@@ -10,6 +10,7 @@
 
     <mapping class="com.jba.dao.type.user.User"/>
     <mapping class="com.jba.dao.type.user.Authority"/>
+    <mapping class="com.jba.dao.type.image.Image"/>
 
   </session-factory>
 </hibernate-configuration>
