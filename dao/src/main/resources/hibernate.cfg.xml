@@ -6,7 +6,9 @@
   <session-factory>
     <mapping package="com.jba.dao.type"/>
 
-    <!--<mapping class="com.jba.barberszop.type.base.SystemBaseTypeSimpleId"/>-->
+    <mapping class="com.jba.dao.type.base.BaseTypeSimpleKey"/>
+
+    <mapping class="com.jba.dao.type.user.User"/>
 
   </session-factory>
 </hibernate-configuration>

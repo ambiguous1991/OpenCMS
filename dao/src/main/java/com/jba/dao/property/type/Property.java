@@ -1,6 +1,6 @@
 package com.jba.dao.property.type;
 
-import com.jba.dao.type.DAOBase;
+import com.jba.dao.type.base.BaseTypeSimpleKey;
 import lombok.Data;
 import lombok.ToString;
 
@@ -10,7 +10,7 @@ import javax.persistence.*;
 @Table(name="properties")
 @Data
 @ToString(callSuper = true)
-public class Property extends DAOBase {
+public class Property extends BaseTypeSimpleKey {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
