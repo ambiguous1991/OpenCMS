@@ -14,22 +14,22 @@ import javax.persistence.Table;
 @Table(name = "USER")
 public class User extends BaseTypeSimpleKey<User> {
 
-    @Column(name = "USERNAME")
+    @Column(name = "USERNAME",length = 100, nullable = false, unique = true)
     private String username;
 
-    @Column(name = "PASSWORD")
+    @Column(name = "PASSWORD", nullable = false)
     private String password;
 
-    @Column(name="SALT")
+    @Column(name="SALT", nullable = false)
     private String salt;
 
-    @Column(name= "EMAIL")
+    @Column(name= "EMAIL", nullable = false, unique = true)
     private String email;
 
-    @Column(name = "FIRSTNAME")
+    @Column(name = "FIRSTNAME", length = 100, nullable = false)
     private String firstName;
 
-    @Column(name = "LASTNAME")
+    @Column(name = "LASTNAME", length = 100)
     private String lastName;
-    
+
 }

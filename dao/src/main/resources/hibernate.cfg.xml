@@ -9,6 +9,7 @@
     <mapping class="com.jba.dao.type.base.BaseTypeSimpleKey"/>
 
     <mapping class="com.jba.dao.type.user.User"/>
+    <mapping class="com.jba.dao.type.user.Authority"/>
 
   </session-factory>
 </hibernate-configuration>
