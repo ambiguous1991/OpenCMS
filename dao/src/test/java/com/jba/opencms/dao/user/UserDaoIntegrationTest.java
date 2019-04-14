@@ -1,5 +1,6 @@
 package com.jba.opencms.dao.user;
 
+import com.jba.jfiller.JFill;
 import com.jba.opencms.BaseSpringIntegrationTest;
 import com.jba.opencms.configuration.DaoConfiguration;
 import com.jba.opencms.configuration.DataSourceConfig;
@@ -21,11 +22,12 @@ public class UserDaoIntegrationTest extends BaseSpringIntegrationTest {
     @Test
     public void addUser(){
         User user = new User();
-        user.setEmail("jakub.bartusiak@gmail.com");
-        user.setFirstName("Jakub");
+        JFill fill = JFill.instance();
+        user.setEmail(fill.name().male().gen()+randomLong(1000)+"@"+fill.name().lastName().gen()+".pl");
+        user.setFirstName(fill.name().male().gen());
         user.setPassword("password");
         user.setSalt("AWD");
-        user.setUsername("satanicus1991");
+        user.setUsername(fill.name().male().gen()+randomLong(1000));
         userDao.create(user);
     }
 

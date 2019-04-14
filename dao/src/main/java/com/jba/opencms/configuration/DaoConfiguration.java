@@ -3,6 +3,9 @@ package com.jba.opencms.configuration;
 import com.jba.opencms.dao.GenericDao;
 import com.jba.opencms.dao.HibernateDao;
 import com.jba.opencms.type.image.Image;
+import com.jba.opencms.type.menu.Entry;
+import com.jba.opencms.type.menu.Menu;
+import com.jba.opencms.type.menu.MenuEntry;
 import com.jba.opencms.type.message.Message;
 import com.jba.opencms.type.message.Status;
 import com.jba.opencms.type.page.Page;
@@ -45,5 +48,20 @@ public class DaoConfiguration {
     @Bean
     public GenericDao<Image> imageDao(SessionFactory sessionFactory){
         return new HibernateDao<>(Image.class, sessionFactory);
+    }
+
+    @Bean
+    public GenericDao<Menu> menuDao(SessionFactory sessionFactory){
+        return new HibernateDao<>(Menu.class, sessionFactory);
+    }
+
+    @Bean
+    public GenericDao<MenuEntry> menuEntryDao(SessionFactory sessionFactory){
+        return new HibernateDao<>(MenuEntry.class, sessionFactory);
+    }
+
+    @Bean
+    public GenericDao<Entry> entryDao(SessionFactory sessionFactory){
+        return new HibernateDao<>(Entry.class, sessionFactory);
     }
 }

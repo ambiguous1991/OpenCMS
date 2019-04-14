@@ -24,7 +24,7 @@ public class Page extends BaseTypeSimpleKey<Page> {
     @Column(name = "VISIBLE", nullable = false)
     private Boolean visible;
 
-    @ManyToMany(fetch = FetchType.EAGER)
+    @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(
             name = "page_authority",
             joinColumns = {@JoinColumn(name = "FK_AUTHORITY_ID")},

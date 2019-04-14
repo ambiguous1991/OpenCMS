@@ -18,5 +18,9 @@
 
     <mapping class="com.jba.opencms.type.message.Message"/>
     <mapping class="com.jba.opencms.type.message.Status"/>
+
+    <mapping class="com.jba.opencms.type.menu.Menu"/>
+    <mapping class="com.jba.opencms.type.menu.MenuEntry"/>
+    <mapping class="com.jba.opencms.type.menu.Entry"/>
   </session-factory>
 </hibernate-configuration>
