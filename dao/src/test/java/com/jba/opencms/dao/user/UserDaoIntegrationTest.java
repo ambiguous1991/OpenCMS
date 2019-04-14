@@ -1,8 +1,9 @@
-package com.jba.opencms.dao;
+package com.jba.opencms.dao.user;
 
 import com.jba.opencms.BaseSpringIntegrationTest;
 import com.jba.opencms.configuration.DaoConfiguration;
 import com.jba.opencms.configuration.DataSourceConfig;
+import com.jba.opencms.dao.GenericDao;
 import com.jba.opencms.type.user.User;
 import org.junit.Test;
 import org.junit.runner.RunWith;

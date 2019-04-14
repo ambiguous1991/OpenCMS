@@ -11,15 +11,15 @@
         </Console>
     </Appenders>
     <Loggers>
-        <Logger name="com.example.log4j2demo" level="debug" additivity="false">
+        <Logger name="com.example.log4j2demo" level="info" additivity="false">
             <AppenderRef ref="ConsoleAppender" />
         </Logger>
 
-        <Logger name="org.hibernate.type.descriptor.sql" level="trace" additivity="false">
+        <Logger name="org.hibernate.type.descriptor.sql" level="info" additivity="false">
             <AppenderRef ref="ConsoleAppender"/>
         </Logger>
 
-        <Logger name="org.hibernate.SQL" level="trace" additivity="false">
+        <Logger name="org.hibernate.SQL" level="info" additivity="false">
             <AppenderRef ref="ConsoleAppender"/>
         </Logger>
 

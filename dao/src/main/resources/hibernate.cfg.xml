@@ -6,11 +6,15 @@
   <session-factory>
     <mapping package="com.jba.opencms.type"/>
 
+    <mapping class="com.jba.opencms.type.base.BaseType"/>
     <mapping class="com.jba.opencms.type.base.BaseTypeSimpleKey"/>
+    <mapping class="com.jba.opencms.type.base.BaseTypeCompoundKey"/>
 
     <mapping class="com.jba.opencms.type.user.User"/>
     <mapping class="com.jba.opencms.type.user.Authority"/>
     <mapping class="com.jba.opencms.type.image.Image"/>
 
+    <mapping class="com.jba.opencms.type.page.Page"/>
+    <mapping class="com.jba.opencms.type.page.PageAuthority"/>
   </session-factory>
 </hibernate-configuration>
