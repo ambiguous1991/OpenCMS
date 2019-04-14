@@ -1,4 +1,4 @@
-package com.jba.dao.type.user.enu;
+package com.jba.opencms.type.user.enu;
 
 public enum AuthorityEnum {
     ADMINISTRATOR,
