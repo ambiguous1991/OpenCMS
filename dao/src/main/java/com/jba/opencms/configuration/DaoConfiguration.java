@@ -2,6 +2,8 @@ package com.jba.opencms.configuration;
 
 import com.jba.opencms.dao.GenericDao;
 import com.jba.opencms.dao.HibernateDao;
+import com.jba.opencms.type.message.Message;
+import com.jba.opencms.type.message.Status;
 import com.jba.opencms.type.page.Page;
 import com.jba.opencms.type.user.Authority;
 import com.jba.opencms.type.user.User;
@@ -28,4 +30,15 @@ public class DaoConfiguration {
     public GenericDao<Authority> authorityDao(SessionFactory sessionFactory){
         return new HibernateDao<>(Authority.class, sessionFactory);
     }
+
+    @Bean
+    public GenericDao<Message> messageDao(SessionFactory sessionFactory){
+        return new HibernateDao<>(Message.class, sessionFactory);
+    }
+
+    @Bean
+    public GenericDao<Status> statusDao(SessionFactory sessionFactory){
+        return new HibernateDao<>(Status.class, sessionFactory);
+    }
+
 }

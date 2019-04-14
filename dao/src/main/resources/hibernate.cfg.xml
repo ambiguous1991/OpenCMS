@@ -15,5 +15,8 @@
     <mapping class="com.jba.opencms.type.image.Image"/>
 
     <mapping class="com.jba.opencms.type.page.Page"/>
+
+    <mapping class="com.jba.opencms.type.message.Message"/>
+    <mapping class="com.jba.opencms.type.message.Status"/>
   </session-factory>
 </hibernate-configuration>
