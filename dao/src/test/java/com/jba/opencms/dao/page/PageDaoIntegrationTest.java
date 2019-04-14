@@ -33,9 +33,8 @@ public class PageDaoIntegrationTest extends BaseSpringIntegrationTest {
         page.setTitle("TestTitle");
         pageDao.create(page);
 
-        Authority authority = new Authority();
-        authority.setRole(AuthorityEnum.ADMINISTRATOR);
-        authorityDao.create(authority);
+        List<Authority> all = authorityDao.findAll();
+        Authority authority = all.get(0);
 
         page.addAuthority(authority);
 

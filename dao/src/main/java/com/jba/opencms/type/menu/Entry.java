@@ -21,7 +21,7 @@ public class Entry extends BaseTypeSimpleKey<Entry> {
     @Column(name = "LABEL")
     private String label;
 
-    @ManyToMany(fetch = FetchType.EAGER)
+    @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(
             name = "SUBENTRY",
             joinColumns = {@JoinColumn(name = "FK_ENTRY_ID_CHILD")},

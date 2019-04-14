@@ -13,7 +13,7 @@ import javax.persistence.*;
 @Table(name = "AUTHORITY")
 public class Authority extends BaseTypeSimpleKey<Authority> {
 
-    @Column(name = "ROLE", length = 30, nullable = false)
+    @Column(name = "ROLE", length = 30, nullable = false, unique = true)
     @Enumerated(EnumType.STRING)
     private AuthorityEnum role;
 
