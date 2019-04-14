@@ -3,7 +3,6 @@ package com.jba.opencms.configuration;
 import com.jba.opencms.dao.GenericDao;
 import com.jba.opencms.dao.HibernateDao;
 import com.jba.opencms.type.page.Page;
-import com.jba.opencms.type.page.PageAuthority;
 import com.jba.opencms.type.user.Authority;
 import com.jba.opencms.type.user.User;
 import org.hibernate.SessionFactory;
@@ -28,10 +27,5 @@ public class DaoConfiguration {
     @Bean
     public GenericDao<Authority> authorityDao(SessionFactory sessionFactory){
         return new HibernateDao<>(Authority.class, sessionFactory);
-    }
-
-    @Bean
-    public GenericDao<PageAuthority> pageAuthorityDao(SessionFactory sessionFactory){
-        return new HibernateDao<>(PageAuthority.class, sessionFactory);
     }
 }

@@ -5,7 +5,6 @@ import com.jba.opencms.configuration.DaoConfiguration;
 import com.jba.opencms.configuration.DataSourceConfig;
 import com.jba.opencms.dao.GenericDao;
 import com.jba.opencms.type.page.Page;
-import com.jba.opencms.type.page.PageAuthority;
 import com.jba.opencms.type.user.Authority;
 import com.jba.opencms.type.user.enu.AuthorityEnum;
 import org.junit.Test;
@@ -26,9 +25,6 @@ public class PageDaoIntegrationTest extends BaseSpringIntegrationTest {
     @Autowired
     private GenericDao<Authority> authorityDao;
 
-    @Autowired
-    private GenericDao<PageAuthority> pageAuthorityGenericDao;
-
     @Test
     public void saveTest(){
         Page page = new Page();
@@ -41,10 +37,9 @@ public class PageDaoIntegrationTest extends BaseSpringIntegrationTest {
         authority.setRole(AuthorityEnum.ADMINISTRATOR);
         authorityDao.create(authority);
 
-        PageAuthority pageAuthority = new PageAuthority();
-        pageAuthority.setPage(page);
-        pageAuthority.setAuthority(authority);
-        pageAuthorityGenericDao.create(pageAuthority);
+        page.addAuthority(authority);
+
+        pageDao.update(page);
     }
 
     @Test
