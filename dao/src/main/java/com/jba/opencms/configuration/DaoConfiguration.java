@@ -2,6 +2,7 @@ package com.jba.opencms.configuration;
 
 import com.jba.opencms.dao.GenericDao;
 import com.jba.opencms.dao.HibernateDao;
+import com.jba.opencms.type.image.Image;
 import com.jba.opencms.type.message.Message;
 import com.jba.opencms.type.message.Status;
 import com.jba.opencms.type.page.Page;
@@ -41,4 +42,8 @@ public class DaoConfiguration {
         return new HibernateDao<>(Status.class, sessionFactory);
     }
 
+    @Bean
+    public GenericDao<Image> imageDao(SessionFactory sessionFactory){
+        return new HibernateDao<>(Image.class, sessionFactory);
+    }
 }
