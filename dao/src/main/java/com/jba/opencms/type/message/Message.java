@@ -15,11 +15,15 @@ public class Message extends BaseTypeSimpleKey<Message> {
 
     @ManyToOne
     @JoinColumn(name = "FK_USER_ID_FROM")
-    private User from;
+    private User userFrom;
 
     @ManyToOne
-    @JoinColumn(name = "FK_USER_ID_TO")
-    private User to;
+    @JoinColumn(name = "FK_USER_ID_TO", nullable = false)
+    private User userTo;
+
+    @ManyToOne
+    @JoinColumn(name="FK_STATUS_ID", nullable = false)
+    private Status status;
 
     @Column(name = "RESPONSE_EMAIL")
     private String responseEmail;
