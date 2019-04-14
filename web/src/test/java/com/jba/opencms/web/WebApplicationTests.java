@@ -1,4 +1,4 @@
-package com.jba.web;
+package com.jba.opencms.web;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;

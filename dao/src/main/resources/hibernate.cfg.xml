@@ -4,13 +4,13 @@
     "http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
 <hibernate-configuration>
   <session-factory>
-    <mapping package="com.jba.dao.type"/>
+    <mapping package="com.jba.opencms.type"/>
 
-    <mapping class="com.jba.dao.type.base.BaseTypeSimpleKey"/>
+    <mapping class="com.jba.opencms.type.base.BaseTypeSimpleKey"/>
 
-    <mapping class="com.jba.dao.type.user.User"/>
-    <mapping class="com.jba.dao.type.user.Authority"/>
-    <mapping class="com.jba.dao.type.image.Image"/>
+    <mapping class="com.jba.opencms.type.user.User"/>
+    <mapping class="com.jba.opencms.type.user.Authority"/>
+    <mapping class="com.jba.opencms.type.image.Image"/>
 
   </session-factory>
 </hibernate-configuration>

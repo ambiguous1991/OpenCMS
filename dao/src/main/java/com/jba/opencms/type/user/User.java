@@ -1,6 +1,6 @@
-package com.jba.dao.type.user;
+package com.jba.opencms.type.user;
 
-import com.jba.dao.type.base.BaseTypeSimpleKey;
+import com.jba.opencms.type.base.BaseTypeSimpleKey;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 

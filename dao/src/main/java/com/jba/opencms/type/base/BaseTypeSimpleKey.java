@@ -1,15 +1,14 @@
-package com.jba.dao.type.base;
+package com.jba.opencms.type.base;
 
 import lombok.Data;
-import org.hibernate.annotations.ColumnDefault;
-import org.hibernate.annotations.CreationTimestamp;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.time.OffsetDateTime;
 
 @MappedSuperclass
 @Data
-public abstract class BaseTypeSimpleKey<T extends BaseTypeSimpleKey> {
+public abstract class BaseTypeSimpleKey<T extends BaseTypeSimpleKey> implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

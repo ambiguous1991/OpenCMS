@@ -1,6 +1,6 @@
-package com.jba.dao.type.image;
+package com.jba.opencms.type.image;
 
-import com.jba.dao.type.base.BaseTypeSimpleKey;
+import com.jba.opencms.type.base.BaseTypeSimpleKey;
 import lombok.Data;
 
 import javax.persistence.Column;
@@ -24,7 +24,7 @@ public class Image extends BaseTypeSimpleKey<Image> {
     @Lob
     private Blob data;
 
-    @Column(name = "DESCRIPTION", length = 5)
+    @Column(name = "EXTENSION", length = 5)
     private String extension;
 
 }
