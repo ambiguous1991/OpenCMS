@@ -1,6 +1,8 @@
 package com.jba.dao.type.base;
 
 import lombok.Data;
+import org.hibernate.annotations.ColumnDefault;
+import org.hibernate.annotations.CreationTimestamp;
 
 import javax.persistence.*;
 import java.time.OffsetDateTime;
@@ -20,4 +22,18 @@ public abstract class BaseTypeSimpleKey<T extends BaseTypeSimpleKey> {
     @Column(name = "UDATE")
     protected OffsetDateTime updated;
 
+    @PrePersist
+    protected void initialize(){
+        if(created==null){
+            created = OffsetDateTime.now();
+        }
+        if(updated==null){
+            updated = OffsetDateTime.now();
+        }
+    }
+
+    @PreUpdate
+    protected void preUpdate(){
+        updated=OffsetDateTime.now();
+    }
 }
