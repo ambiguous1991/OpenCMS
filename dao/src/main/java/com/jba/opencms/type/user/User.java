@@ -6,7 +6,9 @@ import lombok.EqualsAndHashCode;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import java.util.List;
 
 @Entity
 @Data
@@ -31,5 +33,8 @@ public class User extends BaseTypeSimpleKey<User> {
 
     @Column(name = "LASTNAME", length = 100)
     private String lastName;
+
+    @OneToMany(mappedBy = "userId")
+    private List<ImageUser> images;
 
 }

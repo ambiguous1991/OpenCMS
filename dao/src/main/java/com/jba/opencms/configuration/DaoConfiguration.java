@@ -10,6 +10,7 @@ import com.jba.opencms.type.message.Message;
 import com.jba.opencms.type.message.Status;
 import com.jba.opencms.type.page.Page;
 import com.jba.opencms.type.user.Authority;
+import com.jba.opencms.type.user.ImageUser;
 import com.jba.opencms.type.user.User;
 import org.hibernate.SessionFactory;
 import org.springframework.context.annotation.Bean;
@@ -63,5 +64,10 @@ public class DaoConfiguration {
     @Bean
     public GenericDao<Entry> entryDao(SessionFactory sessionFactory){
         return new HibernateDao<>(Entry.class, sessionFactory);
+    }
+
+    @Bean
+    public GenericDao<ImageUser> imageUserDao(SessionFactory sessionFactory){
+        return new HibernateDao<>(ImageUser.class, sessionFactory);
     }
 }
