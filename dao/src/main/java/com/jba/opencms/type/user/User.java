@@ -4,10 +4,8 @@ import com.jba.opencms.type.base.BaseTypeSimpleKey;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
+import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -35,6 +33,13 @@ public class User extends BaseTypeSimpleKey<User> {
     private String lastName;
 
     @OneToMany(mappedBy = "userId")
-    private List<ImageUser> images;
+    private List<ImageUser> images = new ArrayList<>();
 
+    @ManyToMany
+    @JoinTable(
+            name = "USER_AUTHORITY",
+            joinColumns = {@JoinColumn(name = "FK_AUTORITY_ID")},
+            inverseJoinColumns = {@JoinColumn(name = "FK_USER_ID")}
+    )
+    private List<Authority> authorities = new ArrayList<>();
 }
