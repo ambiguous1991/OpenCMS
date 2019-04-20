@@ -27,6 +27,7 @@
 
     <modules>
         <module>dao</module>
+        <module>security</module>
         <module>web</module>
     </modules>
 

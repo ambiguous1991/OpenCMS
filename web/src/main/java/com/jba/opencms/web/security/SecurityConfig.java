@@ -12,7 +12,11 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.keygen.BytesKeyGenerator;
+import org.springframework.security.crypto.keygen.KeyGenerators;
 import org.springframework.security.crypto.password.PasswordEncoder;
+
+import javax.crypto.KeyGenerator;
 
 @Configuration
 @EnableWebSecurity
@@ -57,6 +61,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         logger.info("password for test123 is ");
         String test123 = passwordEncoder.encode("test123");
         logger.info(test123);
+        BytesKeyGenerator bytesKeyGenerator = KeyGenerators.secureRandom();
         return passwordEncoder;
     }
 
