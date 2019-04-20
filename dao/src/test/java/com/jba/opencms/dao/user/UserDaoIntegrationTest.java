@@ -25,7 +25,7 @@ public class UserDaoIntegrationTest extends BaseSpringIntegrationTest {
         JFill fill = JFill.instance();
         user.setEmail(fill.name().male().gen()+randomLong(1000)+"@"+fill.name().lastName().gen()+".pl");
         user.setFirstName(fill.name().male().gen());
-        user.setPassword("password");
+        String password = "password";
         user.setSalt("AWD");
         user.setUsername(fill.name().male().gen()+randomLong(1000));
         userDao.create(user);

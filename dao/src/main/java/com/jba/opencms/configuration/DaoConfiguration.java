@@ -2,6 +2,7 @@ package com.jba.opencms.configuration;
 
 import com.jba.opencms.dao.GenericDao;
 import com.jba.opencms.dao.HibernateDao;
+import com.jba.opencms.dao.UserDao;
 import com.jba.opencms.type.image.Image;
 import com.jba.opencms.type.menu.Entry;
 import com.jba.opencms.type.menu.Menu;
@@ -22,8 +23,8 @@ import org.springframework.context.annotation.Import;
 public class DaoConfiguration {
 
     @Bean
-    public GenericDao<User> userDao(SessionFactory sessionFactory){
-        return new HibernateDao<>(User.class, sessionFactory);
+    public UserDao userDao(SessionFactory sessionFactory){
+        return new UserDao(User.class, sessionFactory);
     }
 
     @Bean
