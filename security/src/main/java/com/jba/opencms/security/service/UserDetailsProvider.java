@@ -1,7 +1,7 @@
-package com.jba.opencms.web.security.service;
+package com.jba.opencms.security.service;
 
 import com.jba.opencms.dao.UserDao;
-import com.jba.opencms.web.security.principal.UserPrincipal;
+import com.jba.opencms.security.principal.UserPrincipal;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;

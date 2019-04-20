@@ -1,6 +1,6 @@
 package com.jba.opencms.web.security;
 
-import com.jba.opencms.web.security.service.UserDetailsProvider;
+import com.jba.opencms.security.service.UserDetailsProvider;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.context.annotation.Bean;
@@ -10,13 +10,10 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
-import org.springframework.security.core.userdetails.User;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.keygen.BytesKeyGenerator;
 import org.springframework.security.crypto.keygen.KeyGenerators;
 import org.springframework.security.crypto.password.PasswordEncoder;
-
-import javax.crypto.KeyGenerator;
 
 @Configuration
 @EnableWebSecurity
@@ -34,8 +31,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         auth
                 .userDetailsService(userDetailsProvider);
     }
-
-
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
@@ -64,14 +59,4 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         BytesKeyGenerator bytesKeyGenerator = KeyGenerators.secureRandom();
         return passwordEncoder;
     }
-
-//    @Override
-//    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-//        User.UserBuilder users = User.withDefaultPasswordEncoder();
-//
-//        auth.inMemoryAuthentication()
-//                .withUser(users.username("john").password("test123").roles("EMPLOYEE"))
-//                .withUser(users.username("mary").password("test123").roles("MANAGER"))
-//                .withUser(users.username("susan").password("test123").roles("ADMIN"));
-//    }
 }

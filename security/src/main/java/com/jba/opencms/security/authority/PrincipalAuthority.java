@@ -1,4 +1,4 @@
-package com.jba.opencms.web.security.authority;
+package com.jba.opencms.security.authority;
 
 import com.jba.opencms.type.user.Authority;
 import org.springframework.security.core.GrantedAuthority;

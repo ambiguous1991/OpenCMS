@@ -1,7 +1,7 @@
-package com.jba.opencms.web.security.principal;
+package com.jba.opencms.security.principal;
 
 import com.jba.opencms.type.user.User;
-import com.jba.opencms.web.security.authority.PrincipalAuthority;
+import com.jba.opencms.security.authority.PrincipalAuthority;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
