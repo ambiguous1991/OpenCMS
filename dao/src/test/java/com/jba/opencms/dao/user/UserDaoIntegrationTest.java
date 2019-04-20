@@ -6,10 +6,10 @@ import com.jba.opencms.configuration.DaoConfiguration;
 import com.jba.opencms.configuration.DataSourceConfig;
 import com.jba.opencms.dao.GenericDao;
 import com.jba.opencms.type.user.User;
-import org.hibernate.Hibernate;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
@@ -30,8 +30,9 @@ public class UserDaoIntegrationTest extends BaseSpringIntegrationTest {
         user.setEmail(fill.name().male().gen()+randomLong(1000)+"@"+fill.name().lastName().gen()+".pl");
         user.setFirstName(fill.name().male().gen());
         String password = "password";
-        user.setPassword(password);
-        user.setSalt("AWD");
+        BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+        String encode = encoder.encode(password);
+        user.setPassword(encode);
         user.setUsername(fill.name().male().gen()+randomLong(1000));
         userDao.create(user);
     }
