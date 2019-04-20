@@ -4,10 +4,11 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>com.jba</groupId>
-    <artifactId>OpenCMS</artifactId>
+    <groupId>com.jba.opencms</groupId>
+    <artifactId>base</artifactId>
     <packaging>pom</packaging>
-    <version>1.0-SNAPSHOT</version>
+    <version>1.0</version>
+    <name>OpenCMS Base ${version}</name>
 
     <parent>
         <groupId>org.springframework.boot</groupId>
@@ -16,13 +17,25 @@
     </parent>
 
     <properties>
+        <dao.version>0.9</dao.version>
+        <security.version>1.0</security.version>
+        <web.version>0.0.1-SNAPSHOT</web.version>
+
         <java.version>1.8</java.version>
         <lombok.version>1.18.4</lombok.version>
         <mysql.connector.version>8.0.13</mysql.connector.version>
         <hibernate.version>5.3.6.Final</hibernate.version>
         <c3po.version>0.9.5.2</c3po.version>
         <log4j.version>1.2.17</log4j.version>
-        <dao.version>0.0.1-SNAPSHOT</dao.version>
+        <spring.boot.version>2.1.4.RELEASE</spring.boot.version>
+        <spring.base.version>5.1.5.RELEASE</spring.base.version>
+        <spring.test.version>5.1.6.RELEASE</spring.test.version>
+        <hikari.version>3.3.1</hikari.version>
+        <hibernate.version>5.4.1.Final</hibernate.version>
+        <mysql.connector.version>8.0.15</mysql.connector.version>
+        <lombok.version>1.18.4</lombok.version>
+        <log4j.version>2.11.2</log4j.version>
+        <junit.version>4.12</junit.version>
     </properties>
 
     <modules>
