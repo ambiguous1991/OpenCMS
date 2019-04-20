@@ -24,7 +24,7 @@
 
     <properties>
         <dao.version>0.9</dao.version>
-        <security.version>1.0.1</security.version>
+        <security.version>1.0.2</security.version>
         <web.version>0.0.1-SNAPSHOT</web.version>
 
         <java.version>1.8</java.version>
