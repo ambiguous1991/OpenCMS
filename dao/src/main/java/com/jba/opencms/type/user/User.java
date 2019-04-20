@@ -20,9 +20,6 @@ public class User extends BaseTypeSimpleKey<User> {
     @Column(name = "PASSWORD", nullable = false)
     private String password;
 
-    @Column(name="SALT", nullable = false)
-    private String salt;
-
     @Column(name= "EMAIL", nullable = false, unique = true)
     private String email;
 

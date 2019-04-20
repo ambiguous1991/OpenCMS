@@ -38,8 +38,6 @@ public class PageDaoIntegrationTest extends BaseSpringIntegrationTest {
         List<Authority> all = authorityDao.findAll();
         Authority authority = all.get(0);
 
-        page.addAuthority(authority);
-
         pageDao.update(page);
     }
 
