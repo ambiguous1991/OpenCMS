@@ -7,8 +7,80 @@
     <meta charset="UTF-8">
     <title>Dashboard</title>
     <div th:replace="/fragment/import"></div>
+    <link rel="stylesheet" href="../static/css/opencms.css"/>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="../static/css/bootstrap.css"/>
 </head>
-<body>
-    <div class="jumbotron"><h1>Dashboard</h1></div>
+<body class="bg-dark">
+<div class="container-fluid m-0 p-0 no-gutters">
+    <nav class="navbar navbar-light bg-light" style="-webkit-border-radius: 0;-moz-border-radius: 0;border-radius: 0;">
+        <a class="navbar-brand" href="#">
+            <img src="../static/images/bulb.png" width="30" height="30" alt="">
+            <strong>OpenCMS</strong>
+        </a>
+
+        <a class="mr-sm-0" th:href="@{/logout}">Wyloguj się</a>
+    </nav>
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb m-0" style="-webkit-border-radius: 0;-moz-border-radius: 0;border-radius: 0;">
+            <li class="breadcrumb-item active" aria-current="page">Dashboard</li>
+            <li class="breadcrumb-item">Data</li>
+            <li class="breadcrumb-item">Data</li>
+        </ol>
+    </nav>
+    <div class="wrapper">
+        <nav id="sidebar">
+            <ul class="list-unstyled components">
+                <p>Dummy Heading</p>
+                <li class="active">
+                    <a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Home</a>
+                    <ul class="collapse list-unstyled" id="homeSubmenu">
+                        <li>
+                            <a href="#">Home 1</a>
+                        </li>
+                        <li>
+                            <a href="#">Home 2</a>
+                        </li>
+                        <li>
+                            <a href="#">Home 3</a>
+                        </li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="#">About</a>
+                </li>
+                <li>
+                    <a href="#pageSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Pages</a>
+                    <ul class="collapse list-unstyled" id="pageSubmenu">
+                        <li>
+                            <a href="#">Page 1</a>
+                        </li>
+                        <li>
+                            <a href="#">Page 2</a>
+                        </li>
+                        <li>
+                            <a href="#">Page 3</a>
+                        </li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="#">Portfolio</a>
+                </li>
+                <li>
+                    <a href="#">Contact</a>
+                </li>
+            </ul>
+        </nav>
+
+        <!-- Page Content -->
+        <div id="content">
+            <ul class="text-white">
+                <li><a th:href="@{/dashboard/menu}">Edytuj menu</a></li>
+                <li><a th:href="@{/dashboard/sites}">Edytuj strony</a></li>
+                <li><a th:href="@{/dashboard/me}">Ja</a></li>
+            </ul>
+        </div>
+    </div>
+</div>
 </body>
 </html>
