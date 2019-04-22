@@ -4,6 +4,7 @@ import com.jba.opencms.BaseSpringIntegrationTest;
 import com.jba.opencms.configuration.DaoConfiguration;
 import com.jba.opencms.configuration.DataSourceConfig;
 import com.jba.opencms.dao.GenericDao;
+import com.jba.opencms.dao.ifs.MenuDao;
 import com.jba.opencms.type.menu.Entry;
 import com.jba.opencms.type.menu.Menu;
 import com.jba.opencms.type.menu.MenuEntry;
@@ -13,12 +14,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Arrays;
 import java.util.List;
-import java.util.stream.Collectors;
-
-import static org.junit.Assert.*;
 
 @RunWith(SpringRunner.class)
 @ContextConfiguration(classes = {DataSourceConfig.class, DaoConfiguration.class})
@@ -26,7 +25,7 @@ import static org.junit.Assert.*;
 public class EntryDaoTest extends BaseSpringIntegrationTest {
 
     @Autowired
-    private GenericDao<Menu> menuDao;
+    private MenuDao menuDao;
 
     @Autowired
     private GenericDao<MenuEntry> menuEntryDao;
@@ -35,9 +34,10 @@ public class EntryDaoTest extends BaseSpringIntegrationTest {
     private GenericDao<Entry> entryDao;
 
     @Test
+    @Transactional
     public void test(){
-        List<Entry> all = entryDao.findAll();
-        all.stream().forEach(e->logger.info(e));
+        Menu activeMenu = menuDao.findActiveMenu();
+        logger.info(activeMenu);
     }
 
     @Test

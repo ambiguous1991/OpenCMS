@@ -30,11 +30,6 @@ public class Entry extends BaseTypeSimpleKey<Entry> {
     )
     private List<Entry> subentires;
 
-    public List<Entry> getSubentires() {
-        Hibernate.initialize(subentires);
-        return subentires;
-    }
-
     public static Entry of(String label){
         Entry entry = new Entry();
         entry.setLabel(label);
