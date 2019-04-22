@@ -1,8 +1,6 @@
 package com.jba.opencms.type.menu;
 
 import com.jba.opencms.type.base.BaseTypeCompoundKey;
-import com.jba.opencms.type.base.BaseTypeSimpleKey;
-import com.sun.org.apache.xpath.internal.operations.Bool;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
@@ -27,7 +25,7 @@ public class MenuEntry extends BaseTypeCompoundKey<Menu, Entry> {
     private Entry entry;
 
     @Column(name = "ACTIVE")
-    private Boolean isActive;
+    private Boolean isActive = false;
 
     public static MenuEntry of(Menu menu, Entry entry, Boolean isActive){
         MenuEntry menuEntry = new MenuEntry();
