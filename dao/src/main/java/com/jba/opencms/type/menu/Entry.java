@@ -4,6 +4,7 @@ import com.jba.opencms.type.base.BaseTypeSimpleKey;
 import com.jba.opencms.type.page.Page;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import org.hibernate.Hibernate;
 
 import javax.persistence.*;
 import java.util.List;
@@ -27,6 +28,16 @@ public class Entry extends BaseTypeSimpleKey<Entry> {
             joinColumns = {@JoinColumn(name = "FK_ENTRY_ID_CHILD")},
             inverseJoinColumns = {@JoinColumn(name="FK_ENTRY_ID_PARENT")}
     )
-    private List<Page> subentires;
+    private List<Entry> subentires;
 
+    public List<Entry> getSubentires() {
+        Hibernate.initialize(subentires);
+        return subentires;
+    }
+
+    public static Entry of(String label){
+        Entry entry = new Entry();
+        entry.setLabel(label);
+        return entry;
+    }
 }
