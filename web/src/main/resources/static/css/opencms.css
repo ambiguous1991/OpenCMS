@@ -53,3 +53,8 @@
     -o-transform: translateY(-50%) translateX(-50%);
     transform: translateY(-50%) translateX(-50%);
 }
+
+.sidebar-dimens{
+    width:300px;
+    min-width:300px;
+}
