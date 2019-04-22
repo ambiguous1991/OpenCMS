@@ -43,10 +43,17 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                     AuthorityEnum.Editor.name(),
                     AuthorityEnum.Reviewer.name()
                 )
-                .and()
-        .formLogin()
+        .and()
+            .formLogin()
                 .loginPage("/login")
                 .loginProcessingUrl("/login")
+                .permitAll()
+        .and()
+            .logout()
+                .logoutUrl("/logout")
+                .invalidateHttpSession(true)
+                .deleteCookies("JSESSIONID")
+                .logoutSuccessUrl("/")
                 .permitAll();
     }
 
