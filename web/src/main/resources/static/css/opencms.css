@@ -1,3 +1,7 @@
+*{
+    border:0px solid red;
+}
+
 .box-login{
     width: 50%;
     position: absolute;
@@ -9,4 +13,43 @@
     -o-transform: translateX(-50%) translateY(-50%);
     transform: translateX(-50%) translateY(-50%);
     border-radius: 1em;
+}
+
+.tiles{
+    display: flex;
+    flex-direction: row;
+}
+
+.tiles>div{
+    margin:1em 1em 0 1em;
+}
+
+.tiles>div:last-child{
+    margin:1em 1em 1em 1em;
+}
+
+.tiles>div>.card{
+    padding: 1em;
+    text-align: center;
+    margin:1em 1em 0 1em;
+}
+
+.wrapper{
+    display:flex;
+    flex-direction: row;
+}
+
+.card{
+
+}
+
+.card-content{
+    position:relative;
+    top:50%;
+    left:50%;
+    -webkit-transform: translateY(-50%) translateX(-50%);
+    -moz-transform: translateY(-50%) translateX(-50%);
+    -ms-transform: translateY(-50%) translateX(-50%);
+    -o-transform: translateY(-50%) translateX(-50%);
+    transform: translateY(-50%) translateX(-50%);
 }

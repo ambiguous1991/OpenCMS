@@ -1,6 +1,7 @@
 package com.jba.opencms.web.security;
 
 import com.jba.opencms.security.service.UserDetailsProvider;
+import com.jba.opencms.type.user.enu.AuthorityEnum;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.context.annotation.Bean;
@@ -37,10 +38,21 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http
                 .authorizeRequests()
                 .anyRequest().authenticated()
+                .antMatchers("/dashboard/**").hasAnyRole(
+                    AuthorityEnum.Administrator.name(),
+                    AuthorityEnum.Editor.name(),
+                    AuthorityEnum.Reviewer.name()
+                )
         .and()
-        .formLogin()
+            .formLogin()
                 .loginPage("/login")
                 .loginProcessingUrl("/login")
+                .permitAll()
+        .and()
+            .logout()
+                .invalidateHttpSession(true)
+                .deleteCookies("JSESSIONID")
+                .logoutSuccessUrl("/")
                 .permitAll();
     }
 
