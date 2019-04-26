@@ -3,42 +3,49 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:th="http://www.thymeleaf.org">
 
-<!--<link rel="stylesheet" href="../../../static/css/opencms.css"/>-->
-<!--<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css"-->
-      <!--integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">-->
-<!--<link rel="stylesheet" href="../../../static/css/bootstrap.css"/>-->
+    <link rel="stylesheet" href="../../../static/css/opencms.css"/>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css"
+          integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+    <link rel="stylesheet" href="../../../static/css/bootstrap.css"/>
 
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-    <a class="navbar-brand" href="#">Navbar</a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-    </button>
+    <nav class="navbar navbar-expand-md navbar-dark bg-dark">
+        <a class="navbar-brand" href="#">Navbar</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
 
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <ul class="navbar-nav mr-auto">
-            <!--/*@thymesVar id="menuItem" type="com.jba.opencms.type.menu.Entry"*/-->
-            <li th:each="menuItem: ${menu}"
-                th:with="subetries=${menuItem.getSubentires()}, hasSub=${menuItem.getSubentires().size()>0}"
-                th:class="${hasSub}? 'nav-item dropdown' : 'nav-item'">
-                <a
-                   th:class="${hasSub} ? 'nav-link dropdown-toggle' : 'nav-link'"
-                   th:href="${hasSub} ? '#' : '/page/'"
-                   th:id="${menuItem.getLabel()}"
-                   role="button"
-                   th:data-toggle="${hasSub} ? 'dropdown' : ''"
-                   th:text="${menuItem.getLabel()+' '+hasSub}">
-                    PLACEHOLDER
-                </a>
-                <div th:if="${hasSub}" class="dropdown-menu">
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+                <!--/*@thymesVar id="menuItem" type="com.jba.opencms.type.menu.Entry"*/-->
+                <li th:each="menuItem: ${menu}"
+                    th:with="subetries=${menuItem.getSubentires()}, hasSub=${menuItem.getSubentires().size()>0}"
+                    th:class="${hasSub}? 'nav-item dropdown' : 'nav-item'">
                     <a
-                            th:each="subentry: ${subetries}"
-                            class="dropdown-item"
-                            th:href="'/page/'"
-                            th:text="${subentry.getLabel()}">
+                            th:class="${hasSub} ? 'nav-link dropdown-toggle' : 'nav-link'"
+                            th:href="${hasSub} ? '#' : '/page/'"
+                            th:id="${menuItem.getLabel()}"
+                            role="button"
+                            th:data-toggle="${hasSub} ? 'dropdown' : ''"
+                            th:text="${menuItem.getLabel()+' '+hasSub}">
                         PLACEHOLDER
                     </a>
-                </div>
-            </li>
-        </ul>
-    </div>
-</nav>
+                    <div th:if="${hasSub}" class="dropdown-menu">
+                        <a
+                                th:each="subentry: ${subetries}"
+                                class="dropdown-item"
+                                th:href="'/page/'"
+                                th:text="${subentry.getLabel()}">
+                            PLACEHOLDER
+                        </a>
+                    </div>
+                </li>
+
+            </ul>
+            <ul class="navbar-nav mr-0">
+                <li class="nav-item mr-0">
+                    <a class="nav-link" href="/dashboard">Zaloguj się</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
