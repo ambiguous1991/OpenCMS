@@ -4,6 +4,7 @@ import com.jba.opencms.type.base.BaseTypeSimpleKey;
 import com.jba.opencms.type.page.Page;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import lombok.ToString;
 import org.hibernate.Hibernate;
 
 import javax.persistence.*;
@@ -25,9 +26,10 @@ public class Entry extends BaseTypeSimpleKey<Entry> {
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(
             name = "SUBENTRY",
-            joinColumns = {@JoinColumn(name = "FK_ENTRY_ID_CHILD")},
-            inverseJoinColumns = {@JoinColumn(name="FK_ENTRY_ID_PARENT")}
+            joinColumns = {@JoinColumn(name = "FK_ENTRY_ID_PARENT")},
+            inverseJoinColumns = {@JoinColumn(name="FK_ENTRY_ID_CHILD")}
     )
+    @ToString.Exclude
     private List<Entry> subentires;
 
     public static Entry of(String label){

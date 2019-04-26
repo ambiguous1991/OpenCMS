@@ -1,9 +1,7 @@
 package com.jba.opencms.configuration;
 
-import com.jba.opencms.dao.GenericDao;
-import com.jba.opencms.dao.HibernateDao;
-import com.jba.opencms.dao.MenuDaoImpl;
-import com.jba.opencms.dao.UserDao;
+import com.jba.opencms.dao.*;
+import com.jba.opencms.dao.ifs.EntryDao;
 import com.jba.opencms.dao.ifs.MenuDao;
 import com.jba.opencms.type.image.Image;
 import com.jba.opencms.type.menu.Entry;
@@ -16,6 +14,7 @@ import com.jba.opencms.type.user.Authority;
 import com.jba.opencms.type.user.ImageUser;
 import com.jba.opencms.type.user.User;
 import org.hibernate.SessionFactory;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
@@ -55,7 +54,7 @@ public class DaoConfiguration {
     }
 
     @Bean
-    public MenuDao menuDao(SessionFactory sessionFactory){
+    public MenuDao menuDao(@Qualifier("sessionFactory") SessionFactory sessionFactory){
         return new MenuDaoImpl(Menu.class, sessionFactory);
     }
 
@@ -65,8 +64,8 @@ public class DaoConfiguration {
     }
 
     @Bean
-    public GenericDao<Entry> entryDao(SessionFactory sessionFactory){
-        return new HibernateDao<>(Entry.class, sessionFactory);
+    public EntryDao entryDao(SessionFactory sessionFactory){
+        return new EntryDaoImpl(Entry.class, sessionFactory);
     }
 
     @Bean
