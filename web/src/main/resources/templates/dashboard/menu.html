@@ -5,11 +5,42 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>Menu</title>
+    <title th:text="${@systemVariables.get('page.name')+' - Dashboard - Menu'}">Failed</title>
     <div th:replace="/fragment/import"></div>
+    <link rel="stylesheet" href="../../static/css/opencms.css"/>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css"
+          integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+    <link rel="stylesheet" href="../../static/css/bootstrap.css"/>
 </head>
 <body>
 <nav th:replace="/fragment/admin-navbar"></nav>
 <nav th:replace="/fragment/admin-breadcrumb"></nav>
+<div class="wrapper" style="height: 88vh;">
+    <div th:replace="fragment/admin-sidebar"></div>
+    <div class="flex-grow-1 flex-column">
+        <div class="m-4">
+            <nav class="m-4" th:replace="/fragment/menu/user-menu">PLACEHOLDER</nav>
+        </div>
+        <p class="text-info text-center m-4">^ Podgląd menu ^</p>
+        <table class="table table-hover table-sm p-5">
+            <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Czy aktywny?</th>
+                <th scope="col">Liczba elementów w menu:</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="menuTop: ${allMenus}">
+                <a href="tawdawd">
+                    <th scope="row" th:text="${menuTop.getId()}">1</th>
+                    <td th:text="${menuTop.getIsActive()?'aktywny':''}">aktywny</td>
+                    <td th:text="${menuTop.getMenuEntryList().size()}"></td>
+                </a>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
 </body>
 </html>

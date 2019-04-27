@@ -7,6 +7,8 @@ import org.hibernate.Hibernate;
 import org.hibernate.SessionFactory;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+
 @Transactional
 public class MenuDaoImpl extends HibernateDao<Menu> implements MenuDao {
     public MenuDaoImpl(Class<Menu> clazz, SessionFactory sessionFactory) {
@@ -25,5 +27,13 @@ public class MenuDaoImpl extends HibernateDao<Menu> implements MenuDao {
             }
         }
         return menu;
+    }
+
+    @Override
+    @Transactional
+    public List<Menu> findAll() {
+        List<Menu> all = super.findAll();
+        all.forEach(e-> Hibernate.initialize(e.getMenuEntryList()));
+        return all;
     }
 }

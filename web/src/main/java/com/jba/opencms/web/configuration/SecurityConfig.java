@@ -1,4 +1,4 @@
-package com.jba.opencms.web.security;
+package com.jba.opencms.web.configuration;
 
 import com.jba.opencms.security.service.UserDetailsProvider;
 import com.jba.opencms.type.user.enu.AuthorityEnum;
@@ -65,10 +65,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Bean
     public PasswordEncoder passwordEncoder() {
         BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
-        logger.info("password for test123 is ");
-        String test123 = passwordEncoder.encode("test123");
-        logger.info(test123);
-        BytesKeyGenerator bytesKeyGenerator = KeyGenerators.secureRandom();
         return passwordEncoder;
     }
 }
