@@ -1,0 +1,75 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-4.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title th:text="${@systemVariables.get('page.name')+' - Dashboard'}">Failed</title>
+    <div th:replace="fragment/import"></div>
+    <link rel="stylesheet" href="../static/css/opencms.css"/>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css"
+          integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+    <link rel="stylesheet" href="../static/css/bootstrap.css"/>
+</head>
+<body class="d-flex flex-column vh-100">
+<nav th:replace="/fragment/admin-navbar"></nav>
+<nav th:replace="/fragment/admin-breadcrumb"></nav>
+<div class="wrapper">
+    <div th:replace="/fragment/admin-sidebar"></div>
+    <div class="tiles flex-grow-1 flex-column overflow-auto">
+        <div style="display:flex; flex-grow: 1">
+            <!-- Page Content -->
+            <div class="card flex-grow-1 shadow-lg">
+                <div class="card-content">
+                    <a href="" th:href="@{/dashboard/pages}">
+                        <p><i class="fas fa-file text-muted icon-vh"></i></p>
+                        <strong>Strony</strong>
+                        <p class="text-muted" style="font-size: 1em;">Dodawaj, usuwaj<br>lub zmieniaj strony</p>
+                    </a>
+                </div>
+            </div>
+            <div class="card flex-grow-1 shadow-lg">
+                <div class="card-content">
+                    <a href="" th:href="@{/dashboard/menu}">
+                        <p><i class="fas fa-bars text-muted icon-vh"></i></p>
+                        <strong>Menu</strong>
+                        <p class="text-muted" style="font-size: 1em;">Dodawaj, usuwaj<br>lub zmieniaj menu</p>
+                    </a>
+                </div>
+            </div>
+            <div class="card flex-grow-1 shadow-lg">
+                <div class="card-content">
+                    <a href="" th:href="@{/dashboard/images}">
+                        <p><i class="fas fa-image text-muted icon-vh"></i></p>
+                        <strong>Obrazy</strong>
+                        <p class="text-muted" style="font-size: 1em;">Przeglądaj lub<br>edytuj obrazy</p>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div style="display:flex; flex-wrap: wrap;flex-grow: 1">
+            <div class="card flex-grow-1 shadow-lg">
+                <div class="card-content">
+                    <a href="" th:href="@{/dashboard/global}">
+                        <p><i class="fas fa-globe text-muted icon-vh"></i></p>
+                        <strong>Serwis</strong>
+                        <p class="text-muted" style="font-size: 1em;">Zarządzaj globalnymi<br>ustawieniami serwisu.</p>
+                    </a>
+                </div>
+            </div>
+            <!-- Page Content -->
+            <div class="card flex-grow-1 shadow-lg">
+                <div class="card-content">
+                    <a href="" th:href="@{/dashboard/users}">
+                        <p><i class="fas fa-user-shield text-muted icon-vh"></i></p>
+                        <strong>Użytkownicy & IAM</strong>
+                        <p class="text-muted" style="font-size: 1em;">Zarządzaj<br>użytkownikami</p>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

@@ -24,5 +24,7 @@
     <mapping class="com.jba.opencms.type.menu.Menu"/>
     <mapping class="com.jba.opencms.type.menu.MenuEntry"/>
     <mapping class="com.jba.opencms.type.menu.Entry"/>
+
+    <mapping class="com.jba.opencms.type.system.SystemVariable"/>
   </session-factory>
 </hibernate-configuration>

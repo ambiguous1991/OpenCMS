@@ -5,10 +5,12 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>OpenCMS</title>
+    <title th:text="${@systemVariables.get('page.name')}">Failed</title>
     <div th:replace="/fragment/import"></div>
 </head>
 <body>
+
+<nav th:replace="/fragment/menu/user-menu"></nav>
 
 </body>
 </html>
