@@ -22,4 +22,6 @@ public class Menu extends BaseTypeSimpleKey<Menu> {
     @Column(name = "ACTIVE", length = 1, nullable = false)
     private Boolean isActive = Boolean.FALSE;
 
+    @Column(name = "NAME")
+    private String name;
 }
