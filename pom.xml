@@ -23,7 +23,7 @@
     </modules>
 
     <properties>
-        <dao.version>0.9.1</dao.version>
+        <dao.version>0.9.2</dao.version>
         <security.version>1.0.2</security.version>
         <web.version>0.0.1-SNAPSHOT</web.version>
 
