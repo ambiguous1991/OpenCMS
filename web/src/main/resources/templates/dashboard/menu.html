@@ -29,7 +29,7 @@
                 <th scope="col">Nazwa</th>
                 <th scope="col">Czy aktywny?</th>
                 <th scope="col">Liczba elementów w menu:</th>
-                <th scope="col"> </th>
+                <th scope="col"></th>
             </tr>
             </thead>
             <tbody>
@@ -38,7 +38,12 @@
                 <td th:text="${menuTop.getIsActive()?'aktywny':''}">nazwa</td>
                 <td th:text="${menuTop.getIsActive()?'aktywny':''}">aktywny</td>
                 <td th:text="${menuTop.getMenuEntryList().size()}"></td>
-                <td><a href="#" class="btn btn-primary btn-block" role="button">EDYTUJ</a> </td>
+                <td>
+                    <a th:if="${menuTop.getIsActive()}" th:href="${'/dashboard/menu/'+menuTop.getId()}" href="#"
+                       class="btn btn-primary" role="button">Edytuj</a>
+                    <a th:unless="${menuTop.getIsActive()}" th:href="${'/dashboard/menu/'+menuTop.getId()}" href="#"
+                       class="btn btn-danger" role="button">Aktywuj i edytuj</a>
+                </td>
             </tr>
             </tbody>
         </table>
