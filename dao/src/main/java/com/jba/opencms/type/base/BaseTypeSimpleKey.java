@@ -1,12 +1,14 @@
 package com.jba.opencms.type.base;
 
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.ToString;
 
 import javax.persistence.*;
 import java.io.Serializable;
 import java.time.OffsetDateTime;
 
+@EqualsAndHashCode(callSuper = false)
 @MappedSuperclass
 @Data
 @ToString(callSuper = false)
