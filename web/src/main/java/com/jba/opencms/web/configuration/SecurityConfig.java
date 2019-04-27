@@ -1,4 +1,4 @@
-package com.jba.opencms.web.security;
+package com.jba.opencms.web.configuration;
 
 import com.jba.opencms.security.service.UserDetailsProvider;
 import com.jba.opencms.type.user.enu.AuthorityEnum;
@@ -36,13 +36,17 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http
+                //TODO - Go back to role selection after debug
                 .authorizeRequests()
-                .anyRequest().authenticated()
-                .antMatchers("/dashboard/**").hasAnyRole(
-                    AuthorityEnum.Administrator.name(),
-                    AuthorityEnum.Editor.name(),
-                    AuthorityEnum.Reviewer.name()
-                )
+                .anyRequest().permitAll()
+//                .anyRequest().authenticated()
+                .antMatchers("/dashboard/**")
+                .permitAll()
+//                .hasAnyRole(
+//                    AuthorityEnum.Administrator.name(),
+//                    AuthorityEnum.Editor.name(),
+//                    AuthorityEnum.Reviewer.name()
+//                )
         .and()
             .formLogin()
                 .loginPage("/login")
@@ -65,10 +69,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Bean
     public PasswordEncoder passwordEncoder() {
         BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
-        logger.info("password for test123 is ");
-        String test123 = passwordEncoder.encode("test123");
-        logger.info(test123);
-        BytesKeyGenerator bytesKeyGenerator = KeyGenerators.secureRandom();
         return passwordEncoder;
     }
 }

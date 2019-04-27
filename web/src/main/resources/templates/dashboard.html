@@ -5,95 +5,69 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>Dashboard</title>
-    <div th:replace="/fragment/import"></div>
+    <title th:text="${@systemVariables.get('page.name')+' - Dashboard'}">Failed</title>
+    <div th:replace="fragment/import"></div>
     <link rel="stylesheet" href="../static/css/opencms.css"/>
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css"
           integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
     <link rel="stylesheet" href="../static/css/bootstrap.css"/>
 </head>
-<body class="bg-dark">
-<div class="container-fluid m-0 p-0 no-gutters">
-    <nav class="navbar navbar-light bg-light" style="-webkit-border-radius: 0;-moz-border-radius: 0;border-radius: 0;">
-        <a class="navbar-brand" href="#">
-            <img src="../static/images/bulb.png" width="30" height="30" alt="">
-            <strong>OpenCMS</strong>
-        </a>
-
-        <a class="mr-sm-0" href="/logout">Wyloguj się</a>
-    </nav>
-    <nav aria-label="breadcrumb">
-        <ol class="breadcrumb m-0" style="-webkit-border-radius: 0;-moz-border-radius: 0;border-radius: 0;">
-            <li class="breadcrumb-item active" aria-current="page">Dashboard</li>
-            <!--<li class="breadcrumb-item">Data</li>-->
-            <!--<li class="breadcrumb-item">Data</li>-->
-        </ol>
-    </nav>
-    <div class="wrapper" style="height: 88vh;">
-        <div class="bg-secondary d-flex" style="width:300px; min-width: 300px;">
-            <ul>
-                <li>Test</li>
-                <li>Test2</li>
-                <li>Test3</li>
-            </ul>
+<body class="d-flex flex-column vh-100">
+<nav th:replace="/fragment/admin-navbar"></nav>
+<nav th:replace="/fragment/admin-breadcrumb"></nav>
+<div class="wrapper">
+    <div th:replace="/fragment/admin-sidebar"></div>
+    <div class="tiles flex-grow-1 flex-column overflow-auto">
+        <div style="display:flex; flex-grow: 1">
+            <!-- Page Content -->
+            <div class="card flex-grow-1 shadow-lg">
+                <div class="card-content">
+                    <a href="" th:href="@{/dashboard/pages}">
+                        <p><i class="fas fa-file text-muted icon-vh"></i></p>
+                        <strong>Strony</strong>
+                        <p class="text-muted" style="font-size: 1em;">Dodawaj, usuwaj<br>lub zmieniaj strony</p>
+                    </a>
+                </div>
+            </div>
+            <div class="card flex-grow-1 shadow-lg">
+                <div class="card-content">
+                    <a href="" th:href="@{/dashboard/menu}">
+                        <p><i class="fas fa-bars text-muted icon-vh"></i></p>
+                        <strong>Menu</strong>
+                        <p class="text-muted" style="font-size: 1em;">Dodawaj, usuwaj<br>lub zmieniaj menu</p>
+                    </a>
+                </div>
+            </div>
+            <div class="card flex-grow-1 shadow-lg">
+                <div class="card-content">
+                    <a href="" th:href="@{/dashboard/images}">
+                        <p><i class="fas fa-image text-muted icon-vh"></i></p>
+                        <strong>Obrazy</strong>
+                        <p class="text-muted" style="font-size: 1em;">Przeglądaj lub<br>edytuj obrazy</p>
+                    </a>
+                </div>
+            </div>
         </div>
-        <div class="tiles flex-grow-1 flex-column">
-            <div style="display:flex; flex-grow: 1">
-                <!-- Page Content -->
-                <div class="card flex-grow-1">
-                    <div class="card-content">
-                        <a href="" th:href="@{/dashboard/pages}">
-                            <p><i class="fas fa-file text-muted" style="font-size: 10em;"></i></p>
-                            <strong>Strony</strong>
-                            <p class="text-muted" style="font-size: 1em;">Dodawaj, usuwaj<br>lub zmieniaj strony</p>
-                        </a>
-                    </div>
-                </div>
-                <div class="card flex-grow-1">
-                    <div class="card-content">
-                        <a href="" th:href="@{/dashboard/menus}">
-                            <p><i class="fas fa-bars text-muted" style="font-size: 10em;"></i></p>
-                            <strong>Menu</strong>
-                            <p class="text-muted" style="font-size: 1em;">Dodawaj, usuwaj<br>lub zmieniaj menu</p>
-                        </a>
-                    </div>
-                </div>
-                <div class="card flex-grow-1">
-                    <div class="card-content">
-                        <a href="" th:href="@{/dashboard/images}">
-                            <p><i class="fas fa-image text-muted" style="font-size: 10em;"></i></p>
-                            <strong>Obrazy</strong>
-                            <p class="text-muted" style="font-size: 1em;">Przeglądaj lub<br>edytuj obrazy</p>
-                        </a>
-                    </div>
+        <div style="display:flex; flex-wrap: wrap;flex-grow: 1">
+            <div class="card flex-grow-1 shadow-lg">
+                <div class="card-content">
+                    <a href="" th:href="@{/dashboard/global}">
+                        <p><i class="fas fa-globe text-muted icon-vh"></i></p>
+                        <strong>Serwis</strong>
+                        <p class="text-muted" style="font-size: 1em;">Zarządzaj globalnymi<br>ustawieniami serwisu.</p>
+                    </a>
                 </div>
             </div>
-            <div style="display:flex; flex-wrap: wrap;flex-grow: 1">
-                <div class="card flex-grow-1">
-                    <div class="card-content">
-                        <a href="" th:href="@{/dashboard/global}">
-                            <p><i class="fas fa-globe text-muted" style="font-size: 10em;"></i></p>
-                            <strong>Serwis</strong>
-                            <p class="text-muted" style="font-size: 1em;">Zarządzaj globalnymi<br>ustawieniami serwisu.</p>
-                        </a>
-                    </div>
-                </div>
-                <!-- Page Content -->
-                <div class="card flex-grow-1">
-                    <div class="card-content">
-                        <a href="" th:href="@{/dashboard/users}">
-                            <p><i class="fas fa-user-shield text-muted" style="font-size: 10em;"></i></p>
-                            <strong>Użytkownicy & IAM</strong>
-                            <p class="text-muted" style="font-size: 1em;">Zarządzaj<br>użytkownikami</p>
-                        </a>
-                    </div>
+            <!-- Page Content -->
+            <div class="card flex-grow-1 shadow-lg">
+                <div class="card-content">
+                    <a href="" th:href="@{/dashboard/users}">
+                        <p><i class="fas fa-user-shield text-muted icon-vh"></i></p>
+                        <strong>Użytkownicy & IAM</strong>
+                        <p class="text-muted" style="font-size: 1em;">Zarządzaj<br>użytkownikami</p>
+                    </a>
                 </div>
             </div>
-            <!--<ul class="text-white">-->
-            <!--<li><a th:href="@{/dashboard/menu}">Edytuj menu</a></li>-->
-            <!--<li><a th:href="@{/dashboard/sites}">Edytuj strony</a></li>-->
-            <!--<li><a th:href="@{/dashboard/me}">Ja</a></li>-->
-            <!--</ul>-->
         </div>
     </div>
 </div>

@@ -6,7 +6,6 @@ import com.jba.opencms.configuration.DataSourceConfig;
 import com.jba.opencms.dao.GenericDao;
 import com.jba.opencms.type.page.Page;
 import com.jba.opencms.type.user.Authority;
-import com.jba.opencms.type.user.enu.AuthorityEnum;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
