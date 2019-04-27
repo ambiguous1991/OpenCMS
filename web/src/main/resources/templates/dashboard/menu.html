@@ -12,41 +12,43 @@
           integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
     <link rel="stylesheet" href="../../static/css/bootstrap.css"/>
 </head>
-<body>
+<body class="d-flex flex-column vh-100">
 <nav th:replace="/fragment/admin-navbar"></nav>
 <nav th:replace="/fragment/admin-breadcrumb"></nav>
-<div class="wrapper" style="height: 88vh;">
+<div class="wrapper">
     <div th:replace="fragment/admin-sidebar"></div>
-    <div class="flex-grow-1 flex-column">
+    <div class="flex-grow-1 flex-column d-flex overflow-auto">
         <div class="m-4">
             <nav class="m-4" th:replace="/fragment/menu/user-menu">PLACEHOLDER</nav>
         </div>
         <p class="text-info text-center m-4">^ Podgląd menu ^</p>
-        <table class="table table-hover table-sm p-5">
-            <thead>
-            <tr>
-                <th scope="col">#</th>
-                <th scope="col">Nazwa</th>
-                <th scope="col">Czy aktywny?</th>
-                <th scope="col">Liczba elementów w menu:</th>
-                <th scope="col"></th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr th:each="menuTop: ${allMenus}">
-                <th scope="row" th:text="${menuTop.getId()}">1</th>
-                <td th:text="${menuTop.getIsActive()?'aktywny':''}">nazwa</td>
-                <td th:text="${menuTop.getIsActive()?'aktywny':''}">aktywny</td>
-                <td th:text="${menuTop.getMenuEntryList().size()}"></td>
-                <td>
-                    <a th:if="${menuTop.getIsActive()}" th:href="${'/dashboard/menu/'+menuTop.getId()}" href="#"
-                       class="btn btn-primary" role="button">Edytuj</a>
-                    <a th:unless="${menuTop.getIsActive()}" th:href="${'/dashboard/menu/'+menuTop.getId()}" href="#"
-                       class="btn btn-danger" role="button">Aktywuj i edytuj</a>
-                </td>
-            </tr>
-            </tbody>
-        </table>
+        <div id="table-wrapper" style="margin: 1em; position: relative; overflow: auto; display: block;">
+            <table class="table table-hover table-sm p-5">
+                <thead>
+                <tr>
+                    <th scope="col">Identyfikator</th>
+                    <th scope="col">Nazwa</th>
+                    <th scope="col">Czy aktywny</th>
+                    <th scope="col">Liczba elementów w menu</th>
+                    <th scope="col"></th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="menuTop: ${allMenus}">
+                    <th scope="row" th:text="${menuTop.getId()}">1</th>
+                    <td th:text="${menuTop.getName()}">nazwa</td>
+                    <td th:text="${menuTop.getIsActive()?'aktywny':''}">aktywny</td>
+                    <td th:text="${menuTop.getMenuEntryList().size()}"></td>
+                    <td>
+                        <a th:if="${menuTop.getIsActive()}" th:href="${'/dashboard/menu/'+menuTop.getId()}" href="#"
+                           class="btn btn-primary" role="button">Edytuj</a>
+                        <a th:unless="${menuTop.getIsActive()}" th:href="${'/dashboard/menu/'+menuTop.getId()}" href="#"
+                           class="btn btn-danger" role="button">Aktywuj i edytuj</a>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
     </div>
 </div>
 </body>

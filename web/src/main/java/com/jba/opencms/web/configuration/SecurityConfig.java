@@ -36,13 +36,17 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http
+                //TODO - Go back to role selection after debug
                 .authorizeRequests()
-                .anyRequest().authenticated()
-                .antMatchers("/dashboard/**").hasAnyRole(
-                    AuthorityEnum.Administrator.name(),
-                    AuthorityEnum.Editor.name(),
-                    AuthorityEnum.Reviewer.name()
-                )
+                .anyRequest().permitAll()
+//                .anyRequest().authenticated()
+                .antMatchers("/dashboard/**")
+                .permitAll()
+//                .hasAnyRole(
+//                    AuthorityEnum.Administrator.name(),
+//                    AuthorityEnum.Editor.name(),
+//                    AuthorityEnum.Reviewer.name()
+//                )
         .and()
             .formLogin()
                 .loginPage("/login")
