@@ -10,4 +10,7 @@ public interface MenuDao extends GenericDao<Menu> {
 
     @Override
     List<Menu> findAll();
+
+    @Override
+    Menu findOne(final long id);
 }

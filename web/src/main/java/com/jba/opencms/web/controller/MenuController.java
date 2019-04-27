@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.util.Collections;
@@ -33,5 +34,12 @@ public class MenuController {
         model.addAttribute("allMenus", allMenus);
 
         return "dashboard/menu";
+    }
+
+    @GetMapping("/{menuId}")
+    public String getMenuDetails(@PathVariable(name = "menuId") Integer menuId){
+        Menu one = menuDao.findOne(menuId);
+
+        return "ok";
     }
 }

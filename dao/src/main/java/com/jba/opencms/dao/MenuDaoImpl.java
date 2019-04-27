@@ -36,4 +36,13 @@ public class MenuDaoImpl extends HibernateDao<Menu> implements MenuDao {
         all.forEach(e-> Hibernate.initialize(e.getMenuEntryList()));
         return all;
     }
+
+    @Override
+    @Transactional
+    public Menu findOne(long id) {
+        Menu one = super.findOne(id);
+        Hibernate.initialize(one.getMenuEntryList());
+        Hibernate.initialize(one.getEntries());
+        return one;
+    }
 }

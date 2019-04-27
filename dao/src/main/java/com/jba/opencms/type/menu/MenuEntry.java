@@ -38,7 +38,8 @@ public class MenuEntry extends BaseTypeCompoundKey<Menu, Entry> {
     @Override
     public String toString() {
         return "MenuEntry{" +
-                "menu=" + menu.getId() +
+                "super="+ super.toString() +
+                ", menu=" + menu.getId() +
                 ", entry=" + entry +
                 ", isActive=" + isActive +
                 '}';
