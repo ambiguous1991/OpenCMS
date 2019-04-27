@@ -26,17 +26,19 @@
             <thead>
             <tr>
                 <th scope="col">#</th>
+                <th scope="col">Nazwa</th>
                 <th scope="col">Czy aktywny?</th>
                 <th scope="col">Liczba elementów w menu:</th>
+                <th scope="col"> </th>
             </tr>
             </thead>
             <tbody>
             <tr th:each="menuTop: ${allMenus}">
-                <a href="tawdawd">
-                    <th scope="row" th:text="${menuTop.getId()}">1</th>
-                    <td th:text="${menuTop.getIsActive()?'aktywny':''}">aktywny</td>
-                    <td th:text="${menuTop.getMenuEntryList().size()}"></td>
-                </a>
+                <th scope="row" th:text="${menuTop.getId()}">1</th>
+                <td th:text="${menuTop.getIsActive()?'aktywny':''}">nazwa</td>
+                <td th:text="${menuTop.getIsActive()?'aktywny':''}">aktywny</td>
+                <td th:text="${menuTop.getMenuEntryList().size()}"></td>
+                <td><a href="#" class="btn btn-primary btn-block" role="button">EDYTUJ</a> </td>
             </tr>
             </tbody>
         </table>
