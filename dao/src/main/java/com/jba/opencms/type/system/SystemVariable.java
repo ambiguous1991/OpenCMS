@@ -12,10 +12,10 @@ import javax.persistence.Table;
 @Table(name = "SYSTEM_VARIABLE")
 public class SystemVariable extends BaseTypeSimpleKey<SystemVariable>{
 
-    @Column(name = "KEY")
+    @Column(name = "SYSTEM_KEY")
     public String key;
 
-    @Column(name = "VALUE")
+    @Column(name = "SYSTEM_VALUE")
     public String value;
 
 }
