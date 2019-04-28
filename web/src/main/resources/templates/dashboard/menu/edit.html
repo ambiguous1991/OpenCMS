@@ -1,0 +1,130 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-4.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+
+    <head>
+        <meta charset="UTF-8">
+        <title th:text="${@systemVariables.get('page.name')+' - Dashboard - Menu - Edit'}">Failed</title>
+        <div th:replace="/fragment/import"></div>
+        <link rel="stylesheet" href="../../../static/css/opencms.css"/>
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css"
+              integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf"
+              crossorigin="anonymous">
+        <link rel="stylesheet" href="../../../static/css/bootstrap.css"/>
+        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+                integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+                crossorigin="anonymous"></script>
+        <link href="https://gitcdn.github.io/bootstrap-toggle/2.2.2/css/bootstrap-toggle.min.css" rel="stylesheet">
+        <script src="https://gitcdn.github.io/bootstrap-toggle/2.2.2/js/bootstrap-toggle.min.js"></script>
+
+        <script>
+            var count = -1;
+
+            function addNewMenuElement(){
+                count++;
+                console.info(count);
+                var csrf = $('#csrf');
+
+                addHeader(csrf);
+                addLabel(csrf);
+                addPage(csrf);
+            }
+
+            function addPage(csrf){
+                var newMenu = document.createElement("div");
+
+                $(newMenu).addClass("form-group row");
+
+                let pageLabel = document.createElement("label");
+                pageLabel.setAttribute("for","page["+count+"]");
+                pageLabel.innerHTML="Strona";
+                $(pageLabel).addClass("col-sm-2");
+
+                let pagePicker = document.createElement("select");
+                $(pagePicker).addClass("form-control col-sm-6");
+
+                $(pagePicker).append($("option"));
+
+                $(newMenu).append(pageLabel);
+                $(newMenu).append(pagePicker);
+
+                $(newMenu).insertBefore(csrf);
+            }
+
+            function addLabel(csrf){
+                var newMenu = document.createElement("div");
+
+                $(newMenu).addClass("form-group row");
+
+                let entryLabel = document.createElement("label");
+                entryLabel.setAttribute("for","label["+count+"]");
+                entryLabel.innerHTML="Etykieta";
+                $(entryLabel).addClass("col-sm-2");
+
+                let entryLabelValue = document.createElement("input");
+                entryLabelValue.id="label["+count+"]";
+                $(entryLabelValue).addClass("col-sm-6 form-control");
+
+                $(newMenu).append(entryLabel);
+                $(newMenu).append(entryLabelValue);
+                $(newMenu).insertBefore(csrf);
+            }
+
+            function addHeader(csrf){
+                var newMenuItemSection = document.createElement("h5");
+                newMenuItemSection.innerHTML="Pozycja menu "+(count+1);
+                $(newMenuItemSection).addClass("border-bottom mb-3");
+
+                $(newMenuItemSection).insertBefore(csrf);
+            }
+        </script>
+    </head>
+    <body class="d-flex flex-column vh-100">
+        <nav th:replace="/fragment/admin-navbar"></nav>
+        <nav th:replace="/fragment/admin-breadcrumb"></nav>
+
+        <datalist id="pages">
+            <option value="0" selected></option>
+            <option value="Internet Explorer">Internet Explorer</option>
+            <option value="Firefox">Firefox</option>
+            <option value="Google Chrome">Google Chrome</option>
+            <option value="Opera">Opera</option>
+            <option value="Safari">Safari</option>
+        </datalist>
+
+        <select>
+        </select>
+        <div class="wrapper">
+            <div th:replace="fragment/admin-sidebar"></div>
+            <form class="m-5 p-5 shadow-lg flex-grow-1" style="background-color: #EEE" th:object="${menu}">
+                <h1 class="mb-5">Edycja pozycji menu</h1>
+                <div class="form-group row">
+                    <label for="isActive" class="col-sm-2">Czy aktywować</label>
+                    <br>
+                    <input class="col-sm-6" id="isActive" type="checkbox" checked data-toggle="toggle" data-on="Aktywne"
+                           data-off="Nieaktywne" data-onstyle="success" data-offstyle="danger" th:value="${menu.isActive}">
+                </div>
+                <div class="form-group row">
+                    <label for="name" class="col-sm-2">Nazwa</label>
+                    <input id="name" name="name" type="text" aria-describedby="nameHelpBlock"
+                           class="col-sm-6 form-control" th:value="${menu.getName()}">
+                </div>
+                <a id="button" href="#" class="btn btn-success mb-5" onclick="addNewMenuElement()"><i class="fas fa-plus-square"></i> Dodaj pozycję menu</a>
+                <div th:each="entry, iStat:${menu.getEntries()}" class="form-group row">
+                    <label th:for="'label['+${iStat}+']'" class="col-sm-2">Etykieta</label>
+                    <input th:id="'label['+${iStat}+']'" class="col-sm-6 form-control" th:value="${entry.getLabel()}">Etykieta</input>
+                </div>
+                <input
+                        id="csrf"
+                        type="hidden"
+                        th:name="${_csrf.parameterName}"
+                        th:value="${_csrf.token}" />
+
+                <div class="form-group text-center row mt-5 ml-0">
+                    <button name="submit" type="submit" class="btn btn-lg btn-primary">Zatwierdź</button>
+                </div>
+            </form>
+        </div>
+    </body>
+</html>
