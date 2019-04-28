@@ -42,6 +42,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 //                .anyRequest().authenticated()
                 .antMatchers("/dashboard/**")
                 .permitAll()
+                .antMatchers("/dashboard/menu/**")
+                .permitAll()
 //                .hasAnyRole(
 //                    AuthorityEnum.Administrator.name(),
 //                    AuthorityEnum.Editor.name(),

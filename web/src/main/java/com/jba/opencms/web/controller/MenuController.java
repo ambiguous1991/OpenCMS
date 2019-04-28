@@ -7,9 +7,8 @@ import com.jba.opencms.type.menu.MenuEntry;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.view.RedirectView;
 
 import java.util.Collections;
 import java.util.Comparator;
@@ -17,13 +16,12 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Controller
-@RequestMapping(value = "/dashboard/menu")
 public class MenuController {
 
     @Autowired
     private MenuDao menuDao;
 
-    @GetMapping
+    @RequestMapping(value = "/dashboard/menu", method = RequestMethod.GET)
     public String mainPage(Model model){
         List<Menu> allMenus = menuDao.findAll();
         allMenus.sort(Comparator.comparing(Menu::getIsActive));
@@ -33,13 +31,29 @@ public class MenuController {
         model.addAttribute("menu", menuEntries);
         model.addAttribute("allMenus", allMenus);
 
-        return "dashboard/menu";
+        return "dashboard/menu/menu";
     }
 
-    @GetMapping("/{menuId}")
-    public String getMenuDetails(@PathVariable(name = "menuId") Integer menuId){
-        Menu one = menuDao.findOne(menuId);
+    @RequestMapping(value = "/dashboard/menu/new",method = RequestMethod.POST)
+    public RedirectView createNewMenu(){
+        Menu menu = new Menu();
+        menuDao.create(menu);
+        return new RedirectView("/dashboard/menu/"+menu.getId());
+    }
 
-        return "ok";
+    @RequestMapping(value = "/dashboard/menu/{menuId}", method = RequestMethod.GET)
+    public String getMenuDetails(@PathVariable(name = "menuId") Integer menuId, Model model){
+        Menu menu = menuDao.findOne(menuId);
+
+        model.addAttribute("menu", menu);
+
+        return "dashboard/menu/edit";
+    }
+
+    @RequestMapping(value = "/dashboard/menu/{menuId", method = RequestMethod.POST)
+    public RedirectView postMenuDetails(@PathVariable(name = "menuId") Integer menuId, Menu menu){
+
+
+        return new RedirectView("/dashboard/menu");
     }
 }

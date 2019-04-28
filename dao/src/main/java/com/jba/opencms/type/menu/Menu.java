@@ -6,6 +6,7 @@ import lombok.EqualsAndHashCode;
 import lombok.ToString;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 @EqualsAndHashCode(callSuper = true)
@@ -31,5 +32,5 @@ public class Menu extends BaseTypeSimpleKey<Menu> {
             inverseJoinColumns = {@JoinColumn(name = "FK_MENU_ID")}
     )
     @ToString.Exclude
-    public List<Entry> entries;
+    public List<Entry> entries = new ArrayList<>();
 }
