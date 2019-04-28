@@ -32,20 +32,17 @@ public class Entry extends BaseTypeSimpleKey<Entry> {
     @ToString.Exclude
     private List<Entry> subentires;
 
-    @ManyToMany(cascade = CascadeType.ALL)
-    @JoinTable(
-            name = "MENU_ENTRY",
-            joinColumns = {@JoinColumn(name = "FK_MENU_ID")},
-            inverseJoinColumns= {@JoinColumn(name = "FK_ENTRY_ID")}
-    )
+    @ManyToOne
+    @JoinColumn(name = "FK_MENU_ID")
     @ToString.Exclude
-    private List<Menu> menu;
+    private Menu menu = null;
 
     @Override
     public String toString() {
         return "Entry{" +
                 "page=" + page +
-                ", label='" + label + '\'' +
+                ", label='" + label +
+                ", subentries="+((subentires==null)? "no subentries" : "has subentries" ) +
                 ", id=" + id +
                 '}';
     }

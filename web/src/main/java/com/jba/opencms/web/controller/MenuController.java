@@ -1,9 +1,7 @@
 package com.jba.opencms.web.controller;
 
 import com.jba.opencms.dao.ifs.MenuDao;
-import com.jba.opencms.type.menu.Entry;
 import com.jba.opencms.type.menu.Menu;
-import com.jba.opencms.type.menu.MenuEntry;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -13,7 +11,6 @@ import org.springframework.web.servlet.view.RedirectView;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Controller
 public class MenuController {
@@ -27,8 +24,7 @@ public class MenuController {
         allMenus.sort(Comparator.comparing(Menu::getIsActive));
         Collections.reverse(allMenus);
         Menu activeMenu = menuDao.findActiveMenu();
-        List<Entry> menuEntries = activeMenu.getMenuEntryList().stream().map(MenuEntry::getEntry).collect(Collectors.toList());
-        model.addAttribute("menu", menuEntries);
+        model.addAttribute("menu", activeMenu.getEntries());
         model.addAttribute("allMenus", allMenus);
 
         return "dashboard/menu/menu";

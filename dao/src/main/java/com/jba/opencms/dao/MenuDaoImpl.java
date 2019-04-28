@@ -2,11 +2,11 @@ package com.jba.opencms.dao;
 
 import com.jba.opencms.dao.ifs.MenuDao;
 import com.jba.opencms.type.menu.Menu;
-import com.jba.opencms.type.menu.MenuEntry;
 import org.hibernate.Hibernate;
 import org.hibernate.SessionFactory;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.persistence.NoResultException;
 import java.util.List;
 
 @Transactional
@@ -16,24 +16,23 @@ public class MenuDaoImpl extends HibernateDao<Menu> implements MenuDao {
     }
 
     public Menu findActiveMenu(){
-        Menu menu = getCurrentSession()
-                .createQuery("from Menu m where m.isActive=true", clazz)
-                .getSingleResult();
+        try {
+            Menu menu = getCurrentSession()
+                    .createQuery("from Menu m where m.isActive=true", clazz)
+                    .getSingleResult();
 
-        if(menu!=null) {
-            Hibernate.initialize(menu.getMenuEntryList());
-            for(MenuEntry menuEntry: menu.getMenuEntryList()){
-                Hibernate.initialize(menuEntry.getEntry().getSubentires());
-            }
+            return menu;
         }
-        return menu;
+        catch (NoResultException e){
+            return null;
+        }
     }
 
     @Override
     @Transactional
     public List<Menu> findAll() {
         List<Menu> all = super.findAll();
-        all.forEach(e-> Hibernate.initialize(e.getMenuEntryList()));
+        all.forEach(e-> Hibernate.initialize(e.getEntries()));
         return all;
     }
 
@@ -41,9 +40,6 @@ public class MenuDaoImpl extends HibernateDao<Menu> implements MenuDao {
     @Transactional
     public Menu findOne(long id) {
         Menu one = super.findOne(id);
-        Hibernate.initialize(one.getMenuEntryList());
-        Hibernate.initialize(one);
-        Hibernate.initialize(one.getEntries());
         return one;
     }
 }

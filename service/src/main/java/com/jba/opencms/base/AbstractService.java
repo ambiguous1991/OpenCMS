@@ -60,7 +60,7 @@ public abstract class AbstractService<T extends BaseType> implements BaseService
      * If the element has collections such as Set, List, Map etc, it calls Hibernate#initialize
      * @param element
      */
-    private void initialize(T element){
+    protected void initialize(Object element){
         Field[] declaredFields = element.getClass().getDeclaredFields();
         for (Field declaredField : declaredFields) {
             if(isAssignableToCollection(declaredField)){
@@ -81,7 +81,7 @@ public abstract class AbstractService<T extends BaseType> implements BaseService
         return Collection.class.isAssignableFrom(field.getType());
     }
 
-    private void initialize(Collection collection){
+    private void initialize(Collection<T> collection){
         Hibernate.initialize(collection);
     }
 }

@@ -18,7 +18,19 @@ public class MenuServiceTest extends ServiceIntegrationTest {
     @Test
     public void test(){
         List<Menu> all = menuService.findAll(true);
-        all.forEach(e->logger.info(e));
+        all.forEach(e->{
+            logger.info(e);
+            e.getEntries().forEach(entry -> logger.info(entry));
+        });
     }
 
+
+    @Test
+    public void active(){
+        Menu active = menuService.findActive(true);
+        if(active!=null){
+            active.getEntries().forEach(e->logger.info(e));
+        }
+
+    }
 }

@@ -9,6 +9,6 @@ import java.util.List;
 public interface MenuService extends BaseService<Menu> {
     void addMenuEntry(Menu menu, Entry entry);
     List<Entry> getMenuEntries(Menu menu);
-    Menu findActive();
+    Menu findActive(boolean initialize);
     boolean setActive(Menu menu);
 }

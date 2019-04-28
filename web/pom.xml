@@ -21,8 +21,8 @@
     <dependencies>
         <dependency>
             <groupId>com.jba.opencms</groupId>
-            <artifactId>dao</artifactId>
-            <version>${dao.version}</version>
+            <artifactId>service</artifactId>
+            <version>${service.version}</version>
         </dependency>
         <dependency>
             <groupId>com.jba.opencms</groupId>

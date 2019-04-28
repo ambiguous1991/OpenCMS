@@ -7,7 +7,6 @@ import com.jba.opencms.dao.ifs.SystemVariableDao;
 import com.jba.opencms.type.image.Image;
 import com.jba.opencms.type.menu.Entry;
 import com.jba.opencms.type.menu.Menu;
-import com.jba.opencms.type.menu.MenuEntry;
 import com.jba.opencms.type.message.Message;
 import com.jba.opencms.type.message.Status;
 import com.jba.opencms.type.page.Page;
@@ -57,11 +56,6 @@ public class DaoConfiguration {
     @Bean
     public MenuDao menuDao(@Qualifier("sessionFactory") SessionFactory sessionFactory){
         return new MenuDaoImpl(Menu.class, sessionFactory);
-    }
-
-    @Bean
-    public GenericDao<MenuEntry> menuEntryDao(SessionFactory sessionFactory){
-        return new HibernateDao<>(MenuEntry.class, sessionFactory);
     }
 
     @Bean
