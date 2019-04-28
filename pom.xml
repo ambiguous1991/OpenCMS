@@ -20,12 +20,14 @@
         <module>dao</module>
         <module>security</module>
         <module>web</module>
+        <module>service</module>
     </modules>
 
     <properties>
         <dao.version>0.9.22</dao.version>
         <security.version>1.0.2</security.version>
         <web.version>0.0.1-SNAPSHOT</web.version>
+        <service.version>0.0.1-SNAPSHOT</service.version>
 
         <java.version>1.8</java.version>
         <lombok.version>1.18.4</lombok.version>

@@ -12,7 +12,6 @@ import java.util.List;
 @EqualsAndHashCode(callSuper = true)
 @Entity
 @Data
-@ToString(callSuper = true)
 @Table(name = "MENU")
 public class Menu extends BaseTypeSimpleKey<Menu> {
 
@@ -33,4 +32,14 @@ public class Menu extends BaseTypeSimpleKey<Menu> {
     )
     @ToString.Exclude
     public List<Entry> entries = new ArrayList<>();
+
+    @Override
+    public String toString() {
+        return "Menu{" +
+                "isActive=" + isActive +
+                ", name='" + name + '\'' +
+                ", entries=" + entries +
+                ", id=" + id +
+                '}';
+    }
 }

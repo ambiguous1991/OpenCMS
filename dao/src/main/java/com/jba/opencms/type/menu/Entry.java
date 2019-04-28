@@ -13,7 +13,6 @@ import java.util.List;
 @EqualsAndHashCode(callSuper = true)
 @Entity
 @Data
-@ToString(callSuper = true)
 @Table(name = "ENTRY")
 public class Entry extends BaseTypeSimpleKey<Entry> {
 
@@ -39,7 +38,17 @@ public class Entry extends BaseTypeSimpleKey<Entry> {
             joinColumns = {@JoinColumn(name = "FK_MENU_ID")},
             inverseJoinColumns= {@JoinColumn(name = "FK_ENTRY_ID")}
     )
+    @ToString.Exclude
     private List<Menu> menu;
+
+    @Override
+    public String toString() {
+        return "Entry{" +
+                "page=" + page +
+                ", label='" + label + '\'' +
+                ", id=" + id +
+                '}';
+    }
 
     public static Entry of(String label){
         Entry entry = new Entry();
