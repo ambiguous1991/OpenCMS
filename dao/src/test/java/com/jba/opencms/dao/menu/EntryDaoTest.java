@@ -10,6 +10,7 @@ import com.jba.opencms.type.menu.Menu;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.test.annotation.Rollback;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
@@ -39,6 +40,7 @@ public class EntryDaoTest extends BaseSpringIntegrationTest {
     }
 
     @Test
+    @Rollback
     @Transactional
     public void addTest(){
         Menu menu = new Menu();
@@ -57,5 +59,22 @@ public class EntryDaoTest extends BaseSpringIntegrationTest {
 
         List<Entry> entries = Arrays.asList(entry1, entry2, entry3);
         entries.forEach(e->entryDao.create(e));
+    }
+
+    @Test
+    @Rollback
+    @Transactional
+    public void addSubentryTest(){
+        Entry entry = entryDao.findOne(3);
+
+        logger.info(entry);
+
+        Entry subentry = new Entry();
+        subentry.setLabel("Subentry 1");
+        entryDao.create(subentry);
+
+        entry.getSubentires().add(subentry);
+
+        entryDao.update(entry);
     }
 }

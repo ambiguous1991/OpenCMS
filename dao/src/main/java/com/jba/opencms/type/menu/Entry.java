@@ -16,36 +16,25 @@ import java.util.List;
 @Table(name = "ENTRY")
 public class Entry extends BaseTypeSimpleKey<Entry> {
 
-    @ManyToOne
-    @JoinColumn(name = "FK_PAGE_ID")
-    private Page page;
-
     @Column(name = "LABEL")
     private String label;
 
-    @ManyToMany
-    @JoinTable(
-            name = "SUBENTRY",
-            joinColumns = {@JoinColumn(name = "FK_ENTRY_ID_PARENT")},
-            inverseJoinColumns = {@JoinColumn(name="FK_ENTRY_ID_CHILD")}
-    )
-    @ToString.Exclude
-    private List<Entry> subentires;
+    @ManyToOne
+    @JoinColumn(name = "FK_PAGE_ID")
+    private Page page;
 
     @ManyToOne
     @JoinColumn(name = "FK_MENU_ID")
     @ToString.Exclude
     private Menu menu = null;
 
-    @Override
-    public String toString() {
-        return "Entry{" +
-                "page=" + page +
-                ", label='" + label +
-                ", subentries="+((subentires==null)? "no subentries" : "has subentries" ) +
-                ", id=" + id +
-                '}';
-    }
+    @OneToMany(mappedBy = "parent")
+    private List<Entry> subentires;
+
+    @ManyToOne
+    @JoinColumn(name = "FK_ENTRY_PARENT_ID")
+    @ToString.Exclude
+    private Entry parent;
 
     public static Entry of(String label){
         Entry entry = new Entry();
