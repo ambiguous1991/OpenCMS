@@ -26,11 +26,11 @@
             <div th:replace="fragment/admin-sidebar"></div>
             <div class="container-fluid shadow-lg flex-grow-1 m-5 p-5">
                 <form class="" th:object="${menu}">
-                    <h1 class="">Edycja pozycji menu</h1>
+                    <h3 class="mb-4">Edycja pozycji menu</h3>
                     <div class="form-group row">
                         <label for="isActive" class="col-sm-2">Czy aktywować</label>
                         <br>
-                        <input class="col-sm-6" id="isActive" type="checkbox" checked data-toggle="toggle"
+                        <input class="col-sm-10" id="isActive" type="checkbox" checked data-toggle="toggle"
                                data-on="Aktywne"
                                data-off="Nieaktywne" data-onstyle="success" data-offstyle="danger"
                                th:value="${menu.getIsActive()}">
@@ -38,19 +38,21 @@
                     <div class="form-group row">
                         <label for="name" class="col-sm-2">Nazwa</label>
                         <input id="name" name="name" type="text" aria-describedby="nameHelpBlock"
-                               class="col-sm-6 form-control" th:value="${menu.getName()}">
+                               class="col-sm-10 form-control" th:value="${menu.getName()}">
                     </div>
                     <input
                             id="csrf"
                             type="hidden"
                             th:name="${_csrf.parameterName}"
                             th:value="${_csrf.token}"/>
-                    <div class="form-group text-center row mt-5 ml-0">
-                        <button name="submit" type="submit" class="btn btn-lg btn-primary">Zatwierdź</button>
+                    <div class="form-group row mt-1 col-sm-12">
+                        <button name="submit" type="submit" class="btn btn-primary">Zatwierdź</button>
                     </div>
                 </form>
                 <div class="">
-                    <table class="table table-sm table-responsive-sm table-striped table-bordered table-hover" th:if="${menu.getEntries().size()>0}">
+                    <table class="table table-sm table-responsive-sm table-striped table-bordered table-hover"
+                           th:if="${menu.getEntries().size()>0}">
+                        <h4 class="mb-2 mt-5">Elementy menu</h4>
                         <thead>
                             <tr>
                                 <th>Id</th>
@@ -61,20 +63,24 @@
                         </thead>
                         <tbody>
                             <tr th:each="entry:${menu.getEntries()}">
-                                <th th:text="${entry.getId()}">1</th>
-                                <th th:text="${entry.getLabel()}">Label</th>
+                                <th>
+                                    <a href="#" th:href="'/dashboard/menu/'+${menu.getId()}+'/'+${entry.getId()}">
+                                        <span th:text="${entry.getId()}">1</span>
+                                    </a>
+                                </th>
+                                <th th:text="${entry.getLabel()}">Etykieta</th>
                                 <th th:text="${entry.getPage()!=null}?${entry.getPage().getTitle()} : 'brak'">brak</th>
                                 <th th:text="${entry.getSubentires()!=null}?${entry.getSubentires().size()}:'0'">0</th>
                             </tr>
                         </tbody>
                     </table>
                 </div>
-                <div class="">
-                    <a id="button" th:href="${'/dashboard/menu/'+menu.getId()+'/new'}" class="btn btn-success mb-5">
+                <form th:action="${'/dashboard/menu/'+menu.getId()+'/new'}" method="post" class="text-right">
+                    <button name="submit" type="submit" class="btn btn-success mt-3">
                         <i class="fas fa-plus-square"></i>
                         Dodaj pozycję menu
-                    </a>
-                </div>
+                    </button>
+                </form>
             </div>
         </div>
     </body>

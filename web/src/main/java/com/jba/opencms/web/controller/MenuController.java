@@ -1,6 +1,7 @@
 package com.jba.opencms.web.controller;
 
 import com.jba.opencms.menu.MenuService;
+import com.jba.opencms.type.menu.Entry;
 import com.jba.opencms.type.menu.Menu;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -53,5 +54,40 @@ public class MenuController {
 
 
         return new RedirectView("/dashboard/menu");
+    }
+
+    @RequestMapping(value = "/dashboard/menu/{menuId}/new", method = RequestMethod.POST)
+    public RedirectView createNewMenuEntry(@PathVariable(name = "menuId") Long menuId){
+        Menu menu = menuService.findOne(menuId, false);
+
+        Entry entry = new Entry();
+        entry.setMenu(menu);
+        entry.setLabel("");
+        menuService.addMenuEntry(menu, entry);
+
+        return new RedirectView("/dashboard/menu/"+menuId+"/"+entry.getId());
+    }
+
+    @RequestMapping(value = "/dashboard/menu/{menuId}/{entryId}", method = RequestMethod.GET)
+    public String getMenuEntriesDetails(@PathVariable(name = "menuId") Long menuId,
+                                        @PathVariable(name = "entryId") Long entryId,
+                                        Model model){
+        Menu menu = menuService.findOne(menuId, true);
+
+        model.addAttribute("entry", menu.getEntries().stream()
+                .filter(entry -> entry.getId().equals(entryId))
+                .findAny().orElse(null)
+        );
+
+        return "dashboard/menu/entry";
+    }
+
+    @RequestMapping(value = "/dashboard/menu/{menuId}/{entryId}", method = RequestMethod.POST)
+    public RedirectView postMenuEntriesDetails(@PathVariable(name = "menuId") Long menuId, Model model){
+        Menu menu = menuService.findOne(menuId, false);
+
+        model.addAttribute("menu", menu);
+
+        return new RedirectView("/dashboard/menu/"+menu.getId());
     }
 }
