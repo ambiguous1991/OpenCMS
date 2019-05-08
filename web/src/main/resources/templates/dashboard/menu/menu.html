@@ -46,7 +46,7 @@
                                 <th scope="row" th:text="${menuTop.getId()}">1</th>
                                 <td th:text="${menuTop.getName()}">nazwa</td>
                                 <td th:text="${menuTop.getIsActive()?'aktywny':''}">aktywny</td>
-                                <td th:text="${menuTop.getMenuEntryList().size()}"></td>
+                                <td th:text="${menuTop.getEntries().size()}"></td>
                                 <td>
                                     <a th:if="${menuTop.getIsActive()}" th:href="${'/dashboard/menu/'+menuTop.getId()}"
                                        href="#"

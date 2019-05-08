@@ -1,11 +1,13 @@
 package com.jba.opencms.web.controller;
 
-import com.jba.opencms.dao.ifs.MenuDao;
+import com.jba.opencms.menu.MenuService;
 import com.jba.opencms.type.menu.Menu;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.view.RedirectView;
 
 import java.util.Collections;
@@ -16,14 +18,14 @@ import java.util.List;
 public class MenuController {
 
     @Autowired
-    private MenuDao menuDao;
+    private MenuService menuService;
 
     @RequestMapping(value = "/dashboard/menu", method = RequestMethod.GET)
     public String mainPage(Model model){
-        List<Menu> allMenus = menuDao.findAll();
+        List<Menu> allMenus = menuService.findAll(true);
         allMenus.sort(Comparator.comparing(Menu::getIsActive));
         Collections.reverse(allMenus);
-        Menu activeMenu = menuDao.findActiveMenu();
+        Menu activeMenu = menuService.findActive(true);
         model.addAttribute("menu", activeMenu.getEntries());
         model.addAttribute("allMenus", allMenus);
 
@@ -33,21 +35,21 @@ public class MenuController {
     @RequestMapping(value = "/dashboard/menu/new",method = RequestMethod.POST)
     public RedirectView createNewMenu(){
         Menu menu = new Menu();
-        menuDao.create(menu);
+        menuService.create(menu);
         return new RedirectView("/dashboard/menu/"+menu.getId());
     }
 
     @RequestMapping(value = "/dashboard/menu/{menuId}", method = RequestMethod.GET)
-    public String getMenuDetails(@PathVariable(name = "menuId") Integer menuId, Model model){
-        Menu menu = menuDao.findOne(menuId);
+    public String getMenuDetails(@PathVariable(name = "menuId") Long menuId, Model model){
+        Menu menu = menuService.findOne(menuId, false);
 
         model.addAttribute("menu", menu);
 
         return "dashboard/menu/edit";
     }
 
-    @RequestMapping(value = "/dashboard/menu/{menuId", method = RequestMethod.POST)
-    public RedirectView postMenuDetails(@PathVariable(name = "menuId") Integer menuId, Menu menu){
+    @RequestMapping(value = "/dashboard/menu/{menuId}", method = RequestMethod.POST)
+    public RedirectView postMenuDetails(@PathVariable(name = "menuId") Long menuId, Menu menu){
 
 
         return new RedirectView("/dashboard/menu");
