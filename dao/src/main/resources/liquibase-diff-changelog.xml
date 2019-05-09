@@ -1,0 +1,151 @@
+<?xml version="1.1" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd">
+    <changeSet author="satan (generated)" id="1557424409883-1">
+        <createIndex indexName="IX_IMAGE_USERPK" tableName="IMAGE_USER" unique="true">
+            <column name="FK_USER_ID"/>
+            <column name="FK_IMAGE_ID"/>
+        </createIndex>
+    </changeSet>
+    <changeSet author="satan (generated)" id="1557424409883-2">
+        <addForeignKeyConstraint baseColumnNames="FK_IMAGE_ID" baseTableName="IMAGE_PAGE" constraintName="FK8futhk3rjx0gr4n8ll5kolebp" deferrable="false" initiallyDeferred="false" referencedColumnNames="ID" referencedTableName="PAGE"/>
+    </changeSet>
+    <changeSet author="satan (generated)" id="1557424409883-3">
+        <addForeignKeyConstraint baseColumnNames="FK_AUTORITY_ID" baseTableName="USER_AUTHORITY" constraintName="FK976m6l0pn62g8e6cyw5t74kke" deferrable="false" initiallyDeferred="false" referencedColumnNames="ID" referencedTableName="USER"/>
+    </changeSet>
+    <changeSet author="satan (generated)" id="1557424409883-4">
+        <addForeignKeyConstraint baseColumnNames="FK_PAGE_ID" baseTableName="IMAGE_PAGE" constraintName="FKcgegum0o6rwg0qdk5jf2oanf2" deferrable="false" initiallyDeferred="false" referencedColumnNames="ID" referencedTableName="IMAGE"/>
+    </changeSet>
+    <changeSet author="satan (generated)" id="1557424409883-5">
+        <addForeignKeyConstraint baseColumnNames="FK_PAGE_ID" baseTableName="page_authority" constraintName="FKjmk2rkfyb96nh675qemhh7ee5" deferrable="false" initiallyDeferred="false" referencedColumnNames="ID" referencedTableName="AUTHORITY"/>
+    </changeSet>
+    <changeSet author="satan (generated)" id="1557424409883-6">
+        <addForeignKeyConstraint baseColumnNames="FK_USER_ID" baseTableName="USER_AUTHORITY" constraintName="FKmpa00t68x2da9d2c3etnubso7" deferrable="false" initiallyDeferred="false" referencedColumnNames="ID" referencedTableName="AUTHORITY"/>
+    </changeSet>
+    <changeSet author="satan (generated)" id="1557424409883-7">
+        <addForeignKeyConstraint baseColumnNames="FK_AUTHORITY_ID" baseTableName="page_authority" constraintName="FKt5wwonajvqv1d1apitxril9tb" deferrable="false" initiallyDeferred="false" referencedColumnNames="ID" referencedTableName="PAGE"/>
+    </changeSet>
+    <changeSet author="satan (generated)" id="1557424409883-8">
+        <dropForeignKeyConstraint baseTableName="image_page" constraintName="FKIMAGE_PAGE260805"/>
+    </changeSet>
+    <changeSet author="satan (generated)" id="1557424409883-9">
+        <dropForeignKeyConstraint baseTableName="image_page" constraintName="FKIMAGE_PAGE909037"/>
+    </changeSet>
+    <changeSet author="satan (generated)" id="1557424409883-10">
+        <dropForeignKeyConstraint baseTableName="page_authority" constraintName="FKPAGE_AUTHO676317"/>
+    </changeSet>
+    <changeSet author="satan (generated)" id="1557424409883-11">
+        <dropForeignKeyConstraint baseTableName="page_authority" constraintName="FKPAGE_AUTHO939906"/>
+    </changeSet>
+    <changeSet author="satan (generated)" id="1557424409883-12">
+        <dropForeignKeyConstraint baseTableName="user_authority" constraintName="FKUSER_AUTHO278605"/>
+    </changeSet>
+    <changeSet author="satan (generated)" id="1557424409883-13">
+        <dropForeignKeyConstraint baseTableName="user_authority" constraintName="FKUSER_AUTHO904035"/>
+    </changeSet>
+    <changeSet author="satan (generated)" id="1557424409883-14">
+        <dropUniqueConstraint constraintName="KEY_UNIQUE" tableName="system_variable"/>
+    </changeSet>
+    <changeSet author="satan (generated)" id="1557424409883-15">
+        <dropTable tableName="respondto"/>
+    </changeSet>
+    <changeSet author="satan (generated)" id="1557424409883-16">
+        <dropPrimaryKey constraintName="PRIMARY" tableName="image_page"/>
+    </changeSet>
+    <changeSet author="satan (generated)" id="1557424409883-17">
+        <dropPrimaryKey constraintName="PRIMARY" tableName="page_authority"/>
+    </changeSet>
+    <changeSet author="satan (generated)" id="1557424409883-18">
+        <dropPrimaryKey constraintName="PRIMARY" tableName="subpage"/>
+    </changeSet>
+    <changeSet author="satan (generated)" id="1557424409883-19">
+        <dropPrimaryKey constraintName="PRIMARY" tableName="user_authority"/>
+    </changeSet>
+    <changeSet author="satan (generated)" id="1557424409883-20">
+        <dropDefaultValue columnDataType="boolean" columnName="ACTIVE" tableName="MENU"/>
+    </changeSet>
+    <changeSet author="satan (generated)" id="1557424409883-21">
+        <dropNotNullConstraint columnDataType="blob" columnName="CDATE" tableName="AUTHORITY"/>
+    </changeSet>
+    <changeSet author="satan (generated)" id="1557424409883-22">
+        <dropNotNullConstraint columnDataType="blob" columnName="CDATE" tableName="ENTRY"/>
+    </changeSet>
+    <changeSet author="satan (generated)" id="1557424409883-23">
+        <dropNotNullConstraint columnDataType="blob" columnName="CDATE" tableName="IMAGE"/>
+    </changeSet>
+    <changeSet author="satan (generated)" id="1557424409883-24">
+        <dropNotNullConstraint columnDataType="blob" columnName="CDATE" tableName="IMAGE_USER"/>
+    </changeSet>
+    <changeSet author="satan (generated)" id="1557424409883-25">
+        <dropNotNullConstraint columnDataType="blob" columnName="CDATE" tableName="MENU"/>
+    </changeSet>
+    <changeSet author="satan (generated)" id="1557424409883-26">
+        <dropNotNullConstraint columnDataType="blob" columnName="CDATE" tableName="MESSAGE"/>
+    </changeSet>
+    <changeSet author="satan (generated)" id="1557424409883-27">
+        <dropNotNullConstraint columnDataType="blob" columnName="CDATE" tableName="PAGE"/>
+    </changeSet>
+    <changeSet author="satan (generated)" id="1557424409883-28">
+        <dropNotNullConstraint columnDataType="blob" columnName="CDATE" tableName="STATUS"/>
+    </changeSet>
+    <changeSet author="satan (generated)" id="1557424409883-29">
+        <dropNotNullConstraint columnDataType="blob" columnName="CDATE" tableName="SYSTEM_VARIABLE"/>
+    </changeSet>
+    <changeSet author="satan (generated)" id="1557424409883-30">
+        <dropNotNullConstraint columnDataType="blob" columnName="CDATE" tableName="USER"/>
+    </changeSet>
+    <changeSet author="satan (generated)" id="1557424409883-31">
+        <dropNotNullConstraint columnDataType="varchar(255)" columnName="LABEL" tableName="ENTRY"/>
+    </changeSet>
+    <changeSet author="satan (generated)" id="1557424409883-32">
+        <dropDefaultValue columnDataType="varchar(255)" columnName="NAME" tableName="MENU"/>
+    </changeSet>
+    <changeSet author="satan (generated)" id="1557424409883-33">
+        <dropDefaultValue columnDataType="boolean" columnName="PROFILE" tableName="IMAGE_USER"/>
+    </changeSet>
+    <changeSet author="satan (generated)" id="1557424409883-34">
+        <dropNotNullConstraint columnDataType="varchar(255)" columnName="STATUS_NAME" tableName="STATUS"/>
+    </changeSet>
+    <changeSet author="satan (generated)" id="1557424409883-35">
+        <dropNotNullConstraint columnDataType="varchar(255)" columnName="SYSTEM_KEY" tableName="SYSTEM_VARIABLE"/>
+    </changeSet>
+    <changeSet author="satan (generated)" id="1557424409883-36">
+        <dropNotNullConstraint columnDataType="varchar(255)" columnName="SYSTEM_VALUE" tableName="SYSTEM_VARIABLE"/>
+    </changeSet>
+    <changeSet author="satan (generated)" id="1557424409883-37">
+        <dropNotNullConstraint columnDataType="blob" columnName="UDATE" tableName="AUTHORITY"/>
+    </changeSet>
+    <changeSet author="satan (generated)" id="1557424409883-38">
+        <dropNotNullConstraint columnDataType="blob" columnName="UDATE" tableName="ENTRY"/>
+    </changeSet>
+    <changeSet author="satan (generated)" id="1557424409883-39">
+        <dropNotNullConstraint columnDataType="blob" columnName="UDATE" tableName="IMAGE"/>
+    </changeSet>
+    <changeSet author="satan (generated)" id="1557424409883-40">
+        <dropNotNullConstraint columnDataType="blob" columnName="UDATE" tableName="IMAGE_USER"/>
+    </changeSet>
+    <changeSet author="satan (generated)" id="1557424409883-41">
+        <dropNotNullConstraint columnDataType="blob" columnName="UDATE" tableName="MENU"/>
+    </changeSet>
+    <changeSet author="satan (generated)" id="1557424409883-42">
+        <dropNotNullConstraint columnDataType="blob" columnName="UDATE" tableName="MESSAGE"/>
+    </changeSet>
+    <changeSet author="satan (generated)" id="1557424409883-43">
+        <dropNotNullConstraint columnDataType="blob" columnName="UDATE" tableName="PAGE"/>
+    </changeSet>
+    <changeSet author="satan (generated)" id="1557424409883-44">
+        <dropNotNullConstraint columnDataType="blob" columnName="UDATE" tableName="STATUS"/>
+    </changeSet>
+    <changeSet author="satan (generated)" id="1557424409883-45">
+        <dropNotNullConstraint columnDataType="blob" columnName="UDATE" tableName="SYSTEM_VARIABLE"/>
+    </changeSet>
+    <changeSet author="satan (generated)" id="1557424409883-46">
+        <dropNotNullConstraint columnDataType="blob" columnName="UDATE" tableName="USER"/>
+    </changeSet>
+    <changeSet author="satan (generated)" id="1557424409883-47">
+        <dropDefaultValue columnDataType="boolean" columnName="VISIBLE" tableName="PAGE"/>
+    </changeSet>
+    <changeSet author="satan (generated)" id="1557424409883-48">
+        <dropPrimaryKey tableName="IMAGE_USER"/>
+        <addPrimaryKey columnNames="FK_USER_ID, FK_IMAGE_ID" constraintName="IMAGE_USERPK" tableName="IMAGE_USER"/>
+    </changeSet>
+</databaseChangeLog>
