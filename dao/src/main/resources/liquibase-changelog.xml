@@ -1,0 +1,386 @@
+<?xml version="1.1" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd">
+    <changeSet author="jba" id="1557424117790-1">
+        <createTable tableName="authority">
+            <column autoIncrement="true" name="ID" type="BIGINT">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="ROLE" type="VARCHAR(30)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="CDATE" type="datetime(6)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="UDATE" type="datetime(6)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="jba" id="1557424117790-2">
+        <createTable tableName="entry">
+            <column autoIncrement="true" name="ID" type="BIGINT">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="FK_ENTRY_PARENT_ID" type="BIGINT"/>
+            <column name="FK_PAGE_ID" type="BIGINT"/>
+            <column name="FK_MENU_ID" type="BIGINT"/>
+            <column name="LABEL" type="VARCHAR(100)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="CDATE" type="datetime(6)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="UDATE" type="datetime(6)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="jba" id="1557424117790-3">
+        <createTable tableName="image">
+            <column autoIncrement="true" name="ID" type="BIGINT">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="NAME" type="VARCHAR(100)"/>
+            <column name="DESCRIPTION" type="VARCHAR(200)"/>
+            <column name="DATA" type="BLOB">
+                <constraints nullable="false"/>
+            </column>
+            <column name="EXTENSION" type="CHAR(5)"/>
+            <column name="CDATE" type="datetime(6)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="UDATE" type="datetime(6)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="jba" id="1557424117790-4">
+        <createTable tableName="image_page">
+            <column name="FK_IMAGE_ID" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="FK_PAGE_ID" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="jba" id="1557424117790-5">
+        <createTable tableName="image_user">
+            <column name="FK_IMAGE_ID" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="FK_USER_ID" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="CDATE" type="datetime(6)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="UDATE" type="datetime(6)">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValueBoolean="false" name="PROFILE" type="BIT(1)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="jba" id="1557424117790-6">
+        <createTable tableName="menu">
+            <column autoIncrement="true" name="ID" type="BIGINT">
+                <constraints primaryKey="true"/>
+            </column>
+            <column defaultValueBoolean="false" name="ACTIVE" type="BIT(1)">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValue="" name="NAME" type="VARCHAR(100)"/>
+            <column defaultValueComputed="CURRENT_TIMESTAMP" name="CDATE" type="datetime(6)">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValueComputed="CURRENT_TIMESTAMP" name="UDATE" type="datetime(6)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="jba" id="1557424117790-7">
+        <createTable tableName="message">
+            <column autoIncrement="true" name="ID" type="BIGINT">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="FK_USER_ID_FROM" type="BIGINT"/>
+            <column name="FK_USER_ID_TO" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="FK_STATUS_ID" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="RESPONSE_EMAIL" type="VARCHAR(255)"/>
+            <column name="MESSAGE" type="TEXT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="CDATE" type="datetime(6)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="UDATE" type="datetime(6)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="jba" id="1557424117790-8">
+        <createTable tableName="page">
+            <column autoIncrement="true" name="ID" type="BIGINT">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="TITLE" type="VARCHAR(200)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="CONTENT" type="TEXT">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValueBoolean="true" name="VISIBLE" type="BIT(1)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="CDATE" type="datetime(6)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="UDATE" type="datetime(6)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="jba" id="1557424117790-9">
+        <createTable tableName="page_authority">
+            <column name="FK_AUTHORITY_ID" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="FK_PAGE_ID" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="jba" id="1557424117790-10">
+        <createTable tableName="respondto">
+            <column autoIncrement="true" name="ID" type="BIGINT">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="RECEIVER" type="VARCHAR(20)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="CDATE" type="datetime(6)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="UDATE" type="datetime(6)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="jba" id="1557424117790-11">
+        <createTable tableName="status">
+            <column autoIncrement="true" name="ID" type="BIGINT">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="STATUS_NAME" type="VARCHAR(100)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="CDATE" type="datetime(6)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="UDATE" type="datetime(6)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="jba" id="1557424117790-12">
+        <createTable tableName="subpage">
+            <column name="FK_PAGE_ID_PARENT" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="FK_PAGE_ID_CHILD" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="jba" id="1557424117790-13">
+        <createTable tableName="system_variable">
+            <column autoIncrement="true" name="ID" type="BIGINT">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="SYSTEM_KEY" type="VARCHAR(100)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="SYSTEM_VALUE" type="TEXT">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValueComputed="CURRENT_TIMESTAMP" name="CDATE" type="datetime(6)">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValueComputed="CURRENT_TIMESTAMP" name="UDATE" type="datetime(6)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="jba" id="1557424117790-14">
+        <createTable tableName="user">
+            <column autoIncrement="true" name="ID" type="BIGINT">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="USERNAME" type="VARCHAR(100)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="PASSWORD" type="CHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="EMAIL" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="FIRSTNAME" type="VARCHAR(100)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="LASTNAME" type="VARCHAR(100)"/>
+            <column name="CDATE" type="datetime(6)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="UDATE" type="datetime(6)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="jba" id="1557424117790-15">
+        <createTable tableName="user_authority">
+            <column name="FK_USER_ID" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="FK_AUTORITY_ID" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="jba" id="1557424117790-16">
+        <addPrimaryKey columnNames="FK_IMAGE_ID, FK_PAGE_ID" constraintName="PRIMARY" tableName="image_page"/>
+    </changeSet>
+    <changeSet author="jba" id="1557424117790-17">
+        <addPrimaryKey columnNames="FK_IMAGE_ID, FK_USER_ID" constraintName="PRIMARY" tableName="image_user"/>
+    </changeSet>
+    <changeSet author="jba" id="1557424117790-18">
+        <addPrimaryKey columnNames="FK_AUTHORITY_ID, FK_PAGE_ID" constraintName="PRIMARY" tableName="page_authority"/>
+    </changeSet>
+    <changeSet author="jba" id="1557424117790-19">
+        <addPrimaryKey columnNames="FK_PAGE_ID_PARENT, FK_PAGE_ID_CHILD" constraintName="PRIMARY" tableName="subpage"/>
+    </changeSet>
+    <changeSet author="jba" id="1557424117790-20">
+        <addPrimaryKey columnNames="FK_USER_ID, FK_AUTORITY_ID" constraintName="PRIMARY" tableName="user_authority"/>
+    </changeSet>
+    <changeSet author="jba" id="1557424117790-21">
+        <addUniqueConstraint columnNames="EMAIL" constraintName="EMAIL" tableName="user"/>
+    </changeSet>
+    <changeSet author="jba" id="1557424117790-22">
+        <addUniqueConstraint columnNames="SYSTEM_KEY" constraintName="KEY_UNIQUE" tableName="system_variable"/>
+    </changeSet>
+    <changeSet author="jba" id="1557424117790-23">
+        <addUniqueConstraint columnNames="ROLE" constraintName="ROLE" tableName="authority"/>
+    </changeSet>
+    <changeSet author="jba" id="1557424117790-24">
+        <addUniqueConstraint columnNames="USERNAME" constraintName="USERNAME" tableName="user"/>
+    </changeSet>
+    <changeSet author="jba" id="1557424117790-25">
+        <createIndex indexName="FKIMAGE_PAGE260805" tableName="image_page">
+            <column name="FK_PAGE_ID"/>
+        </createIndex>
+    </changeSet>
+    <changeSet author="jba" id="1557424117790-26">
+        <createIndex indexName="FKIMAGE_USER511672" tableName="image_user">
+            <column name="FK_USER_ID"/>
+        </createIndex>
+    </changeSet>
+    <changeSet author="jba" id="1557424117790-27">
+        <createIndex indexName="FKMESSAGE241606" tableName="message">
+            <column name="FK_STATUS_ID"/>
+        </createIndex>
+    </changeSet>
+    <changeSet author="jba" id="1557424117790-28">
+        <createIndex indexName="FKMESSAGE423697" tableName="message">
+            <column name="FK_USER_ID_FROM"/>
+        </createIndex>
+    </changeSet>
+    <changeSet author="jba" id="1557424117790-29">
+        <createIndex indexName="FKMESSAGE853733" tableName="message">
+            <column name="FK_USER_ID_TO"/>
+        </createIndex>
+    </changeSet>
+    <changeSet author="jba" id="1557424117790-30">
+        <createIndex indexName="FKPAGE_AUTHO676317" tableName="page_authority">
+            <column name="FK_PAGE_ID"/>
+        </createIndex>
+    </changeSet>
+    <changeSet author="jba" id="1557424117790-31">
+        <createIndex indexName="FKSUBPAGE921558" tableName="subpage">
+            <column name="FK_PAGE_ID_CHILD"/>
+        </createIndex>
+    </changeSet>
+    <changeSet author="jba" id="1557424117790-32">
+        <createIndex indexName="FKUSER_AUTHO278605" tableName="user_authority">
+            <column name="FK_AUTORITY_ID"/>
+        </createIndex>
+    </changeSet>
+    <changeSet author="jba" id="1557424117790-33">
+        <createIndex indexName="FK_ENTRY_PARENT_ID_idx" tableName="entry">
+            <column name="FK_ENTRY_PARENT_ID"/>
+        </createIndex>
+    </changeSet>
+    <changeSet author="jba" id="1557424117790-34">
+        <createIndex indexName="FK_MENU_ID_idx" tableName="entry">
+            <column name="FK_MENU_ID"/>
+        </createIndex>
+    </changeSet>
+    <changeSet author="jba" id="1557424117790-35">
+        <createIndex indexName="FK_SUBENTRY_ID" tableName="entry">
+            <column name="FK_PAGE_ID"/>
+        </createIndex>
+    </changeSet>
+    <changeSet author="jba" id="1557424117790-36">
+        <addForeignKeyConstraint baseColumnNames="FK_ENTRY_PARENT_ID" baseTableName="entry" constraintName="CSTR_FK_ENTRY_PARENT_ID" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="ID" referencedTableName="entry"/>
+    </changeSet>
+    <changeSet author="jba" id="1557424117790-37">
+        <addForeignKeyConstraint baseColumnNames="FK_PAGE_ID" baseTableName="image_page" constraintName="FKIMAGE_PAGE260805" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="ID" referencedTableName="page"/>
+    </changeSet>
+    <changeSet author="jba" id="1557424117790-38">
+        <addForeignKeyConstraint baseColumnNames="FK_IMAGE_ID" baseTableName="image_page" constraintName="FKIMAGE_PAGE909037" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="ID" referencedTableName="image"/>
+    </changeSet>
+    <changeSet author="jba" id="1557424117790-39">
+        <addForeignKeyConstraint baseColumnNames="FK_USER_ID" baseTableName="image_user" constraintName="FKIMAGE_USER511672" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="ID" referencedTableName="user"/>
+    </changeSet>
+    <changeSet author="jba" id="1557424117790-40">
+        <addForeignKeyConstraint baseColumnNames="FK_IMAGE_ID" baseTableName="image_user" constraintName="FKIMAGE_USER75242" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="ID" referencedTableName="image"/>
+    </changeSet>
+    <changeSet author="jba" id="1557424117790-41">
+        <addForeignKeyConstraint baseColumnNames="FK_STATUS_ID" baseTableName="message" constraintName="FKMESSAGE241606" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="ID" referencedTableName="status"/>
+    </changeSet>
+    <changeSet author="jba" id="1557424117790-42">
+        <addForeignKeyConstraint baseColumnNames="FK_USER_ID_FROM" baseTableName="message" constraintName="FKMESSAGE423697" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="ID" referencedTableName="user"/>
+    </changeSet>
+    <changeSet author="jba" id="1557424117790-43">
+        <addForeignKeyConstraint baseColumnNames="FK_USER_ID_TO" baseTableName="message" constraintName="FKMESSAGE853733" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="ID" referencedTableName="user"/>
+    </changeSet>
+    <changeSet author="jba" id="1557424117790-44">
+        <addForeignKeyConstraint baseColumnNames="FK_PAGE_ID" baseTableName="page_authority" constraintName="FKPAGE_AUTHO676317" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="ID" referencedTableName="page"/>
+    </changeSet>
+    <changeSet author="jba" id="1557424117790-45">
+        <addForeignKeyConstraint baseColumnNames="FK_AUTHORITY_ID" baseTableName="page_authority" constraintName="FKPAGE_AUTHO939906" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="ID" referencedTableName="authority"/>
+    </changeSet>
+    <changeSet author="jba" id="1557424117790-46">
+        <addForeignKeyConstraint baseColumnNames="FK_PAGE_ID_PARENT" baseTableName="subpage" constraintName="FKSUBPAGE560386" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="ID" referencedTableName="page"/>
+    </changeSet>
+    <changeSet author="jba" id="1557424117790-47">
+        <addForeignKeyConstraint baseColumnNames="FK_PAGE_ID_CHILD" baseTableName="subpage" constraintName="FKSUBPAGE921558" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="ID" referencedTableName="page"/>
+    </changeSet>
+    <changeSet author="jba" id="1557424117790-48">
+        <addForeignKeyConstraint baseColumnNames="FK_AUTORITY_ID" baseTableName="user_authority" constraintName="FKUSER_AUTHO278605" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="ID" referencedTableName="authority"/>
+    </changeSet>
+    <changeSet author="jba" id="1557424117790-49">
+        <addForeignKeyConstraint baseColumnNames="FK_USER_ID" baseTableName="user_authority" constraintName="FKUSER_AUTHO904035" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="ID" referencedTableName="user"/>
+    </changeSet>
+    <changeSet author="jba" id="1557424117790-50">
+        <addForeignKeyConstraint baseColumnNames="FK_MENU_ID" baseTableName="entry" constraintName="FK_MENU_ID" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="ID" referencedTableName="menu"/>
+    </changeSet>
+    <changeSet author="jba" id="1557424117790-51">
+        <addForeignKeyConstraint baseColumnNames="FK_PAGE_ID" baseTableName="entry" constraintName="FK_SUBENTRY_ID" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="ID" referencedTableName="page"/>
+    </changeSet>
+</databaseChangeLog>
