@@ -1,6 +1,8 @@
 <?xml version="1.1" encoding="UTF-8" standalone="no"?>
 <databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd">
-    <changeSet author="jba" id="1557425409642-1">
+    <property name="now" value="now()" dbms="mysql"/>
+
+    <changeSet author="jba" id="1557431477758-1">
         <createTable tableName="authority">
             <column autoIncrement="true" name="ID" type="BIGINT">
                 <constraints primaryKey="true"/>
@@ -16,7 +18,7 @@
             </column>
         </createTable>
     </changeSet>
-    <changeSet author="jba" id="1557425409642-2">
+    <changeSet author="jba" id="1557431477758-2">
         <createTable tableName="entry">
             <column autoIncrement="true" name="ID" type="BIGINT">
                 <constraints primaryKey="true"/>
@@ -35,7 +37,7 @@
             </column>
         </createTable>
     </changeSet>
-    <changeSet author="jba" id="1557425409642-3">
+    <changeSet author="jba" id="1557431477758-3">
         <createTable tableName="image">
             <column autoIncrement="true" name="ID" type="BIGINT">
                 <constraints primaryKey="true"/>
@@ -54,7 +56,7 @@
             </column>
         </createTable>
     </changeSet>
-    <changeSet author="jba" id="1557425409642-4">
+    <changeSet author="jba" id="1557431477758-4">
         <createTable tableName="image_page">
             <column name="FK_IMAGE_ID" type="BIGINT">
                 <constraints nullable="false"/>
@@ -64,7 +66,7 @@
             </column>
         </createTable>
     </changeSet>
-    <changeSet author="jba" id="1557425409642-5">
+    <changeSet author="jba" id="1557431477758-5">
         <createTable tableName="image_user">
             <column name="FK_IMAGE_ID" type="BIGINT">
                 <constraints nullable="false"/>
@@ -83,7 +85,7 @@
             </column>
         </createTable>
     </changeSet>
-    <changeSet author="jba" id="1557425409642-6">
+    <changeSet author="jba" id="1557431477758-6">
         <createTable tableName="menu">
             <column autoIncrement="true" name="ID" type="BIGINT">
                 <constraints primaryKey="true"/>
@@ -100,7 +102,7 @@
             </column>
         </createTable>
     </changeSet>
-    <changeSet author="jba" id="1557425409642-7">
+    <changeSet author="jba" id="1557431477758-7">
         <createTable tableName="message">
             <column autoIncrement="true" name="ID" type="BIGINT">
                 <constraints primaryKey="true"/>
@@ -124,7 +126,7 @@
             </column>
         </createTable>
     </changeSet>
-    <changeSet author="jba" id="1557425409642-8">
+    <changeSet author="jba" id="1557431477758-8">
         <createTable tableName="page">
             <column autoIncrement="true" name="ID" type="BIGINT">
                 <constraints primaryKey="true"/>
@@ -146,7 +148,7 @@
             </column>
         </createTable>
     </changeSet>
-    <changeSet author="jba" id="1557425409642-9">
+    <changeSet author="jba" id="1557431477758-9">
         <createTable tableName="page_authority">
             <column name="FK_AUTHORITY_ID" type="BIGINT">
                 <constraints nullable="false"/>
@@ -156,7 +158,7 @@
             </column>
         </createTable>
     </changeSet>
-    <changeSet author="jba" id="1557425409642-10">
+    <changeSet author="jba" id="1557431477758-10">
         <createTable tableName="respondto">
             <column autoIncrement="true" name="ID" type="BIGINT">
                 <constraints primaryKey="true"/>
@@ -172,7 +174,7 @@
             </column>
         </createTable>
     </changeSet>
-    <changeSet author="jba" id="1557425409642-11">
+    <changeSet author="jba" id="1557431477758-11">
         <createTable tableName="status">
             <column autoIncrement="true" name="ID" type="BIGINT">
                 <constraints primaryKey="true"/>
@@ -188,7 +190,7 @@
             </column>
         </createTable>
     </changeSet>
-    <changeSet author="jba" id="1557425409642-12">
+    <changeSet author="jba" id="1557431477758-12">
         <createTable tableName="subpage">
             <column name="FK_PAGE_ID_PARENT" type="BIGINT">
                 <constraints nullable="false"/>
@@ -198,7 +200,7 @@
             </column>
         </createTable>
     </changeSet>
-    <changeSet author="jba" id="1557425409642-13">
+    <changeSet author="jba" id="1557431477758-13">
         <createTable tableName="system_variable">
             <column autoIncrement="true" name="ID" type="BIGINT">
                 <constraints primaryKey="true"/>
@@ -217,7 +219,7 @@
             </column>
         </createTable>
     </changeSet>
-    <changeSet author="jba" id="1557425409642-14">
+    <changeSet author="jba" id="1557431477758-14">
         <createTable tableName="user">
             <column autoIncrement="true" name="ID" type="BIGINT">
                 <constraints primaryKey="true"/>
@@ -243,7 +245,7 @@
             </column>
         </createTable>
     </changeSet>
-    <changeSet author="jba" id="1557425409642-15">
+    <changeSet author="jba" id="1557431477758-15">
         <createTable tableName="user_authority">
             <column name="FK_USER_ID" type="BIGINT">
                 <constraints nullable="false"/>
@@ -253,134 +255,168 @@
             </column>
         </createTable>
     </changeSet>
-    <changeSet author="jba" id="1557425409642-16">
+    <changeSet author="jba" id="1557431477758-16">
         <addPrimaryKey columnNames="FK_IMAGE_ID, FK_PAGE_ID" constraintName="PRIMARY" tableName="image_page"/>
     </changeSet>
-    <changeSet author="jba" id="1557425409642-17">
+    <changeSet author="jba" id="1557431477758-17">
         <addPrimaryKey columnNames="FK_IMAGE_ID, FK_USER_ID" constraintName="PRIMARY" tableName="image_user"/>
     </changeSet>
-    <changeSet author="jba" id="1557425409642-18">
+    <changeSet author="jba" id="1557431477758-18">
         <addPrimaryKey columnNames="FK_AUTHORITY_ID, FK_PAGE_ID" constraintName="PRIMARY" tableName="page_authority"/>
     </changeSet>
-    <changeSet author="jba" id="1557425409642-19">
+    <changeSet author="jba" id="1557431477758-19">
         <addPrimaryKey columnNames="FK_PAGE_ID_PARENT, FK_PAGE_ID_CHILD" constraintName="PRIMARY" tableName="subpage"/>
     </changeSet>
-    <changeSet author="jba" id="1557425409642-20">
+    <changeSet author="jba" id="1557431477758-20">
         <addPrimaryKey columnNames="FK_USER_ID, FK_AUTORITY_ID" constraintName="PRIMARY" tableName="user_authority"/>
     </changeSet>
-    <changeSet author="jba" id="1557425409642-21">
+    <changeSet author="jba" id="1557431477758-21">
         <addUniqueConstraint columnNames="EMAIL" constraintName="EMAIL" tableName="user"/>
     </changeSet>
-    <changeSet author="jba" id="1557425409642-22">
+    <changeSet author="jba" id="1557431477758-22">
         <addUniqueConstraint columnNames="SYSTEM_KEY" constraintName="KEY_UNIQUE" tableName="system_variable"/>
     </changeSet>
-    <changeSet author="jba" id="1557425409642-23">
+    <changeSet author="jba" id="1557431477758-23">
         <addUniqueConstraint columnNames="ROLE" constraintName="ROLE" tableName="authority"/>
     </changeSet>
-    <changeSet author="jba" id="1557425409642-24">
+    <changeSet author="jba" id="1557431477758-24">
         <addUniqueConstraint columnNames="USERNAME" constraintName="USERNAME" tableName="user"/>
     </changeSet>
-    <changeSet author="jba" id="1557425409642-25">
+    <changeSet author="jba" id="1557431477758-25">
         <createIndex indexName="FKIMAGE_PAGE260805" tableName="image_page">
             <column name="FK_PAGE_ID"/>
         </createIndex>
     </changeSet>
-    <changeSet author="jba" id="1557425409642-26">
+    <changeSet author="jba" id="1557431477758-26">
         <createIndex indexName="FKIMAGE_USER511672" tableName="image_user">
             <column name="FK_USER_ID"/>
         </createIndex>
     </changeSet>
-    <changeSet author="jba" id="1557425409642-27">
+    <changeSet author="jba" id="1557431477758-27">
         <createIndex indexName="FKMESSAGE241606" tableName="message">
             <column name="FK_STATUS_ID"/>
         </createIndex>
     </changeSet>
-    <changeSet author="jba" id="1557425409642-28">
+    <changeSet author="jba" id="1557431477758-28">
         <createIndex indexName="FKMESSAGE423697" tableName="message">
             <column name="FK_USER_ID_FROM"/>
         </createIndex>
     </changeSet>
-    <changeSet author="jba" id="1557425409642-29">
+    <changeSet author="jba" id="1557431477758-29">
         <createIndex indexName="FKMESSAGE853733" tableName="message">
             <column name="FK_USER_ID_TO"/>
         </createIndex>
     </changeSet>
-    <changeSet author="jba" id="1557425409642-30">
+    <changeSet author="jba" id="1557431477758-30">
         <createIndex indexName="FKPAGE_AUTHO676317" tableName="page_authority">
             <column name="FK_PAGE_ID"/>
         </createIndex>
     </changeSet>
-    <changeSet author="jba" id="1557425409642-31">
+    <changeSet author="jba" id="1557431477758-31">
         <createIndex indexName="FKSUBPAGE921558" tableName="subpage">
             <column name="FK_PAGE_ID_CHILD"/>
         </createIndex>
     </changeSet>
-    <changeSet author="jba" id="1557425409642-32">
+    <changeSet author="jba" id="1557431477758-32">
         <createIndex indexName="FKUSER_AUTHO278605" tableName="user_authority">
             <column name="FK_AUTORITY_ID"/>
         </createIndex>
     </changeSet>
-    <changeSet author="jba" id="1557425409642-33">
+    <changeSet author="jba" id="1557431477758-33">
         <createIndex indexName="FK_ENTRY_PARENT_ID_idx" tableName="entry">
             <column name="FK_ENTRY_PARENT_ID"/>
         </createIndex>
     </changeSet>
-    <changeSet author="jba" id="1557425409642-34">
+    <changeSet author="jba" id="1557431477758-34">
         <createIndex indexName="FK_MENU_ID_idx" tableName="entry">
             <column name="FK_MENU_ID"/>
         </createIndex>
     </changeSet>
-    <changeSet author="jba" id="1557425409642-35">
+    <changeSet author="jba" id="1557431477758-35">
         <createIndex indexName="FK_SUBENTRY_ID" tableName="entry">
             <column name="FK_PAGE_ID"/>
         </createIndex>
     </changeSet>
-    <changeSet author="jba" id="1557425409642-36">
+    <changeSet author="jba" id="1557431477758-36">
         <addForeignKeyConstraint baseColumnNames="FK_ENTRY_PARENT_ID" baseTableName="entry" constraintName="CSTR_FK_ENTRY_PARENT_ID" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="ID" referencedTableName="entry"/>
     </changeSet>
-    <changeSet author="jba" id="1557425409642-37">
+    <changeSet author="jba" id="1557431477758-37">
         <addForeignKeyConstraint baseColumnNames="FK_PAGE_ID" baseTableName="image_page" constraintName="FKIMAGE_PAGE260805" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="ID" referencedTableName="page"/>
     </changeSet>
-    <changeSet author="jba" id="1557425409642-38">
+    <changeSet author="jba" id="1557431477758-38">
         <addForeignKeyConstraint baseColumnNames="FK_IMAGE_ID" baseTableName="image_page" constraintName="FKIMAGE_PAGE909037" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="ID" referencedTableName="image"/>
     </changeSet>
-    <changeSet author="jba" id="1557425409642-39">
+    <changeSet author="jba" id="1557431477758-39">
         <addForeignKeyConstraint baseColumnNames="FK_USER_ID" baseTableName="image_user" constraintName="FKIMAGE_USER511672" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="ID" referencedTableName="user"/>
     </changeSet>
-    <changeSet author="jba" id="1557425409642-40">
+    <changeSet author="jba" id="1557431477758-40">
         <addForeignKeyConstraint baseColumnNames="FK_IMAGE_ID" baseTableName="image_user" constraintName="FKIMAGE_USER75242" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="ID" referencedTableName="image"/>
     </changeSet>
-    <changeSet author="jba" id="1557425409642-41">
+    <changeSet author="jba" id="1557431477758-41">
         <addForeignKeyConstraint baseColumnNames="FK_STATUS_ID" baseTableName="message" constraintName="FKMESSAGE241606" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="ID" referencedTableName="status"/>
     </changeSet>
-    <changeSet author="jba" id="1557425409642-42">
+    <changeSet author="jba" id="1557431477758-42">
         <addForeignKeyConstraint baseColumnNames="FK_USER_ID_FROM" baseTableName="message" constraintName="FKMESSAGE423697" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="ID" referencedTableName="user"/>
     </changeSet>
-    <changeSet author="jba" id="1557425409642-43">
+    <changeSet author="jba" id="1557431477758-43">
         <addForeignKeyConstraint baseColumnNames="FK_USER_ID_TO" baseTableName="message" constraintName="FKMESSAGE853733" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="ID" referencedTableName="user"/>
     </changeSet>
-    <changeSet author="jba" id="1557425409642-44">
+    <changeSet author="jba" id="1557431477758-44">
         <addForeignKeyConstraint baseColumnNames="FK_PAGE_ID" baseTableName="page_authority" constraintName="FKPAGE_AUTHO676317" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="ID" referencedTableName="page"/>
     </changeSet>
-    <changeSet author="jba" id="1557425409642-45">
+    <changeSet author="jba" id="1557431477758-45">
         <addForeignKeyConstraint baseColumnNames="FK_AUTHORITY_ID" baseTableName="page_authority" constraintName="FKPAGE_AUTHO939906" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="ID" referencedTableName="authority"/>
     </changeSet>
-    <changeSet author="jba" id="1557425409642-46">
+    <changeSet author="jba" id="1557431477758-46">
         <addForeignKeyConstraint baseColumnNames="FK_PAGE_ID_PARENT" baseTableName="subpage" constraintName="FKSUBPAGE560386" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="ID" referencedTableName="page"/>
     </changeSet>
-    <changeSet author="jba" id="1557425409642-47">
+    <changeSet author="jba" id="1557431477758-47">
         <addForeignKeyConstraint baseColumnNames="FK_PAGE_ID_CHILD" baseTableName="subpage" constraintName="FKSUBPAGE921558" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="ID" referencedTableName="page"/>
     </changeSet>
-    <changeSet author="jba" id="1557425409642-48">
+    <changeSet author="jba" id="1557431477758-48">
         <addForeignKeyConstraint baseColumnNames="FK_AUTORITY_ID" baseTableName="user_authority" constraintName="FKUSER_AUTHO278605" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="ID" referencedTableName="authority"/>
     </changeSet>
-    <changeSet author="jba" id="1557425409642-49">
+    <changeSet author="jba" id="1557431477758-49">
         <addForeignKeyConstraint baseColumnNames="FK_USER_ID" baseTableName="user_authority" constraintName="FKUSER_AUTHO904035" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="ID" referencedTableName="user"/>
     </changeSet>
-    <changeSet author="jba" id="1557425409642-50">
+    <changeSet author="jba" id="1557431477758-50">
         <addForeignKeyConstraint baseColumnNames="FK_MENU_ID" baseTableName="entry" constraintName="FK_MENU_ID" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="ID" referencedTableName="menu"/>
     </changeSet>
-    <changeSet author="jba" id="1557425409642-51">
+    <changeSet author="jba" id="1557431477758-51">
         <addForeignKeyConstraint baseColumnNames="FK_PAGE_ID" baseTableName="entry" constraintName="FK_SUBENTRY_ID" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="ID" referencedTableName="page"/>
+    </changeSet>
+    <changeSet id="20190509-base-inserts" author="jba">
+        <insert tableName="user">
+            <column name="username" value="admin"/>
+            <column name="password" value="$2a$10$Qsu1WtW6YQRXbPmwg8Zk2eKP9/tFXTrk6zCbLT4xxlnD9RVun7U9."/>
+            <column name="email" value="jakub.bartusiak@gmail.com"/>
+            <column name="firstname" value="Jakub"/>
+            <column name="lastname" value="Bartusiak"/>
+            <column name="cdate" value="${now}"/>
+            <column name="udate" value="${now}"/>
+        </insert>
+        <insert tableName="authority">
+            <column name="role" value="Administrator"/>
+            <column name="cdate" value="${now}"/>
+            <column name="udate" value="${now}"/>
+        </insert>
+        <insert tableName="system_variable">
+            <column name="system_key" value="page.name"/>
+            <column name="system_value" value="OpenCMS"/>
+            <column name="cdate" value="${now}"/>
+            <column name="udate" value="${now}"/>
+        </insert>
+        <insert tableName="menu">
+            <column name="active" valueBoolean="true"/>
+            <column name="name" value="default"/>
+            <column name="cdate" value="${now}"/>
+            <column name="udate" value="${now}"/>
+        </insert>
+    </changeSet>
+    <changeSet id="20190509-assing-inserts" author="jba">
+        <insert tableName="user_authority">
+            <column name="fk_user_id" value="1"/>
+            <column name="fk_autority_id" value="1"/>
+        </insert>
     </changeSet>
 </databaseChangeLog>

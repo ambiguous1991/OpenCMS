@@ -31,7 +31,7 @@ public class LiquibaseConfiguration {
     @Bean
     public DataSource liquibaseDataSource(Environment env){
         HikariConfig config = new HikariConfig();
-        String url = "jdbc:mysql://localhost:3306/opencmsliquibase?useSSL=false&serverTimezone=UTC&allowPublicKeyRetrieval=true";
+        String url = env.getProperty("jdbc.url");
         logger.info("Liquibase connection URL - "+url);
         config.setJdbcUrl(url);
         config.setDriverClassName("com.mysql.cj.jdbc.Driver");
