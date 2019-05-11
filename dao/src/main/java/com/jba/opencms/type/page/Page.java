@@ -20,7 +20,7 @@ public class Page extends BaseTypeSimpleKey<Page> {
     @Column(name = "TITLE", nullable = false, length = 200)
     private String title;
 
-    @Column(name = "CONTENT", nullable = false)
+    @Column(name = "CONTENT")
     private String content;
 
     @Column(name = "VISIBLE", nullable = false)
