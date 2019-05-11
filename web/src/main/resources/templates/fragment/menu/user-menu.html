@@ -27,7 +27,7 @@
                             th:id="${menuItem.getLabel()}"
                             role="button"
                             th:data-toggle="${hasSub} ? 'dropdown' : ''"
-                            th:text="${menuItem.getLabel()+' '+hasSub}">
+                            th:text="${menuItem.getLabel()}">
                         PLACEHOLDER
                     </a>
                     <div th:if="${hasSub}" class="dropdown-menu">

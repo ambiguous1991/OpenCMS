@@ -28,7 +28,7 @@ public class Entry extends BaseTypeSimpleKey<Entry> {
     @ToString.Exclude
     private Menu menu = null;
 
-    @OneToMany(mappedBy = "parent", fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "parent", fetch = FetchType.EAGER, orphanRemoval = true)
     private List<Entry> subentires;
 
     @ManyToOne

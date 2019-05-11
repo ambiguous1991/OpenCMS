@@ -1,8 +1,11 @@
 package com.jba.opencms.web.controller;
 
+import com.jba.opencms.menu.EntryService;
 import com.jba.opencms.menu.MenuService;
+import com.jba.opencms.page.PageService;
 import com.jba.opencms.type.menu.Entry;
 import com.jba.opencms.type.menu.Menu;
+import com.jba.opencms.type.page.Page;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -11,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.view.RedirectView;
 
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
@@ -18,8 +22,9 @@ import java.util.List;
 @Controller
 public class MenuController {
 
-    @Autowired
-    private MenuService menuService;
+    @Autowired private MenuService menuService;
+    @Autowired private EntryService entryService;
+    @Autowired private PageService pageService;
 
     @RequestMapping(value = "/dashboard/menu", method = RequestMethod.GET)
     public String mainPage(Model model){
@@ -42,7 +47,7 @@ public class MenuController {
 
     @RequestMapping(value = "/dashboard/menu/{menuId}", method = RequestMethod.GET)
     public String getMenuDetails(@PathVariable(name = "menuId") Long menuId, Model model){
-        Menu menu = menuService.findOne(menuId, false);
+        Menu menu = menuService.findOne(menuId, true);
 
         model.addAttribute("menu", menu);
 
@@ -51,14 +56,19 @@ public class MenuController {
 
     @RequestMapping(value = "/dashboard/menu/{menuId}", method = RequestMethod.POST)
     public RedirectView postMenuDetails(@PathVariable(name = "menuId") Long menuId, Menu menu){
+        Menu edited = menuService.findOne(menuId, true);
 
+        edited.setIsActive(menu.getIsActive());
+        edited.setName(menu.getName());
+
+        menuService.update(edited);
 
         return new RedirectView("/dashboard/menu");
     }
 
     @RequestMapping(value = "/dashboard/menu/{menuId}/new", method = RequestMethod.POST)
     public RedirectView createNewMenuEntry(@PathVariable(name = "menuId") Long menuId){
-        Menu menu = menuService.findOne(menuId, false);
+        Menu menu = menuService.findOne(menuId, true);
 
         Entry entry = new Entry();
         entry.setMenu(menu);
@@ -72,22 +82,63 @@ public class MenuController {
     public String getMenuEntriesDetails(@PathVariable(name = "menuId") Long menuId,
                                         @PathVariable(name = "entryId") Long entryId,
                                         Model model){
-        Menu menu = menuService.findOne(menuId, true);
+        Entry entry = entryService.findOne(entryId, true);
+        model.addAttribute("entry", entry);
 
-        model.addAttribute("entry", menu.getEntries().stream()
-                .filter(entry -> entry.getId().equals(entryId))
-                .findAny().orElse(null)
-        );
+        model.addAttribute("menuId", menuId);
+        List<Page> pages = pageService.findAll(true);
+        model.addAttribute("pages", pages);
 
         return "dashboard/menu/entry";
     }
 
     @RequestMapping(value = "/dashboard/menu/{menuId}/{entryId}", method = RequestMethod.POST)
-    public RedirectView postMenuEntriesDetails(@PathVariable(name = "menuId") Long menuId, Model model){
-        Menu menu = menuService.findOne(menuId, false);
+    public RedirectView postMenuEntriesDetails(@PathVariable(name = "menuId") Long menuId,
+                                               @PathVariable(name = "entryId") Long entryId,
+                                               String label,
+                                               Long page){
+        Entry edited = entryService.findOne(entryId, true);
 
-        model.addAttribute("menu", menu);
+        edited.setLabel(label);
+        edited.setPage(pageService.findOne(page, false));
 
-        return new RedirectView("/dashboard/menu/"+menu.getId());
+        entryService.update(edited);
+
+        return new RedirectView("/dashboard/menu/"+menuId +"?success");
+    }
+
+    @RequestMapping(value = "/dashboard/menu/{menuId}/{entryId}/new", method = RequestMethod.POST)
+    public RedirectView createSubentry(@PathVariable(name = "menuId") Long menuId,
+                                               @PathVariable(name = "entryId") Long entryId,
+                                               String label,
+                                               Long page){
+        Entry parentEntry = entryService.findOne(entryId, true);
+        Entry entry = new Entry();
+        entry.setLabel("");
+        entry.setParent(parentEntry);
+        parentEntry.setSubentires(Arrays.asList(entry));
+        entryService.create(entry);
+        return new RedirectView("/dashboard/menu/"+menuId+"/"+entry.getId());
+    }
+
+    @RequestMapping(value = "/dashboard/menu/{menuId}/{entryId}/delete" ,method = RequestMethod.GET)
+    public String getDeleteElementForm(@PathVariable(name = "menuId") Long menuId,
+                                       @PathVariable(name = "entryId") Long entryId,
+                                       Model model){
+        Entry entry = entryService.findOne(entryId, true);
+
+        model.addAttribute("menuId", menuId);
+        model.addAttribute("entry", entry);
+
+        return "dashboard/menu/delete-entry";
+    }
+
+    @RequestMapping(value = "/dashboard/menu/{menuId}/{entryId}/delete" ,method = RequestMethod.POST)
+    public RedirectView deleteElement(@PathVariable(name = "menuId") Long menuId,
+                                @PathVariable(name = "entryId") Long entryId,
+                                Model model){
+        entryService.delete(entryId);
+
+        return new RedirectView("/dashboard/menu/"+menuId +"?success");
     }
 }
