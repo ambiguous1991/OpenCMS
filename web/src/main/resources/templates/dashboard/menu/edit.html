@@ -18,113 +18,70 @@
         <link href="https://gitcdn.github.io/bootstrap-toggle/2.2.2/css/bootstrap-toggle.min.css" rel="stylesheet">
         <script src="https://gitcdn.github.io/bootstrap-toggle/2.2.2/js/bootstrap-toggle.min.js"></script>
 
-        <script>
-            var count = -1;
-
-            function addNewMenuElement(){
-                count++;
-                console.info(count);
-                var csrf = $('#csrf');
-
-                addHeader(csrf);
-                addLabel(csrf);
-                addPage(csrf);
-            }
-
-            function addPage(csrf){
-                var newMenu = document.createElement("div");
-
-                $(newMenu).addClass("form-group row");
-
-                let pageLabel = document.createElement("label");
-                pageLabel.setAttribute("for","page["+count+"]");
-                pageLabel.innerHTML="Strona";
-                $(pageLabel).addClass("col-sm-2");
-
-                let pagePicker = document.createElement("select");
-                $(pagePicker).addClass("form-control col-sm-6");
-
-                $(pagePicker).append($("option"));
-
-                $(newMenu).append(pageLabel);
-                $(newMenu).append(pagePicker);
-
-                $(newMenu).insertBefore(csrf);
-            }
-
-            function addLabel(csrf){
-                var newMenu = document.createElement("div");
-
-                $(newMenu).addClass("form-group row");
-
-                let entryLabel = document.createElement("label");
-                entryLabel.setAttribute("for","label["+count+"]");
-                entryLabel.innerHTML="Etykieta";
-                $(entryLabel).addClass("col-sm-2");
-
-                let entryLabelValue = document.createElement("input");
-                entryLabelValue.id="label["+count+"]";
-                $(entryLabelValue).addClass("col-sm-6 form-control");
-
-                $(newMenu).append(entryLabel);
-                $(newMenu).append(entryLabelValue);
-                $(newMenu).insertBefore(csrf);
-            }
-
-            function addHeader(csrf){
-                var newMenuItemSection = document.createElement("h5");
-                newMenuItemSection.innerHTML="Pozycja menu "+(count+1);
-                $(newMenuItemSection).addClass("border-bottom mb-3");
-
-                $(newMenuItemSection).insertBefore(csrf);
-            }
-        </script>
     </head>
     <body class="d-flex flex-column vh-100">
         <nav th:replace="/fragment/admin-navbar"></nav>
         <nav th:replace="/fragment/admin-breadcrumb"></nav>
-
-        <datalist id="pages">
-            <option value="0" selected></option>
-            <option value="Internet Explorer">Internet Explorer</option>
-            <option value="Firefox">Firefox</option>
-            <option value="Google Chrome">Google Chrome</option>
-            <option value="Opera">Opera</option>
-            <option value="Safari">Safari</option>
-        </datalist>
-
-        <select>
-        </select>
         <div class="wrapper">
             <div th:replace="fragment/admin-sidebar"></div>
-            <form class="m-5 p-5 shadow-lg flex-grow-1" style="background-color: #EEE" th:object="${menu}">
-                <h1 class="mb-5">Edycja pozycji menu</h1>
-                <div class="form-group row">
-                    <label for="isActive" class="col-sm-2">Czy aktywować</label>
-                    <br>
-                    <input class="col-sm-6" id="isActive" type="checkbox" checked data-toggle="toggle" data-on="Aktywne"
-                           data-off="Nieaktywne" data-onstyle="success" data-offstyle="danger" th:value="${menu.isActive}">
+            <div class="container-fluid shadow-lg flex-grow-1 m-5 p-5">
+                <form class="" th:object="${menu}">
+                    <h3 class="mb-4">Edycja pozycji menu</h3>
+                    <div class="form-group row">
+                        <label for="isActive" class="col-sm-2">Czy aktywować</label>
+                        <br>
+                        <input class="col-sm-10" id="isActive" type="checkbox" checked data-toggle="toggle"
+                               data-on="Aktywne"
+                               data-off="Nieaktywne" data-onstyle="success" data-offstyle="danger"
+                               th:value="${menu.getIsActive()}">
+                    </div>
+                    <div class="form-group row">
+                        <label for="name" class="col-sm-2">Nazwa</label>
+                        <input id="name" name="name" type="text" aria-describedby="nameHelpBlock"
+                               class="col-sm-10 form-control" th:value="${menu.getName()}">
+                    </div>
+                    <input
+                            id="csrf"
+                            type="hidden"
+                            th:name="${_csrf.parameterName}"
+                            th:value="${_csrf.token}"/>
+                    <div class="form-group row mt-1 col-sm-12">
+                        <button name="submit" type="submit" class="btn btn-primary">Zatwierdź</button>
+                    </div>
+                </form>
+                <div class="">
+                    <table class="table table-sm table-responsive-sm table-striped table-bordered table-hover"
+                           th:if="${menu.getEntries().size()>0}">
+                        <h4 class="mb-2 mt-5">Elementy menu</h4>
+                        <thead>
+                            <tr>
+                                <th>Id</th>
+                                <th>Etykieta</th>
+                                <th>Strona</th>
+                                <th>Ilość elementów</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr th:each="entry:${menu.getEntries()}">
+                                <th>
+                                    <a href="#" th:href="'/dashboard/menu/'+${menu.getId()}+'/'+${entry.getId()}">
+                                        <span th:text="${entry.getId()}">1</span>
+                                    </a>
+                                </th>
+                                <th th:text="${entry.getLabel()}">Etykieta</th>
+                                <th th:text="${entry.getPage()!=null}?${entry.getPage().getTitle()} : 'brak'">brak</th>
+                                <th th:text="${entry.getSubentires()!=null}?${entry.getSubentires().size()}:'0'">0</th>
+                            </tr>
+                        </tbody>
+                    </table>
                 </div>
-                <div class="form-group row">
-                    <label for="name" class="col-sm-2">Nazwa</label>
-                    <input id="name" name="name" type="text" aria-describedby="nameHelpBlock"
-                           class="col-sm-6 form-control" th:value="${menu.getName()}">
-                </div>
-                <a id="button" href="#" class="btn btn-success mb-5" onclick="addNewMenuElement()"><i class="fas fa-plus-square"></i> Dodaj pozycję menu</a>
-                <div th:each="entry, iStat:${menu.getEntries()}" class="form-group row">
-                    <label th:for="'label['+${iStat}+']'" class="col-sm-2">Etykieta</label>
-                    <input th:id="'label['+${iStat}+']'" class="col-sm-6 form-control" th:value="${entry.getLabel()}">Etykieta</input>
-                </div>
-                <input
-                        id="csrf"
-                        type="hidden"
-                        th:name="${_csrf.parameterName}"
-                        th:value="${_csrf.token}" />
-
-                <div class="form-group text-center row mt-5 ml-0">
-                    <button name="submit" type="submit" class="btn btn-lg btn-primary">Zatwierdź</button>
-                </div>
-            </form>
+                <form th:action="${'/dashboard/menu/'+menu.getId()+'/new'}" method="post" class="text-right">
+                    <button name="submit" type="submit" class="btn btn-success mt-3">
+                        <i class="fas fa-plus-square"></i>
+                        Dodaj pozycję menu
+                    </button>
+                </form>
+            </div>
         </div>
     </body>
 </html>

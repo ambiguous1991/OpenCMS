@@ -7,7 +7,6 @@ import com.jba.opencms.dao.GenericDao;
 import com.jba.opencms.dao.ifs.MenuDao;
 import com.jba.opencms.type.menu.Entry;
 import com.jba.opencms.type.menu.Menu;
-import com.jba.opencms.type.menu.MenuEntry;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,45 +28,53 @@ public class EntryDaoTest extends BaseSpringIntegrationTest {
     private MenuDao menuDao;
 
     @Autowired
-    private GenericDao<MenuEntry> menuEntryDao;
-
-    @Autowired
     private GenericDao<Entry> entryDao;
 
     @Test
     @Transactional
-    public void test(){
+    public void findActive(){
         Menu activeMenu = menuDao.findActiveMenu();
-        logger.info(activeMenu);
+        if(activeMenu!=null) {
+            logger.info(activeMenu);
+        }
     }
 
     @Test
+    @Rollback
+    @Transactional
     public void addTest(){
         Menu menu = new Menu();
 
         menuDao.create(menu);
         logger.info("Created menu: "+menu);
 
-        List<Entry> entries = Arrays.asList(
-                Entry.of("Newtest1"),
-                Entry.of("NewTest2"),
-                Entry.of("NewTest3")
-        );
-        entries.forEach(entry->{
-            entryDao.create(entry);
-            logger.info("Added entry: "+entry);
-        });
+        Entry entry1 = new Entry();
+        entry1.setLabel("Menu item 1");
 
+        Entry entry2 = new Entry();
+        entry2.setLabel("Menu item 2");
 
-        List<MenuEntry> menuEntries = Arrays.asList(
-                MenuEntry.of(menu, entries.get(0), true),
-                MenuEntry.of(menu, entries.get(1), true),
-                MenuEntry.of(menu, entries.get(2), true)
-        );
+        Entry entry3 = new Entry();
+        entry3.setLabel("Menu item 3");
 
-        menuEntries.forEach(entry->{
-            menuEntryDao.create(entry);
-            logger.info("Added menu entry: "+entry);
-        });
+        List<Entry> entries = Arrays.asList(entry1, entry2, entry3);
+        entries.forEach(e->entryDao.create(e));
+    }
+
+    @Test
+    @Rollback
+    @Transactional
+    public void addSubentryTest(){
+        Entry entry = entryDao.findOne(3);
+
+        logger.info(entry);
+
+        Entry subentry = new Entry();
+        subentry.setLabel("Subentry 1");
+        entryDao.create(subentry);
+
+        entry.getSubentires().add(subentry);
+
+        entryDao.update(entry);
     }
 }

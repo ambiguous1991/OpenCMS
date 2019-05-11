@@ -11,7 +11,6 @@ import java.time.OffsetDateTime;
 @EqualsAndHashCode(callSuper = false)
 @MappedSuperclass
 @Data
-@ToString(callSuper = false)
 public abstract class BaseTypeSimpleKey<T extends BaseType> extends BaseType {
 
     @Id

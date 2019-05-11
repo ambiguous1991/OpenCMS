@@ -4,5 +4,5 @@ import com.jba.opencms.dao.GenericDao;
 import com.jba.opencms.type.menu.Entry;
 
 public interface EntryDao extends GenericDao<Entry> {
-
+    void addSubentry(Entry parent, Entry child);
 }
