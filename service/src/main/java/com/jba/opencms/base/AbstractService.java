@@ -32,7 +32,8 @@ public abstract class AbstractService<T extends BaseType> implements BaseService
     @Override
     public T findOne(Long id, boolean initialize) {
         T element = dao.findOne(id);
-        initialize(element);
+        if(element!=null)
+            initialize(element);
         return element;
     }
 

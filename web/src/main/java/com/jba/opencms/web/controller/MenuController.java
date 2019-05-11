@@ -2,8 +2,10 @@ package com.jba.opencms.web.controller;
 
 import com.jba.opencms.menu.EntryService;
 import com.jba.opencms.menu.MenuService;
+import com.jba.opencms.page.PageService;
 import com.jba.opencms.type.menu.Entry;
 import com.jba.opencms.type.menu.Menu;
+import com.jba.opencms.type.page.Page;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -21,6 +23,7 @@ public class MenuController {
 
     @Autowired private MenuService menuService;
     @Autowired private EntryService entryService;
+    @Autowired private PageService pageService;
 
     @RequestMapping(value = "/dashboard/menu", method = RequestMethod.GET)
     public String mainPage(Model model){
@@ -86,6 +89,8 @@ public class MenuController {
         );
 
         model.addAttribute("menuId", menuId);
+        List<Page> pages = pageService.findAll(true);
+        model.addAttribute("pages", pages);
 
         return "dashboard/menu/entry";
     }
@@ -99,10 +104,11 @@ public class MenuController {
         Entry edited = menuService.getMenuEntries(menu).stream().filter(e -> e.getId().equals(entryId)).findAny().orElse(null);
 
         edited.setLabel(label);
-        edited.setPage(null);
+        Page one = pageService.findOne(page, true);
+        edited.setPage(one);
 
         entryService.update(edited);
 
-        return new RedirectView("/dashboard/menu/"+menu.getId());
+        return new RedirectView("/dashboard/menu/"+menu.getId()+"?success");
     }
 }

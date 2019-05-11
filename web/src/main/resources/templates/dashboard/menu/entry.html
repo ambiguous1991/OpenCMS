@@ -47,6 +47,7 @@
                     <div class="col-8">
                         <select id="page" name="page" class="custom-select" aria-describedby="pageHelpBlock">
                             <option value="-1">brak</option>
+                            <option th:each="page:${pages}" th:value="${page.getId()}" th:text="${page.getTitle()}">Page</option>
                         </select>
                         <span id="pageHelpBlock" class="form-text text-muted">Elementy stanowiące listę rozwijaną nie mogą posiadać odnośników</span>
                     </div>
