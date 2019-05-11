@@ -1,7 +1,24 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-4.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+
 <nav aria-label="breadcrumb">
     <ol class="breadcrumb m-0" style="-webkit-border-radius: 0;-moz-border-radius: 0;border-radius: 0;">
-        <li class="breadcrumb-item active" aria-current="page">Dashboard</li>
-        <!--<li class="breadcrumb-item">Data</li>-->
-        <!--<li class="breadcrumb-item">Data</li>-->
+        <!--/*@thymesVar id="breadcrumb" type="List<Breadcrumb>"*/-->
+        <li
+                th:if="${breadcrumb!=null}"
+                th:each="crumb, iStat: ${breadcrumb}"
+                th:class="${iStat.last}?'breadcrumb-item active':'breadcrumb-item'"
+                class="breadcrumb-item active">
+            <a  th:unless="${iStat.last}"
+                th:text="${crumb.getLabel()}"
+                th:href="${crumb.getHref()}">
+                Dashboard
+            </a>
+            <span
+                th:if="${iStat.last}"
+                th:text="${crumb.getLabel()}">Last</span>
+        </li>
     </ol>
 </nav>
