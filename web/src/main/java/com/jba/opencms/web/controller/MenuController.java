@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.view.RedirectView;
 
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
@@ -46,7 +47,7 @@ public class MenuController {
 
     @RequestMapping(value = "/dashboard/menu/{menuId}", method = RequestMethod.GET)
     public String getMenuDetails(@PathVariable(name = "menuId") Long menuId, Model model){
-        Menu menu = menuService.findOne(menuId, false);
+        Menu menu = menuService.findOne(menuId, true);
 
         model.addAttribute("menu", menu);
 
@@ -67,26 +68,22 @@ public class MenuController {
 
     @RequestMapping(value = "/dashboard/menu/{menuId}/new", method = RequestMethod.POST)
     public RedirectView createNewMenuEntry(@PathVariable(name = "menuId") Long menuId){
-        Menu menu = menuService.findOne(menuId, false);
+        Menu menu = menuService.findOne(menuId, true);
 
         Entry entry = new Entry();
         entry.setMenu(menu);
         entry.setLabel("");
         menuService.addMenuEntry(menu, entry);
 
-        return new RedirectView("redirect:/dashboard/menu/"+menuId+"/"+entry.getId());
+        return new RedirectView("/dashboard/menu/"+menuId+"/"+entry.getId());
     }
 
     @RequestMapping(value = "/dashboard/menu/{menuId}/{entryId}", method = RequestMethod.GET)
     public String getMenuEntriesDetails(@PathVariable(name = "menuId") Long menuId,
                                         @PathVariable(name = "entryId") Long entryId,
                                         Model model){
-        Menu menu = menuService.findOne(menuId, true);
-
-        model.addAttribute("entry", menu.getEntries().stream()
-                .filter(entry -> entry.getId().equals(entryId))
-                .findAny().orElse(null)
-        );
+        Entry entry = entryService.findOne(entryId, true);
+        model.addAttribute("entry", entry);
 
         model.addAttribute("menuId", menuId);
         List<Page> pages = pageService.findAll(true);
@@ -100,15 +97,27 @@ public class MenuController {
                                                @PathVariable(name = "entryId") Long entryId,
                                                String label,
                                                Long page){
-        Menu menu = menuService.findOne(menuId, false);
-        Entry edited = menuService.getMenuEntries(menu).stream().filter(e -> e.getId().equals(entryId)).findAny().orElse(null);
+        Entry edited = entryService.findOne(entryId, true);
 
         edited.setLabel(label);
-        Page one = pageService.findOne(page, true);
-        edited.setPage(one);
+        edited.setPage(pageService.findOne(page, false));
 
         entryService.update(edited);
 
-        return new RedirectView("/dashboard/menu/"+menu.getId()+"?success");
+        return new RedirectView("/dashboard/menu/"+menuId +"?success");
+    }
+
+    @RequestMapping(value = "/dashboard/menu/{menuId}/{entryId}/new", method = RequestMethod.POST)
+    public RedirectView createSubentry(@PathVariable(name = "menuId") Long menuId,
+                                               @PathVariable(name = "entryId") Long entryId,
+                                               String label,
+                                               Long page){
+        Entry parentEntry = entryService.findOne(entryId, true);
+        Entry entry = new Entry();
+        entry.setLabel("");
+        entry.setParent(parentEntry);
+        parentEntry.setSubentires(Arrays.asList(entry));
+        entryService.create(entry);
+        return new RedirectView("/dashboard/menu/"+menuId+"/"+entry.getId());
     }
 }

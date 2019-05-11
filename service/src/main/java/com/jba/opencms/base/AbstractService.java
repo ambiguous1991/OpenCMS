@@ -9,6 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.lang.reflect.Field;
 import java.util.Collection;
 import java.util.List;
+import java.util.Optional;
 
 @Transactional
 public abstract class AbstractService<T extends BaseType> implements BaseService<T> {
@@ -32,9 +33,10 @@ public abstract class AbstractService<T extends BaseType> implements BaseService
     @Override
     public T findOne(Long id, boolean initialize) {
         T element = dao.findOne(id);
-        if(element!=null)
+        Optional<T> optional = Optional.ofNullable(element);
+        if(optional.isPresent()&&initialize)
             initialize(element);
-        return element;
+        return optional.orElse(null);
     }
 
     @Override

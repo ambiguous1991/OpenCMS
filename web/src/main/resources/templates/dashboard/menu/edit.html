@@ -22,7 +22,15 @@
         <nav th:replace="/fragment/admin-breadcrumb"></nav>
         <div class="wrapper">
             <div th:replace="fragment/admin-sidebar"></div>
-            <div class="container-fluid shadow-lg flex-grow-1 m-5 p-5">
+            <div class="container-fluid shadow-lg flex-grow-1 m-5 p-5 overflow-auto">
+                <div th:if="${param.success!=null}" class="alert alert-success alert-dismissible fade show"
+                     role="alert">
+                    <i class="fas fa-check-circle" style="font-size: 2em;"></i>
+                    <strong>Modyfikacja elementu przebiegła pomyślnie!</strong>
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
                 <form class="" th:object="${menu}" method="post" th:action="'/dashboard/menu/'+${menu.id}">
                     <h3 class="mb-4">Edycja pozycji menu</h3>
                     <div class="form-group row">
@@ -32,25 +40,26 @@
                                th:value="${menu.getId()}">
                     </div>
                     <div class="form-group row">
-                        <label class="form-check-label col-sm-4" for="defaultCheck1">Czy aktywne?</label>
-                        <input class="form-check-input col-sm-2" type="checkbox" th:field="${menu.isActive}" th:value="${menu.isActive}" id="defaultCheck1">
-                    </div>
-                    <div class="form-group row">
                         <label for="name" class="col-sm-2">Nazwa</label>
                         <input id="name" name="name" type="text" aria-describedby="nameHelpBlock"
-                               class="col-sm-6 form-control" th:value="${menu.getName()}">
+                        class="col-sm-6 form-control" th:value="${menu.getName()}">
+                    </div>
+                    <div class="form-group form-check-inline">
+                        <input class="form-check-input" type="checkbox" th:field="${menu.isActive}"
+                               th:value="${menu.isActive}" id="defaultCheck1">
+                        <label class="form-check-label" for="defaultCheck1">Czy aktywne?</label>
                     </div>
                     <input
                             id="csrf"
                             type="hidden"
                             th:name="${_csrf.parameterName}"
-                            th:value="${_csrf.token}"/>
+                    th:value="${_csrf.token}"/>
                     <div class="form-group row mt-1 col-sm-12">
                         <button name="submit" type="submit" class="btn btn-primary">Zatwierdź</button>
                     </div>
                 </form>
                 <div class="">
-                    <table class="table table-sm table-responsive-sm table-striped table-bordered table-hover"
+                    <table class="table table-sm table-responsive-sm table-striped table-bordered table-hover overflow-auto h-25"
                            th:if="${menu.getEntries().size()>0}">
                         <h4 class="mb-2 mt-5">Elementy menu</h4>
                         <thead>
@@ -81,6 +90,9 @@
                         Dodaj pozycję menu
                     </button>
                 </form>
+                <div class="text-right mt-3">
+                    <a href="/dashboard/menu" class="btn btn-primary text-right">Powrót</a>
+                </div>
             </div>
         </div>
     </body>
