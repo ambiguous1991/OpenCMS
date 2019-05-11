@@ -1,5 +1,6 @@
 package com.jba.opencms.web.controller;
 
+import com.jba.opencms.menu.EntryService;
 import com.jba.opencms.menu.MenuService;
 import com.jba.opencms.type.menu.Entry;
 import com.jba.opencms.type.menu.Menu;
@@ -18,8 +19,8 @@ import java.util.List;
 @Controller
 public class MenuController {
 
-    @Autowired
-    private MenuService menuService;
+    @Autowired private MenuService menuService;
+    @Autowired private EntryService entryService;
 
     @RequestMapping(value = "/dashboard/menu", method = RequestMethod.GET)
     public String mainPage(Model model){
@@ -84,14 +85,23 @@ public class MenuController {
                 .findAny().orElse(null)
         );
 
+        model.addAttribute("menuId", menuId);
+
         return "dashboard/menu/entry";
     }
 
     @RequestMapping(value = "/dashboard/menu/{menuId}/{entryId}", method = RequestMethod.POST)
-    public RedirectView postMenuEntriesDetails(@PathVariable(name = "menuId") Long menuId, Model model){
+    public RedirectView postMenuEntriesDetails(@PathVariable(name = "menuId") Long menuId,
+                                               @PathVariable(name = "entryId") Long entryId,
+                                               String label,
+                                               Long page){
         Menu menu = menuService.findOne(menuId, false);
+        Entry edited = menuService.getMenuEntries(menu).stream().filter(e -> e.getId().equals(entryId)).findAny().orElse(null);
 
-        model.addAttribute("menu", menu);
+        edited.setLabel(label);
+        edited.setPage(null);
+
+        entryService.update(edited);
 
         return new RedirectView("/dashboard/menu/"+menu.getId());
     }
