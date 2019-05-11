@@ -2,7 +2,7 @@ package com.jba.opencms.web;
 
 import com.jba.opencms.configuration.DataSourceConfiguration;
 import com.jba.opencms.configuration.ServicesInitializr;
-import com.jba.opencms.web.controller.interceptor.BreadcrumbInterceptor;
+import com.jba.opencms.web.interceptor.BreadcrumbInterceptor;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.liquibase.LiquibaseAutoConfiguration;

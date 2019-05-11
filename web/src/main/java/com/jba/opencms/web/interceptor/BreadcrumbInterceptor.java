@@ -1,4 +1,4 @@
-package com.jba.opencms.web.controller.interceptor;
+package com.jba.opencms.web.interceptor;
 
 import com.jba.opencms.web.type.Breadcrumb;
 import org.slf4j.Logger;
@@ -57,6 +57,7 @@ public class BreadcrumbInterceptor extends HandlerInterceptorAdapter {
         map.put("menu", "Edycja menu");
         map.put("digit", "Element");
         map.put("delete", "Usunięcie");
+        map.put("page", "Strony");
         return map;
     }
 }
