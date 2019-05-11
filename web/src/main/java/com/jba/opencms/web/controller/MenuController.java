@@ -51,7 +51,12 @@ public class MenuController {
 
     @RequestMapping(value = "/dashboard/menu/{menuId}", method = RequestMethod.POST)
     public RedirectView postMenuDetails(@PathVariable(name = "menuId") Long menuId, Menu menu){
+        Menu edited = menuService.findOne(menuId, true);
 
+        edited.setIsActive(menu.getIsActive());
+        edited.setName(menu.getName());
+
+        menuService.update(edited);
 
         return new RedirectView("/dashboard/menu");
     }
@@ -65,7 +70,7 @@ public class MenuController {
         entry.setLabel("");
         menuService.addMenuEntry(menu, entry);
 
-        return new RedirectView("/dashboard/menu/"+menuId+"/"+entry.getId());
+        return new RedirectView("redirect:/dashboard/menu/"+menuId+"/"+entry.getId());
     }
 
     @RequestMapping(value = "/dashboard/menu/{menuId}/{entryId}", method = RequestMethod.GET)
