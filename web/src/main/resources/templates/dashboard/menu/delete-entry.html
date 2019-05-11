@@ -1,0 +1,58 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-4.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+
+    <head>
+        <meta charset="UTF-8">
+        <title th:text="${@systemVariables.get('page.name')+' - Dashboard - Menu - Edit'}">Failed</title>
+        <div th:replace="/fragment/import"></div>
+        <link rel="stylesheet" href="../../../static/css/opencms.css"/>
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css"
+              integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf"
+              crossorigin="anonymous">
+        <link rel="stylesheet" href="../../../static/css/bootstrap.css"/>
+        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+                integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+                crossorigin="anonymous"></script>
+
+    </head>
+    <body class="d-flex flex-column vh-100">
+        <nav th:replace="/fragment/admin-navbar"></nav>
+        <nav th:replace="/fragment/admin-breadcrumb"></nav>
+        <div class="wrapper">
+            <div th:replace="fragment/admin-sidebar"></div>
+            <div class="container-fluid shadow-lg flex-grow-1 align-items-center d-flex justify-content-center m-5 p-5 overflow-auto text-center"
+                 style="">
+                <div class="w-75">
+                    <div class="alert alert-danger text-center">
+                        <h3>Usunięcie elementu</h3>
+                        <strong>Uwaga!</strong>
+                        usunięcie elementu menu jest czynnością nieodwracalną
+                    </div>
+
+                    <div>Jeżeli jesteś pewien, że chcesz usunąć element</div>
+                    <div class="font-weight-bolder text-danger"
+                         th:text="'Wpis w menu o id: '+${entry.getId()}+' i etykiecie '+${entry.getLabel()}">
+                        Wpis w menu o id: 1 i etyckiecie test
+                    </div>
+                    <div class="font-weight-bold text-danger"
+                         th:if="${entry.getSubentires()!=null}"
+                         th:each="subentry: ${entry.getSubentires()}"
+                         th:text="'Podelement menu o id: '+${subentry.getId()}+' i etykiecie '+${subentry.getLabel()}">
+                        Podelement menu o id: 1 i etyckiecie test
+                    </div>
+                    <form class="mt-5" th:action="'/dashboard/menu/'+${menuId}+'/'+${entry.getId()+'/delete'}" method="post">
+                        <div class="form-group row">
+                            <div class="col-sm-1"></div>
+                            <button class=" col-sm-4 btn btn-danger" type="submit">Potwierdź</button>
+                            <div class="col-sm-2"></div>
+                            <a class="col-sm-4 btn btn-info" href="#" th:href="'/dashboard/menu/'+${menuId}+'/'+${entry.getId()}">Cofnij</a>
+                            <div class="col-sm-1"></div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>

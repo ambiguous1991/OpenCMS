@@ -120,4 +120,25 @@ public class MenuController {
         entryService.create(entry);
         return new RedirectView("/dashboard/menu/"+menuId+"/"+entry.getId());
     }
+
+    @RequestMapping(value = "/dashboard/menu/{menuId}/{entryId}/delete" ,method = RequestMethod.GET)
+    public String getDeleteElementForm(@PathVariable(name = "menuId") Long menuId,
+                                       @PathVariable(name = "entryId") Long entryId,
+                                       Model model){
+        Entry entry = entryService.findOne(entryId, true);
+
+        model.addAttribute("menuId", menuId);
+        model.addAttribute("entry", entry);
+
+        return "dashboard/menu/delete-entry";
+    }
+
+    @RequestMapping(value = "/dashboard/menu/{menuId}/{entryId}/delete" ,method = RequestMethod.POST)
+    public RedirectView deleteElement(@PathVariable(name = "menuId") Long menuId,
+                                @PathVariable(name = "entryId") Long entryId,
+                                Model model){
+        entryService.delete(entryId);
+
+        return new RedirectView("/dashboard/menu/"+menuId +"?success");
+    }
 }
