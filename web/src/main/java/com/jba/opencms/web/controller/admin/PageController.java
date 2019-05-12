@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.view.RedirectView;
 
+import java.util.List;
+
 @Controller
 @RequestMapping("/dashboard/page")
 public class PageController {
@@ -17,7 +19,11 @@ public class PageController {
     @Autowired private PageService pageService;
 
     @RequestMapping(method = RequestMethod.GET)
-    public String getLandingPage(){
+    public String getLandingPage(Model model){
+        List<Page> pages = pageService.findAll(true);
+
+        model.addAttribute("pages", pages);
+
         return "dashboard/page/pages";
     }
 

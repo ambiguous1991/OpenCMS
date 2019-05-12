@@ -10,6 +10,8 @@ import lombok.ToString;
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 @EqualsAndHashCode(callSuper = true)
 @Entity
@@ -58,5 +60,11 @@ public class Page extends BaseTypeSimpleKey<Page> {
             pageAuthorities.add(authority);
         }
         else throw new IllegalArgumentException("This page already contains authority: "+authority.getRole());
+    }
+
+    public String getAuthoritiesAsString(){
+        if(pageAuthorities.size()>0)
+            return pageAuthorities.stream().map(a -> a.getRole().name()).collect(Collectors.joining(", "));
+        else return "";
     }
 }

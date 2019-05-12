@@ -1,5 +1,7 @@
 package com.jba.opencms.type.base;
 
+import lombok.Data;
+import lombok.Getter;
 import lombok.ToString;
 
 import javax.persistence.Column;
@@ -11,6 +13,7 @@ import java.time.OffsetDateTime;
 
 @MappedSuperclass
 @ToString
+@Getter
 public class BaseType implements Serializable {
 
     @Column(name = "CDATE")

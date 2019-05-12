@@ -27,7 +27,7 @@
     <div class="container-fluid d-flex flex-column shadow-lg m-5 p-5">
         <h2 class="mb-4">Edycja stron</h2>
         <input type="text"/>
-        <div class="d-flex overflow-auto flex-column" style="flex:1;">
+        <div th:if="${pages.size()>0}" class="d-flex overflow-auto flex-column" style="flex:1;">
             <table class="table table-responsive-lg table-striped table-bordered table-hover">
                 <thead>
                 <tr class="table-success">
@@ -42,14 +42,14 @@
                 </tr>
                 </thead>
                 <tbody>
-                <tr>
-                    <th>moja-strona-główna</th>
-                    <th>Strona główna</th>
-                    <th>0</th>
-                    <th>2019-05-11</th>
-                    <th>2019-05-11</th>
-                    <th>Każdy</th>
-                    <th>Tak</th>
+                <tr th:each="page: ${pages}">
+                    <th th:text="${page.getTitle()}">moja-strona-główna</th>
+                    <th th:text="${page.getTitle()}">Strona główna</th>
+                    <th th:text="${page.getSubpages().size()}">0</th>
+                    <th th:text="${page.getCreated()}">2019-05-11</th>
+                    <th th:text="${page.getUpdated()}">2019-05-11</th>
+                    <th th:text="${page.getAuthoritiesAsString()}">Każdy</th>
+                    <th th:text="${page.getVisible()}?'tak':'nie'">Tak</th>
                     <th>
                         <a href="#" class="btn btn-sm btn-block btn-info">modyfikuj</a>
                         <a href="#" class="btn btn-sm btn-block btn-success">edytuj treść</a>
@@ -58,6 +58,10 @@
                 </tr>
                 </tbody>
             </table>
+
+        </div>
+        <div th:if="${pages.size()==0}" class="alert alert-info text-center p-4">
+            W tej chwili, nie ma jeszcze żadnej strony.
         </div>
         <form class="align-self-center mt-4" action="/dashboard/page/new" method="post">
             <input
