@@ -49,4 +49,22 @@ public class PageController {
 
         return "dashboard/page/page-details";
     }
+
+    @RequestMapping(value = "/{pageId}/delete", method = RequestMethod.GET)
+    public String deletePage(
+            @PathVariable("pageId") Long pageId,
+            Model model){
+        Page page = pageService.findOne(pageId, true);
+
+        model.addAttribute("page", page);
+
+        return "dashboard/page/delete-page";
+    }
+
+    @RequestMapping(value = "/{pageId}/delete", method = RequestMethod.POST)
+    public RedirectView doDeletePage(
+            @PathVariable("pageId") Long pageId){
+        pageService.delete(pageId);
+        return new RedirectView("/dashboard/page?deleteSuccess");
+    }
 }

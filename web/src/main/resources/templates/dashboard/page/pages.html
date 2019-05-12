@@ -26,6 +26,14 @@
     <div th:replace="fragment/admin-sidebar"></div>
     <div class="container-fluid d-flex flex-column shadow-lg m-5 p-5">
         <h2 class="mb-4">Edycja stron</h2>
+        <div th:if="${param.deleteSuccess!=null}" class="alert alert-success alert-dismissible fade show"
+             role="alert">
+            <i class="fas fa-check-circle" style="font-size: 2em;"></i>
+            <strong>Strona została usunięta!</strong>
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
         <input type="text"/>
         <div th:if="${pages.size()>0}" class="d-flex overflow-auto flex-column" style="flex:1;">
             <table class="table table-responsive-lg table-striped table-bordered table-hover">
@@ -46,14 +54,14 @@
                     <th th:text="${page.getTitle()}">moja-strona-główna</th>
                     <th th:text="${page.getTitle()}">Strona główna</th>
                     <th th:text="${page.getSubpages().size()}">0</th>
-                    <th th:text="${page.getCreated()}">2019-05-11</th>
-                    <th th:text="${page.getUpdated()}">2019-05-11</th>
+                    <th th:text="${#temporals.format(page.getCreated(),@systemVariables.get(@varkey.SYSTEM_DASHBOARD_DATE_FORMAT))}">2019-05-11</th>
+                    <th th:text="${#temporals.format(page.getUpdated(), @systemVariables.get(@varkey.SYSTEM_DASHBOARD_DATE_FORMAT))}">2019-05-11</th>
                     <th th:text="${page.getAuthoritiesAsString()}">Każdy</th>
                     <th th:text="${page.getVisible()}?'tak':'nie'">Tak</th>
                     <th>
-                        <a href="#" class="btn btn-sm btn-block btn-info">modyfikuj</a>
-                        <a href="#" class="btn btn-sm btn-block btn-success">edytuj treść</a>
-                        <a href="#" class="btn btn-sm btn-block btn-danger">usuń</a>
+                        <a href="#" th:href="'/dashboard/page/'+${page.getId()}" class="btn btn-sm btn-block btn-info">modyfikuj</a>
+                        <a href="#" th:href="'/dasbhoard/page/'+${page.getId()}+'/edit'" class="btn btn-sm btn-block btn-success">edytuj treść</a>
+                        <a href="#" th:href="'/dashboard/page/'+${page.getId()}+'/delete'" class="btn btn-sm btn-block btn-danger">usuń</a>
                     </th>
                 </tr>
                 </tbody>

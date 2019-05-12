@@ -23,6 +23,12 @@
             <column name="cdate" value="${now}"/>
             <column name="udate" value="${now}"/>
         </insert>
+        <insert tableName="system_variable">
+            <column name="system_key" value="system.dashboard.dateformat"/>
+            <column name="system_value" value="yyyy-MM-dd hh:mm:ss"/>
+            <column name="cdate" value="${now}"/>
+            <column name="udate" value="${now}"/>
+        </insert>
         <insert tableName="menu">
             <column name="active" valueBoolean="true"/>
             <column name="name" value="default"/>

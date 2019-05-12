@@ -1,6 +1,5 @@
 package com.jba.opencms.type.base;
 
-import lombok.Data;
 import lombok.Getter;
 import lombok.ToString;
 
@@ -23,18 +22,18 @@ public class BaseType implements Serializable {
     protected OffsetDateTime updated;
 
     @PrePersist
-    protected void initialize(){
-        if(created==null){
+    protected void initialize() {
+        if (created == null) {
             created = OffsetDateTime.now();
         }
-        if(updated==null){
+        if (updated == null) {
             updated = OffsetDateTime.now();
         }
     }
 
     @PreUpdate
-    protected void preUpdate(){
-        updated=OffsetDateTime.now();
+    protected void preUpdate() {
+        updated = OffsetDateTime.now();
     }
 
 }
