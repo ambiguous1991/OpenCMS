@@ -22,10 +22,11 @@ public class BreadcrumbInterceptor extends HandlerInterceptorAdapter {
         String requestURI = request.getRequestURI();
         if(requestURI.startsWith("/dashboard")&&!requestURI.contains("/static")){
             logger.info("Building breadcrumbs for "+request.getRequestURI());
-            if(requestURI.contains("?"))
-                modelAndView.addObject("breadcrumb", requestToBreadcrumb(requestURI.substring(0, requestURI.lastIndexOf("?"))));
-            else
-                modelAndView.addObject("breadcrumb", requestToBreadcrumb(requestURI));
+
+            List<Breadcrumb> breadcrumbs = requestToBreadcrumb(requestURI);
+            String breadcrumbTitle = breadcrumbs.stream().map(Breadcrumb::getLabel).collect(Collectors.joining(" - ", " - ", ""));
+            modelAndView.addObject("breadcrumb", requestToBreadcrumb(requestURI));
+            modelAndView.addObject("breadcrumbTitle", breadcrumbTitle);
         }
     }
 
