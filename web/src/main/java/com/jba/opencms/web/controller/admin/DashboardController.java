@@ -1,4 +1,4 @@
-package com.jba.opencms.web.controller;
+package com.jba.opencms.web.controller.admin;
 
 import com.jba.opencms.security.SecurityUtils;
 import com.jba.opencms.security.principal.UserPrincipal;

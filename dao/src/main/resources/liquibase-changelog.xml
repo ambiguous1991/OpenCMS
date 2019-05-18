@@ -135,7 +135,7 @@
                 <constraints nullable="false"/>
             </column>
             <column name="CONTENT" type="TEXT">
-                <constraints nullable="false"/>
+                <constraints nullable="true"/>
             </column>
             <column defaultValueBoolean="true" name="VISIBLE" type="BIT(1)">
                 <constraints nullable="false"/>
@@ -403,6 +403,12 @@
         <insert tableName="system_variable">
             <column name="system_key" value="page.name"/>
             <column name="system_value" value="OpenCMS"/>
+            <column name="cdate" value="${now}"/>
+            <column name="udate" value="${now}"/>
+        </insert>
+        <insert tableName="system_variable">
+            <column name="system_key" value="system.dashboard.dateformat"/>
+            <column name="system_value" value="yyyy-MM-dd hh:mm:ss"/>
             <column name="cdate" value="${now}"/>
             <column name="udate" value="${now}"/>
         </insert>

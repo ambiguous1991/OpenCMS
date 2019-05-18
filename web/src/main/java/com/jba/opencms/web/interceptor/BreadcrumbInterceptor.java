@@ -1,4 +1,4 @@
-package com.jba.opencms.web.controller.interceptor;
+package com.jba.opencms.web.interceptor;
 
 import com.jba.opencms.web.type.Breadcrumb;
 import org.slf4j.Logger;
@@ -20,13 +20,23 @@ public class BreadcrumbInterceptor extends HandlerInterceptorAdapter {
     @Override
     public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler, ModelAndView modelAndView) throws Exception {
         String requestURI = request.getRequestURI();
-        if(requestURI.startsWith("/dashboard")&&!requestURI.contains("/static")){
-            logger.info("Building breadcrumbs for "+request.getRequestURI());
-            if(requestURI.contains("?"))
-                modelAndView.addObject("breadcrumb", requestToBreadcrumb(requestURI.substring(0, requestURI.lastIndexOf("?"))));
-            else
-                modelAndView.addObject("breadcrumb", requestToBreadcrumb(requestURI));
+        if(shouldIntercept(request)){
+            logger.info("Building breadcrumbs for "+requestURI);
+
+            List<Breadcrumb> breadcrumbs = requestToBreadcrumb(requestURI);
+            String breadcrumbTitle = breadcrumbs.stream().map(Breadcrumb::getLabel).collect(Collectors.joining(" - ", " - ", ""));
+            modelAndView.addObject("breadcrumb", requestToBreadcrumb(requestURI));
+            modelAndView.addObject("breadcrumbTitle", breadcrumbTitle);
         }
+    }
+
+    private boolean shouldIntercept(HttpServletRequest request){
+        String uri = request.getRequestURI();
+        return uri.contains("/dashboard") &&
+                !uri.contains("/static") &&
+                !uri.contains("/js") &&
+                !uri.contains("/css") &&
+                !request.getMethod().equals("PUT");
     }
 
     private List<Breadcrumb> requestToBreadcrumb(final String requestURI){
@@ -57,6 +67,8 @@ public class BreadcrumbInterceptor extends HandlerInterceptorAdapter {
         map.put("menu", "Edycja menu");
         map.put("digit", "Element");
         map.put("delete", "Usunięcie");
+        map.put("page", "Strony");
+        map.put("edit", "Edytuj");
         return map;
     }
 }

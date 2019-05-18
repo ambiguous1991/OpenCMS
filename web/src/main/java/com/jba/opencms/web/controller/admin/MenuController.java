@@ -1,4 +1,4 @@
-package com.jba.opencms.web.controller;
+package com.jba.opencms.web.controller.admin;
 
 import com.jba.opencms.menu.EntryService;
 import com.jba.opencms.menu.MenuService;
@@ -113,6 +113,8 @@ public class MenuController {
                                                String label,
                                                Long page){
         Entry parentEntry = entryService.findOne(entryId, true);
+        parentEntry.setPage(null);
+        entryService.update(parentEntry);
         Entry entry = new Entry();
         entry.setLabel("");
         entry.setParent(parentEntry);

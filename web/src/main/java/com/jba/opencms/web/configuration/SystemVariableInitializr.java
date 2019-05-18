@@ -1,6 +1,7 @@
 package com.jba.opencms.web.configuration;
 
 import com.jba.opencms.dao.ifs.SystemVariableDao;
+import com.jba.opencms.type.system.enu.SystemVariableKeys;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.config.ConfigurableBeanFactory;
@@ -28,5 +29,11 @@ public class SystemVariableInitializr {
         });
 
         return systemVariables;
+    }
+
+    @Bean
+    @Scope(value = ConfigurableBeanFactory.SCOPE_SINGLETON)
+    public SystemVariableKeys varkey(){
+        return new SystemVariableKeys();
     }
 }
