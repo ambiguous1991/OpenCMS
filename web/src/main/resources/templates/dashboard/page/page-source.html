@@ -57,11 +57,13 @@
         </div>
         <form class="flex-grow-1 d-flex flex-column" method="post"
               th:action="'/dashboard/page/'+${page.getId()}+'/edit'">
+            <input id="page-initial-content" type="hidden" th:value="${page.content}"/>
             <textarea name="editor1" class="border" id="page-contents"></textarea>
             <script>
                 var editor = CKEDITOR.replace('editor1', {
                     customConfig: '/js/ckeditor-config.js'
                 });
+                editor.setData($('#page-initial-content').val());
             </script>
             <input id="pageId" type="hidden" th:value="${page.getId()}"/>
         </form>

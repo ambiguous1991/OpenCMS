@@ -4,6 +4,7 @@ import com.jba.opencms.dao.GenericDao;
 import com.jba.opencms.type.base.BaseType;
 import org.hibernate.Hibernate;
 import org.hibernate.LazyInitializationException;
+import org.slf4j.Logger;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.lang.reflect.Field;
@@ -15,6 +16,7 @@ import java.util.Optional;
 public abstract class AbstractService<T extends BaseType> implements BaseService<T> {
 
     protected GenericDao<T> dao;
+    protected Logger logger;
 
     public AbstractService(GenericDao<T> dao) {
         this.dao = dao;

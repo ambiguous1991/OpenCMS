@@ -68,6 +68,7 @@ public class PageController {
     @Async
     public ResponseEntity result(@PathVariable("pageId") Long pageId,
                                  String content){
+        pageService.updateContents(pageId, content);
         return new ResponseEntity(HttpStatus.OK);
     }
 
