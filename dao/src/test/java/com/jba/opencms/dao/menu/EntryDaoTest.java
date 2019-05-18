@@ -65,7 +65,8 @@ public class EntryDaoTest extends BaseSpringIntegrationTest {
     @Rollback
     @Transactional
     public void addSubentryTest(){
-        Entry entry = entryDao.findOne(3);
+        List<Entry> all = entryDao.findAll();
+        Entry entry = all.get(0);
 
         logger.info(entry);
 
