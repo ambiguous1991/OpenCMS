@@ -1,6 +1,8 @@
 package com.jba.opencms.web.controller.admin;
 
+import com.jba.opencms.menu.MenuService;
 import com.jba.opencms.page.PageService;
+import com.jba.opencms.type.menu.Entry;
 import com.jba.opencms.type.page.Page;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -20,9 +22,10 @@ import java.util.List;
 public class PageController {
 
     @Autowired private PageService pageService;
+    @Autowired private MenuService menuService;
 
     @RequestMapping(method = RequestMethod.GET)
-    public String getLandingPage(Model model){
+    public String getLandingPage(Model model) {
         List<Page> pages = pageService.findAll(true);
 
         model.addAttribute("pages", pages);
@@ -31,7 +34,7 @@ public class PageController {
     }
 
     @RequestMapping(value = "/new", method = RequestMethod.POST)
-    public RedirectView createNewPage(){
+    public RedirectView createNewPage() {
         Page page = new Page();
 
         page.setTitle("New page");
@@ -39,13 +42,13 @@ public class PageController {
 
         pageService.create(page);
 
-        return new RedirectView("/dashboard/page/"+page.getId());
+        return new RedirectView("/dashboard/page/" + page.getId());
     }
 
     @RequestMapping(value = "/{pageId}", method = RequestMethod.GET)
     public String getPageDetails(
             @PathVariable("pageId") Long pageId,
-            Model model){
+            Model model) {
         Page page = pageService.findOne(pageId, true);
 
         model.addAttribute("page", page);
@@ -56,7 +59,7 @@ public class PageController {
     @RequestMapping(value = "/{pageId}/edit", method = RequestMethod.GET)
     public String editPage(
             @PathVariable("pageId") Long pageId,
-            Model model){
+            Model model) {
         Page page = pageService.findOne(pageId, true);
 
         model.addAttribute("page", page);
@@ -64,10 +67,23 @@ public class PageController {
         return "dashboard/page/page-source";
     }
 
+    @RequestMapping(value = "/{pageId}/preview", method = RequestMethod.GET)
+    public String previewPage(
+            @PathVariable("pageId") Long pageId,
+            Model model) {
+        Page page = pageService.findOne(pageId, true);
+        List<Entry> menu = menuService.findActive(true).getEntries();
+
+        model.addAttribute("page", page);
+        model.addAttribute("menu", menu);
+
+        return "index";
+    }
+
     @RequestMapping(value = "/{pageId}/update", method = RequestMethod.PUT)
     @Async
     public ResponseEntity result(@PathVariable("pageId") Long pageId,
-                                 String content){
+                                 String content) {
         pageService.updateContents(pageId, content);
         return new ResponseEntity(HttpStatus.OK);
     }
@@ -75,7 +91,7 @@ public class PageController {
     @RequestMapping(value = "/{pageId}/delete", method = RequestMethod.GET)
     public String deletePage(
             @PathVariable("pageId") Long pageId,
-            Model model){
+            Model model) {
         Page page = pageService.findOne(pageId, true);
 
         model.addAttribute("page", page);
@@ -85,7 +101,7 @@ public class PageController {
 
     @RequestMapping(value = "/{pageId}/delete", method = RequestMethod.POST)
     public RedirectView doDeletePage(
-            @PathVariable("pageId") Long pageId){
+            @PathVariable("pageId") Long pageId) {
         pageService.delete(pageId);
         return new RedirectView("/dashboard/page?deleteSuccess");
     }
