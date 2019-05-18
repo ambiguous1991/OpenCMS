@@ -20,14 +20,23 @@ public class BreadcrumbInterceptor extends HandlerInterceptorAdapter {
     @Override
     public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler, ModelAndView modelAndView) throws Exception {
         String requestURI = request.getRequestURI();
-        if(requestURI.startsWith("/dashboard")&&!requestURI.contains("/static")&&!request.getMethod().equals("PUT")){
-            logger.info("Building breadcrumbs for "+request.getRequestURI());
+        if(shouldIntercept(request)){
+            logger.info("Building breadcrumbs for "+requestURI);
 
             List<Breadcrumb> breadcrumbs = requestToBreadcrumb(requestURI);
             String breadcrumbTitle = breadcrumbs.stream().map(Breadcrumb::getLabel).collect(Collectors.joining(" - ", " - ", ""));
             modelAndView.addObject("breadcrumb", requestToBreadcrumb(requestURI));
             modelAndView.addObject("breadcrumbTitle", breadcrumbTitle);
         }
+    }
+
+    private boolean shouldIntercept(HttpServletRequest request){
+        String uri = request.getRequestURI();
+        return uri.contains("/dashboard") &&
+                !uri.contains("/static") &&
+                !uri.contains("/js") &&
+                !uri.contains("/css") &&
+                !request.getMethod().equals("PUT");
     }
 
     private List<Breadcrumb> requestToBreadcrumb(final String requestURI){
