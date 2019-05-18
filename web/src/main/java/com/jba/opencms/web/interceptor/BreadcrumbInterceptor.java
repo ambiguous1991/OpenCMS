@@ -20,7 +20,7 @@ public class BreadcrumbInterceptor extends HandlerInterceptorAdapter {
     @Override
     public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler, ModelAndView modelAndView) throws Exception {
         String requestURI = request.getRequestURI();
-        if(requestURI.startsWith("/dashboard")&&!requestURI.contains("/static")){
+        if(requestURI.startsWith("/dashboard")&&!requestURI.contains("/static")&&!request.getMethod().equals("PUT")){
             logger.info("Building breadcrumbs for "+request.getRequestURI());
 
             List<Breadcrumb> breadcrumbs = requestToBreadcrumb(requestURI);
@@ -59,6 +59,7 @@ public class BreadcrumbInterceptor extends HandlerInterceptorAdapter {
         map.put("digit", "Element");
         map.put("delete", "Usunięcie");
         map.put("page", "Strony");
+        map.put("edit", "Edytuj");
         return map;
     }
 }

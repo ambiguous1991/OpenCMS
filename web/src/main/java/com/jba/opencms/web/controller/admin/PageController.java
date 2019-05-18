@@ -3,6 +3,9 @@ package com.jba.opencms.web.controller.admin;
 import com.jba.opencms.page.PageService;
 import com.jba.opencms.type.page.Page;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -48,6 +51,24 @@ public class PageController {
         model.addAttribute("page", page);
 
         return "dashboard/page/page-details";
+    }
+
+    @RequestMapping(value = "/{pageId}/edit", method = RequestMethod.GET)
+    public String editPage(
+            @PathVariable("pageId") Long pageId,
+            Model model){
+        Page page = pageService.findOne(pageId, true);
+
+        model.addAttribute("page", page);
+
+        return "dashboard/page/page-source";
+    }
+
+    @RequestMapping(value = "/{pageId}/update", method = RequestMethod.PUT)
+    @Async
+    public ResponseEntity result(@PathVariable("pageId") Long pageId,
+                                 String content){
+        return new ResponseEntity(HttpStatus.OK);
     }
 
     @RequestMapping(value = "/{pageId}/delete", method = RequestMethod.GET)
