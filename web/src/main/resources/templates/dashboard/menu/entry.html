@@ -47,7 +47,7 @@
                 <div class="form-group row">
                     <label for="page" class="col-4 col-form-label">Odnośnik do strony</label>
                     <div class="col-8">
-                        <select id="page" name="page" class="custom-select" aria-describedby="pageHelpBlock">
+                        <select id="page" name="page" class="custom-select" aria-describedby="pageHelpBlock" th:disabled="${entry.getSubentires().size()>0}">
                             <option value="-1">brak</option>
                             <option
                                     th:if="${entry.getPage()!=null}"
@@ -95,7 +95,7 @@
                                 </a>
                             </th>
                             <th th:text="${subentry.getLabel()}">Etykieta</th>
-                            <th th:text="${subentry.getPage()!=null}?${entry.getPage().getTitle()} : 'brak'">brak</th>
+                            <th th:text="${subentry.getPage()!=null}?${subentry.getPage().getTitle()} : 'brak'">brak</th>
                         </tr>
                     </tbody>
                 </table>
