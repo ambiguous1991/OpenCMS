@@ -30,7 +30,7 @@
             <h5 class="mb-4" th:if="${entry.getParent()!=null}" th:text="'etykieta elementu nadrzędnego: '+${entry.getParent().getLabel()}">Element nadrzędny</h5>
             <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
 
-            <form th:action="'/dashboard/menu/'+${menuId}+'/'+${entry.getId()}" method="post">
+            <form th:action="'/dashboard/menu/'+${menuId}+'/'+${entry.getId()}" method="post" th:object="${entry}">
                 <div class="form-group row">
                     <label for="id" class="col-4 col-form-label">ID</label>
                     <div class="col-8">
@@ -49,7 +49,17 @@
                     <div class="col-8">
                         <select id="page" name="page" class="custom-select" aria-describedby="pageHelpBlock">
                             <option value="-1">brak</option>
-                            <option th:each="page:${pages}" th:value="${page.getId()}" th:text="${page.getTitle()}">Page</option>
+                            <option
+                                    th:if="${entry.getPage()!=null}"
+                                    th:each="page:${pages}"
+                                    th:value="${page.getId()}"
+                                    th:text="${page.getTitle()}"
+                                    th:selected="${page.getId()==entry.getPage().getId()}">Page</option>
+                            <option
+                                    th:if="${entry.getPage()==null}"
+                                    th:each="page:${pages}"
+                                    th:value="${page.getId()}"
+                                    th:text="${page.getTitle()}">Page</option>
                         </select>
                         <span id="pageHelpBlock" class="form-text text-muted">Elementy stanowiące listę rozwijaną nie mogą posiadać odnośników</span>
                     </div>
