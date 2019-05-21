@@ -22,7 +22,7 @@ public class Image extends BaseTypeSimpleKey<Image> {
 
     @Column(name = "DATA", nullable = false)
     @Lob
-    private Blob data;
+    private byte[] data;
 
     @Column(name = "EXTENSION", length = 5)
     private String extension;

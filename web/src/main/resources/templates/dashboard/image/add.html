@@ -1,0 +1,116 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-4.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title th:text="${@systemVariables.get(@varkey.PAGE_NAME)}+${breadcrumbTitle}">Failed</title>
+    <div th:replace="/fragment/import"></div>
+    <!--<link rel="stylesheet" href="../../../static/css/opencms.css"/>-->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css"
+          integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf"
+          crossorigin="anonymous">
+    <!--<link rel="stylesheet" href="../../../static/css/bootstrap.css"/>-->
+
+</head>
+<body class="d-flex flex-column vh-100">
+<nav th:replace="/fragment/admin-navbar"></nav>
+<nav th:replace="/fragment/admin-breadcrumb"></nav>
+
+<script>
+    $(document).ready(function () {
+        $.ajaxSetup({
+            headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')}
+        });
+
+        $("#open-upload-modal").on("click", function () {
+            console.info("INSIDE MODAL");
+            $('#upload-modal').modal();
+        });
+
+        $('#do-upload').on("click", function (event) {
+
+            event.preventDefault();
+
+            console.info("In do upload");
+
+            var form = document.forms[0];
+            var data = new FormData(form);
+
+            var request = $.ajax({
+                type: 'PUT',
+                url: '/dashboard/images/1/upload',
+                data: data,
+                cache: false,
+                contentType: false,
+                processData: false,
+                timeout: 600000
+            });
+        })
+    })
+</script>
+
+<div id="modal-container">
+    <div class="modal" id="upload-modal">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Prześlij plik</h4>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+                <div id="modal-body" class="modal-body">
+                    <form id="image-upload-form" action="/dashboard/images/1/upload" enctype="multipart/form-data" method="post">
+                        <div class="form-group row-file ml-1">
+                            <label>Select File</label>
+                            <input class="form-control" type="file" name="file">
+                        </div>
+                        <div class="form-group row">
+                            <button id="do-upload" class="btn btn-sm btn-info" type="submit">Podgląd</button>
+                            <meta name="csrf-token" th:content="${_csrf.getToken()}">
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="wrapper">
+    <div th:replace="fragment/admin-sidebar"></div>
+    <div class="container-fluid shadow-lg flex-grow-1 m-5 p-5 overflow-auto d-flex flex-column flex-wrap">
+        <div class="d-flex flex-row">
+            <h3>Dodanie obrazu</h3>
+
+        </div>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+        <div class="row">
+            <div class="col-6">
+                <div class="mt-3 mb-3">
+                    <button id="open-upload-modal" class="btn btn-sm btn-success">Prześlij obraz</button>
+                </div>
+                <form>
+                    <div class="form-group row">
+                        <label for="name" class="col-4 col-form-label">Nazwa</label>
+                        <div class="col-8">
+                            <input id="name" name="name" type="text" class="form-control">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="description" class="col-4 col-form-label">Opis</label>
+                        <div class="col-8">
+                        <textarea id="description" name="description" cols="40" rows="5"
+                                  class="form-control"></textarea>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <div class="offset-4 col-8">
+                            <button name="submit" type="submit" class="btn btn-primary">Zatwierdź</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>
