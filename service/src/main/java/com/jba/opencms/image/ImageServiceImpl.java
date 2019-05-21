@@ -9,5 +9,5 @@ public class ImageServiceImpl extends AbstractService<Image> implements ImageSer
     public ImageServiceImpl(GenericDao<Image> dao) {
         super(dao);
     }
-    
+
 }
