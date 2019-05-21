@@ -2,7 +2,6 @@ package com.jba.opencms.web.controller.admin;
 
 import com.jba.opencms.image.ImageService;
 import com.jba.opencms.type.image.Image;
-import com.mysql.cj.jdbc.Blob;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
