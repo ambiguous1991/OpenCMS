@@ -35,7 +35,7 @@
 
             console.info("In do upload");
 
-            var form = document.forms[0];
+            var form = $('#image-upload-form')[0];
             var data = new FormData(form);
 
             var request = $.ajax({
