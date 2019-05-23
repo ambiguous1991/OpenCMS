@@ -10,6 +10,10 @@ import org.springframework.web.servlet.view.RedirectView;
 
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.Map;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
+import static java.util.AbstractMap.SimpleEntry;
 
 @Controller
 @RequestMapping(value = "/image")
@@ -18,11 +22,22 @@ public class ImageController {
     @Autowired
     private ImageRepository imageRepository;
 
+    private final static Map<String, String> mimeTypes;
+
+    static{
+        mimeTypes = Stream.of(
+                new SimpleEntry<>(".PNG", "image/png"),
+                new SimpleEntry<>(".JPG", "image/jpg"),
+                new SimpleEntry<>(".JPEG", "image/jpeg"),
+                new SimpleEntry<>(".GIF", "image/gif")
+        ).collect(Collectors.toMap(SimpleEntry::getKey, SimpleEntry::getValue));
+    }
+
     @RequestMapping(value = "/{imageId}", method = RequestMethod.GET)
     public RedirectView getImage(
             @PathVariable("imageId") Long imageId,
             HttpServletResponse response
-    ) throws IOException {
+    ){
         return new RedirectView("/image/"+imageId+"/"+imageRepository.getFullName(imageId));
     }
 
@@ -32,25 +47,12 @@ public class ImageController {
         @PathVariable("imageName") String imageName,
         HttpServletResponse response
     ) throws IOException{
-        switch (imageRepository.getExtension(imageId)){
-            case ".PNG": {
-                response.setContentType("image/png");
-                break;
-            }
-            case ".JPG": {
-                response.setContentType("image/jpg");
-                break;
-            }
-            case ".JPEG": {
-                response.setContentType("image/jpeg");
-                break;
-            }
-            case ".GIF": {
-                response.setContentType("image/gif");
-                break;
-            }
+        determineContentType(imageRepository.getExtension(imageId), response);
 
-        }
         response.getOutputStream().write(imageRepository.get(imageId));
+    }
+
+    private void determineContentType(String ext, HttpServletResponse response){
+        response.setContentType(mimeTypes.get(ext));
     }
 }
