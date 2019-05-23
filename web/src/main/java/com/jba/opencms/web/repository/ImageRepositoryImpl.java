@@ -1,6 +1,7 @@
 package com.jba.opencms.web.repository;
 
 import com.jba.opencms.image.ImageService;
+import com.jba.opencms.type.image.Image;
 import org.springframework.stereotype.Repository;
 
 @Repository
@@ -15,5 +16,21 @@ public class ImageRepositoryImpl implements ImageRepository {
     @Override
     public byte[] get(Long id) {
         return imageService.findOne(id, false).getData();
+    }
+
+    @Override
+    public String getName(Long id) {
+        return imageService.findOne(id, false).getName();
+    }
+
+    @Override
+    public String getExtension(Long id) {
+        return imageService.findOne(id, false).getExtension();
+    }
+
+    @Override
+    public String getFullName(Long id) {
+        Image one = imageService.findOne(id, false);
+        return one.getName()+one.getExtension();
     }
 }
