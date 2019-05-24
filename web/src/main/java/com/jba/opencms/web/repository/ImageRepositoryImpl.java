@@ -30,7 +30,7 @@ public class ImageRepositoryImpl implements ImageRepository {
 
     @Override
     public String getFullName(Long id) {
-        Image one = imageService.findOne(id, false);
-        return one.getName()+one.getExtension();
+        Image image = imageService.findOne(id, false);
+        return image.getName()+"."+image.getExtension();
     }
 }

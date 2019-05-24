@@ -32,11 +32,9 @@ public class AdminImageController {
         return "dashboard/image/add";
     }
 
-    @RequestMapping(value = "/{imageId}/upload", method = RequestMethod.PUT)
+    @RequestMapping(value = "/upload", method = RequestMethod.PUT)
     public ResponseEntity upload(
-            @PathVariable("imageId") Long imageId,
-            @RequestParam("file") MultipartFile file,
-            HttpServletRequest request) {
+            @RequestParam("file") MultipartFile file) {
         file.toString();
 
         Image image = new Image();
