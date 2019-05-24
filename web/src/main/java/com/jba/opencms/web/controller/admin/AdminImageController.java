@@ -6,13 +6,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.view.RedirectView;
 
-import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
 
 @Controller
@@ -27,16 +28,35 @@ public class AdminImageController {
         return "dashboard/image/images";
     }
 
-    @RequestMapping(value = "/add")
-    public String getNewImageForm() {
-        return "dashboard/image/add";
+    @RequestMapping(value = "/{imageId}")
+    public String getImageForm(
+            @PathVariable("imageId") Long imageId,
+            Model model
+    ) {
+        Image image = imageService.findOne(imageId, true);
+        model.addAttribute("image", image);
+        model.addAttribute("imageId", image.getId());
+
+        return "dashboard/image/image";
+    }
+
+    @RequestMapping(value = "/{imageId}", method = RequestMethod.POST)
+    public RedirectView postImage(
+            @PathVariable("imageId") Long imageId,
+            Image image
+    ) {
+        Image imageDB = imageService.findOne(imageId, false);
+
+        imageDB.setName(image.getName());
+        imageDB.setDescription(image.getDescription());
+        imageService.update(imageDB);
+
+        return new RedirectView("/dashboard/images?success");
     }
 
     @RequestMapping(value = "/upload", method = RequestMethod.PUT)
     public ResponseEntity upload(
             @RequestParam("file") MultipartFile file) {
-        file.toString();
-
         Image image = new Image();
         try {
             image.setData(file.getBytes());
@@ -56,9 +76,9 @@ public class AdminImageController {
         }
         catch (IOException e) {
             e.printStackTrace();
-            return new ResponseEntity(HttpStatus.INTERNAL_SERVER_ERROR);
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
 
-        return new ResponseEntity(HttpStatus.OK);
+        return new ResponseEntity<>("/dashboard/images/"+image.getId(), HttpStatus.OK);
     }
 }

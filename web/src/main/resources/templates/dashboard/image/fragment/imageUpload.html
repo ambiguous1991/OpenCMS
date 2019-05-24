@@ -33,7 +33,11 @@
                 cache: false,
                 contentType: false,
                 processData: false,
-                timeout: 600000
+                timeout: 600000,
+                success: function (data) {
+                    console.log(data);
+                    window.location.href = data;
+                }
             });
         })
     })

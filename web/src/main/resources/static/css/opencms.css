@@ -72,3 +72,7 @@
 .modal-body {
     /* 100% = dialog height, 120px = header + footer */
 }
+
+.img-100{
+    width:100%;
+}
