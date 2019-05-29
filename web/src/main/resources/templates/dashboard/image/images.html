@@ -1,0 +1,55 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-4.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title th:text="${@systemVariables.get(@varkey.PAGE_NAME)}+${breadcrumbTitle}">Failed</title>
+    <div th:replace="/fragment/import"></div>
+    <link rel="stylesheet" href="../../../static/css/opencms.css"/>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css"
+          integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf"
+          crossorigin="anonymous">
+    <link rel="stylesheet" href="../../../static/css/bootstrap.css"/>
+
+</head>
+<div th:replace="/dashboard/image/fragment/imageUpload"></div>
+<body class="d-flex flex-column vh-100">
+<nav th:replace="/fragment/admin-navbar"></nav>
+<nav th:replace="/fragment/admin-breadcrumb"></nav>
+<div class="wrapper">
+    <div th:replace="fragment/admin-sidebar"></div>
+    <div class="container-fluid shadow-lg flex-grow-1 m-5 p-5 overflow-auto d-flex flex-column">
+        <div id="heading" class="d-flex flex-grow-1">
+            <div>
+                <h3>Obrazy</h3>
+            </div>
+            <div class="flex-grow-1 text-right">
+                <button id="open-upload-modal" class="btn btn-sm btn-success">Prześlij obraz <i
+                        class="fas fa-cloud-upload-alt"></i></button>
+            </div>
+        </div>
+        <div class="flex-grow-1 text-center" id="image-list">
+            <th:block th:with="columnCount=${6}">
+                <div class="row" th:each="row: ${#numbers.sequence(0, images.size(), columnCount)}">
+                    <div class="card col-sm-2" th:each="column: ${#numbers.sequence(0, 5)}"
+                         th:if="${row+column}<${images.size()}">
+                        <img class="card-img-top" th:src="${'/image/'+images.get(row+column).getId()}"
+                             src="../../../static/images/bulb.png"
+                             alt="Card image cap">
+                        <div class="card-body">
+                            <a href="#" th:href="${'/dashboard/images/'+images.get(row+column).getId()}">
+                                <h5 class="font-weight-bold card-title"
+                                    th:text="${images.get(row+column).getName()}">Title</h5>
+                            </a>
+                            <p class="card-text" th:text="${images.get(row+column).getDescription()}">Description</p>
+                        </div>
+                    </div>
+                </div>
+            </th:block>
+        </div>
+    </div>
+</div>
+</body>
+</html>

@@ -69,6 +69,8 @@ public class BreadcrumbInterceptor extends HandlerInterceptorAdapter {
         map.put("delete", "Usunięcie");
         map.put("page", "Strony");
         map.put("edit", "Edytuj");
+        map.put("images", "Obrazy");
+        map.put("add", "Dodaj");
         return map;
     }
 }

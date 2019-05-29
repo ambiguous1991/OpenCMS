@@ -20,9 +20,9 @@ public class Image extends BaseTypeSimpleKey<Image> {
     @Column(name = "DESCRIPTION", length = 200)
     private String description;
 
-    @Column(name = "DATA", nullable = false)
+    @Column(name = "DATA", nullable = false, columnDefinition = "LONGBLOB")
     @Lob
-    private Blob data;
+    private byte[] data;
 
     @Column(name = "EXTENSION", length = 5)
     private String extension;
