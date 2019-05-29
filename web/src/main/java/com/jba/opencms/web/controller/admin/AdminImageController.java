@@ -15,6 +15,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.view.RedirectView;
 
 import java.io.IOException;
+import java.util.List;
 
 @Controller
 @RequestMapping(value = "/dashboard/images")
@@ -24,7 +25,11 @@ public class AdminImageController {
     private ImageService imageService;
 
     @RequestMapping(method = RequestMethod.GET)
-    public String getImageDashboard() {
+    public String getImageDashboard(Model model) {
+        List<Image> images = imageService.findAll(true);
+
+        model.addAttribute("images", images);
+
         return "dashboard/image/images";
     }
 

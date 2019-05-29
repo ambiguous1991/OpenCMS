@@ -26,55 +26,28 @@
                 <h3>Obrazy</h3>
             </div>
             <div class="flex-grow-1 text-right">
-                <button id="open-upload-modal" class="btn btn-sm btn-success">Prześlij obraz <i class="fas fa-cloud-upload-alt"></i></button>
+                <button id="open-upload-modal" class="btn btn-sm btn-success">Prześlij obraz <i
+                        class="fas fa-cloud-upload-alt"></i></button>
             </div>
         </div>
-        <div class="flex-grow-1 text-center overflow-auto" id="image-list">
-            <div class="row">
-                <div class="card m-3 p-5">
-                    <img class="border p-2 img-fluid" src="../../../static/images/bulb.png"
-                         alt="Card image cap">
-                    <div class="card-body">
-                        <h5 class="card-title">Title</h5>
-                        <p class="card-text">Description</p>
+        <div class="flex-grow-1 text-center" id="image-list">
+            <th:block th:with="columnCount=${6}">
+                <div class="row" th:each="row: ${#numbers.sequence(0, images.size(), columnCount)}">
+                    <div class="card col-sm-2" th:each="column: ${#numbers.sequence(0, 5)}"
+                         th:if="${row+column}<${images.size()}">
+                        <img class="card-img-top" th:src="${'/image/'+images.get(row+column).getId()}"
+                             src="../../../static/images/bulb.png"
+                             alt="Card image cap">
+                        <div class="card-body">
+                            <a href="#" th:href="${'/dashboard/images/'+images.get(row+column).getId()}">
+                                <h5 class="font-weight-bold card-title"
+                                    th:text="${images.get(row+column).getName()}">Title</h5>
+                            </a>
+                            <p class="card-text" th:text="${images.get(row+column).getDescription()}">Description</p>
+                        </div>
                     </div>
                 </div>
-                <div class="card m-3 p-5">
-                    <img class="img-fluid" src="../../../static/images/bulb.png" alt="Card image cap">
-                    <div class="card-body">
-                        <h5 class="card-title">Title</h5>
-                        <p class="card-text">Description</p>
-                    </div>
-                </div>
-                <div class="card m-3 p-5">
-                    <img class="img-fluid" src="../../../static/images/bulb.png" alt="Card image cap">
-                    <div class="card-body">
-                        <h5 class="card-title">Title</h5>
-                        <p class="card-text">Description</p>
-                    </div>
-                </div>
-                <div class="card m-3 p-5">
-                    <img class="card-img-top img-fluid" src="../../../static/images/bulb.png" alt="Card image cap">
-                    <div class="card-body">
-                        <h5 class="card-title">Title</h5>
-                        <p class="card-text">Description</p>
-                    </div>
-                </div>
-                <div class="card m-3 p-5">
-                    <img class="card-img-top img-fluid" src="../../../static/images/bulb.png" alt="Card image cap">
-                    <div class="card-body">
-                        <h5 class="card-title">Title</h5>
-                        <p class="card-text">Description</p>
-                    </div>
-                </div>
-                <div class="card m-3 p-5">
-                    <img class="card-img-top img-fluid" src="../../../static/images/bulb.png" alt="Card image cap">
-                    <div class="card-body">
-                        <h5 class="card-title">Title</h5>
-                        <p class="card-text">Description</p>
-                    </div>
-                </div>
-            </div>
+            </th:block>
         </div>
     </div>
 </div>

@@ -44,7 +44,7 @@
             </column>
             <column name="NAME" type="VARCHAR(100)"/>
             <column name="DESCRIPTION" type="VARCHAR(200)"/>
-            <column name="DATA" type="LONGBLOB">
+            <column name="DATA" type="MEDIUMBLOB">
                 <constraints nullable="false"/>
             </column>
             <column name="EXTENSION" type="CHAR(5)"/>
