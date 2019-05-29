@@ -20,7 +20,7 @@ public class BreadcrumbInterceptor extends HandlerInterceptorAdapter {
     @Override
     public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler, ModelAndView modelAndView) throws Exception {
         String requestURI = request.getRequestURI();
-        if(shouldIntercept(request)){
+        if(shouldIntercept(request, response)){
             logger.info("Building breadcrumbs for "+requestURI);
 
             List<Breadcrumb> breadcrumbs = requestToBreadcrumb(requestURI);
@@ -30,9 +30,10 @@ public class BreadcrumbInterceptor extends HandlerInterceptorAdapter {
         }
     }
 
-    private boolean shouldIntercept(HttpServletRequest request){
+    private boolean shouldIntercept(HttpServletRequest request, HttpServletResponse response){
         String uri = request.getRequestURI();
         return uri.contains("/dashboard") &&
+                response.getStatus()== HttpServletResponse.SC_OK &&
                 !uri.contains("/static") &&
                 !uri.contains("/js") &&
                 !uri.contains("/css") &&

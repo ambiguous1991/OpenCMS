@@ -35,11 +35,11 @@
                 </tr>
             </thead>
             <tbody>
-                <tr th:each="">
-                    <td>Mark</td>
-                    <td>Otto</td>
-                    <td>@mdo</td>
-                    <td>@mdo</td>
+                <tr th:each="attr: ${attributes}">
+                    <td th:text="${attr.getKey()}">Mark</td>
+                    <td ><a href="#" th:href="${'/dashboard/globals/'+attr.getId()}"><span th:text="${attr.getValue()}">Otto</span></a></td>
+                    <td th:text="${attr.getUpdated()}">@mdo</td>
+                    <td th:text="${attr.getCreated()}">@mdo</td>
                 </tr>
             </tbody>
         </table>
