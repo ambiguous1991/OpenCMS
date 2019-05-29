@@ -71,6 +71,7 @@ public class BreadcrumbInterceptor extends HandlerInterceptorAdapter {
         map.put("edit", "Edytuj");
         map.put("images", "Obrazy");
         map.put("add", "Dodaj");
+        map.put("globals", "Serwis");
         return map;
     }
 }
