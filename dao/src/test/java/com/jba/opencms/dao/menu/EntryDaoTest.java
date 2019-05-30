@@ -66,7 +66,16 @@ public class EntryDaoTest extends BaseSpringIntegrationTest {
     @Transactional
     public void addSubentryTest(){
         List<Entry> all = entryDao.findAll();
-        Entry entry = all.get(0);
+        Entry entry;
+
+        if(all.size()>0){
+            entry = all.get(0);
+        }
+        else {
+            entry = new Entry();
+            entry.setLabel("LABEL");
+            entryDao.create(entry);
+        }
 
         logger.info(entry);
 

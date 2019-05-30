@@ -8,6 +8,7 @@ import lombok.ToString;
 import org.hibernate.Hibernate;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 @EqualsAndHashCode(callSuper = true)
@@ -29,7 +30,7 @@ public class Entry extends BaseTypeSimpleKey<Entry> {
     private Menu menu = null;
 
     @OneToMany(mappedBy = "parent", fetch = FetchType.EAGER, orphanRemoval = true)
-    private List<Entry> subentires;
+    private List<Entry> subentires = new ArrayList<>();
 
     @ManyToOne
     @JoinColumn(name = "FK_ENTRY_PARENT_ID")
