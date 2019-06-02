@@ -4,5 +4,7 @@ spring:
     username: opencms
     password: n86TgiYq9F2DwxB
     driver-class-name: com.mysql.cj.jdbc.Driver
+  profiles:
+    active: aws,security
 server:
   port: 5000
