@@ -2,7 +2,7 @@ package com.jba.opencms.dao.menu;
 
 import com.jba.opencms.BaseSpringIntegrationTest;
 import com.jba.opencms.configuration.DaoConfiguration;
-import com.jba.opencms.configuration.DataSourceConfig;
+import com.jba.opencms.configuration.TestDatasourceConfiguration;
 import com.jba.opencms.dao.GenericDao;
 import com.jba.opencms.dao.ifs.MenuDao;
 import com.jba.opencms.type.menu.Entry;
@@ -20,7 +20,7 @@ import java.util.Arrays;
 import java.util.List;
 
 @RunWith(SpringRunner.class)
-@ContextConfiguration(classes = {DataSourceConfig.class, DaoConfiguration.class})
+@ContextConfiguration(classes = {TestDatasourceConfiguration.class, DaoConfiguration.class})
 @EnableTransactionManagement
 public class EntryDaoTest extends BaseSpringIntegrationTest {
 

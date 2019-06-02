@@ -1,7 +1,7 @@
 package com.jba.opencms;
 
 import com.jba.opencms.configuration.DaoConfiguration;
-import com.jba.opencms.configuration.DataSourceConfig;
+import com.jba.opencms.configuration.TestDatasourceConfiguration;
 import com.jba.jfiller.JFill;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -11,7 +11,7 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 import java.util.Random;
 
 
-@ContextConfiguration(classes = {DataSourceConfig.class, DaoConfiguration.class})
+@ContextConfiguration(classes = {TestDatasourceConfiguration.class, DaoConfiguration.class})
 @EnableTransactionManagement
 public abstract class BaseSpringIntegrationTest {
     protected Logger logger = LogManager.getLogger(getClass());

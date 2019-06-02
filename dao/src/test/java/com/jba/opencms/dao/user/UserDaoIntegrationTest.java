@@ -3,7 +3,7 @@ package com.jba.opencms.dao.user;
 import com.jba.jfiller.JFill;
 import com.jba.opencms.BaseSpringIntegrationTest;
 import com.jba.opencms.configuration.DaoConfiguration;
-import com.jba.opencms.configuration.DataSourceConfig;
+import com.jba.opencms.configuration.TestDatasourceConfiguration;
 import com.jba.opencms.dao.GenericDao;
 import com.jba.opencms.type.user.User;
 import org.junit.Test;
@@ -16,7 +16,7 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 import org.springframework.transaction.annotation.Transactional;
 
 @RunWith(SpringRunner.class)
-@ContextConfiguration(classes = {DataSourceConfig.class, DaoConfiguration.class})
+@ContextConfiguration(classes = {TestDatasourceConfiguration.class, DaoConfiguration.class})
 @EnableTransactionManagement
 public class UserDaoIntegrationTest extends BaseSpringIntegrationTest {
 

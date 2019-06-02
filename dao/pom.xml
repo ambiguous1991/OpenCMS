@@ -102,7 +102,6 @@
                     <verbose>true</verbose>
                     <propertyFile>src/main/resources/liquibase.properties</propertyFile>
                     <outputChangeLogFile>src/main/resources/liquibase-changelog.xml</outputChangeLogFile>
-                    <liquibaseSchemaName>opencmstest</liquibaseSchemaName>
                 </configuration>
                 <dependencies>
                     <dependency>
