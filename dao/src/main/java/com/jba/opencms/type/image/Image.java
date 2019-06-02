@@ -11,7 +11,7 @@ import java.sql.Blob;
 
 @Entity
 @Data
-@Table(name = "IMAGE")
+@Table(name = "image")
 public class Image extends BaseTypeSimpleKey<Image> {
 
     @Column(name = "NAME", length = 100)

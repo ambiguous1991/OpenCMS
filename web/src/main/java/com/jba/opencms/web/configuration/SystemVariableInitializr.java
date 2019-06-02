@@ -1,6 +1,6 @@
 package com.jba.opencms.web.configuration;
 
-import com.jba.opencms.dao.ifs.SystemVariableDao;
+import com.jba.opencms.globals.GlobalsService;
 import com.jba.opencms.type.system.enu.SystemVariableKeys;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -18,7 +18,7 @@ public class SystemVariableInitializr {
 
     @Bean
     @Scope(value = ConfigurableBeanFactory.SCOPE_SINGLETON)
-    public Map<String, String> systemVariables(SystemVariableDao systemVariableDao){
+    public Map<String, String> systemVariables(GlobalsService systemVariableDao){
 
         Map<String, String> systemVariables = systemVariableDao.getAsMap();
 

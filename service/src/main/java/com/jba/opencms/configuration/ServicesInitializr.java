@@ -3,6 +3,9 @@ package com.jba.opencms.configuration;
 import com.jba.opencms.dao.GenericDao;
 import com.jba.opencms.dao.ifs.EntryDao;
 import com.jba.opencms.dao.ifs.MenuDao;
+import com.jba.opencms.dao.ifs.SystemVariableDao;
+import com.jba.opencms.globals.GlobalsService;
+import com.jba.opencms.globals.GlobalsServiceImpl;
 import com.jba.opencms.image.ImageService;
 import com.jba.opencms.image.ImageServiceImpl;
 import com.jba.opencms.menu.EntryService;
@@ -41,6 +44,11 @@ public class ServicesInitializr {
     @Bean
     public ImageService imageService(GenericDao<Image> imageDao){
         return new ImageServiceImpl(imageDao);
+    }
+
+    @Bean
+    public GlobalsService globalsService(SystemVariableDao systemVariableDao){
+        return new GlobalsServiceImpl(systemVariableDao);
     }
 
 }

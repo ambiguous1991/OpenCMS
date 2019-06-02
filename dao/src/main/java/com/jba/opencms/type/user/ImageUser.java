@@ -8,7 +8,7 @@ import javax.persistence.*;
 
 @Entity
 @Data
-@Table(name = "IMAGE_USER")
+@Table(name = "image_user")
 public class ImageUser extends BaseTypeCompoundKey<Image, User> {
 
     @Id

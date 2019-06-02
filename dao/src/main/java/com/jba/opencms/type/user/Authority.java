@@ -10,7 +10,7 @@ import javax.persistence.*;
 @Entity
 @Data
 @EqualsAndHashCode(callSuper = false)
-@Table(name = "AUTHORITY")
+@Table(name = "authority")
 public class Authority extends BaseTypeSimpleKey<Authority> {
 
     @Column(name = "ROLE", length = 30, nullable = false, unique = true)
