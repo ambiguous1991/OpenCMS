@@ -1,0 +1,8 @@
+spring:
+  datasource:
+    url: jdbc:mysql://jba.ckrms4qkskz1.eu-west-3.rds.amazonaws.com:3306/opencms?useSSL=false&serverTimezone=UTC&allowPublicKeyRetrieval=true
+    username: opencms
+    password: n86TgiYq9F2DwxB
+    driver-class-name: com.mysql.cj.jdbc.Driver
+server:
+  port: 5000

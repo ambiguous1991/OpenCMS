@@ -12,7 +12,7 @@ import java.util.List;
 @EqualsAndHashCode(callSuper = true)
 @Entity
 @Data
-@Table(name = "MENU")
+@Table(name = "menu")
 public class Menu extends BaseTypeSimpleKey<Menu> {
 
     @Column(name = "ACTIVE", length = 1, nullable = false)

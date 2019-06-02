@@ -1,0 +1,8 @@
+spring:
+  datasource:
+    url: jdbc:mysql://localhost:3306/opencmstest?useSSL=false&serverTimezone=UTC&allowPublicKeyRetrieval=true
+    username: opencms
+    password: password
+    driver-class-name: com.mysql.cj.jdbc.Driver
+server:
+  port: 8080
