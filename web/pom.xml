@@ -21,8 +21,8 @@
     <dependencies>
         <dependency>
             <groupId>com.jba.opencms</groupId>
-            <artifactId>dao</artifactId>
-            <version>${dao.version}</version>
+            <artifactId>service</artifactId>
+            <version>${service.version}</version>
         </dependency>
         <dependency>
             <groupId>com.jba.opencms</groupId>
@@ -76,6 +76,13 @@
             <artifactId>font-awesome</artifactId>
             <version>5.8.1</version>
         </dependency>
+        <!-- https://mvnrepository.com/artifact/org.webjars/popper.js -->
+        <dependency>
+            <groupId>org.webjars</groupId>
+            <artifactId>popper.js</artifactId>
+            <version>1.14.7</version>
+        </dependency>
+
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>

@@ -63,3 +63,16 @@
     width:300px;
     min-width:300px;
 }
+
+.modal-dialog,
+.modal-content {
+    /* 80% of window height */
+}
+
+.modal-body {
+    /* 100% = dialog height, 120px = header + footer */
+}
+
+.img-100{
+    width:100%;
+}

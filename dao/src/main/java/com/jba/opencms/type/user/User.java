@@ -11,7 +11,7 @@ import java.util.List;
 @Entity
 @Data
 @EqualsAndHashCode(callSuper = false)
-@Table(name = "USER")
+@Table(name = "user")
 public class User extends BaseTypeSimpleKey<User> {
 
     @Column(name = "USERNAME",length = 100, nullable = false, unique = true)
@@ -34,7 +34,7 @@ public class User extends BaseTypeSimpleKey<User> {
 
     @ManyToMany
     @JoinTable(
-            name = "USER_AUTHORITY",
+            name = "user_authority",
             joinColumns = {@JoinColumn(name = "FK_AUTORITY_ID")},
             inverseJoinColumns = {@JoinColumn(name = "FK_USER_ID")}
     )

@@ -1,0 +1,92 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-4.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title th:text="${@systemVariables.get(@varkey.PAGE_NAME)}+${breadcrumbTitle}">Failed</title>
+    <div th:replace="fragment/import"></div>
+    <!--<script src="https://cdn.ckeditor.com/4.11.4/standard/ckeditor.js"></script>-->
+    <link rel="stylesheet" href="/summernote/summernote-bs4.css">
+    <link rel="stylesheet" href="../../../static/css/opencms.css.css">
+    <link rel="stylesheet" href="../../../static/css/bootstrap.css">
+    <!--<link rel="stylesheet" href="../../../static/css/summernote-bs4.css">-->
+    <script src="/summernote/summernote-bs4.js"></script>
+    <!--<script src="../../../static/js/summernote-bs4.js"></script>-->
+</head>
+<div id="modal-container">
+    <div class="modal" id="preview-modal">
+        <div class="modal-dialog modal-dialog-centered mw-100 mh-100" style="width:90%; max-height: 90%;">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Pogląd strony</h4>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+                <div id="modal-body" class="modal-body">
+                    <meta id="modal-iframe">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<body class="d-flex flex-column vh-100">
+<nav th:replace="fragment/admin-navbar"></nav>
+<nav th:replace="fragment/admin-breadcrumb"></nav>
+<div class="wrapper">
+    <div class="container-fluid shadow-lg d-flex flex-column m-5 p-5 overflow-auto">
+        <meta name="csrf-token" th:content="${_csrf.getToken()}">
+        <input type="hidden" id="pageId" th:value="${page.getId()}">
+        <input type="hidden" id="page-initial-content" th:value="${page.getContent()}">
+
+        <script>
+            $(document).ready(function () {
+                $.ajaxSetup({
+                    headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')}
+                });
+
+                $("#update-page").on("click", function () {
+                    var request;
+                    var editorValue = $('#summernote').summernote('code');
+                    var pageId = $('#pageId').val();
+                    request = $.ajax({
+                        type: "PUT",
+                        url: '/dashboard/page/' + pageId + '/update',
+                        data: {
+                            content: editorValue
+                        },
+                        dataType: "json"
+                    });
+                });
+
+                $("#preview").on("click", function () {
+                    console.info("INSIDE MODAL");
+                    var pageId = $('#pageId').val();
+                    $('#modal-iframe').replaceWith(
+                        '<iframe class="w-100 h-100 border" id="modal-iframe" src="/dashboard/page/' + pageId + '/preview">' + '</iframe>'
+                    );
+                    $('#preview-modal').modal();
+                });
+            })
+        </script>
+
+        <div class="d-flex flex-row">
+            <h2>Edycja strony <span th:text="${page.getTitle()}"></span></h2>
+            <div class="text-right align-self-center flex-grow-1">
+                <button id="preview" class="btn btn-sm btn-info">Podgląd</button>
+                <button id="update-page" class="btn btn-sm btn-success">Zapisz postęp</button>
+            </div>
+        </div>
+        <div id="summernote" class="flex-grow-1"></div>
+    </div>
+</div>
+<script>
+    $('#summernote').summernote(
+        {
+            minHeight: 500,
+            focus: true
+        });
+    $('#summernote').summernote('code', $('#page-initial-content').val());
+</script>
+</body>
+</html>

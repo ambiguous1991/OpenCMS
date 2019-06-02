@@ -12,12 +12,8 @@ import java.util.List;
 @EqualsAndHashCode(callSuper = true)
 @Entity
 @Data
-@ToString(callSuper = true)
-@Table(name = "MENU")
+@Table(name = "menu")
 public class Menu extends BaseTypeSimpleKey<Menu> {
-
-    @OneToMany(mappedBy = "menu")
-    private List<MenuEntry> menuEntryList;
 
     @Column(name = "ACTIVE", length = 1, nullable = false)
     private Boolean isActive = Boolean.FALSE;
@@ -25,12 +21,17 @@ public class Menu extends BaseTypeSimpleKey<Menu> {
     @Column(name = "NAME")
     private String name;
 
-    @ManyToMany(cascade = CascadeType.ALL)
-    @JoinTable(
-            name = "MENU_ENTRY",
-            joinColumns = {@JoinColumn(name = "FK_ENTRY_ID")},
-            inverseJoinColumns = {@JoinColumn(name = "FK_MENU_ID")}
-    )
-    @ToString.Exclude
+    @OneToMany(cascade = CascadeType.ALL)
+    @JoinColumn(name = "FK_MENU_ID")
     public List<Entry> entries = new ArrayList<>();
+
+    @Override
+    public String toString() {
+        return "Menu{" +
+                "isActive=" + isActive +
+                ", name='" + name + '\'' +
+                ", entries=" + entries +
+                ", id=" + id +
+                '}';
+    }
 }

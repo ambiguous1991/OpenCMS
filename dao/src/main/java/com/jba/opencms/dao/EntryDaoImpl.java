@@ -21,8 +21,13 @@ public class EntryDaoImpl extends AbstractHibernateDao<Entry> implements EntryDa
     @Override
     public Entry findOne(long id) {
         Entry entry = super.findOne(id);
-        Hibernate.initialize(entry.getSubentires());
         return entry;
+    }
+
+    @Override
+    public void addSubentry(Entry parent, Entry child) {
+        parent.getSubentires().add(child);
+        update(parent);
     }
 }
 

@@ -2,7 +2,7 @@ package com.jba.opencms.dao.page;
 
 import com.jba.opencms.BaseSpringIntegrationTest;
 import com.jba.opencms.configuration.DaoConfiguration;
-import com.jba.opencms.configuration.DataSourceConfig;
+import com.jba.opencms.configuration.TestDatasourceConfiguration;
 import com.jba.opencms.dao.GenericDao;
 import com.jba.opencms.type.page.Page;
 import com.jba.opencms.type.user.Authority;
@@ -16,7 +16,7 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 import java.util.List;
 
 @RunWith(SpringRunner.class)
-@ContextConfiguration(classes = {DataSourceConfig.class, DaoConfiguration.class})
+@ContextConfiguration(classes = {TestDatasourceConfiguration.class, DaoConfiguration.class})
 @EnableTransactionManagement
 public class PageDaoIntegrationTest extends BaseSpringIntegrationTest {
 

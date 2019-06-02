@@ -10,7 +10,7 @@ import javax.persistence.*;
 @EqualsAndHashCode(callSuper = true)
 @Entity
 @Data
-@Table(name = "MESSAGE")
+@Table(name = "message")
 public class Message extends BaseTypeSimpleKey<Message> {
 
     @ManyToOne

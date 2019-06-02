@@ -1,0 +1,45 @@
+<?xml version="1.1" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd">
+    <property name="now" value="now()" dbms="mysql"/>
+
+    <changeSet id="20190509-base-inserts" author="jba">
+        <insert tableName="user">
+            <column name="username" value="admin"/>
+            <column name="password" value="$2a$10$Qsu1WtW6YQRXbPmwg8Zk2eKP9/tFXTrk6zCbLT4xxlnD9RVun7U9."/>
+            <column name="email" value="jakub.bartusiak@gmail.com"/>
+            <column name="firstname" value="Jakub"/>
+            <column name="lastname" value="Bartusiak"/>
+            <column name="cdate" value="${now}"/>
+            <column name="udate" value="${now}"/>
+        </insert>
+        <insert tableName="authority">
+            <column name="role" value="Administrator"/>
+            <column name="cdate" value="${now}"/>
+            <column name="udate" value="${now}"/>
+        </insert>
+        <insert tableName="system_variable">
+            <column name="system_key" value="page.name"/>
+            <column name="system_value" value="OpenCMS"/>
+            <column name="cdate" value="${now}"/>
+            <column name="udate" value="${now}"/>
+        </insert>
+        <insert tableName="system_variable">
+            <column name="system_key" value="system.dashboard.dateformat"/>
+            <column name="system_value" value="yyyy-MM-dd hh:mm:ss"/>
+            <column name="cdate" value="${now}"/>
+            <column name="udate" value="${now}"/>
+        </insert>
+        <insert tableName="menu">
+            <column name="active" valueBoolean="true"/>
+            <column name="name" value="default"/>
+            <column name="cdate" value="${now}"/>
+            <column name="udate" value="${now}"/>
+        </insert>
+    </changeSet>
+    <changeSet id="20190509-assing-inserts" author="jba">
+        <insert tableName="user_authority">
+            <column name="fk_user_id" value="1"/>
+            <column name="fk_autority_id" value="1"/>
+        </insert>
+    </changeSet>
+</databaseChangeLog>
