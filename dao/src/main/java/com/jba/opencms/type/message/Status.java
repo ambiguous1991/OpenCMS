@@ -11,7 +11,7 @@ import javax.persistence.Table;
 @EqualsAndHashCode(callSuper = true)
 @Entity
 @Data
-@Table(name = "STATUS")
+@Table(name = "status")
 public class Status extends BaseTypeSimpleKey<Status> {
 
     @Column(name="STATUS_NAME")

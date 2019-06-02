@@ -9,7 +9,7 @@ import javax.persistence.Table;
 
 @Entity
 @Data
-@Table(name = "SYSTEM_VARIABLE")
+@Table(name = "system_variable")
 public class SystemVariable extends BaseTypeSimpleKey<SystemVariable>{
 
     @Column(name = "SYSTEM_KEY")

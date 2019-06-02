@@ -14,7 +14,7 @@ import java.util.List;
 @EqualsAndHashCode(callSuper = true)
 @Entity
 @Data
-@Table(name = "ENTRY")
+@Table(name = "entry")
 public class Entry extends BaseTypeSimpleKey<Entry> {
 
     @Column(name = "LABEL")
