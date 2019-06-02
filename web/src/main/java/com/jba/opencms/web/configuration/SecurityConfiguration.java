@@ -6,25 +6,26 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Profile;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.crypto.keygen.BytesKeyGenerator;
-import org.springframework.security.crypto.keygen.KeyGenerators;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 @Configuration
+@Profile("security")
 @EnableWebSecurity
-public class SecurityConfig extends WebSecurityConfigurerAdapter {
+public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
     private UserDetailsProvider userDetailsProvider;
     private Logger logger = LoggerFactory.getLogger(this.getClass());
 
-    public SecurityConfig(UserDetailsProvider userDetailsProvider) {
+    public SecurityConfiguration(UserDetailsProvider userDetailsProvider) {
         this.userDetailsProvider = userDetailsProvider;
+        logger.info("Using security configuration class: {}", this.getClass().getName());
     }
 
     @Override
@@ -40,19 +41,15 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .frameOptions()
                 .sameOrigin()
                 .and()
-                //TODO - Go back to role selection after debug
                 .authorizeRequests()
-                .anyRequest().permitAll()
-//                .anyRequest().authenticated()
+                .antMatchers("/page/**").permitAll()
+                .anyRequest().authenticated()
                 .antMatchers("/dashboard/**")
-                .permitAll()
-                .antMatchers("/dashboard/menu/**")
-                .permitAll()
-//                .hasAnyRole(
-//                    AuthorityEnum.Administrator.name(),
-//                    AuthorityEnum.Editor.name(),
-//                    AuthorityEnum.Reviewer.name()
-//                )
+                .hasAnyRole(
+                    AuthorityEnum.Administrator.name(),
+                    AuthorityEnum.Editor.name(),
+                    AuthorityEnum.Reviewer.name()
+                )
         .and()
             .formLogin()
                 .loginPage("/login")
@@ -69,7 +66,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     public void configure(WebSecurity web) throws Exception {
         super.configure(web);
-        web.ignoring().antMatchers( "/webjars/**", "/css/**", "/js/**");
+        web.ignoring().antMatchers( "/webjars/**", "/css/**", "/js/**", "/image/**");
     }
 
     @Bean
