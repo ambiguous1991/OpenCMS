@@ -1,0 +1,83 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-4.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title th:text="${@systemVariables.get(@varkey.PAGE_NAME)}+${breadcrumbTitle}">Failed</title>
+    <div th:replace="fragment/import"></div>
+    <link rel="stylesheet" href="../../../static/css/opencms.css"/>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css"
+          integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf"
+          crossorigin="anonymous">
+    <link rel="stylesheet" href="../../../static/css/bootstrap.css"/>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+            integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+            crossorigin="anonymous"></script>
+    <link href="https://gitcdn.github.io/bootstrap-toggle/2.2.2/css/bootstrap-toggle.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="../../../static/css/bootstrap-theme.css"/>
+    <script src="https://gitcdn.github.io/bootstrap-toggle/2.2.2/js/bootstrap-toggle.min.js"></script>
+
+</head>
+<body class="d-flex flex-column vh-100">
+<nav th:replace="fragment/admin-navbar"></nav>
+<nav th:replace="fragment/admin-breadcrumb"></nav>
+<div class="wrapper" style="max-height: 100vh;">
+    <div th:replace="fragment/admin-sidebar"></div>
+    <div class="container-fluid flex-column d-flex shadow-lg m-5 p-5">
+        <form th:object="${form}" method="post" th:action="'/dashboard/globals/'+${form.getId()}">
+            <h3 class="mb-4" th:text="'Edycja zmiennej '+${form.getKey()}">Test</h3>
+            <div class="form-group row">
+                <div class="col-8 floating-label-container">
+                    <label for="key" class="">identyfikator</label>
+                    <input id="id" name="id" type="text" class="form-control" th:field="*{id}" th:value="${form.id}"
+                           required="required">
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="col-8 floating-label-container">
+                    <label for="key" class="">klucz</label>
+                    <input id="key" name="key" type="text" class="form-control" th:field="*{key}" th:value="${form.key}"
+                           required="required">
+                    <span class="form-text text-danger" th:if="${#fields.hasErrors('key')}" th:errors="*{key}"
+                          id="keyErrorBlock">Klucz o wskazanej nazwie już istnieje!</span>
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="col-8 floating-label-container">
+                    <label for="value" class="">wartość</label>
+                    <input id="value" name="value" type="text" class="form-control" th:field="*{value}"
+                           th:value="${form.value}" required="required">
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="col-8 floating-label-container">
+                    <label for="created" class="">data utworzenia</label>
+                    <input id="created" name="cdate" type="text" class="form-control" th:field="*{created}"
+                           th:value="${form.created}" disabled>
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="col-8 floating-label-container">
+                    <label for="updated" class="">data aktualizacji</label>
+                    <input id="updated" name="udate" type="text" class="form-control" th:field="*{updated}"
+                           th:value="${form.updated}" disabled>
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="col-8" th:if="${@varkey.containsKey(form.getKey())}">
+                    <button name="submit" type="submit" class="btn btn-block btn-primary">Zapisz</button>
+                </div>
+                <div class="col-8 form-group row" th:unless="${@varkey.containsKey(form.getKey())}">
+                    <div class="row form-group col-12">
+                        <button name="submit" type="submit" class="btn btn-primary offset-2 col-3">Zapisz</button>
+                        <a href="#" class="btn btn-primary offset-2 col-3">Usuń</a>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+</body>
+</html>

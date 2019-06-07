@@ -28,6 +28,8 @@
     margin:1em 1em 0 1em;
 }
 
+
+
 .tiles>div:last-child{
     margin:1em 1em 1em 1em;
 }
@@ -75,4 +77,23 @@
 
 .img-100{
     width:100%;
+}
+
+.floating-label-container{
+    margin-top: 0.5rem;
+}
+
+.floating-label-container>label{
+    position:absolute;
+    top:-0.9rem;
+    left:1.3rem;
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
+    background: var(--white);
+    color: var(--secondary);
+    border-radius: 0.4rem;
+    z-index: 5;
+}
+.floating-label-container>input[type=checkbox]{
+    margin-top: 0.8rem;
 }

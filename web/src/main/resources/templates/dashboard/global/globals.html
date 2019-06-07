@@ -25,22 +25,39 @@
 <div class="wrapper" style="max-height: 100vh;">
     <div th:replace="fragment/admin-sidebar"></div>
     <div class="container-fluid flex-column d-flex shadow-lg m-5 p-5">
+        <form action="/dashboard/globals/new" method="post" class="mb-4">
+            <div class="row">
+                <div class="col-6">
+                    <h3>Zmienne środowiskowe</h3>
+                </div>
+                <div class="col-6 text-right">
+                    <input
+                            id="csrf"
+                            type="hidden"
+                            th:name="${_csrf.parameterName}"
+                            th:value="${_csrf.token}"/>
+                    <button id="open-upload-modal" class="btn btn-sm btn-success">Dodaj nową zmienną <i
+                            class="fas fa-plus-square"></i></button>
+                </div>
+            </div>
+        </form>
         <table class="border table table-sm table-hover">
             <thead>
-                <tr class="bg-success text-white">
-                    <td>Klucz</td>
-                    <td>Wartość</td>
-                    <td>Data aktualizacji</td>
-                    <td>Data utworzenia</td>
-                </tr>
+            <tr class="bg-primary text-white">
+                <td>Klucz</td>
+                <td>Wartość</td>
+                <td>Data aktualizacji</td>
+                <td>Data utworzenia</td>
+            </tr>
             </thead>
             <tbody>
-                <tr th:each="attr: ${attributes}">
-                    <td th:text="${attr.getKey()}">Mark</td>
-                    <td ><a href="#" th:href="${'/dashboard/globals/'+attr.getId()}"><span th:text="${attr.getValue()}">Otto</span></a></td>
-                    <td th:text="${attr.getUpdated()}">@mdo</td>
-                    <td th:text="${attr.getCreated()}">@mdo</td>
-                </tr>
+            <tr th:each="attr: ${attributes}">
+                <td th:text="${attr.getKey()}">Mark</td>
+                <td><a href="#" th:href="${'/dashboard/globals/'+attr.getId()}"><span
+                        th:text="${attr.getValue()}">Otto</span></a></td>
+                <td th:text="${attr.getUpdated()}">@mdo</td>
+                <td th:text="${attr.getCreated()}">@mdo</td>
+            </tr>
             </tbody>
         </table>
     </div>
