@@ -7,36 +7,40 @@
     <meta charset="UTF-8">
     <title th:text="${@systemVariables.get('page.name')+' - Login'}">Failed</title>
     <div th:replace="fragment/import"></div>
+    <div th:replace="fragment/import"></div>
+    <link rel="stylesheet" href="../static/css/opencms.css"/>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css"
+          integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf"
+          crossorigin="anonymous">
+    <link rel="stylesheet" href="../static/css/bootstrap.css"/>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+            integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+            crossorigin="anonymous"></script>
+    <link href="https://gitcdn.github.io/bootstrap-toggle/2.2.2/css/bootstrap-toggle.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="../static/css/bootstrap-theme.css"/>
+    <script src="https://gitcdn.github.io/bootstrap-toggle/2.2.2/js/bootstrap-toggle.min.js"></script>
 </head>
 
 <body class="bg-dark">
 <div class="box-login bg-white p-5">
     <h1 class="text-center" style="margin-bottom: 1em;">Zaloguj się</h1>
     <form method="post" th:action="@{/login}">
-        <div class="form-group">
-            <label></label>
-            <div class="input-group">
-                <div class="input-group-prepend">
-                    <div class="input-group-text">
-                        <i class="fa fa-user"></i>
-                    </div>
-                </div>
-                <input id="username" name="username" placeholder="adres e-mail" type="text" required="required"
-                       class="form-control">
-            </div>
-            <label></label>
-            <div class="input-group">
-                <div class="input-group-prepend">
-                    <div class="input-group-text">
-                        <i class="fa fa-lock"></i>
-                    </div>
-                </div>
-                <input id="password" name="password" placeholder="hasło" type="password" class="form-control"
-                       required="required">
+        <div class="form-group row">
+            <div class="col-12 floating-label-container">
+                <label for="username" class="">adres e-mail</label>
+                <input id="username" name="username" type="text" required="required" class="form-control">
             </div>
         </div>
-        <div class="form-group" style="margin-top: 3em;">
-            <button name="submit" type="submit" class="btn btn-primary btn-block">Zatwierdź</button>
+        <div class="form-group row">
+            <div class="col-12 floating-label-container">
+                <label for="username" class="">hasło</label>
+                <input id="password" name="password" type="password" class="form-control" required="required">
+            </div>
+        </div>
+        <div class="form-group row" style="">
+            <div class="col-12">
+            <button name="submit" type="submit" class="btn btn-primary btn-block text-white">Zatwierdź</button>
+            </div>
         </div>
     </form>
 </div>
