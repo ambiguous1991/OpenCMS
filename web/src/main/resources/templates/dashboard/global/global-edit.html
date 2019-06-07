@@ -31,37 +31,49 @@
             <div class="form-group row">
                 <div class="col-8 floating-label-container">
                     <label for="key" class="">identyfikator</label>
-                    <input id="id" name="id" type="text" class="form-control" th:field="*{id}" th:value="${form.id}" required="required">
+                    <input id="id" name="id" type="text" class="form-control" th:field="*{id}" th:value="${form.id}"
+                           required="required">
                 </div>
             </div>
             <div class="form-group row">
                 <div class="col-8 floating-label-container">
                     <label for="key" class="">klucz</label>
-                    <input id="key" name="key" type="text" class="form-control" th:field="*{key}" th:value="${form.key}" required="required">
-                    <span class="form-text text-danger" th:if="${#fields.hasErrors('key')}" th:errors="*{key}" id="keyErrorBlock">Klucz o wskazanej nazwie już istnieje!</span>
+                    <input id="key" name="key" type="text" class="form-control" th:field="*{key}" th:value="${form.key}"
+                           required="required">
+                    <span class="form-text text-danger" th:if="${#fields.hasErrors('key')}" th:errors="*{key}"
+                          id="keyErrorBlock">Klucz o wskazanej nazwie już istnieje!</span>
                 </div>
             </div>
             <div class="form-group row">
                 <div class="col-8 floating-label-container">
                     <label for="value" class="">wartość</label>
-                    <input id="value" name="value" type="text" class="form-control" th:field="*{value}" th:value="${form.value}" required="required">
+                    <input id="value" name="value" type="text" class="form-control" th:field="*{value}"
+                           th:value="${form.value}" required="required">
                 </div>
             </div>
             <div class="form-group row">
                 <div class="col-8 floating-label-container">
                     <label for="created" class="">data utworzenia</label>
-                    <input id="created" name="cdate" type="text" class="form-control" th:field="*{created}" th:value="${form.created}" disabled>
+                    <input id="created" name="cdate" type="text" class="form-control" th:field="*{created}"
+                           th:value="${form.created}" disabled>
                 </div>
             </div>
             <div class="form-group row">
                 <div class="col-8 floating-label-container">
                     <label for="updated" class="">data aktualizacji</label>
-                    <input id="updated" name="udate" type="text" class="form-control" th:field="*{updated}" th:value="${form.updated}" disabled>
+                    <input id="updated" name="udate" type="text" class="form-control" th:field="*{updated}"
+                           th:value="${form.updated}" disabled>
                 </div>
             </div>
             <div class="form-group row">
-                <div class="col-8">
+                <div class="col-8" th:if="${@varkey.containsKey(form.getKey())}">
                     <button name="submit" type="submit" class="btn btn-block btn-primary">Zapisz</button>
+                </div>
+                <div class="col-8 form-group row" th:unless="${@varkey.containsKey(form.getKey())}">
+                    <div class="row form-group col-12">
+                        <button name="submit" type="submit" class="btn btn-primary offset-2 col-3">Zapisz</button>
+                        <a href="#" class="btn btn-primary offset-2 col-3">Usuń</a>
+                    </div>
                 </div>
             </div>
         </form>
