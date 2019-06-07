@@ -64,7 +64,6 @@ public class GlobalsController {
                                     @PathVariable("globalId") Long globalId){
         if(bindingResult.hasErrors()){
             RedirectView redirectView = new RedirectView("/dashboard/globals/{globalId}");
-            redirectView.setStatusCode(HttpStatus.BAD_REQUEST);
             return redirectView;
         }
 
