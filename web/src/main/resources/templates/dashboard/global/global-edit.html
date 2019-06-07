@@ -27,7 +27,7 @@
     <div th:replace="fragment/admin-sidebar"></div>
     <div class="container-fluid flex-column d-flex shadow-lg m-5 p-5">
         <form th:object="${form}" method="post" th:action="'/dashboard/globals/'+${form.getId()}">
-            <h3>Test</h3>
+            <h3 class="mb-4" th:text="'Edycja zmiennej '+${form.getKey()}">Test</h3>
             <div class="form-group row">
                 <div class="col-8 floating-label-container">
                     <label for="key" class="">identyfikator</label>
