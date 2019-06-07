@@ -26,30 +26,37 @@
 <div class="wrapper" style="max-height: 100vh;">
     <div th:replace="fragment/admin-sidebar"></div>
     <div class="container-fluid flex-column d-flex shadow-lg m-5 p-5">
-        <form th:object="${attribute}" method="post" th:action="'/dashboard/globals/'+${attribute.getId()}">
+        <form th:object="${form}" method="post" th:action="'/dashboard/globals/'+${form.getId()}">
             <h3>Test</h3>
             <div class="form-group row">
                 <label for="key" class="col-4 col-form-label">Klucz</label>
                 <div class="col-8">
-                    <input id="key" name="key" type="text" class="form-control" th:value="${attribute.key}" required="required">
+                    <input id="id" name="id" type="text" class="form-control" th:field="*{id}" th:value="${form.id}" required="required">
+                </div>
+            </div>
+            <div class="form-group row">
+                <label for="key" class="col-4 col-form-label">Klucz</label>
+                <div class="col-8">
+                    <input id="key" name="key" type="text" class="form-control" th:field="*{key}" th:value="${form.key}" required="required">
+                    <span class="form-text text-danger" th:if="${#fields.hasErrors('key')}" th:errors="*{key}" id="keyErrorBlock">Klucz o wskazanej nazwie już istnieje!</span>
                 </div>
             </div>
             <div class="form-group row">
                 <label for="value" class="col-4 col-form-label">Wartość</label>
                 <div class="col-8">
-                    <input id="value" name="value" type="text" class="form-control" th:value="${attribute.value}" required="required">
+                    <input id="value" name="value" type="text" class="form-control" th:field="*{value}" th:value="${form.value}" required="required">
                 </div>
             </div>
             <div class="form-group row">
                 <label for="created" class="col-4 col-form-label">Data utworzenia</label>
                 <div class="col-8">
-                    <input id="created" name="cdate" type="text" class="form-control" th:value="${attribute.created}" disabled>
+                    <input id="created" name="cdate" type="text" class="form-control" th:field="*{created}" th:value="${form.created}" disabled>
                 </div>
             </div>
             <div class="form-group row">
                 <label for="updated" class="col-4 col-form-label">Data aktualizacji</label>
                 <div class="col-8">
-                    <input id="updated" name="udate" type="text" class="form-control" th:value="${attribute.updated}" disabled>
+                    <input id="updated" name="udate" type="text" class="form-control" th:field="*{updated}" th:value="${form.updated}" disabled>
                 </div>
             </div>
             <div class="form-group row">

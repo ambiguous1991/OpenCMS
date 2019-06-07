@@ -1,19 +1,24 @@
-package com.jba.opencms.web.controller.admin;
+package com.jba.opencms.web.controller.admin.globals;
 
 import com.jba.opencms.globals.GlobalsService;
 import com.jba.opencms.type.system.SystemVariable;
+import com.jba.opencms.web.controller.admin.globals.form.SystemVariableForm;
 import net.bytebuddy.utility.RandomString;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Lazy;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.view.RedirectView;
 
+import javax.validation.Valid;
 import java.util.Map;
 
 @Controller
+@Lazy
 @RequestMapping(value = "/dashboard/globals")
 public class GlobalsController {
 
@@ -47,17 +52,25 @@ public class GlobalsController {
     @RequestMapping(value = "/{globalId}")
     public String getGlobalEdit(Model model,
                                 @PathVariable("globalId") Long globalId){
-        model.addAttribute("attribute", globalsService.findOne(globalId, false));
+        SystemVariableForm form = SystemVariableForm.from(globalsService.findOne(globalId, false));
+        model.addAttribute("form", form);
 
         return "dashboard/global/global-edit";
     }
 
     @RequestMapping(value = "/{globalId}", method = RequestMethod.POST)
-    public RedirectView postChanges(SystemVariable attribute,
+    public RedirectView postChanges(@Valid SystemVariableForm attribute,
+                                    BindingResult bindingResult,
                                     @PathVariable("globalId") Long globalId){
+        if(bindingResult.hasErrors()){
+            RedirectView redirectView = new RedirectView("/dashboard/globals/{globalId}");
+            redirectView.setStatusCode(HttpStatus.BAD_REQUEST);
+            return redirectView;
+        }
+
         SystemVariable fromDB = globalsService.findOne(globalId, false);
-        fromDB.setKey(attribute.key);
-        fromDB.setValue(attribute.value);
+        fromDB.setKey(attribute.getKey());
+        fromDB.setValue(attribute.getValue());
 
         globalsService.update(fromDB);
         updateGlobals(fromDB);
@@ -65,7 +78,7 @@ public class GlobalsController {
         return new RedirectView("/dashboard/globals?success");
     }
 
-    void updateGlobals(SystemVariable systemVariable){
+    private void updateGlobals(SystemVariable systemVariable){
         if(systemVariables.containsKey(systemVariable.key)) {
             systemVariables.remove(systemVariable.key);
         }
