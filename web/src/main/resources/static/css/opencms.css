@@ -92,4 +92,5 @@
     background: var(--white);
     color: var(--secondary);
     border-radius: 0.4rem;
+    z-index: 5;
 }
