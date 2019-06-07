@@ -2,6 +2,7 @@ package com.jba.opencms.web.controller.admin;
 
 import com.jba.opencms.globals.GlobalsService;
 import com.jba.opencms.type.system.SystemVariable;
+import net.bytebuddy.utility.RandomString;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -31,6 +32,18 @@ public class GlobalsController {
         return "dashboard/global/globals";
     }
 
+    @RequestMapping(value = "/new", method = RequestMethod.POST)
+    public RedirectView createNewGlobal(){
+        SystemVariable attribute = new SystemVariable();
+        attribute.setKey(RandomString.make(10));
+        attribute.setValue("nil");
+
+        globalsService.create(attribute);
+        updateGlobals(attribute);
+
+        return new RedirectView("/dashboard/globals/"+attribute.getId());
+    }
+
     @RequestMapping(value = "/{globalId}")
     public String getGlobalEdit(Model model,
                                 @PathVariable("globalId") Long globalId){
@@ -47,9 +60,15 @@ public class GlobalsController {
         fromDB.setValue(attribute.value);
 
         globalsService.update(fromDB);
-        systemVariables.remove(attribute.key);
-        systemVariables.put(attribute.key, attribute.value);
+        updateGlobals(fromDB);
 
         return new RedirectView("/dashboard/globals?success");
+    }
+
+    void updateGlobals(SystemVariable systemVariable){
+        if(systemVariables.containsKey(systemVariable.key)) {
+            systemVariables.remove(systemVariable.key);
+        }
+        systemVariables.put(systemVariable.key, systemVariable.value);
     }
 }
