@@ -83,7 +83,7 @@
     margin-top: 0.5rem;
 }
 
-.floating-label-container>:first-child{
+.floating-label-container>label{
     position:absolute;
     top:-0.9rem;
     left:1.3rem;
@@ -93,4 +93,7 @@
     color: var(--secondary);
     border-radius: 0.4rem;
     z-index: 5;
+}
+.floating-label-container>input[type=checkbox]{
+    margin-top: 0.8rem;
 }

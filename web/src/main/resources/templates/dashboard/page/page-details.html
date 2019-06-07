@@ -29,33 +29,30 @@
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
         <form th:object="${page}">
             <div class="form-group row">
-                <label for="id" class="col-4 col-form-label">ID</label>
-                <div class="col-8">
+                <div class="col-8 floating-label-container">
+                    <label for="id">identyfikator</label>
                     <input id="id" name="id" type="text" class="form-control" th:value="${page.id}" disabled>
                 </div>
             </div>
             <div class="form-group row">
-                <label for="title" class="col-4 col-form-label">tytuł</label>
-                <div class="col-8">
+                <div class="col-8 floating-label-container">
+                    <label for="title">tytuł</label>
                     <input id="title" name="title" type="text" class="form-control" required th:value="${page.title}">
                     <span id="titleHelpBlock" class="form-text text-muted">tytuł strony wyświetlony zostanie na pasku przeglądarki, zatem tytuł strony musi być unikalny</span>
                 </div>
             </div>
             <div class="form-group row">
-                <label for="identifier" class="col-4 col-form-label">identyfikator</label>
-                <div class="col-8">
+                <div class="col-8 floating-label-container">
+                    <label for="identifier">identyfikator</label>
                     <input id="identifier" name="id" type="text" class="form-control" disabled>
                     <span id="identifierHelpBlock" class="form-text text-muted">ta treść generowana jest automatycznie na podstawie tytułu</span>
                 </div>
             </div>
             <div class="form-group row">
-                <label class="col-4">widoczna</label>
-                <div class="col-8">
-                    <div class="custom-control custom-checkbox custom-control-inline">
-                        <input name="visible" id="visible" type="checkbox" checked="checked"
-                               class="custom-control-input" th:value="${page.visible}" required>
-                        <label for="visible" class="custom-control-label"></label>
-                    </div>
+                <div class="col-8 floating-label-container">
+                    <input name="visible" id="visible" type="checkbox"
+                           th:value="${page.visible}" required>
+                    <label for="visible">widoczna</label>
                 </div>
             </div>
             <div class="form-group row">
