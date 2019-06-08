@@ -447,4 +447,12 @@
             </column>
         </createTable>
     </changeSet>
+    <changeSet id="20190608-image-backdrop" author="jba">
+        <insert tableName="system_variable">
+            <column name="system_key" value="system.dashboard.login.backdrop"/>
+            <column name="system_value" value="none"/>
+            <column name="cdate" value="${now}"/>
+            <column name="udate" value="${now}"/>
+        </insert>
+    </changeSet>
 </databaseChangeLog>
