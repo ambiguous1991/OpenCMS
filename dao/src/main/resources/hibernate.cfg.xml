@@ -10,6 +10,8 @@
     <mapping class="com.jba.opencms.type.base.BaseTypeSimpleKey"/>
     <mapping class="com.jba.opencms.type.base.BaseTypeCompoundKey"/>
 
+    <mapping class="com.jba.opencms.type.file.File"/>
+
     <mapping class="com.jba.opencms.type.user.User"/>
     <mapping class="com.jba.opencms.type.user.Authority"/>
     <mapping class="com.jba.opencms.type.user.ImageUser"/>
