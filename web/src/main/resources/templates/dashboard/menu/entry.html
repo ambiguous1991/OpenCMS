@@ -16,7 +16,7 @@
     <nav th:replace="fragment/admin-breadcrumb"></nav>
     <div class="wrapper">
         <div th:replace="fragment/admin-sidebar"></div>
-        <div class="container-fluid shadow-lg flex-grow-1 m-5 p-5">
+        <div class="flex-grow-1 flex-column d-flex overflow-auto p-5">
             <h3 class="mb-4" th:if="${entry.getParent()==null}">Edycja elementu menu</h3>
             <h3 class="" th:if="${entry.getParent()!=null}">Edycja wpisu w elemencie menu</h3>
             <h5 class="mb-4" th:if="${entry.getParent()!=null}" th:text="'etykieta elementu nadrzędnego: '+${entry.getParent().getLabel()}">Element nadrzędny</h5>

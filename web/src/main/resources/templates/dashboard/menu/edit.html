@@ -22,7 +22,7 @@
         <nav th:replace="fragment/admin-breadcrumb"></nav>
         <div class="wrapper">
             <div th:replace="fragment/admin-sidebar"></div>
-            <div class="container-fluid shadow-lg flex-grow-1 m-5 p-5 overflow-auto">
+            <div class="flex-grow-1 flex-column d-flex overflow-auto p-5">
                 <div th:if="${param.success!=null}" class="alert alert-success alert-dismissible fade show"
                      role="alert">
                     <i class="fas fa-check-circle" style="font-size: 2em;"></i>

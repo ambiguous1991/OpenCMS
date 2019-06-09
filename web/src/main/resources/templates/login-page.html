@@ -18,7 +18,7 @@
 </head>
 <body class="bg-dark overflow-hidden">
 <img th:unless="${@systemVariables.get(@varkey.LOGIN_BACKDROP).equals('none')}"
-     th:src="'/image/'+${@systemVariables.get(@varkey.LOGIN_BACKDROP)}" src="../static/images/login-backdrop.jpg" class="backdrop-image">
+     th:src="@{'/image/'+${@systemVariables.get(@varkey.LOGIN_BACKDROP)}}" src="../static/images/login-backdrop.jpg" class="backdrop-image">
 <div class="box-login bg-white p-5 shadow">
     <h1 class="text-center mb-4" style="font-size: calc(2rem + 4vw);">zaloguj sie</h1>
 
