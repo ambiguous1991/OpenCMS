@@ -24,8 +24,20 @@
 <nav th:replace="fragment/admin-breadcrumb"></nav>
 <div class="wrapper" style="max-height: 100vh;">
     <div th:replace="fragment/admin-sidebar"></div>
-    <div class="container-fluid d-flex flex-column shadow-lg m-5 p-5">
-        <h2 class="mb-4">Edycja stron</h2>
+    <div class="flex-grow-1 flex-column d-flex overflow-auto p-5">
+        <div class="d-flex flex-row">
+            <h2>Edycja stron</h2>
+            <form class="flex-grow-1 text-right" action="/dashboard/page/new" method="post">
+                <input
+                        id="csrf"
+                        type="hidden"
+                        th:name="${_csrf.parameterName}"
+                        th:value="${_csrf.token}"/>
+                <button class="btn btn-sm btn-success" type="submit"><i class="fas fa-folder-plus"></i>
+                    utwórz nową stronę
+                </button>
+            </form>
+        </div>
         <div th:if="${param.deleteSuccess!=null}" class="alert alert-success alert-dismissible fade show"
              role="alert">
             <i class="fas fa-check-circle" style="font-size: 2em;"></i>
@@ -34,53 +46,41 @@
                 <span aria-hidden="true">&times;</span>
             </button>
         </div>
-        <input type="text"/>
-        <div th:if="${pages.size()>0}" class="d-flex overflow-auto flex-column" style="flex:1;">
-            <table class="table table-responsive-lg table-striped table-bordered table-hover">
-                <thead>
-                <tr class="table-success">
-                    <th>identyfikator</th>
-                    <th>tytuł strony</th>
-                    <th>liczba podstron</th>
-                    <th>data utworzenia</th>
-                    <th>data aktualizacji</th>
-                    <th>uprawnienia podglądu</th>
-                    <th>widoczna</th>
-                    <th>edycja</th>
-                </tr>
+        <div th:if="${pages.size()>0}" class="d-flex flex-grow-1 overflow-auto flex-column mt-3">
+            <table class="table table-sm table-borderless text-center">
+                <thead class="border-bottom">
+                    <tr class="font-italic">
+                        <th class="font-weight-normal">identyfikator</th>
+                        <th class="font-weight-normal">tytuł strony</th>
+                        <th class="font-weight-normal">liczba podstron</th>
+                        <th class="font-weight-normal">data aktualizacji</th>
+                        <th class="font-weight-normal">widoczna</th>
+                        <th class="font-weight-normal">edycja</th>
+                    </tr>
                 </thead>
                 <tbody>
-                <tr th:each="page: ${pages}">
-                    <th th:text="${page.getTitle()}">moja-strona-główna</th>
-                    <th th:text="${page.getTitle()}">Strona główna</th>
-                    <th th:text="${page.getSubpages().size()}">0</th>
-                    <th th:text="${#temporals.format(page.getCreated(),@systemVariables.get(@varkey.SYSTEM_DASHBOARD_DATE_FORMAT))}">2019-05-11</th>
-                    <th th:text="${#temporals.format(page.getUpdated(), @systemVariables.get(@varkey.SYSTEM_DASHBOARD_DATE_FORMAT))}">2019-05-11</th>
-                    <th th:text="${page.getAuthoritiesAsString()}">Każdy</th>
-                    <th th:text="${page.getVisible()}?'tak':'nie'">Tak</th>
-                    <th>
-                        <a href="#" th:href="'/dashboard/page/'+${page.getId()}" class="btn btn-sm btn-block btn-info">modyfikuj</a>
-                        <a href="#" th:href="'/dashboard/page/'+${page.getId()}+'/edit'" class="btn btn-sm btn-block btn-success">edytuj treść</a>
-                        <a href="#" th:href="'/dashboard/page/'+${page.getId()}+'/delete'" class="btn btn-sm btn-block btn-danger">usuń</a>
-                    </th>
-                </tr>
+                    <tr th:each="page: ${pages}">
+                        <th th:text="${page.getTitle()}" class="font-weight-normal">moja-strona-główna</th>
+                        <th th:text="${page.getTitle()}" class="font-weight-normal">Strona główna</th>
+                        <th th:text="${page.getSubpages().size()}" class="font-weight-normal">0</th>
+                        <th th:text="${#temporals.format(page.getUpdated(), @systemVariables.get(@varkey.SYSTEM_DASHBOARD_DATE_FORMAT))}" class="font-weight-normal">
+                            2019-05-11
+                        </th>
+                        <th th:text="${page.getVisible()}?'tak':'nie'" class="font-weight-normal">Tak</th>
+                        <th>
+                            <a href="#" th:href="'/dashboard/page/'+${page.getId()}" class="btn btn-sm btn-block btn-info">modyfikuj</a>
+                            <a href="#" th:href="'/dashboard/page/'+${page.getId()}+'/edit'"
+                               class="btn btn-sm btn-block btn-success">edytuj treść</a>
+                            <a href="#" th:href="'/dashboard/page/'+${page.getId()}+'/delete'"
+                               class="btn btn-sm btn-block btn-danger">usuń</a>
+                        </th>
+                    </tr>
                 </tbody>
             </table>
-
         </div>
         <div th:if="${pages.size()==0}" class="alert alert-info text-center p-4">
             W tej chwili, nie ma jeszcze żadnej strony.
         </div>
-        <form class="align-self-center mt-4" action="/dashboard/page/new" method="post">
-            <input
-                    id="csrf"
-                    type="hidden"
-                    th:name="${_csrf.parameterName}"
-                    th:value="${_csrf.token}"/>
-            <button style="font-size: 1.3rem;" class="btn btn-success" type="submit"><i class="fas fa-folder-plus"></i>
-                Utwórz nową stronę
-            </button>
-        </form>
     </div>
 </div>
 </body>
