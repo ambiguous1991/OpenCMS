@@ -34,7 +34,7 @@
 <nav th:replace="fragment/admin-navbar"></nav>
 <nav th:replace="fragment/admin-breadcrumb"></nav>
 <div class="wrapper">
-    <div class="container-fluid shadow-lg d-flex flex-column m-5 p-5 overflow-auto">
+    <div class="flex-grow-1 flex-column d-flex overflow-auto p-2">
         <meta name="csrf-token" th:content="${_csrf.getToken()}">
         <input type="hidden" id="pageId" th:value="${page.getId()}">
         <input type="hidden" id="page-initial-content" th:value="${page.getContent()}">
@@ -70,7 +70,7 @@
             })
         </script>
 
-        <div class="d-flex flex-row">
+        <div class="d-flex flex-row mb-2">
             <h2>Edycja strony <span th:text="${page.getTitle()}"></span></h2>
             <div class="text-right align-self-center flex-grow-1">
                 <button id="preview" class="btn btn-sm btn-info">Podgląd</button>

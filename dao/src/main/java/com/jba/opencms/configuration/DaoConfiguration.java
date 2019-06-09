@@ -4,6 +4,7 @@ import com.jba.opencms.dao.*;
 import com.jba.opencms.dao.ifs.EntryDao;
 import com.jba.opencms.dao.ifs.MenuDao;
 import com.jba.opencms.dao.ifs.SystemVariableDao;
+import com.jba.opencms.type.file.File;
 import com.jba.opencms.type.image.Image;
 import com.jba.opencms.type.menu.Entry;
 import com.jba.opencms.type.menu.Menu;
@@ -71,5 +72,10 @@ public class DaoConfiguration {
     @Bean
     public SystemVariableDao systemVariableDao(SessionFactory sessionFactory){
         return new SystemVariableDaoImpl(sessionFactory);
+    }
+
+    @Bean
+    public GenericDao<File> fileDao(SessionFactory sessionFactory){
+        return new HibernateDao<>(File.class, sessionFactory);
     }
 }

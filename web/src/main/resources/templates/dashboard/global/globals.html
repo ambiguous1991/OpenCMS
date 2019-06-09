@@ -24,11 +24,11 @@
 <nav th:replace="fragment/admin-breadcrumb"></nav>
 <div class="wrapper" style="max-height: 100vh;">
     <div th:replace="fragment/admin-sidebar"></div>
-    <div class="container-fluid flex-column d-flex shadow-lg m-5 p-5">
-        <form action="/dashboard/globals/new" method="post" class="mb-4">
+    <div class="flex-grow-1 flex-column d-flex overflow-auto p-5">
+        <form action="/dashboard/globals/new" method="post" class="mb-2">
             <div class="row">
                 <div class="col-6">
-                    <h3>Zmienne środowiskowe</h3>
+                    <h3>Zmienne srodowiskowe</h3>
                 </div>
                 <div class="col-6 text-right">
                     <input
@@ -41,25 +41,24 @@
                 </div>
             </div>
         </form>
-        <table class="border table table-sm table-hover">
-            <thead>
-            <tr class="bg-primary text-white">
-                <td>Klucz</td>
-                <td>Wartość</td>
-                <td>Data aktualizacji</td>
-                <td>Data utworzenia</td>
+        <div class="d-flex flex-grow-1 overflow-auto">
+        <table class="table table-sm table-borderless">
+            <thead class="border-bottom border-dark">
+            <tr class="font-italic">
+                <td>klucz</td>
+                <td>wartość</td>
+                <td>data aktualizacji</td>
             </tr>
             </thead>
             <tbody>
-            <tr th:each="attr: ${attributes}">
-                <td th:text="${attr.getKey()}">Mark</td>
-                <td><a href="#" th:href="${'/dashboard/globals/'+attr.getId()}"><span
-                        th:text="${attr.getValue()}">Otto</span></a></td>
-                <td th:text="${attr.getUpdated()}">@mdo</td>
-                <td th:text="${attr.getCreated()}">@mdo</td>
+            <tr th:each="attr: ${attributes}" class="border-bottom">
+                <td th:text="${attr.getKey()}">key</td>
+                <td><a href="#" th:href="${'/dashboard/globals/'+attr.getId()}"><span th:text="${attr.getValue()}">value</span></a></td>
+                <td th:text="${#temporals.format(attr.getUpdated(), @systemVariables.get(@varkey.SYSTEM_DASHBOARD_DATE_FORMAT))}">2019-06-09</td>
             </tr>
             </tbody>
         </table>
+        </div>
     </div>
 </div>
 </body>

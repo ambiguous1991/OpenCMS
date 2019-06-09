@@ -99,8 +99,10 @@ public class MenuController {
                                                Long page){
         Entry edited = entryService.findOne(entryId, true);
 
+        if(page!=null) {
+            edited.setPage(pageService.findOne(page, false));
+        }
         edited.setLabel(label);
-        edited.setPage(pageService.findOne(page, false));
 
         entryService.update(edited);
 

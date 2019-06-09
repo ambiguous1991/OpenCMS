@@ -22,7 +22,7 @@
         <nav th:replace="fragment/admin-breadcrumb"></nav>
         <div class="wrapper">
             <div th:replace="fragment/admin-sidebar"></div>
-            <div class="container-fluid shadow-lg flex-grow-1 m-5 p-5 overflow-auto">
+            <div class="flex-grow-1 flex-column d-flex overflow-auto p-5">
                 <div th:if="${param.success!=null}" class="alert alert-success alert-dismissible fade show"
                      role="alert">
                     <i class="fas fa-check-circle" style="font-size: 2em;"></i>
@@ -34,21 +34,21 @@
                 <form class="" th:object="${menu}" method="post" th:action="'/dashboard/menu/'+${menu.id}">
                     <h3 class="mb-4">Edycja pozycji menu</h3>
                     <div class="form-group row">
-                        <div class="col-8 floating-label-container">
+                        <div class="col-12 floating-label-container">
                             <label for="id">ID</label>
                             <input class="form-control" id="id" type="text" disabled
                                    th:value="${menu.getId()}">
                         </div>
                     </div>
                     <div class="form-group row">
-                        <div class="col-8 floating-label-container">
+                        <div class="col-12 floating-label-container">
                             <label for="name">Nazwa</label>
                             <input id="name" name="name" type="text" aria-describedby="nameHelpBlock"
                                    class="form-control" th:value="${menu.getName()}">
                         </div>
                     </div>
                     <div class="form-group row">
-                        <div class="col-8 floating-label-container">
+                        <div class="col-12 floating-label-container">
                             <input name="visible" id="isActive" type="checkbox"
                                    th:value="${menu.isActive}" th:field="${menu.isActive}" required>
                             <label for="isActive">widoczna</label>
@@ -63,40 +63,41 @@
                         <button name="submit" type="submit" class="btn btn-primary">Zatwierdź</button>
                     </div>
                 </form>
-                <div class="">
-                    <table class="table table-sm table-responsive-sm table-striped table-bordered table-hover overflow-auto h-25"
-                           th:if="${menu.getEntries().size()>0}">
-                        <h4 class="mb-2 mt-5">Elementy menu</h4>
-                        <thead>
+                <div class="d-flex flex-row mt-5 mb-3">
+                    <h4 class="">Elementy menu</h4>
+                    <form th:action="${'/dashboard/menu/'+menu.getId()+'/new'}" method="post" class="flex-grow-1 text-right">
+                        <button name="submit" type="submit" class="btn btn-success btn-sm">
+                            <i class="fas fa-plus-square"></i>
+                            Dodaj pozycję menu
+                        </button>
+                    </form>
+                </div>
+                <div class="overflow-auto" style="min-height: 25vh;">
+                    <table class="table table-sm table-borderless" th:if="${menu.getEntries().size()>0}">
+                        <thead class="border-bottom border-dark font-italic">
                             <tr>
-                                <th>Id</th>
-                                <th>Etykieta</th>
-                                <th>Strona</th>
-                                <th>Ilość elementów</th>
+                                <th class="font-weight-normal">identyfikator</th>
+                                <th class="font-weight-normal">etykieta</th>
+                                <th class="font-weight-normal">strona</th>
+                                <th class="font-weight-normal">liczba elementów</th>
                             </tr>
                         </thead>
                         <tbody>
-                            <tr th:each="entry:${menu.getEntries()}">
-                                <th>
+                            <tr th:each="entry:${menu.getEntries()}" class="border-bottom">
+                                <th class="font-weight-normal">
                                     <a href="#" th:href="'/dashboard/menu/'+${menu.getId()}+'/'+${entry.getId()}">
                                         <span th:text="${entry.getId()}">1</span>
                                     </a>
                                 </th>
-                                <th th:text="${entry.getLabel()}">Etykieta</th>
-                                <th th:text="${entry.getPage()!=null}?${entry.getPage().getTitle()} : 'brak'">brak</th>
-                                <th th:text="${entry.getSubentires()!=null}?${entry.getSubentires().size()}:'0'">0</th>
+                                <th class="font-weight-normal" th:text="${entry.getLabel()}">Etykieta</th>
+                                <th class="font-weight-normal" th:text="${entry.getPage()!=null}?${entry.getPage().getTitle()} : 'brak'">brak</th>
+                                <th class="font-weight-normal" th:text="${entry.getSubentires()!=null}?${entry.getSubentires().size()}:'0'">0</th>
                             </tr>
                         </tbody>
                     </table>
                 </div>
-                <form th:action="${'/dashboard/menu/'+menu.getId()+'/new'}" method="post" class="text-right">
-                    <button name="submit" type="submit" class="btn btn-success mt-3">
-                        <i class="fas fa-plus-square"></i>
-                        Dodaj pozycję menu
-                    </button>
-                </form>
                 <div class="text-right mt-3">
-                    <a href="/dashboard/menu" class="btn btn-primary text-right">Powrót</a>
+                    <a href="/dashboard/menu" class="btn btn-primary btn-sm text-right">Powrót</a>
                 </div>
             </div>
         </div>

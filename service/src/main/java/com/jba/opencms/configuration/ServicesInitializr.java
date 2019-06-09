@@ -4,6 +4,8 @@ import com.jba.opencms.dao.GenericDao;
 import com.jba.opencms.dao.ifs.EntryDao;
 import com.jba.opencms.dao.ifs.MenuDao;
 import com.jba.opencms.dao.ifs.SystemVariableDao;
+import com.jba.opencms.file.FileService;
+import com.jba.opencms.file.FileServiceImpl;
 import com.jba.opencms.globals.GlobalsService;
 import com.jba.opencms.globals.GlobalsServiceImpl;
 import com.jba.opencms.image.ImageService;
@@ -14,6 +16,7 @@ import com.jba.opencms.menu.MenuService;
 import com.jba.opencms.menu.MenuServiceImpl;
 import com.jba.opencms.page.PageService;
 import com.jba.opencms.page.PageServiceImpl;
+import com.jba.opencms.type.file.File;
 import com.jba.opencms.type.image.Image;
 import com.jba.opencms.type.page.Page;
 import org.springframework.context.annotation.Bean;
@@ -51,4 +54,8 @@ public class ServicesInitializr {
         return new GlobalsServiceImpl(systemVariableDao);
     }
 
+    @Bean
+    public FileService fileService(GenericDao<File> fileDao){
+        return new FileServiceImpl(fileDao);
+    }
 }

@@ -7,23 +7,21 @@
     <meta charset="UTF-8">
     <title th:text="${@systemVariables.get('page.name')+' - Login'}">Failed</title>
     <div th:replace="fragment/import"></div>
-    <div th:replace="fragment/import"></div>
-    <link rel="stylesheet" href="../static/css/opencms.css"/>
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css"
-          integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf"
-          crossorigin="anonymous">
-    <link rel="stylesheet" href="../static/css/bootstrap.css"/>
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
-            integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
-            crossorigin="anonymous"></script>
-    <link href="https://gitcdn.github.io/bootstrap-toggle/2.2.2/css/bootstrap-toggle.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="../static/css/bootstrap-theme.css"/>
-    <script src="https://gitcdn.github.io/bootstrap-toggle/2.2.2/js/bootstrap-toggle.min.js"></script>
+    <div th:if="${1==0}">
+        <link rel="stylesheet" href="../static/css/bootstrap.css"/>
+        <link rel="stylesheet" href="../static/css/bootstrap-theme.css"/>
+        <script src="/webjars/jquery/3.4.0/jquery.js"></script>
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css"
+              integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+        <link rel="stylesheet" href="../static/css/opencms.css"/>
+    </div>
 </head>
+<body class="bg-dark overflow-hidden">
+<img th:unless="${@systemVariables.get(@varkey.LOGIN_BACKDROP).equals('none')}"
+     th:src="@{'/image/'+${@systemVariables.get(@varkey.LOGIN_BACKDROP)}}" src="../static/images/login-backdrop.jpg" class="backdrop-image">
+<div class="box-login bg-white p-5 shadow">
+    <h1 class="text-center mb-4" style="font-size: calc(2rem + 4vw);">zaloguj sie</h1>
 
-<body class="bg-dark">
-<div class="box-login bg-white p-5">
-    <h1 class="text-center" style="margin-bottom: 1em;">Zaloguj się</h1>
     <form method="post" th:action="@{/login}">
         <div class="form-group row">
             <div class="col-12 floating-label-container">
@@ -37,9 +35,9 @@
                 <input id="password" name="password" type="password" class="form-control" required="required">
             </div>
         </div>
-        <div class="form-group row" style="">
-            <div class="col-12">
-            <button name="submit" type="submit" class="btn btn-primary btn-block text-white">Zatwierdź</button>
+        <div class="form-group row mt-5">
+            <div class="col-12 text-center">
+                <button name="submit" type="submit" class="btn p-3 btn-primary btn-block btn-hover text-white">Zatwierdź</button>
             </div>
         </div>
     </form>
