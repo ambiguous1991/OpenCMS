@@ -19,42 +19,42 @@
 <nav th:replace="fragment/admin-breadcrumb"></nav>
 <div class="wrapper" style="max-height: 100vh;">
     <div th:replace="fragment/admin-sidebar"></div>
-    <div class="container-fluid flex-column d-flex shadow-lg m-5 p-5">
+    <div class="flex-grow-1 flex-column d-flex overflow-auto p-5">
         <h2 class="mb-4">Edycja strony <span th:text="${page.getTitle()}"></span></h2>
         <form th:object="${page}">
             <div class="form-group row">
-                <div class="col-8 floating-label-container">
+                <div class="col-12 floating-label-container">
                     <label for="id">identyfikator</label>
                     <input id="id" name="id" type="text" class="form-control" th:value="${page.id}" disabled>
                 </div>
             </div>
             <div class="form-group row">
-                <div class="col-8 floating-label-container">
+                <div class="col-12 floating-label-container">
                     <label for="title">tytuł</label>
                     <input id="title" name="title" type="text" class="form-control" required th:value="${page.title}">
                     <span id="titleHelpBlock" class="form-text text-muted">tytuł strony wyświetlony zostanie na pasku przeglądarki, zatem tytuł strony musi być unikalny</span>
                 </div>
             </div>
             <div class="form-group row">
-                <div class="col-8 floating-label-container">
+                <div class="col-12 floating-label-container">
                     <label for="identifier">identyfikator</label>
                     <input id="identifier" name="id" type="text" class="form-control" disabled>
                     <span id="identifierHelpBlock" class="form-text text-muted">ta treść generowana jest automatycznie na podstawie tytułu</span>
                 </div>
             </div>
             <div class="form-group row">
-                <div class="col-8 floating-label-container">
+                <div class="col-12 floating-label-container">
                     <input name="visible" id="visible" type="checkbox"
                            th:value="${page.visible}" required>
                     <label for="visible">widoczna</label>
                 </div>
             </div>
             <div class="form-group row">
-                <div class="col-8 row">
+                <div class="col-12 row">
                     <div class="offset-2 col-3">
                         <button name="submit" type="submit" class="btn btn-primary btn-block">Zatwierdź</button>
                     </div>
-                    <a href="#" class="offset-2 col-3 btn btn-block btn-danger">Usun</a>
+                    <a th:href="@{'/dashboard/page/'+${page.getId()}+'/delete'}" class="offset-2 col-3 btn btn-block btn-danger">Usun</a>
                 </div>
             </div>
         </form>
