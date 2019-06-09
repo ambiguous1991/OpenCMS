@@ -27,7 +27,7 @@
     <div th:replace="fragment/admin-sidebar"></div>
     <div class="flex-grow-1 flex-column d-flex overflow-auto p-5">
         <form th:object="${form}" method="post" th:action="'/dashboard/globals/'+${form.getId()}">
-            <h3 class="mb-4">Edycja zmiennej <span class="text-monospace" style="font-size: 0.9em;" th:text="${form.getKey()}">test</span></h3>
+            <h3 class="mb-4 font-family-roboto">Edycja zmiennej <span class="text-monospace" th:text="${form.getKey()}">test</span></h3>
             <div class="form-group row">
                 <div class="col-12 floating-label-container">
                     <label for="key" class="">identyfikator</label>
@@ -72,7 +72,7 @@
                 <div class="col-12 form-group row" th:unless="${@varkey.containsKey(form.getKey())}">
                     <div class="row form-group col-12">
                         <button name="submit" type="submit" class="btn btn-primary offset-2 col-3">Zapisz</button>
-                        <a href="#" class="btn btn-primary offset-2 col-3">Usuń</a>
+                        <a href="#" class="btn btn-danger offset-2 col-3">Usuń</a>
                     </div>
                 </div>
             </div>

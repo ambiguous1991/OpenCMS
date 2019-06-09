@@ -31,7 +31,7 @@
                 </form>
                 <div id="table-wrapper" class="m-2; overflow-auto flex-grow-1 p-2">
                     <table class="table table-sm table-borderless text-center">
-                        <thead class="border-bottom">
+                        <thead class="border-bottom border-dark">
                             <tr class="font-italic">
                                 <th scope="col" class="font-weight-normal">nazwa</th>
                                 <th scope="col" class="font-weight-normal">czy aktywny</th>
@@ -40,18 +40,18 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr th:each="menuTop: ${allMenus}">
+                            <tr th:each="menuTop: ${allMenus}" class="border-bottom">
                                 <td th:text="${menuTop.getName()}">nazwa</td>
                                 <td th:text="${menuTop.getIsActive()?'aktywny':''}">aktywny</td>
                                 <td th:text="${menuTop.getEntries().size()}"></td>
                                 <td>
                                     <a th:if="${menuTop.getIsActive()}" th:href="${'/dashboard/menu/'+menuTop.getId()}"
                                        href="#"
-                                       class="btn btn-primary" role="button">Edytuj
+                                       class="text-primary" role="button">edytuj
                                     </a>
                                     <a th:unless="${menuTop.getIsActive()}"
                                        th:href="${'/dashboard/menu/'+menuTop.getId()}" href="#"
-                                       class="btn btn-danger" role="button">Aktywuj i edytuj
+                                       class="text-danger" role="button">aktywuj i edytuj
                                     </a>
                                 </td>
                             </tr>

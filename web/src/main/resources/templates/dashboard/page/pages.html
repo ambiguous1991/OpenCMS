@@ -48,7 +48,7 @@
         </div>
         <div th:if="${pages.size()>0}" class="d-flex flex-grow-1 overflow-auto flex-column mt-3">
             <table class="table table-sm table-borderless text-center">
-                <thead class="border-bottom">
+                <thead class="border-bottom border-dark">
                     <tr class="font-italic">
                         <th class="font-weight-normal">identyfikator</th>
                         <th class="font-weight-normal">tytuł strony</th>
@@ -59,7 +59,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr th:each="page: ${pages}">
+                    <tr th:each="page: ${pages}" class="border-bottom">
                         <th th:text="${page.getTitle()}" class="font-weight-normal">moja-strona-główna</th>
                         <th th:text="${page.getTitle()}" class="font-weight-normal">Strona główna</th>
                         <th th:text="${page.getSubpages().size()}" class="font-weight-normal">0</th>
@@ -67,12 +67,12 @@
                             2019-05-11
                         </th>
                         <th th:text="${page.getVisible()}?'tak':'nie'" class="font-weight-normal">Tak</th>
-                        <th>
-                            <a href="#" th:href="'/dashboard/page/'+${page.getId()}" class="btn btn-sm btn-block btn-info">modyfikuj</a>
+                        <th class="font-weight-normal">
+                            <a href="#" th:href="'/dashboard/page/'+${page.getId()}" class="text-info">modyfikuj</a><br>
                             <a href="#" th:href="'/dashboard/page/'+${page.getId()}+'/edit'"
-                               class="btn btn-sm btn-block btn-success">edytuj treść</a>
+                               class="text-success">edytuj treść</a><br>
                             <a href="#" th:href="'/dashboard/page/'+${page.getId()}+'/delete'"
-                               class="btn btn-sm btn-block btn-danger">usuń</a>
+                               class="text-danger">usuń</a>
                         </th>
                     </tr>
                 </tbody>

@@ -66,32 +66,33 @@
                     <div class="col-1"></div>
                 </div>
             </form>
-            <div th:if="${entry.getParent()==null}" class="">
-                <table class="table table-sm table-responsive-sm table-striped table-bordered table-hover"
-                       th:if="${entry.getSubentires().size()>0}">
-                    <h4 class="mb-3 mt-5">Wpisy</h4>
-                    <thead>
+            <div class="d-flex flex-row mt-5">
+                <h4>Wpisy</h4>
+                <form th:action="'/dashboard/menu/'+${menuId}+'/'+${entry.getId()}+'/new'" method="post" class="flex-grow-1 text-right">
+                    <button name="submit" type="submit" class="btn btn-primary">Dodaj wpis</button>
+                </form>
+            </div>
+            <div th:if="${entry.getParent()==null}" class="overflow-auto">
+                <table class="table table-sm table-borderless" th:if="${entry.getSubentires().size()>0}">
+                    <thead class="border-bottom border-dark font-italic">
                         <tr>
-                            <th>Id</th>
-                            <th>Etykieta</th>
-                            <th>Strona</th>
+                            <th class="font-weight-normal">identyfikator</th>
+                            <th class="font-weight-normal">etykieta</th>
+                            <th class="font-weight-normal">strona</th>
                         </tr>
                     </thead>
                     <tbody>
-                        <tr th:each="subentry:${entry.getSubentires()}">
-                            <th>
+                        <tr th:each="subentry:${entry.getSubentires()}" class="border-bottom">
+                            <th class="font-weight-normal">
                                 <a href="#" th:href="'/dashboard/menu/'+${menuId}+'/'+${subentry.getId()}">
                                     <span th:text="${subentry.getId()}">1</span>
                                 </a>
                             </th>
-                            <th th:text="${subentry.getLabel()}">Etykieta</th>
-                            <th th:text="${subentry.getPage()!=null}?${subentry.getPage().getTitle()} : 'brak'">brak</th>
+                            <th class="font-weight-normal" th:text="${subentry.getLabel()}">Etykieta</th>
+                            <th class="font-weight-normal" th:text="${subentry.getPage()!=null}?${subentry.getPage().getTitle()} : 'brak'">brak</th>
                         </tr>
                     </tbody>
                 </table>
-                <form th:action="'/dashboard/menu/'+${menuId}+'/'+${entry.getId()}+'/new'" method="post">
-                    <button name="submit" type="submit" class="btn btn-primary">Dodaj wpis</button>
-                </form>
             </div>
         </div>
     </div>

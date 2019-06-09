@@ -43,7 +43,7 @@
         </form>
         <div class="d-flex flex-grow-1 overflow-auto">
         <table class="table table-sm table-borderless">
-            <thead class="border-bottom">
+            <thead class="border-bottom border-dark">
             <tr class="font-italic">
                 <td>klucz</td>
                 <td>wartość</td>
@@ -51,7 +51,7 @@
             </tr>
             </thead>
             <tbody>
-            <tr th:each="attr: ${attributes}">
+            <tr th:each="attr: ${attributes}" class="border-bottom">
                 <td th:text="${attr.getKey()}">key</td>
                 <td><a href="#" th:href="${'/dashboard/globals/'+attr.getId()}"><span th:text="${attr.getValue()}">value</span></a></td>
                 <td th:text="${#temporals.format(attr.getUpdated(), @systemVariables.get(@varkey.SYSTEM_DASHBOARD_DATE_FORMAT))}">2019-06-09</td>

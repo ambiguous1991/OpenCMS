@@ -38,7 +38,7 @@
                              alt="Card image cap">
                         <div class="card-body">
                             <a href="#" th:href="${'/dashboard/images/'+images.get(row+column).getId()}">
-                                <h5 class="font-weight-bold card-title"
+                                <h5 class="font-weight-bold card-title font-family-roboto"
                                     th:text="${images.get(row+column).getName()}">Title</h5>
                             </a>
                             <p class="card-text" th:text="${images.get(row+column).getDescription()}">Description</p>
