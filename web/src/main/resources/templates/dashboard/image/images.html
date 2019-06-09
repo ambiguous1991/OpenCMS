@@ -20,11 +20,9 @@
 <nav th:replace="fragment/admin-breadcrumb"></nav>
 <div class="wrapper">
     <div th:replace="fragment/admin-sidebar"></div>
-    <div class="container-fluid shadow-lg flex-grow-1 m-5 p-5 overflow-auto d-flex flex-column">
-        <div id="heading" class="d-flex flex-grow-1">
-            <div>
-                <h3>Obrazy</h3>
-            </div>
+    <div class="flex-grow-1 flex-column d-flex overflow-auto p-5">
+        <div id="heading" class="d-flex flex-row mb-2">
+            <h3>Obrazy</h3>
             <div class="flex-grow-1 text-right">
                 <button id="open-upload-modal" class="btn btn-sm btn-success">Prześlij obraz <i
                         class="fas fa-cloud-upload-alt"></i></button>
@@ -40,7 +38,7 @@
                              alt="Card image cap">
                         <div class="card-body">
                             <a href="#" th:href="${'/dashboard/images/'+images.get(row+column).getId()}">
-                                <h5 class="font-weight-bold card-title"
+                                <h5 class="font-weight-bold card-title font-family-roboto"
                                     th:text="${images.get(row+column).getName()}">Title</h5>
                             </a>
                             <p class="card-text" th:text="${images.get(row+column).getDescription()}">Description</p>
