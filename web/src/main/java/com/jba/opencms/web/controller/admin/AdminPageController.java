@@ -19,7 +19,7 @@ import java.util.List;
 
 @Controller
 @RequestMapping("/dashboard/page")
-public class PageController {
+public class AdminPageController {
 
     @Autowired private PageService pageService;
     @Autowired private MenuService menuService;

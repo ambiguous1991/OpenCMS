@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import java.util.List;
 
 @Controller
+@RequestMapping(value = "/")
 public class PageController {
     private MenuService menuService;
     private PageService pageService;
@@ -45,7 +46,7 @@ public class PageController {
 
         model.addAttribute("menu", entries);
 
-        return "index";
+        return "page-template/one-column-half-width";
     }
 
 }
