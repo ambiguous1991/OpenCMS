@@ -1,0 +1,36 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-4.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title th:text="${@systemVariables.get('page.name')}">Failed</title>
+    <div th:replace="fragment/import"></div>
+    <div th:if="${1==0}">
+        <link rel="stylesheet" href="../../static/css/bootstrap.css"/>
+        <link rel="stylesheet" href="../../static/css/bootstrap-theme.css"/>
+        <script src="/webjars/jquery/3.4.0/jquery.js"></script>
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css"
+              integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf"
+              crossorigin="anonymous">
+        <link rel="stylesheet" href="../../static/css/opencms.css"/>
+    </div>
+</head>
+<body class="bg-light">
+
+<nav th:replace="fragment/menu/user-menu"></nav>
+<div class="container-fluid bg-white" style="padding-left: 0 !important; padding-right: 0 !important;">
+    <div class="row">
+        <div class="col-8">
+            <div class="m-0 p-0" th:if="${columnLeft!=null}" th:utext="${columnLeft.getContent()}">
+            </div>
+        </div>
+        <div class="offset-1 col-3">
+            <div class="m-0 p-0" th:if="${columnRight!=null}" th:utext="${columnRight.getContent()}">
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

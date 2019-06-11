@@ -38,6 +38,7 @@ public class ImageController {
             @PathVariable("imageId") Long imageId,
             HttpServletResponse response
     ){
+        response.setStatus(HttpServletResponse.SC_OK);
         return new RedirectView("/image/"+imageId+"/"+imageRepository.getFullName(imageId));
     }
 
@@ -48,7 +49,6 @@ public class ImageController {
         HttpServletResponse response
     ) throws IOException{
         determineContentType(imageRepository.getExtension(imageId), response);
-
         response.getOutputStream().write(imageRepository.get(imageId));
     }
 
