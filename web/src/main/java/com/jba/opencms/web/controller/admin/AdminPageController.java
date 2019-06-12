@@ -2,8 +2,10 @@ package com.jba.opencms.web.controller.admin;
 
 import com.jba.opencms.menu.MenuService;
 import com.jba.opencms.page.PageService;
+import com.jba.opencms.page.PageTypeService;
 import com.jba.opencms.type.menu.Entry;
 import com.jba.opencms.type.page.Page;
+import com.jba.opencms.type.page.PageType;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.scheduling.annotation.Async;
@@ -22,10 +24,12 @@ public class AdminPageController {
 
     private PageService pageService;
     private MenuService menuService;
+    private PageTypeService pageTypeService;
 
-    public AdminPageController(PageService pageService, MenuService menuService) {
+    public AdminPageController(PageService pageService, MenuService menuService, PageTypeService pageTypeService) {
         this.pageService = pageService;
         this.menuService = menuService;
+        this.pageTypeService = pageTypeService;
     }
 
     @RequestMapping(method = RequestMethod.GET)
@@ -57,7 +61,30 @@ public class AdminPageController {
 
         model.addAttribute("page", page);
 
+        List<PageType> pageTypes = pageTypeService.findAll(false);
+        model.addAttribute("pageTypes", pageTypes);
+
         return "dashboard/page/page-details";
+    }
+
+    @RequestMapping(value = "/{pageId}", method = RequestMethod.POST)
+    public RedirectView updatePageDetails(
+            @PathVariable("pageId") Long pageId,
+            String title, Long pageType,
+            Boolean visible) {
+        Page page = pageService.findOne(pageId, true);
+        page.setTitle(title);
+        if(visible!=null) {
+            page.setVisible(visible);
+        }
+        else page.setVisible(false);
+
+        PageType selectedPageType = pageTypeService.findOne(pageType, false);
+        page.setPageType(selectedPageType);
+
+        pageService.update(page);
+
+        return new RedirectView("/dashboard/page");
     }
 
     @RequestMapping(value = "/{pageId}/edit", method = RequestMethod.GET)
