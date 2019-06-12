@@ -6,6 +6,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Lazy;
 
 import java.util.Map;
 
@@ -15,6 +16,7 @@ public class SystemVariableInitializr {
     private final Logger logger = LoggerFactory.getLogger(getClass());
 
     @Bean
+    @Lazy
     public Map<String, String> systemVariables(GlobalsService systemVariableDao){
 
         Map<String, String> systemVariables = systemVariableDao.getAsMap();

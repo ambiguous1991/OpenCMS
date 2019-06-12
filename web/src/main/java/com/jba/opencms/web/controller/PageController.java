@@ -1,5 +1,6 @@
 package com.jba.opencms.web.controller;
 
+import com.jba.opencms.globals.GlobalsService;
 import com.jba.opencms.menu.MenuService;
 import com.jba.opencms.page.PageService;
 import com.jba.opencms.type.menu.Entry;
@@ -20,18 +21,18 @@ import java.util.Map;
 public class PageController {
     private MenuService menuService;
     private PageService pageService;
-    private Map<String, String> systemVariables;
+    private GlobalsService globalsService;
 
-    public PageController(MenuService menuService, PageService pageService, Map<String, String> systemVariables) {
+    public PageController(MenuService menuService, PageService pageService, GlobalsService globalsService) {
         this.menuService = menuService;
         this.pageService = pageService;
-        this.systemVariables = systemVariables;
+        this.globalsService = globalsService;
     }
 
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public String home(Model model){
         List<Entry> entries = menuService.findActive(true).getEntries();
-        Long homePageId = Long.parseLong(systemVariables.get(SystemVariableKeys.PAGE_HOMEPAGE));
+        Long homePageId = Long.parseLong(globalsService.findByKey(SystemVariableKeys.PAGE_HOMEPAGE).getValue());
 
         Page page = pageService.findOne(homePageId, true);
 
