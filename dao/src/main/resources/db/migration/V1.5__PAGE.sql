@@ -1,4 +1,4 @@
-CREATE TABLE PAGE
+CREATE TABLE page
 (
   ID      bigint(20)           NOT NULL AUTO_INCREMENT,
   TITLE   varchar(200)         NOT NULL,

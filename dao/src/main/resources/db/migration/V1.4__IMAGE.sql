@@ -1,4 +1,4 @@
-CREATE TABLE IMAGE
+CREATE TABLE image
 (
   ID          bigint(20)  NOT NULL AUTO_INCREMENT,
   NAME        varchar(100) DEFAULT NULL,

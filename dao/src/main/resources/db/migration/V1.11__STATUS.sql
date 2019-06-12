@@ -1,4 +1,4 @@
-CREATE TABLE STATUS
+CREATE TABLE status
 (
   ID          bigint(20)   NOT NULL AUTO_INCREMENT,
   STATUS_NAME varchar(100) NOT NULL,

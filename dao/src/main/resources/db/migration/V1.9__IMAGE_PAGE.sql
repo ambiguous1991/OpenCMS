@@ -1,4 +1,4 @@
-CREATE TABLE IMAGE_PAGE
+CREATE TABLE image_page
 (
   FK_IMAGE_ID bigint(20) NOT NULL,
   FK_PAGE_ID  bigint(20) NOT NULL,

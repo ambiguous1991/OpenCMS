@@ -1,4 +1,4 @@
-CREATE TABLE USER_AUTHORITY
+CREATE TABLE user_authority
 (
   FK_USER_ID     bigint(20) NOT NULL,
   FK_AUTORITY_ID bigint(20) NOT NULL,

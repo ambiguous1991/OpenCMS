@@ -1,4 +1,4 @@
-CREATE TABLE MENU
+CREATE TABLE menu
 (
   ID     bigint(20)  NOT NULL AUTO_INCREMENT,
   ACTIVE bit(1)      NOT NULL default b'0',

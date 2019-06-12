@@ -1,4 +1,4 @@
-CREATE TABLE AUTHORITY
+CREATE TABLE authority
 (
   ID    bigint(20)  NOT NULL AUTO_INCREMENT,
   ROLE  varchar(30) NOT NULL,
