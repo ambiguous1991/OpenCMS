@@ -20,11 +20,8 @@ import java.util.List;
 @EnableTransactionManagement
 public class PageDaoIntegrationTest extends BaseSpringIntegrationTest {
 
-    @Autowired
-    private GenericDao<Page> pageDao;
-
-    @Autowired
-    private GenericDao<Authority> authorityDao;
+    @Autowired private GenericDao<Page> pageDao;
+    @Autowired private GenericDao<Authority> authorityDao;
 
     @Test
     public void saveTest(){

@@ -6,7 +6,6 @@ import com.jba.opencms.page.PageService;
 import com.jba.opencms.type.menu.Entry;
 import com.jba.opencms.type.menu.Menu;
 import com.jba.opencms.type.page.Page;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -22,9 +21,15 @@ import java.util.List;
 @Controller
 public class MenuController {
 
-    @Autowired private MenuService menuService;
-    @Autowired private EntryService entryService;
-    @Autowired private PageService pageService;
+    private MenuService menuService;
+    private EntryService entryService;
+    private PageService pageService;
+
+    public MenuController(MenuService menuService, EntryService entryService, PageService pageService) {
+        this.menuService = menuService;
+        this.entryService = entryService;
+        this.pageService = pageService;
+    }
 
     @RequestMapping(value = "/dashboard/menu", method = RequestMethod.GET)
     public String mainPage(Model model){
