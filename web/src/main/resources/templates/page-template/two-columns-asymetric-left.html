@@ -20,15 +20,14 @@
 <body class="bg-light">
 
 <nav th:replace="fragment/menu/user-menu"></nav>
-<div class="container-fluid bg-white" style="padding-left: 0 !important; padding-right: 0 !important;">
+<div class="container-fluid bg-white">
     <div class="row">
         <div class="col-8">
-            <div class="m-0 p-0" th:if="${columnLeft!=null}" th:utext="${columnLeft.getContent()}">
+            <div th:if="${page!=null}" th:utext="${page.getContent()}">
             </div>
         </div>
         <div class="offset-1 col-3">
-            <div class="m-0 p-0" th:if="${columnRight!=null}" th:utext="${columnRight.getContent()}">
-            </div>
+awdadwawd
         </div>
     </div>
 </div>
