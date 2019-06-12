@@ -10,11 +10,8 @@ import org.springframework.orm.hibernate5.HibernateTransactionManager;
 import org.springframework.orm.hibernate5.LocalSessionFactoryBean;
 import org.apache.logging.log4j.Logger;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
-import org.yaml.snakeyaml.Yaml;
 
 import javax.sql.DataSource;
-import java.io.InputStream;
-import java.util.Map;
 
 @Configuration
 @EnableTransactionManagement

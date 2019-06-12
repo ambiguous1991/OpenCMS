@@ -4,5 +4,10 @@ spring:
     username: opencms
     password: password
     driver-class-name: com.mysql.cj.jdbc.Driver
+  flyway:
+    enabled: true
+    url: ${spring.datasource.url}
+    password: ${spring.datasource.password}
+    user: ${spring.datasource.username}
 server:
   port: 8080

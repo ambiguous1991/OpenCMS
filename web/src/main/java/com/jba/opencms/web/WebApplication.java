@@ -12,7 +12,7 @@ import org.springframework.context.annotation.Import;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
-@SpringBootApplication(exclude = {HibernateJpaAutoConfiguration.class, LiquibaseAutoConfiguration.class})
+@SpringBootApplication(exclude = {HibernateJpaAutoConfiguration.class})
 @ComponentScan("com.jba.opencms")
 @Import({DataSourceConfiguration.class, ServicesInitializr.class})
 public class WebApplication implements WebMvcConfigurer {
