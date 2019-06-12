@@ -1,5 +1,5 @@
 INSERT INTO user(USERNAME, PASSWORD, EMAIL, FIRSTNAME, LASTNAME, CDATE, UDATE)
-VALUES ('admin', '$2a$10$Qsu1WtW6YQRXbPmwg8Zk2eKP9/tFXTrk6zCbLT4xxlnD9RVun7U9.', 'jakub.bartusiak@gmail.com', 'Jakub', 'Bartusiak', now(), now());
+VALUES ('admin', '$2a$10$duMldOs6/.gQC9BxdKlmKu0IIrR0z09iVUn2/DJmSDD5SL6HXRApe', 'jakub.bartusiak@gmail.com', 'Jakub', 'Bartusiak', now(), now());
 
 INSERT INTO authority(ROLE, CDATE, UDATE)
 VALUE ('Administrator', now(), now());
