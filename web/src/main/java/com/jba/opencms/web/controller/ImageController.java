@@ -1,7 +1,6 @@
 package com.jba.opencms.web.controller;
 
 import com.jba.opencms.web.repository.ImageRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -13,13 +12,13 @@ import java.io.IOException;
 import java.util.Map;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
+
 import static java.util.AbstractMap.SimpleEntry;
 
 @Controller
 @RequestMapping(value = "/image")
 public class ImageController {
 
-    @Autowired
     private ImageRepository imageRepository;
 
     private final static Map<String, String> mimeTypes;
@@ -33,11 +32,16 @@ public class ImageController {
         ).collect(Collectors.toMap(SimpleEntry::getKey, SimpleEntry::getValue));
     }
 
+    public ImageController(ImageRepository imageRepository) {
+        this.imageRepository = imageRepository;
+    }
+
     @RequestMapping(value = "/{imageId}", method = RequestMethod.GET)
     public RedirectView getImage(
             @PathVariable("imageId") Long imageId,
             HttpServletResponse response
     ){
+        response.setStatus(HttpServletResponse.SC_OK);
         return new RedirectView("/image/"+imageId+"/"+imageRepository.getFullName(imageId));
     }
 
@@ -48,7 +52,6 @@ public class ImageController {
         HttpServletResponse response
     ) throws IOException{
         determineContentType(imageRepository.getExtension(imageId), response);
-
         response.getOutputStream().write(imageRepository.get(imageId));
     }
 

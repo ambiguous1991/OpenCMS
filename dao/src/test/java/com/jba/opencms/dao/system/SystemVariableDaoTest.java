@@ -20,8 +20,7 @@ import java.util.Map;
 @EnableTransactionManagement
 public class SystemVariableDaoTest extends BaseSpringIntegrationTest {
 
-    @Autowired
-    private SystemVariableDao systemVariableDao;
+    @Autowired private SystemVariableDao systemVariableDao;
 
     @Test(expected = PersistenceException.class)
     public void shouldPreventFromAddingDuplicates(){
