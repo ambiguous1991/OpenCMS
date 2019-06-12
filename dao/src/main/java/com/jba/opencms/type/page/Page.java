@@ -28,6 +28,10 @@ public class Page extends BaseTypeSimpleKey<Page> {
     @Column(name = "VISIBLE", nullable = false)
     private Boolean visible;
 
+    @ManyToOne
+    @JoinColumn(name = "FK_PAGE_TYPE_ID", nullable = true)
+    private PageType pageType;
+
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(
             name = "page_authority",

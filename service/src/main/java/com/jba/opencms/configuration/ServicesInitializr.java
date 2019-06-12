@@ -16,9 +16,12 @@ import com.jba.opencms.menu.MenuService;
 import com.jba.opencms.menu.MenuServiceImpl;
 import com.jba.opencms.page.PageService;
 import com.jba.opencms.page.PageServiceImpl;
+import com.jba.opencms.page.PageTypeService;
+import com.jba.opencms.page.PageTypeServiceImpl;
 import com.jba.opencms.type.file.File;
 import com.jba.opencms.type.image.Image;
 import com.jba.opencms.type.page.Page;
+import com.jba.opencms.type.page.PageType;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
@@ -42,6 +45,11 @@ public class ServicesInitializr {
     @Bean
     public PageService pageService(GenericDao<Page> pageDao){
         return new PageServiceImpl(pageDao);
+    }
+
+    @Bean
+    public PageTypeService pageTypeService(GenericDao<PageType> pageTypeDao) {
+        return new PageTypeServiceImpl(pageTypeDao);
     }
 
     @Bean

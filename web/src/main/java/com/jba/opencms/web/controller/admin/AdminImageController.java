@@ -2,7 +2,6 @@ package com.jba.opencms.web.controller.admin;
 
 import com.jba.opencms.image.ImageService;
 import com.jba.opencms.type.image.Image;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -21,8 +20,11 @@ import java.util.List;
 @RequestMapping(value = "/dashboard/images")
 public class AdminImageController {
 
-    @Autowired
     private ImageService imageService;
+
+    public AdminImageController(ImageService imageService) {
+        this.imageService = imageService;
+    }
 
     @RequestMapping(method = RequestMethod.GET)
     public String getImageDashboard(Model model) {

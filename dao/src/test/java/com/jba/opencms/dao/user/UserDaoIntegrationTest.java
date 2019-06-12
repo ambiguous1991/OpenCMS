@@ -20,8 +20,7 @@ import org.springframework.transaction.annotation.Transactional;
 @EnableTransactionManagement
 public class UserDaoIntegrationTest extends BaseSpringIntegrationTest {
 
-    @Autowired
-    private GenericDao<User> userDao;
+    @Autowired private GenericDao<User> userDao;
 
     @Test
     public void addUser(){

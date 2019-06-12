@@ -11,7 +11,7 @@
 
     <artifactId>web</artifactId>
     <version>${web.version}</version>
-    <name>OpenCMS Web</name>
+    <name>OpenCMS Web ${web.version}</name>
     <description>Web package for open cms</description>
 
     <properties>
@@ -54,6 +54,11 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-thymeleaf</artifactId>
             <version>${spring.boot.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.flywaydb</groupId>
+            <artifactId>flyway-core</artifactId>
+            <version>5.2.4</version>
         </dependency>
         <dependency>
             <groupId>org.projectlombok</groupId>

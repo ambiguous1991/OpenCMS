@@ -11,7 +11,7 @@
 
     <artifactId>dao</artifactId>
     <version>${dao.version}</version>
-    <name>OpenCMS Dao and Types</name>
+    <name>OpenCMS Dao and Types ${dao.version}</name>
     <description>Dao package</description>
 
     <properties>
@@ -33,11 +33,6 @@
             <groupId>org.hibernate</groupId>
             <artifactId>hibernate-core</artifactId>
             <version>${hibernate.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.liquibase</groupId>
-            <artifactId>liquibase-core</artifactId>
-            <version>3.5.5</version>
         </dependency>
         <dependency>
             <groupId>mysql</groupId>
@@ -94,30 +89,17 @@
     <build>
         <plugins>
             <plugin>
-                <groupId>org.liquibase</groupId>
-                <artifactId>liquibase-maven-plugin</artifactId>
-                <version>3.5.3</version>
+                <groupId>org.flywaydb</groupId>
+                <artifactId>flyway-maven-plugin</artifactId>
+                <version>5.2.4</version>
                 <configuration>
-                    <changeSetAuthor>jba</changeSetAuthor>
-                    <verbose>true</verbose>
-                    <propertyFile>src/main/resources/liquibase.properties</propertyFile>
-                    <outputChangeLogFile>src/main/resources/liquibase-changelog.xml</outputChangeLogFile>
+                    <configFile>src/main/resources/flyway.properties</configFile>
                 </configuration>
                 <dependencies>
                     <dependency>
-                        <groupId>org.liquibase.ext</groupId>
-                        <artifactId>liquibase-hibernate5</artifactId>
-                        <version>3.6</version>
-                    </dependency>
-                    <dependency>
-                        <groupId>org.springframework</groupId>
-                        <artifactId>spring-context</artifactId>
-                        <version>${spring.base.version}</version>
-                    </dependency>
-                    <dependency>
-                        <groupId>org.springframework.data</groupId>
-                        <artifactId>spring-data-jpa</artifactId>
-                        <version>2.1.6.RELEASE</version>
+                        <groupId>mysql</groupId>
+                        <artifactId>mysql-connector-java</artifactId>
+                        <version>${mysql.connector.version}</version>
                     </dependency>
                 </dependencies>
             </plugin>

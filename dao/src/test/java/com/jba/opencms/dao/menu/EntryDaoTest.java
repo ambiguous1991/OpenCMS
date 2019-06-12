@@ -24,11 +24,8 @@ import java.util.List;
 @EnableTransactionManagement
 public class EntryDaoTest extends BaseSpringIntegrationTest {
 
-    @Autowired
-    private MenuDao menuDao;
-
-    @Autowired
-    private GenericDao<Entry> entryDao;
+    @Autowired private MenuDao menuDao;
+    @Autowired private GenericDao<Entry> entryDao;
 
     @Test
     @Transactional
