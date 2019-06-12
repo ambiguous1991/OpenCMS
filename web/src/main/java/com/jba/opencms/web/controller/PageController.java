@@ -15,6 +15,7 @@ import java.util.List;
 @Controller
 @RequestMapping(value = "/")
 public class PageController {
+
     private MenuService menuService;
     private PageService pageService;
 

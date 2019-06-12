@@ -1,6 +1,5 @@
 package com.jba.opencms.security.encoder;
 
-import lombok.SneakyThrows;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.security.crypto.password.PasswordEncoder;

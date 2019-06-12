@@ -4,7 +4,6 @@ import com.jba.opencms.menu.MenuService;
 import com.jba.opencms.page.PageService;
 import com.jba.opencms.type.menu.Entry;
 import com.jba.opencms.type.page.Page;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.scheduling.annotation.Async;
@@ -21,8 +20,13 @@ import java.util.List;
 @RequestMapping("/dashboard/page")
 public class AdminPageController {
 
-    @Autowired private PageService pageService;
-    @Autowired private MenuService menuService;
+    private PageService pageService;
+    private MenuService menuService;
+
+    public AdminPageController(PageService pageService, MenuService menuService) {
+        this.pageService = pageService;
+        this.menuService = menuService;
+    }
 
     @RequestMapping(method = RequestMethod.GET)
     public String getLandingPage(Model model) {
