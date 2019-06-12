@@ -11,7 +11,7 @@
 
     <artifactId>web</artifactId>
     <version>${web.version}</version>
-    <name>OpenCMS Web</name>
+    <name>OpenCMS Web ${web.version}</name>
     <description>Web package for open cms</description>
 
     <properties>

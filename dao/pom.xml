@@ -11,7 +11,7 @@
 
     <artifactId>dao</artifactId>
     <version>${dao.version}</version>
-    <name>OpenCMS Dao and Types</name>
+    <name>OpenCMS Dao and Types ${dao.version}</name>
     <description>Dao package</description>
 
     <properties>
