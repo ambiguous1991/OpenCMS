@@ -1,5 +1,8 @@
 <?xml version="1.1" encoding="UTF-8" standalone="no"?>
-<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd">
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd">
     <property name="now" value="now()" dbms="mysql"/>
 
     <changeSet author="jba" id="1557431477758-1">
@@ -338,52 +341,97 @@
         </createIndex>
     </changeSet>
     <changeSet author="jba" id="1557431477758-36">
-        <addForeignKeyConstraint baseColumnNames="FK_ENTRY_PARENT_ID" baseTableName="entry" constraintName="CSTR_FK_ENTRY_PARENT_ID" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="ID" referencedTableName="entry"/>
+        <addForeignKeyConstraint baseColumnNames="FK_ENTRY_PARENT_ID" baseTableName="entry"
+                                 constraintName="CSTR_FK_ENTRY_PARENT_ID" deferrable="false" initiallyDeferred="false"
+                                 onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="ID"
+                                 referencedTableName="entry"/>
     </changeSet>
     <changeSet author="jba" id="1557431477758-37">
-        <addForeignKeyConstraint baseColumnNames="FK_PAGE_ID" baseTableName="image_page" constraintName="FKIMAGE_PAGE260805" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="ID" referencedTableName="page"/>
+        <addForeignKeyConstraint baseColumnNames="FK_PAGE_ID" baseTableName="image_page"
+                                 constraintName="FKIMAGE_PAGE260805" deferrable="false" initiallyDeferred="false"
+                                 onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="ID"
+                                 referencedTableName="page"/>
     </changeSet>
     <changeSet author="jba" id="1557431477758-38">
-        <addForeignKeyConstraint baseColumnNames="FK_IMAGE_ID" baseTableName="image_page" constraintName="FKIMAGE_PAGE909037" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="ID" referencedTableName="image"/>
+        <addForeignKeyConstraint baseColumnNames="FK_IMAGE_ID" baseTableName="image_page"
+                                 constraintName="FKIMAGE_PAGE909037" deferrable="false" initiallyDeferred="false"
+                                 onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="ID"
+                                 referencedTableName="image"/>
     </changeSet>
     <changeSet author="jba" id="1557431477758-39">
-        <addForeignKeyConstraint baseColumnNames="FK_USER_ID" baseTableName="image_user" constraintName="FKIMAGE_USER511672" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="ID" referencedTableName="user"/>
+        <addForeignKeyConstraint baseColumnNames="FK_USER_ID" baseTableName="image_user"
+                                 constraintName="FKIMAGE_USER511672" deferrable="false" initiallyDeferred="false"
+                                 onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="ID"
+                                 referencedTableName="user"/>
     </changeSet>
     <changeSet author="jba" id="1557431477758-40">
-        <addForeignKeyConstraint baseColumnNames="FK_IMAGE_ID" baseTableName="image_user" constraintName="FKIMAGE_USER75242" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="ID" referencedTableName="image"/>
+        <addForeignKeyConstraint baseColumnNames="FK_IMAGE_ID" baseTableName="image_user"
+                                 constraintName="FKIMAGE_USER75242" deferrable="false" initiallyDeferred="false"
+                                 onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="ID"
+                                 referencedTableName="image"/>
     </changeSet>
     <changeSet author="jba" id="1557431477758-41">
-        <addForeignKeyConstraint baseColumnNames="FK_STATUS_ID" baseTableName="message" constraintName="FKMESSAGE241606" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="ID" referencedTableName="status"/>
+        <addForeignKeyConstraint baseColumnNames="FK_STATUS_ID" baseTableName="message" constraintName="FKMESSAGE241606"
+                                 deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION"
+                                 referencedColumnNames="ID" referencedTableName="status"/>
     </changeSet>
     <changeSet author="jba" id="1557431477758-42">
-        <addForeignKeyConstraint baseColumnNames="FK_USER_ID_FROM" baseTableName="message" constraintName="FKMESSAGE423697" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="ID" referencedTableName="user"/>
+        <addForeignKeyConstraint baseColumnNames="FK_USER_ID_FROM" baseTableName="message"
+                                 constraintName="FKMESSAGE423697" deferrable="false" initiallyDeferred="false"
+                                 onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="ID"
+                                 referencedTableName="user"/>
     </changeSet>
     <changeSet author="jba" id="1557431477758-43">
-        <addForeignKeyConstraint baseColumnNames="FK_USER_ID_TO" baseTableName="message" constraintName="FKMESSAGE853733" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="ID" referencedTableName="user"/>
+        <addForeignKeyConstraint baseColumnNames="FK_USER_ID_TO" baseTableName="message"
+                                 constraintName="FKMESSAGE853733" deferrable="false" initiallyDeferred="false"
+                                 onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="ID"
+                                 referencedTableName="user"/>
     </changeSet>
     <changeSet author="jba" id="1557431477758-44">
-        <addForeignKeyConstraint baseColumnNames="FK_PAGE_ID" baseTableName="page_authority" constraintName="FKPAGE_AUTHO676317" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="ID" referencedTableName="page"/>
+        <addForeignKeyConstraint baseColumnNames="FK_PAGE_ID" baseTableName="page_authority"
+                                 constraintName="FKPAGE_AUTHO676317" deferrable="false" initiallyDeferred="false"
+                                 onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="ID"
+                                 referencedTableName="page"/>
     </changeSet>
     <changeSet author="jba" id="1557431477758-45">
-        <addForeignKeyConstraint baseColumnNames="FK_AUTHORITY_ID" baseTableName="page_authority" constraintName="FKPAGE_AUTHO939906" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="ID" referencedTableName="authority"/>
+        <addForeignKeyConstraint baseColumnNames="FK_AUTHORITY_ID" baseTableName="page_authority"
+                                 constraintName="FKPAGE_AUTHO939906" deferrable="false" initiallyDeferred="false"
+                                 onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="ID"
+                                 referencedTableName="authority"/>
     </changeSet>
     <changeSet author="jba" id="1557431477758-46">
-        <addForeignKeyConstraint baseColumnNames="FK_PAGE_ID_PARENT" baseTableName="subpage" constraintName="FKSUBPAGE560386" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="ID" referencedTableName="page"/>
+        <addForeignKeyConstraint baseColumnNames="FK_PAGE_ID_PARENT" baseTableName="subpage"
+                                 constraintName="FKSUBPAGE560386" deferrable="false" initiallyDeferred="false"
+                                 onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="ID"
+                                 referencedTableName="page"/>
     </changeSet>
     <changeSet author="jba" id="1557431477758-47">
-        <addForeignKeyConstraint baseColumnNames="FK_PAGE_ID_CHILD" baseTableName="subpage" constraintName="FKSUBPAGE921558" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="ID" referencedTableName="page"/>
+        <addForeignKeyConstraint baseColumnNames="FK_PAGE_ID_CHILD" baseTableName="subpage"
+                                 constraintName="FKSUBPAGE921558" deferrable="false" initiallyDeferred="false"
+                                 onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="ID"
+                                 referencedTableName="page"/>
     </changeSet>
     <changeSet author="jba" id="1557431477758-48">
-        <addForeignKeyConstraint baseColumnNames="FK_AUTORITY_ID" baseTableName="user_authority" constraintName="FKUSER_AUTHO278605" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="ID" referencedTableName="authority"/>
+        <addForeignKeyConstraint baseColumnNames="FK_AUTORITY_ID" baseTableName="user_authority"
+                                 constraintName="FKUSER_AUTHO278605" deferrable="false" initiallyDeferred="false"
+                                 onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="ID"
+                                 referencedTableName="authority"/>
     </changeSet>
     <changeSet author="jba" id="1557431477758-49">
-        <addForeignKeyConstraint baseColumnNames="FK_USER_ID" baseTableName="user_authority" constraintName="FKUSER_AUTHO904035" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="ID" referencedTableName="user"/>
+        <addForeignKeyConstraint baseColumnNames="FK_USER_ID" baseTableName="user_authority"
+                                 constraintName="FKUSER_AUTHO904035" deferrable="false" initiallyDeferred="false"
+                                 onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="ID"
+                                 referencedTableName="user"/>
     </changeSet>
     <changeSet author="jba" id="1557431477758-50">
-        <addForeignKeyConstraint baseColumnNames="FK_MENU_ID" baseTableName="entry" constraintName="FK_MENU_ID" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="ID" referencedTableName="menu"/>
+        <addForeignKeyConstraint baseColumnNames="FK_MENU_ID" baseTableName="entry" constraintName="FK_MENU_ID"
+                                 deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION"
+                                 referencedColumnNames="ID" referencedTableName="menu"/>
     </changeSet>
     <changeSet author="jba" id="1557431477758-51">
-        <addForeignKeyConstraint baseColumnNames="FK_PAGE_ID" baseTableName="entry" constraintName="FK_SUBENTRY_ID" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="ID" referencedTableName="page"/>
+        <addForeignKeyConstraint baseColumnNames="FK_PAGE_ID" baseTableName="entry" constraintName="FK_SUBENTRY_ID"
+                                 deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION"
+                                 referencedColumnNames="ID" referencedTableName="page"/>
     </changeSet>
     <changeSet id="20190509-base-inserts" author="jba">
         <insert tableName="user">
@@ -454,5 +502,22 @@
             <column name="cdate" value="${now}"/>
             <column name="udate" value="${now}"/>
         </insert>
+    </changeSet>
+
+    <changeSet id="20190611-image-type-table" author="jba">
+        <createTable tableName="page_type">
+            <column name="ID" type="BIGINT" autoIncrement="true">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="LAYOUT_TITLE" type="VARCHAR(100)"/>
+            <column name="LAYOUT_NAME" type="VARCHAR(100)"/>
+            <column name="FK_IMAGE_ID" type="BIGINT"/>
+            <column name="CDATE" type="datetime(6)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="UDATE" type="datetime(6)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
     </changeSet>
 </databaseChangeLog>
