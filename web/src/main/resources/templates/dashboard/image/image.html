@@ -4,7 +4,7 @@
       xmlns:th="http://www.thymeleaf.org">
 
 <head>
-    <meta charset="UTF-8">
+    <meta th:replace="fragment/metadata">
     <title th:text="${@systemVariables.get(@varkey.PAGE_NAME)}+${breadcrumbTitle}">Failed</title>
     <div th:replace="fragment/import"></div>
     <link rel="stylesheet" href="../../../static/css/opencms.css"/>
@@ -25,7 +25,7 @@
             <h3>Obraz</h3>
         </div>
         <div class="row">
-            <div class="col-5">
+            <div class="col-md-12 col-lg-5">
                 <form th:object="${image}" th:action="'/dashboard/images/'+${imageId}" method="post">
                     <div class="form-group row">
                         <div class="col-12 floating-label-container">
@@ -59,7 +59,7 @@
                     </div>
                 </form>
             </div>
-            <div class="col-7">
+            <div class="col-md-12 col-lg-7 mb-3 mb-lg-0 order-first order-lg-last">
                 <img class="w-100" src="../../../static/images/bulb.png" th:src="'/image/'+${imageId}">
             </div>
         </div>
