@@ -23,16 +23,6 @@
     flex-direction: row;
 }
 
-.tiles>div{
-    margin:1em 1em 0 1em;
-}
-
-
-
-.tiles>div:last-child{
-    margin:1em 1em 1em 1em;
-}
-
 .tiles>div>.card{
     padding: 1em;
     text-align: center;
