@@ -66,12 +66,11 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     @Override
     public void configure(WebSecurity web) throws Exception {
         super.configure(web);
-        web.ignoring().antMatchers( "/webjars/**", "/css/**", "/js/**", "/image/**");
+        web.ignoring().antMatchers( "/webjars/**", "/css/**", "/js/**", "/image/**", "/images/**", "**/favicon.ico");
     }
 
     @Bean
     public PasswordEncoder passwordEncoder() {
-        BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
-        return passwordEncoder;
+        return new BCryptPasswordEncoder();
     }
 }

@@ -2,18 +2,17 @@
     border:0px solid red;
 }
 
-.box-login{
-    width: 50%;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    -webkit-transform: translateX(-50%) translateY(-50%);
-    -moz-transform: translateX(-50%) translateY(-50%);
-    -ms-transform: translateX(-50%) translateY(-50%);
-    -o-transform: translateX(-50%) translateY(-50%);
-    transform: translateX(-50%) translateY(-50%);
-    border-radius: 1em;
+@media (min-width: 1200px){
+    .box-login {
+    }
 }
+
+.box-login {
+    z-index:99;
+    border-radius: 1rem;
+    text-align:center;
+}
+
 
 .icon-vh{
     font-size: 10vw;
@@ -108,17 +107,14 @@
 }
 
 .backdrop-image{
-    position: absolute;
-    overflow: hidden;
-    top:50%;
-    left: 50%;
-    min-height: 100%;
-    z-index: -100;
-    transform: translateX(-50%) translateY(-50%);
+    background-image: url(/images/login-backdrop.jpg);
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    -webkit-animation-name: backdrop-floaty;
+    -moz-animation-name: backdrop-floaty;
+    -o-animation-name: backdrop-floaty;
     animation-name: backdrop-floaty;
-    animation-direction: alternate;
-    animation-iteration-count: infinite;
-    animation-duration: 10s;
 }
 
 @keyframes btn-hover {
