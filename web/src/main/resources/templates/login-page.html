@@ -4,7 +4,8 @@
       xmlns:th="http://www.thymeleaf.org">
 
 <head>
-    <meta charset="UTF-8">
+    <meta th:replace="fragment/metadata">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title th:text="${@systemVariables.get('page.name')+' - Login'}">Failed</title>
     <div th:replace="fragment/import"></div>
     <div th:if="${1==0}">
@@ -12,35 +13,40 @@
         <link rel="stylesheet" href="../static/css/bootstrap-theme.css"/>
         <script src="/webjars/jquery/3.4.0/jquery.js"></script>
         <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css"
-              integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+              integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf"
+              crossorigin="anonymous">
         <link rel="stylesheet" href="../static/css/opencms.css"/>
     </div>
 </head>
 <body class="bg-dark overflow-hidden">
-<img th:unless="${@systemVariables.get(@varkey.LOGIN_BACKDROP).equals('none')}"
-     th:src="@{'/image/'+${@systemVariables.get(@varkey.LOGIN_BACKDROP)}}" src="../static/images/login-backdrop.jpg" class="backdrop-image">
-<div class="box-login bg-white p-5 shadow">
-    <h1 class="text-center mb-4" style="font-size: calc(2rem + 4vw);">zaloguj sie</h1>
+<div class="d-flex flex-column justify-content-center backdrop-image" style="width: 100vw; height: 100vh;">
+    <div class="d-flex flex-row justify-content-center">
+    <div class="box-login bg-white p-5 shadow">
+        <h1 class="text-center mb-4" style="font-size: calc(2rem + 4vw);">zaloguj sie</h1>
 
-    <form method="post" th:action="@{/login}">
-        <div class="form-group row">
-            <div class="col-12 floating-label-container">
-                <label for="username" class="">adres e-mail</label>
-                <input id="username" name="username" type="text" required="required" class="form-control">
+        <form method="post" th:action="@{/login}">
+            <div class="form-group row">
+                <div class="col-12 floating-label-container">
+                    <label for="username" class="">adres e-mail</label>
+                    <input id="username" name="username" type="text" required="required" class="form-control">
+                </div>
             </div>
-        </div>
-        <div class="form-group row">
-            <div class="col-12 floating-label-container">
-                <label for="username" class="">hasło</label>
-                <input id="password" name="password" type="password" class="form-control" required="required">
+            <div class="form-group row">
+                <div class="col-12 floating-label-container">
+                    <label for="username" class="">hasło</label>
+                    <input id="password" name="password" type="password" class="form-control" required="required">
+                </div>
             </div>
-        </div>
-        <div class="form-group row mt-5">
-            <div class="col-12 text-center">
-                <button name="submit" type="submit" class="btn p-3 btn-primary btn-block btn-hover text-white">Zatwierdź</button>
+            <div class="form-group row mt-5">
+                <div class="col-12 text-center">
+                    <button name="submit" type="submit" class="btn p-3 btn-primary btn-block btn-hover text-white">
+                        Zatwierdź
+                    </button>
+                </div>
             </div>
-        </div>
-    </form>
+        </form>
+    </div>
+    </div>
 </div>
 </body>
 </html>

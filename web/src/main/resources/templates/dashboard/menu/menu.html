@@ -4,7 +4,7 @@
       xmlns:th="http://www.thymeleaf.org">
 
     <head>
-        <meta charset="UTF-8">
+        <meta th:replace="fragment/metadata">
         <title th:text="${@systemVariables.get(@varkey.PAGE_NAME)}+${breadcrumbTitle}">Failed</title>
         <div th:replace="fragment/import"></div>
         <link rel="stylesheet" href="../../../static/css/opencms.css"/>

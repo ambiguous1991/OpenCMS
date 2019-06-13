@@ -4,7 +4,7 @@
       xmlns:th="http://www.thymeleaf.org">
 
     <head>
-        <meta charset="UTF-8">
+        <meta th:replace="fragment/metadata">
         <title th:text="${@systemVariables.get(@varkey.PAGE_NAME)}+${breadcrumbTitle}">Failed</title>
         <div th:replace="fragment/import"></div>
         <link rel="stylesheet" href="../../../static/css/opencms.css"/>
@@ -55,15 +55,12 @@
                     </div>
                 </div>
                 <div class="form-group row text-center mt-5">
-                    <div class="col-1"></div>
-                    <div class="col-4">
+                    <div class="offset-1 col-10 mb-2 offset-md-2 col-md-3 mb-md-0">
                         <button name="submit" type="submit" class="btn btn-block btn-primary">Zatwierdź</button>
                     </div>
-                    <div class="col-2"></div>
-                    <div class="col-4">
+                    <div class="offset-1 col-10 offset-md-2 col-md-3">
                         <a href="#" th:href="'/dashboard/menu/'+${menuId}+'/'+${entry.getId()+'/delete'}" class="btn btn-block btn-danger">Usuń</a>
                     </div>
-                    <div class="col-1"></div>
                 </div>
             </form>
             <div class="d-flex flex-row mt-5">
