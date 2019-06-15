@@ -40,7 +40,11 @@ public class PageController {
 
         model.addAttribute("menu", entries);
 
-        return "page-template/one-column-half-width";
+        if(page.getPageType()!=null){
+            return page.getPageType().getLayoutName();
+        }
+        else
+            return "page-template/one-column-half-width";
     }
 
     @RequestMapping(value = "/page/{pageId}", method = RequestMethod.GET)
