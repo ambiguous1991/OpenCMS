@@ -1,14 +1,14 @@
-package com.jba.opencms.web.controller.admin.globals;
+package com.jba.opencms.web.controller.admin.systemvariables;
 
 import com.jba.opencms.globals.GlobalsService;
 import com.jba.opencms.type.system.SystemVariable;
-import com.jba.opencms.web.controller.admin.globals.form.SystemVariableForm;
+import com.jba.opencms.web.controller.admin.systemvariables.form.SystemVariableForm;
 import net.bytebuddy.utility.RandomString;
 import org.springframework.context.annotation.Lazy;
-import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -16,10 +16,11 @@ import org.springframework.web.servlet.view.RedirectView;
 
 import javax.validation.Valid;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 @Controller
 @Lazy
-@RequestMapping(value = "/dashboard/globals")
+@RequestMapping(value = "/dashboard/system-variables")
 public class GlobalsController {
 
     private GlobalsService globalsService;
@@ -34,7 +35,7 @@ public class GlobalsController {
     public String getGlobalsList(Model model){
         model.addAttribute("attributes", globalsService.findAll(false));
 
-        return "dashboard/global/globals";
+        return "dashboard/system-variables/system-variables";
     }
 
     @RequestMapping(value = "/new", method = RequestMethod.POST)
@@ -46,7 +47,7 @@ public class GlobalsController {
         globalsService.create(attribute);
         updateGlobals(attribute);
 
-        return new RedirectView("/dashboard/globals/"+attribute.getId());
+        return new RedirectView("/dashboard/system-variables/"+attribute.getId());
     }
 
     @RequestMapping(value = "/{globalId}")
@@ -55,7 +56,7 @@ public class GlobalsController {
         SystemVariableForm form = SystemVariableForm.from(globalsService.findOne(globalId, false));
         model.addAttribute("form", form);
 
-        return "dashboard/global/global-edit";
+        return "dashboard/system-variables/system-variable-edit";
     }
 
     @RequestMapping(value = "/{globalId}", method = RequestMethod.POST)
@@ -63,7 +64,7 @@ public class GlobalsController {
                                     BindingResult bindingResult,
                                     @PathVariable("globalId") Long globalId){
         if(bindingResult.hasErrors()){
-            RedirectView redirectView = new RedirectView("/dashboard/globals/{globalId}");
+            RedirectView redirectView = new RedirectView("/dashboard/system-variables/{globalId}?error");
             return redirectView;
         }
 
@@ -74,7 +75,7 @@ public class GlobalsController {
         globalsService.update(fromDB);
         updateGlobals(fromDB);
 
-        return new RedirectView("/dashboard/globals?success");
+        return new RedirectView("/dashboard/system-variables?success");
     }
 
     private void updateGlobals(SystemVariable systemVariable){

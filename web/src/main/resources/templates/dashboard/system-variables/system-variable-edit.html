@@ -26,7 +26,7 @@
 <div class="wrapper" style="max-height: 100vh;">
     <div th:replace="fragment/admin-sidebar"></div>
     <div class="flex-grow-1 flex-column d-flex overflow-auto p-5">
-        <form th:object="${form}" method="post" th:action="'/dashboard/globals/'+${form.getId()}">
+        <form th:object="${form}" method="post" th:action="'/dashboard/system-variables/'+${form.getId()}">
             <h3 class="mb-4 font-family-roboto">Edycja zmiennej <span class="text-monospace" th:text="${form.getKey()}">test</span>
             </h3>
             <div class="form-group row">
