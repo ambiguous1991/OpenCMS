@@ -40,7 +40,8 @@ public class BreadcrumbInterceptor extends HandlerInterceptorAdapter {
                 !uri.contains("/static") &&
                 !uri.contains("/js") &&
                 !uri.contains("/css") &&
-                !request.getMethod().equals("PUT");
+                !request.getMethod().equals("PUT") &&
+                !request.getMethod().equals("PATCH");
     }
 
     private List<Breadcrumb> requestToBreadcrumb(final String requestURI){
