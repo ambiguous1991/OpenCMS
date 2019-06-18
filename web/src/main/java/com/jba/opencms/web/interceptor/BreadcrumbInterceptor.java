@@ -76,6 +76,8 @@ public class BreadcrumbInterceptor extends HandlerInterceptorAdapter {
         map.put("images", "Obrazy");
         map.put("add", "Dodaj");
         map.put("system-variables", "Serwis");
+        map.put("users", "Użytkownicy");
+        map.put("change-password", "Zmiana hasła");
         return map;
     }
 }
