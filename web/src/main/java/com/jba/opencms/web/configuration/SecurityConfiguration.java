@@ -68,9 +68,4 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
         super.configure(web);
         web.ignoring().antMatchers( "/webjars/**", "/css/**", "/js/**", "/image/**", "/images/**", "**/favicon.ico");
     }
-
-    @Bean
-    public PasswordEncoder passwordEncoder() {
-        return new BCryptPasswordEncoder();
-    }
 }

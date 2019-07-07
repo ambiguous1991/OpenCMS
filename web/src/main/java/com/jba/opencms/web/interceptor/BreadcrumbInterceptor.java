@@ -40,7 +40,8 @@ public class BreadcrumbInterceptor extends HandlerInterceptorAdapter {
                 !uri.contains("/static") &&
                 !uri.contains("/js") &&
                 !uri.contains("/css") &&
-                !request.getMethod().equals("PUT");
+                !request.getMethod().equals("PUT") &&
+                !request.getMethod().equals("PATCH");
     }
 
     private List<Breadcrumb> requestToBreadcrumb(final String requestURI){
@@ -76,6 +77,8 @@ public class BreadcrumbInterceptor extends HandlerInterceptorAdapter {
         map.put("images", "Obrazy");
         map.put("add", "Dodaj");
         map.put("system-variables", "Serwis");
+        map.put("users", "Użytkownicy");
+        map.put("change-password", "Zmiana hasła");
         return map;
     }
 }
