@@ -27,7 +27,7 @@
         <dao.version>1.1.0</dao.version>
         <security.version>1.1.0</security.version>
         <service.version>1.1.0</service.version>
-        <web.version>1.2.7</web.version>
+        <web.version>1.3.0</web.version>
 
         <java.version>1.8</java.version>
         <lombok.version>1.18.4</lombok.version>
