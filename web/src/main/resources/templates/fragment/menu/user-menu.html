@@ -19,7 +19,7 @@
                     th:class="${hasSub}? 'nav-item dropdown' : 'nav-item'">
                     <a
                             th:class="${hasSub} ? 'nav-link dropdown-toggle' : 'nav-link'"
-                            th:href="${hasSub} ? '#' : '/page/'+${menuItem.getPage().getId()    }"
+                            th:href="${hasSub} ? '#' : '/page/'+${menuItem.getPage().getId()}"
                             th:id="${menuItem.getLabel()}"
                             role="button"
                             th:data-toggle="${hasSub} ? 'dropdown' : ''"
