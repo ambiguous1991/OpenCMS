@@ -1,8 +1,8 @@
-package com.jba.opencms.web.controller.admin.globals.validators;
+package com.jba.opencms.web.controller.admin.systemvariables.validators;
 
 import com.jba.opencms.globals.GlobalsService;
 import com.jba.opencms.type.system.SystemVariable;
-import com.jba.opencms.web.controller.admin.globals.form.SystemVariableForm;
+import com.jba.opencms.web.controller.admin.systemvariables.form.SystemVariableForm;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Component;
 
@@ -11,15 +11,15 @@ import javax.validation.ConstraintValidatorContext;
 
 @Component
 @Lazy
-public class GlobalsValidator implements ConstraintValidator<UniqueGlobal, SystemVariableForm> {
+public class SystemVariableValidator implements ConstraintValidator<UniqueSystemVariable, SystemVariableForm> {
     private GlobalsService globalsService;
 
-    public GlobalsValidator(GlobalsService globalsService) {
+    public SystemVariableValidator(GlobalsService globalsService) {
         this.globalsService = globalsService;
     }
 
     @Override
-    public void initialize(UniqueGlobal constraintAnnotation) {
+    public void initialize(UniqueSystemVariable constraintAnnotation) {
     }
 
     @Override

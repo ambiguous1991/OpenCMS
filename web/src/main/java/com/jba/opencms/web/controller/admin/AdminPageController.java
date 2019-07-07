@@ -108,7 +108,11 @@ public class AdminPageController {
         model.addAttribute("page", page);
         model.addAttribute("menu", menu);
 
-        return "index";
+        if(page.getPageType()!=null){
+            return page.getPageType().getLayoutName();
+        }
+        else
+            return "page-template/one-column-half-width";
     }
 
     @RequestMapping(value = "/{pageId}/update", method = RequestMethod.PUT)

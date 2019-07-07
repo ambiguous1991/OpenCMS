@@ -18,8 +18,19 @@
                     th:with="subetries=${menuItem.getSubentires()}, hasSub=${menuItem.getSubentires().size()>0}"
                     th:class="${hasSub}? 'nav-item dropdown' : 'nav-item'">
                     <a
+                            th:if="${menuItem.getPage()!=null}"
                             th:class="${hasSub} ? 'nav-link dropdown-toggle' : 'nav-link'"
-                            th:href="${hasSub} ? '#' : '/page/'"
+                            th:href="${hasSub} ? '#' : '/page/'+${menuItem.getPage().getId()}"
+                            th:id="${menuItem.getLabel()}"
+                            role="button"
+                            th:data-toggle="${hasSub} ? 'dropdown' : ''"
+                            th:text="${menuItem.getLabel()}">
+                        PLACEHOLDER
+                    </a>
+                    <a
+                            th:if="${menuItem.getPage()==null}"
+                            th:class="${hasSub} ? 'nav-link dropdown-toggle' : 'nav-link'"
+                            th:href="${hasSub} ? '#' : '/page/#'"
                             th:id="${menuItem.getLabel()}"
                             role="button"
                             th:data-toggle="${hasSub} ? 'dropdown' : ''"

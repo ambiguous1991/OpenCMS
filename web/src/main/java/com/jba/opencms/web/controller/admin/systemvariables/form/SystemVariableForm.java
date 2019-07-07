@@ -1,7 +1,7 @@
-package com.jba.opencms.web.controller.admin.globals.form;
+package com.jba.opencms.web.controller.admin.systemvariables.form;
 
 import com.jba.opencms.type.system.SystemVariable;
-import com.jba.opencms.web.controller.admin.globals.validators.UniqueGlobal;
+import com.jba.opencms.web.controller.admin.systemvariables.validators.UniqueSystemVariable;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -13,7 +13,7 @@ import java.time.OffsetDateTime;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@UniqueGlobal
+@UniqueSystemVariable
 public class SystemVariableForm {
 
     private Long id;

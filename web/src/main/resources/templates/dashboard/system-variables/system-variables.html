@@ -25,7 +25,7 @@
 <div class="wrapper" style="max-height: 100vh;">
     <div th:replace="fragment/admin-sidebar"></div>
     <div class="flex-grow-1 flex-column d-flex overflow-auto p-5">
-        <form action="/dashboard/globals/new" method="post" class="mb-2">
+        <form action="/dashboard/system-variables/new" method="post" class="mb-2">
             <div class="row">
                 <div class="col-6">
                     <h3>Zmienne srodowiskowe</h3>
@@ -53,7 +53,7 @@
             <tbody>
             <tr th:each="attr: ${attributes}" class="border-bottom">
                 <td th:text="${attr.getKey()}">key</td>
-                <td><a href="#" th:href="${'/dashboard/globals/'+attr.getId()}"><span th:text="${attr.getValue()}">value</span></a></td>
+                <td><a href="#" th:href="${'/dashboard/system-variables/'+attr.getId()}"><span th:text="${attr.getValue()}">value</span></a></td>
                 <td th:text="${#temporals.format(attr.getUpdated(), @systemVariables.get(@varkey.SYSTEM_DASHBOARD_DATE_FORMAT))}">2019-06-09</td>
             </tr>
             </tbody>
