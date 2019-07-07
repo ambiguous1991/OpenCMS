@@ -13,3 +13,8 @@ spring:
     user: ${spring.datasource.username}
 server:
   port: 5000
+  tomcat:
+    remote-ip-header: x-forwarded-for
+    protocol-header: x-forwarded-proto
+    use-relative-redirects: true
+  use-forward-headers: true
