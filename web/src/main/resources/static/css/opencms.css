@@ -129,3 +129,8 @@
 .font-family-roboto{
     font-family: Roboto,sans-serif;
 }
+
+.footer-fixed{
+    position:fixed;
+    bottom:0;
+}
