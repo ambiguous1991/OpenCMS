@@ -8,9 +8,11 @@ import java.io.IOException;
 public class AmazonS3FileRepository implements FileRepository {
 
     private AmazonS3 bucketClient;
+    private String bucketName;
 
-    public AmazonS3FileRepository(AmazonS3 bucketClient) {
+    public AmazonS3FileRepository(AmazonS3 bucketClient, String bucketName) {
         this.bucketClient = bucketClient;
+        this.bucketName=bucketName;
     }
 
     @Override
