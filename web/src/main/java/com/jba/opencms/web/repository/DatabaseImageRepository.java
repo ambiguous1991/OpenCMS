@@ -2,14 +2,12 @@ package com.jba.opencms.web.repository;
 
 import com.jba.opencms.image.ImageService;
 import com.jba.opencms.type.image.Image;
-import org.springframework.stereotype.Repository;
 
-@Repository
-public class ImageRepositoryImpl implements ImageRepository {
+public class DatabaseImageRepository implements ImageRepository {
 
     private ImageService imageService;
 
-    public ImageRepositoryImpl(ImageService imageService) {
+    public DatabaseImageRepository(ImageService imageService) {
         this.imageService = imageService;
     }
 
