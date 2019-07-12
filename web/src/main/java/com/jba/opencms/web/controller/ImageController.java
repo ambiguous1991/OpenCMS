@@ -38,7 +38,7 @@ public class ImageController {
 
     @RequestMapping(value = "/{imageId}", method = RequestMethod.GET)
     public RedirectView getImage(
-            @PathVariable("imageId") Long imageId,
+            @PathVariable("imageId") String imageId,
             HttpServletResponse response
     ){
         response.setStatus(HttpServletResponse.SC_OK);
@@ -47,7 +47,7 @@ public class ImageController {
 
     @RequestMapping(value = "/{imageId}/{imageName}")
     public void getImageWithReadableName(
-        @PathVariable("imageId") Long imageId,
+        @PathVariable("imageId") String imageId,
         @PathVariable("imageName") String imageName,
         HttpServletResponse response
     ) throws IOException{

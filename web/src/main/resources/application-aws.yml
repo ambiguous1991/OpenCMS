@@ -1,3 +1,16 @@
+application:
+  opencms:
+    web:
+      extension: .s3.eu-west-3.amazonaws.com
+      style: /resources/css/opencms.css
+      theme: /resources/css/theme.css
+server:
+  port: 5000
+  tomcat:
+    remote-ip-header: x-forwarded-for
+    protocol-header: x-forwarded-proto
+    use-relative-redirects: true
+  use-forward-headers: true
 spring:
   datasource:
     url: jdbc:mysql://jba.ckrms4qkskz1.eu-west-3.rds.amazonaws.com:3306/opencms?useSSL=false&serverTimezone=UTC&allowPublicKeyRetrieval=true
@@ -11,10 +24,3 @@ spring:
     url: ${spring.datasource.url}
     password: ${spring.datasource.password}
     user: ${spring.datasource.username}
-server:
-  port: 5000
-  tomcat:
-    remote-ip-header: x-forwarded-for
-    protocol-header: x-forwarded-proto
-    use-relative-redirects: true
-  use-forward-headers: true
