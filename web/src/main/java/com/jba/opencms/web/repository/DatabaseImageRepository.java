@@ -12,23 +12,23 @@ public class DatabaseImageRepository implements ImageRepository {
     }
 
     @Override
-    public byte[] get(Long id) {
-        return imageService.findOne(id, false).getData();
+    public byte[] get(String id) {
+        return imageService.findOne(Long.parseLong(id), false).getData();
     }
 
     @Override
-    public String getName(Long id) {
-        return imageService.findOne(id, false).getName();
+    public String getName(String id) {
+        return imageService.findOne(Long.parseLong(id), false).getName();
     }
 
     @Override
-    public String getExtension(Long id) {
-        return imageService.findOne(id, false).getExtension();
+    public String getExtension(String id) {
+        return imageService.findOne(Long.parseLong(id), false).getExtension();
     }
 
     @Override
-    public String getFullName(Long id) {
-        Image image = imageService.findOne(id, false);
+    public String getFullName(String id) {
+        Image image = imageService.findOne(Long.parseLong(id), false);
         return image.getName()+"."+image.getExtension();
     }
 }
