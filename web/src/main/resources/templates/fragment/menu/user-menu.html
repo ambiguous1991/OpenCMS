@@ -1,58 +1,52 @@
-<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-4.dtd">
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <a class="navbar-brand" href="/" th:text="${@systemVariables.get('page.name')}">Navbar</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
 
-<html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:th="http://www.thymeleaf.org">
-    <link rel="stylesheet" href="../../../static/css/bootstrap.css"/>
-    <link rel="stylesheet" href="../../../static/css/bootstrap-theme.css"/>
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-        <a class="navbar-brand" href="#" th:text="${@systemVariables.get('page.name')}">Navbar</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
-                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav mr-auto">
-                <!--/*@thymesVar id="menuItem" type="com.jba.opencms.type.menu.Entry"*/-->
-                <li th:each="menuItem: ${menu}"
-                    th:with="subetries=${menuItem.getSubentires()}, hasSub=${menuItem.getSubentires().size()>0}"
-                    th:class="${hasSub}? 'nav-item dropdown' : 'nav-item'">
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+            <!--/*@thymesVar id="menuItem" type="com.jba.opencms.type.menu.Entry"*/-->
+            <li th:each="menuItem: ${menu}"
+                th:with="subetries=${menuItem.getSubentires()}, hasSub=${menuItem.getSubentires().size()>0}"
+                th:class="${hasSub}? 'nav-item dropdown' : 'nav-item'">
+                <a
+                        th:if="${menuItem.getPage()!=null}"
+                        th:class="${hasSub} ? 'nav-link dropdown-toggle' : 'nav-link'"
+                        th:href="${hasSub} ? '#' : '/page/'+${menuItem.getPage().getId()}"
+                        th:id="${menuItem.getLabel()}"
+                        role="button"
+                        th:data-toggle="${hasSub} ? 'dropdown' : ''"
+                        th:text="${menuItem.getLabel()}">
+                    PLACEHOLDER
+                </a>
+                <a
+                        th:if="${menuItem.getPage()==null}"
+                        th:class="${hasSub} ? 'nav-link dropdown-toggle' : 'nav-link'"
+                        th:href="${hasSub} ? '#' : '/page/#'"
+                        th:id="${menuItem.getLabel()}"
+                        role="button"
+                        th:data-toggle="${hasSub} ? 'dropdown' : ''"
+                        th:text="${menuItem.getLabel()}">
+                    PLACEHOLDER
+                </a>
+                <div th:if="${hasSub}" class="dropdown-menu">
                     <a
-                            th:if="${menuItem.getPage()!=null}"
-                            th:class="${hasSub} ? 'nav-link dropdown-toggle' : 'nav-link'"
-                            th:href="${hasSub} ? '#' : '/page/'+${menuItem.getPage().getId()}"
-                            th:id="${menuItem.getLabel()}"
-                            role="button"
-                            th:data-toggle="${hasSub} ? 'dropdown' : ''"
-                            th:text="${menuItem.getLabel()}">
+                            th:each="subentry: ${subetries}"
+                            class="dropdown-item"
+                            th:href="${subentry.getPage()}==null ? '#' : '/page/'+${subentry.getPage().getId()}"
+                            th:text="${subentry.getLabel()}">
                         PLACEHOLDER
                     </a>
-                    <a
-                            th:if="${menuItem.getPage()==null}"
-                            th:class="${hasSub} ? 'nav-link dropdown-toggle' : 'nav-link'"
-                            th:href="${hasSub} ? '#' : '/page/#'"
-                            th:id="${menuItem.getLabel()}"
-                            role="button"
-                            th:data-toggle="${hasSub} ? 'dropdown' : ''"
-                            th:text="${menuItem.getLabel()}">
-                        PLACEHOLDER
-                    </a>
-                    <div th:if="${hasSub}" class="dropdown-menu">
-                        <a
-                                th:each="subentry: ${subetries}"
-                                class="dropdown-item"
-                                th:href="${subentry.getPage()}==null ? '#' : '/page/'+${subentry.getPage().getId()}"
-                                th:text="${subentry.getLabel()}">
-                            PLACEHOLDER
-                        </a>
-                    </div>
-                </li>
+                </div>
+            </li>
 
-            </ul>
-            <ul class="navbar-nav mr-0">
-                <li class="nav-item mr-0">
-                    <a class="nav-link" href="/dashboard">Zaloguj się</a>
-                </li>
-            </ul>
-        </div>
-    </nav>
+        </ul>
+        <ul class="navbar-nav mr-0">
+            <li class="nav-item mr-0">
+                <a class="nav-link" href="/dashboard">Zaloguj się</a>
+            </li>
+        </ul>
+    </div>
+</nav>
