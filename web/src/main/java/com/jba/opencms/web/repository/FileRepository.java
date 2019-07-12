@@ -7,5 +7,4 @@ public interface FileRepository {
     File get(String path) throws IOException;
     void save(File file) throws IOException;
     boolean delete(File file) throws IOException;
-
 }
