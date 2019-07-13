@@ -4,13 +4,13 @@
       xmlns:th="http://www.thymeleaf.org">
 
 <link rel="stylesheet" href="/webjars/bootstrap/4.3.1/css/bootstrap.css"/>
-<th:block th:if="${@environment.getActiveProfiles()[0] == 'local'}">
+<th:block th:unless="${@systemVariables.get(@varkey.PAGE_PRESENTATION_OUTSIDE_SOURCES)}==1">
     <link rel="stylesheet" href="/css/bootstrap-theme.css"/>
     <link rel="stylesheet" href="/css/opencms.css"/>
 </th:block>
-<th:block th:if="${@environment.getActiveProfiles()[0] == 'aws'}">
-    <link rel="stylesheet" th:href="'https://'+${@environment.getProperty('cloud.aws.bucket')}+${@environment.getProperty('application.opencms.web.extension')}+${@environment.getProperty('application.opencms.web.theme')}"/>
-    <link rel="stylesheet" th:href="'https://'+${@environment.getProperty('cloud.aws.bucket')}+${@environment.getProperty('application.opencms.web.extension')}+${@environment.getProperty('application.opencms.web.style')}"/>
+<th:block th:if="${@systemVariables.get(@varkey.PAGE_PRESENTATION_OUTSIDE_SOURCES)}==1">
+    <link rel="stylesheet" th:href="'https://'+${@environment.getProperty('cloud.aws.bucket')}+${@environment.getProperty('application.opencms.web.extension')}+${@systemVariables.get(@varkey.PAGE_PRESENTATION_GLOBAL_CSS_NAME)}"/>
+    <link rel="stylesheet" th:href="'https://'+${@environment.getProperty('cloud.aws.bucket')}+${@environment.getProperty('application.opencms.web.extension')}+${@systemVariables.get(@varkey.PAGE_PRESENTATION_THEME_CSS_NAME)}"/>
 </th:block>
 <script src="/webjars/jquery/3.4.0/jquery.js"></script>
 <script type="text/javascript" src="/webjars/popper.js/1.14.7/umd/popper.js"></script>
