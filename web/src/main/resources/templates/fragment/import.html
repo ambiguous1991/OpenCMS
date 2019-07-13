@@ -4,11 +4,11 @@
       xmlns:th="http://www.thymeleaf.org">
 
 <link rel="stylesheet" href="/webjars/bootstrap/4.3.1/css/bootstrap.css"/>
-<th:block th:unless="${@systemVariables.get(@varkey.PAGE_PRESENTATION_OUTSIDE_SOURCES)}==1">
+<th:block th:unless="${@systemVariables.get(@varkey.PAGE_PRESENTATION_OUTSIDE_SOURCES)}=='1'">
     <link rel="stylesheet" href="/css/bootstrap-theme.css"/>
     <link rel="stylesheet" href="/css/opencms.css"/>
 </th:block>
-<th:block th:if="${@systemVariables.get(@varkey.PAGE_PRESENTATION_OUTSIDE_SOURCES)}==1">
+<th:block th:if="${@systemVariables.get(@varkey.PAGE_PRESENTATION_OUTSIDE_SOURCES)}=='1'">
     <link rel="stylesheet" th:href="'https://'+${@environment.getProperty('cloud.aws.bucket')}+${@environment.getProperty('application.opencms.web.extension')}+${@systemVariables.get(@varkey.PAGE_PRESENTATION_GLOBAL_CSS_NAME)}"/>
     <link rel="stylesheet" th:href="'https://'+${@environment.getProperty('cloud.aws.bucket')}+${@environment.getProperty('application.opencms.web.extension')}+${@systemVariables.get(@varkey.PAGE_PRESENTATION_THEME_CSS_NAME)}"/>
 </th:block>
