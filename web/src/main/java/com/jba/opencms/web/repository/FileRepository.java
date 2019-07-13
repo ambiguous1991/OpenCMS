@@ -1,13 +1,13 @@
 package com.jba.opencms.web.repository;
 
-import java.io.File;
-import java.io.IOException;
+import java.io.FileNotFoundException;
 import java.io.InputStream;
+import java.util.List;
 
 public interface FileRepository {
-    InputStream get(String path) throws IOException;
-    void save(String path, String filename, File file) throws IOException;
-    void update(String path, String filename, File file) throws IOException;
-    boolean delete(String path) throws IOException;
-    String list(String path) throws IOException;
+    InputStream get(String path) throws FileNotFoundException, IllegalArgumentException;
+    void save(String path, InputStream input) throws IllegalArgumentException;
+    void update(String path, InputStream input) throws FileNotFoundException, IllegalArgumentException;
+    boolean delete(String path) throws FileNotFoundException, IllegalArgumentException;
+    List<String> list(String path) throws IllegalArgumentException;
 }
