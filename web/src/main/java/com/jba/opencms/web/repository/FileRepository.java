@@ -6,8 +6,8 @@ import java.util.List;
 
 public interface FileRepository {
     InputStream get(String path) throws FileNotFoundException, IllegalArgumentException;
-    void save(String path, InputStream input) throws IllegalArgumentException;
-    void update(String path, InputStream input) throws FileNotFoundException, IllegalArgumentException;
+    void save(String path, InputStream input, FileAccessMode mode) throws IllegalArgumentException;
+    void update(String path, InputStream input, FileAccessMode mode) throws FileNotFoundException, IllegalArgumentException;
     boolean delete(String path) throws FileNotFoundException, IllegalArgumentException;
     List<String> list(String path) throws IllegalArgumentException;
 }

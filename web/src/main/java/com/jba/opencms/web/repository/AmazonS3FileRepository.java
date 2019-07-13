@@ -1,10 +1,7 @@
 package com.jba.opencms.web.repository;
 
 import com.amazonaws.services.s3.AmazonS3;
-import com.amazonaws.services.s3.model.ObjectListing;
-import com.amazonaws.services.s3.model.ObjectMetadata;
-import com.amazonaws.services.s3.model.S3Object;
-import com.amazonaws.services.s3.model.S3ObjectSummary;
+import com.amazonaws.services.s3.model.*;
 
 import java.io.FileNotFoundException;
 import java.io.InputStream;
@@ -18,7 +15,6 @@ public class AmazonS3FileRepository implements FileRepository {
 
     private AmazonS3 repository;
     private String bucketName;
-
 
     public AmazonS3FileRepository(AmazonS3 repository, String bucketName) {
         this.repository = repository;
@@ -35,10 +31,12 @@ public class AmazonS3FileRepository implements FileRepository {
     }
 
     @Override
-    public void save(String path, InputStream input) throws IllegalArgumentException{
+    public void save(String path, InputStream input, FileAccessMode mode) throws IllegalArgumentException{
         if(isPathInvalid(path)) throw new IllegalArgumentException(String.format(MESSAGE_INVALID_PATH, path));
         ObjectMetadata metadata = new ObjectMetadata();
-        repository.putObject(bucketName, path, input, metadata);
+        repository.putObject(
+                new PutObjectRequest(bucketName, path, input, metadata)
+                        .withCannedAcl(fileAccessModeToCannedAccessControl(mode)));
     }
 
     @Override
@@ -51,11 +49,11 @@ public class AmazonS3FileRepository implements FileRepository {
     }
 
     @Override
-    public void update(String path, InputStream input) throws FileNotFoundException, IllegalArgumentException {
+    public void update(String path, InputStream input, FileAccessMode mode) throws FileNotFoundException, IllegalArgumentException {
         if(checkDoesFileExist(path)) {
             boolean isSuccessful = delete(path);
             if (isSuccessful) {
-                save(path, input);
+                save(path, input, mode);
             }
         }
         else throw new FileNotFoundException(String.format(MESSAGE_FILE_NOT_FOUND, path, bucketName));
@@ -81,5 +79,14 @@ public class AmazonS3FileRepository implements FileRepository {
 
     private boolean isPathInvalid(String path){
         return path.startsWith("/");
+    }
+
+    private CannedAccessControlList fileAccessModeToCannedAccessControl(FileAccessMode mode){
+        switch (mode){
+            case PUBLIC_READ_ONLY: return CannedAccessControlList.PublicRead;
+            case PUBLIC_READ_WRITE: return CannedAccessControlList.PublicReadWrite;
+            case PRIVATE: return CannedAccessControlList.Private;
+            default: return CannedAccessControlList.Private;
+        }
     }
 }

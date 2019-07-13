@@ -49,7 +49,7 @@ public class AmazonS3FileRepositoryTest {
         String path = "test/test.txt";
 
         InputStream input = new ByteArrayInputStream(writeToFile.getBytes());
-        repository.save(path, input);
+        repository.save(path, input, FileAccessMode.PRIVATE);
     }
 
     @Test
@@ -60,7 +60,7 @@ public class AmazonS3FileRepositoryTest {
         String path = "test/test.txt";
 
         InputStream inputStream = new ByteArrayInputStream(writeToFile.getBytes());
-        repository.update(path, inputStream);
+        repository.update(path, inputStream, FileAccessMode.PUBLIC_READ_ONLY);
     }
 
     @Test
