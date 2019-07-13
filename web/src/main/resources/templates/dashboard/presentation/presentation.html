@@ -30,9 +30,9 @@
         </div>
         <div>
             <div class="list-group">
-                <a href="/dashboard/presentation/css-edit?file=mail" class="list-group-item border-0 p-0"><i class="fas fa-key mr-4 pr-1"></i>Edycja głównego pliku stylu</a>
+                <a th:href="'/dashboard/presentation/edit-css?file='+${@systemVariables.get(@varkey.PAGE_PRESENTATION_GLOBAL_CSS_NAME)}" class="list-group-item border-0 p-0"><i class="fas fa-key mr-4 pr-1"></i>Edycja głównego pliku stylu</a>
                 <a href="#" class="list-group-item border-0 p-0"><i class="fas fa-user-edit mr-4"></i>Zmiana pliku motywu</a>
-                <a href="/dashboard/presentation/css-edit?file=theme" class="list-group-item border-0 p-0"><i class="fas fa-user-plus mr-4"></i>Edycja pliku motywu</a>
+                <a th:href="'/dashboard/presentation/edit-css?file='+${@systemVariables.get(@varkey.PAGE_PRESENTATION_THEME_CSS_NAME)}" class="list-group-item border-0 p-0"><i class="fas fa-user-plus mr-4"></i>Edycja pliku motywu</a>
                 <a href="#" class="list-group-item border-0 p-0"><i class="fas fa-user-plus mr-4"></i>Przełącz na źródła zewnętrzne</a>
             </div>
         </div>

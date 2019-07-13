@@ -40,4 +40,10 @@ public class AWSS3Configuration {
         }
         else return Regions.EU_CENTRAL_1;
     }
+
+    @Bean
+    public FileRepository fileRepository(AmazonS3 bucketClient, @Value("${cloud.aws.bucket}") String bucketName) {
+        log.info("Initializing " + FileRepository.class + " with: " + bucketClient.getClass().getSimpleName() + " and bucket name: " + bucketName);
+        return new AmazonS3FileRepository(bucketClient, bucketName);
+    }
 }

@@ -7,6 +7,7 @@ import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.test.context.TestConfiguration;
 import org.springframework.context.annotation.Bean;
@@ -33,13 +34,13 @@ public class AmazonS3FileRepositoryTest {
     @TestConfiguration
     static class AWSS3TestConfiguration{
         @Bean
-        public AmazonS3FileRepository repository(AmazonS3 repository, @Value("${cloud.aws.bucket}") String bucketname){
+        public AmazonS3FileRepository testRepository(AmazonS3 repository, @Value("${cloud.aws.bucket}") String bucketname){
             return new AmazonS3FileRepository(repository, bucketname);
         }
     }
 
     @Autowired
-    private AmazonS3FileRepository repository;
+    private @Qualifier("testRepository") AmazonS3FileRepository repository;
 
     @Test
     @Order(1)
