@@ -17,7 +17,10 @@
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
             integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
             crossorigin="anonymous"></script>
-
+    <style type="text/css" media="screen">
+        #editor {
+        }
+    </style>
 </head>
 <body class="d-flex flex-column vh-100">
 <nav th:replace="fragment/admin-navbar"></nav>
@@ -26,13 +29,22 @@
     <div th:replace="fragment/admin-sidebar"></div>
     <div class="flex-grow-1 flex-column d-flex overflow-auto p-5">
         <div class="d-flex flex-row mb-3">
-            <h2>Edycja pliku</h2>
+            <h2>Edycja pliku <span class="text-monospace" th:text="${param.file}"></span></h2>
         </div>
-        <div>
-
+        <div class="flex-grow-1" id="editor">
         </div>
     </div>
-
+    <script src="https://pagecdn.io/lib/ace/1.4.5/ace.js"></script>
+    <script>
+        var modelData=`[[${content}]]`;
+        var editor = ace.edit("editor");
+        editor.setTheme("ace/theme/gruvbox");
+        editor.getSession().setMode("ace/mode/css");
+        editor.setOptions({
+            fontSize: "18pt"
+        });
+        editor.setValue(modelData, -1);
+    </script>
 </div>
 </body>
 </html>
