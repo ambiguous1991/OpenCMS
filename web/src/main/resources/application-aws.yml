@@ -1,9 +1,9 @@
 application:
   opencms:
     web:
-      extension: .s3.eu-west-3.amazonaws.com
-      style: /resources/css/opencms.css
-      theme: /resources/css/theme.css
+      extension: .s3.eu-west-3.amazonaws.com/
+      style: resources/css/opencms.css
+      theme: resources/css/theme.css
 server:
   port: 5000
   tomcat:

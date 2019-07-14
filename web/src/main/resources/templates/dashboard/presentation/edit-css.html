@@ -1,0 +1,48 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-4.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta th:replace="fragment/metadata">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8">
+    <title th:text="${@systemVariables.get(@varkey.PAGE_NAME)}+${breadcrumbTitle}">Failed</title>
+    <div th:replace="fragment/import"></div>
+    <link rel="stylesheet" href="../../../static/css/opencms.css"/>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css"
+          integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf"
+          crossorigin="anonymous">
+    <link rel="stylesheet" href="../../../static/css/bootstrap.css"/>
+    <style>
+        .popup-alert{display:none;position:fixed;width:50%;bottom:5rem;left:50%;-webkit-border-radius:100px;-moz-border-radius:100px;border-radius:100px;-webkit-transform:translateX(-50%);-moz-transform:translateX(-50%);-ms-transform:translateX(-50%);-o-transform:translateX(-50%);transform:translateX(-50%)}
+    </style>
+</head>
+<body class="d-flex flex-column vh-100">
+<nav th:replace="fragment/admin-navbar"></nav>
+<nav th:replace="fragment/admin-breadcrumb"></nav>
+<div class="wrapper" style="max-height: 100vh;">
+    <div th:replace="fragment/admin-sidebar"></div>
+    <div class="flex-grow-1 flex-column d-flex overflow-auto p-5">
+        <div class="d-flex flex-row mb-3 justify-content-between">
+            <h2>Edycja pliku <span class="text-monospace" th:text="${param.file}"></span></h2>
+            <button id="update-css" class="btn btn-sm btn-success">Zapisz postęp</button>
+        </div>
+        <meta name="csrf-token" th:content="${_csrf.getToken()}">
+        <meta name="file-name" th:content="${param.file}">
+        <div class="flex-grow-1" id="editor">
+        </div>
+    </div>
+    <div id="alert-success" class="alert alert-success text-center popup-alert">
+        <strong>Zmiany zostały zapisane!</strong>
+    </div>
+    <div id="alert-failure" class="alert alert-danger text-center popup-alert">
+        <strong>Nie udało się zapisać zmian!</strong>
+    </div>
+    <script src="https://pagecdn.io/lib/ace/1.4.5/ace.js"></script>
+    <script>
+        var modelData=`[[${content}]]`,editor=ace.edit("editor");function fadeInWaitFadeOut(e){e.fadeIn("slow",function(){$(this).delay(1500).fadeOut("slow")})}editor.setTheme("ace/theme/gruvbox"),editor.getSession().setMode("ace/mode/css"),editor.setOptions({fontSize:"18pt"}),editor.setValue(modelData,-1),$(document).ready(function(){$.ajaxSetup({headers:{"X-CSRF-TOKEN":$('meta[name="csrf-token"]').attr("content")}}),$("#update-css").on("click",function(){var e=editor.getValue(),t=$('meta[name="file-name"]').attr("content");console.log("editorValue: "+e),console.log("filename: "+t),$.ajax({type:"PUT",url:"/dashboard/presentation/edit-css?file="+t,data:{content:e},dataType:"json",success:function(){console.log("in alert success"),fadeInWaitFadeOut($("#alert-success"))},error:function(){console.log("ERROR!"),fadeInWaitFadeOut($("#alert-failure"))}})})});
+    </script>
+</div>
+</body>
+</html>
