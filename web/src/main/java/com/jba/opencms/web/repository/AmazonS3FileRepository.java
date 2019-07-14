@@ -5,6 +5,7 @@ import com.amazonaws.services.s3.model.*;
 
 import java.io.FileNotFoundException;
 import java.io.InputStream;
+import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -31,9 +32,13 @@ public class AmazonS3FileRepository implements FileRepository {
     }
 
     @Override
-    public void save(String path, InputStream input, FileAccessMode mode) throws IllegalArgumentException{
+    public void save(String path, InputStream input, FileAccessMode mode, String... contentTypes) throws IllegalArgumentException{
         if(isPathInvalid(path)) throw new IllegalArgumentException(String.format(MESSAGE_INVALID_PATH, path));
         ObjectMetadata metadata = new ObjectMetadata();
+        if(contentTypes!=null) {
+            String contentType= String.join(", ", contentTypes);
+            metadata.setContentType(contentType);
+        }
         repository.putObject(
                 new PutObjectRequest(bucketName, path, input, metadata)
                         .withCannedAcl(fileAccessModeToCannedAccessControl(mode)));
@@ -49,11 +54,11 @@ public class AmazonS3FileRepository implements FileRepository {
     }
 
     @Override
-    public void update(String path, InputStream input, FileAccessMode mode) throws FileNotFoundException, IllegalArgumentException {
+    public void update(String path, InputStream input, FileAccessMode mode, String... contentTypes) throws FileNotFoundException, IllegalArgumentException {
         if(checkDoesFileExist(path)) {
             boolean isSuccessful = delete(path);
             if (isSuccessful) {
-                save(path, input, mode);
+                save(path, input, mode, contentTypes);
             }
         }
         else throw new FileNotFoundException(String.format(MESSAGE_FILE_NOT_FOUND, path, bucketName));

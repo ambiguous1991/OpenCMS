@@ -18,12 +18,12 @@ public class MockFileRepository implements FileRepository {
     }
 
     @Override
-    public void save(String path, InputStream input, FileAccessMode mode) throws IllegalArgumentException {
+    public void save(String path, InputStream input, FileAccessMode mode, String... contentTypes) throws IllegalArgumentException {
 
     }
 
     @Override
-    public void update(String path, InputStream input, FileAccessMode mode) throws FileNotFoundException, IllegalArgumentException {
+    public void update(String path, InputStream input, FileAccessMode mode, String... contentTypes) throws FileNotFoundException, IllegalArgumentException {
 
     }
 
