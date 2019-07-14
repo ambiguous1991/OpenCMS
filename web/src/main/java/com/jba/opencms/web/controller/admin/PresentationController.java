@@ -1,6 +1,5 @@
 package com.jba.opencms.web.controller.admin;
 
-import com.jba.opencms.web.repository.FileAccessMode;
 import com.jba.opencms.web.repository.FileRepository;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.ResponseEntity;
@@ -11,7 +10,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import java.io.*;
+import java.io.ByteArrayInputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+
+import static com.jba.opencms.web.repository.FileAccessMode.PUBLIC_READ_ONLY;
+import static com.jba.opencms.web.utils.ContentType.TEXT_CSS;
 
 @Controller
 @RequestMapping(value = "/dashboard/presentation")
@@ -38,7 +43,7 @@ public class PresentationController {
 
     @RequestMapping(method= RequestMethod.PUT, value = "/edit-css")
     public ResponseEntity update(@RequestParam String file, String content){
-        repository.save(file, new ByteArrayInputStream(content.getBytes()), FileAccessMode.PUBLIC_READ_ONLY);
+        repository.save(file, new ByteArrayInputStream(content.getBytes()), PUBLIC_READ_ONLY, TEXT_CSS);
 
         return ResponseEntity.ok("{\n\t\"status\":\"ok\"\n}");
     }
