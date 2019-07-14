@@ -1,8 +1,19 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-4.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+
 <link rel="stylesheet" href="/webjars/bootstrap/4.3.1/css/bootstrap.css"/>
-<link rel="stylesheet" href="/css/bootstrap-theme.css"/>
+<th:block th:unless="${@systemVariables.get(@varkey.PAGE_PRESENTATION_OUTSIDE_SOURCES)}=='1'">
+    <link rel="stylesheet" href="/css/bootstrap-theme.css"/>
+    <link rel="stylesheet" href="/css/opencms.css"/>
+</th:block>
+<th:block th:if="${@systemVariables.get(@varkey.PAGE_PRESENTATION_OUTSIDE_SOURCES)}=='1'">
+    <link rel="stylesheet" th:href="'https://'+${@environment.getProperty('cloud.aws.bucket')}+${@environment.getProperty('application.opencms.web.extension')}+${@systemVariables.get(@varkey.PAGE_PRESENTATION_GLOBAL_CSS_NAME)}"/>
+    <link rel="stylesheet" th:href="'https://'+${@environment.getProperty('cloud.aws.bucket')}+${@environment.getProperty('application.opencms.web.extension')}+${@systemVariables.get(@varkey.PAGE_PRESENTATION_THEME_CSS_NAME)}"/>
+</th:block>
 <script src="/webjars/jquery/3.4.0/jquery.js"></script>
 <script type="text/javascript" src="/webjars/popper.js/1.14.7/umd/popper.js"></script>
 <script type="text/javascript" src="/webjars/bootstrap/4.3.1/js/bootstrap.js"></script>
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css"
       integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
-<link rel="stylesheet" href="/css/opencms.css"/>
