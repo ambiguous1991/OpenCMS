@@ -34,6 +34,11 @@ public class ErrorControllerImpl implements ErrorController {
         return "error/forbidden";
     }
 
+    @RequestMapping("/other")
+    public String other(){
+        return "error/error";
+    }
+
     @Override
     public String getErrorPath() {
         return "/error";
