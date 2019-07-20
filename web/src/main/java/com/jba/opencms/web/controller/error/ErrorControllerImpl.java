@@ -3,6 +3,7 @@ package com.jba.opencms.web.controller.error;
 import org.springframework.boot.web.servlet.error.ErrorController;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.view.RedirectView;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.http.HttpServletRequest;
@@ -22,21 +23,31 @@ public class ErrorControllerImpl implements ErrorController {
     ).collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue));
 
     @RequestMapping("/error")
-    public String handleError(HttpServletRequest request){
+    public RedirectView handleError(HttpServletRequest request){
         Object status = request.getAttribute(RequestDispatcher.ERROR_STATUS_CODE);
         int statusCode = Integer.parseInt(status.toString());
-
-        return statusCodesToPageMapping.getOrDefault(statusCode, "error/error");
+        switch (statusCode){
+            case 401: return new RedirectView("/error/forbidden");
+            case 403: return new RedirectView("/error/forbidden");
+            case 404: return new RedirectView("/error/not-found");
+            case 500: return new RedirectView("/error/internal-server-error");
+            default: return new RedirectView("/error/internal-server-error");
+        }
     }
 
-    @RequestMapping("/forbidden")
-    public String fobidden(){
-        return "error/forbidden";
+    @RequestMapping("/error/not-found")
+    public String notFound(){
+        return statusCodesToPageMapping.get(404);
     }
 
-    @RequestMapping("/other")
-    public String other(){
-        return "error/error";
+    @RequestMapping("/error/forbidden")
+    public String forbidden(){
+        return statusCodesToPageMapping.get(401);
+    }
+
+    @RequestMapping("/error/internal-server-error")
+    public String error(){
+        return statusCodesToPageMapping.get(500);
     }
 
     @Override
