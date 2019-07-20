@@ -29,6 +29,11 @@ public class ErrorControllerImpl implements ErrorController {
         return statusCodesToPageMapping.getOrDefault(statusCode, "error/error");
     }
 
+    @RequestMapping("/forbidden")
+    public String fobidden(){
+        return "error/forbidden";
+    }
+
     @Override
     public String getErrorPath() {
         return "/error";

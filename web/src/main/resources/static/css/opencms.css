@@ -145,6 +145,10 @@
     background: linear-gradient(130deg, #FFB18B 60%, #FFD4C0 60%);
 }
 
+.error--403{
+    background: linear-gradient(130deg, #273B44 60%, #3E5863 60%);
+}
+
 .error__container {
     height: 50vh;
     width: 80vw;
@@ -157,12 +161,17 @@
 .info-box {
     position: relative;
     max-height: 50vh;
+    color: #FFF;
 }
 
 .info-box--404 {
     background: linear-gradient(95deg, rgba(0, 0, 0, 0) 55%, #FFB400 55%), url("../images/404.jpg") no-repeat center;
     background-size: cover;
-    color: #FFF;
+}
+
+.info-box--404 {
+    background: linear-gradient(95deg, rgba(0, 0, 0, 0) 55%, #7620A5 55%), url("../images/403.jpg") no-repeat center;
+    background-size: cover;
 }
 
 .info-box__contents {
