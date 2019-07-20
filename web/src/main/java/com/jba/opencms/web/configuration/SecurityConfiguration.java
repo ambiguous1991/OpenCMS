@@ -42,14 +42,8 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .sameOrigin()
                 .and()
                 .authorizeRequests()
-                .antMatchers("/page/**").permitAll()
-                .anyRequest().authenticated()
-                .antMatchers("/dashboard/**")
-                .hasAnyRole(
-                    AuthorityEnum.Administrator.name(),
-                    AuthorityEnum.Editor.name(),
-                    AuthorityEnum.Reviewer.name()
-                )
+                .antMatchers("/dashboard/**").authenticated()
+                .antMatchers("/**").permitAll()
         .and()
             .formLogin()
                 .loginPage("/login")
@@ -66,6 +60,6 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     @Override
     public void configure(WebSecurity web) throws Exception {
         super.configure(web);
-        web.ignoring().antMatchers( "/webjars/**", "/css/**", "/js/**", "/image/**", "/images/**", "/**/favicon.ico");
+        web.ignoring().antMatchers( "/webjars/**", "/css/**", "/js/**", "/image/**", "/images/**", "/**/favicon.ico", "/error/**");
     }
 }
