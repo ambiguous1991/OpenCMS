@@ -68,11 +68,11 @@
     width:100%;
 }
 
-.floating-label-container{
+.floating-label{
     margin-top: 0.5rem;
 }
 
-.floating-label-container>label{
+.floating-label>label{
     position:absolute;
     top:-0.9rem;
     left:1.3rem;
@@ -83,7 +83,7 @@
     border-radius: 0.4rem;
     z-index: 5;
 }
-.floating-label-container>input[type=checkbox]{
+.floating-label>input[type=checkbox]{
     margin-top: 0.8rem;
 }
 
