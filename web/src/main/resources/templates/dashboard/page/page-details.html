@@ -24,27 +24,27 @@
         <form th:method="post" th:action="'/dashboard/page/'+${page.getId()}">
             <div class="form-group row">
                 <div class="col-12 floating-label">
-                    <label for="id">identyfikator</label>
+                    <label class="floating-label__label" for="id">identyfikator</label>
                     <input id="id" name="id" type="text" class="form-control" th:value="${page.id}" disabled>
                 </div>
             </div>
             <div class="form-group row">
                 <div class="col-12 floating-label">
-                    <label for="identifier">identyfikator</label>
+                    <label class="floating-label__label" for="identifier">identyfikator</label>
                     <input id="identifier" name="id" type="text" class="form-control" disabled>
                     <span id="identifierHelpBlock" class="form-text text-muted">ta treść generowana jest automatycznie na podstawie tytułu</span>
                 </div>
             </div>
             <div class="form-group row">
                 <div class="col-12 floating-label">
-                    <label for="title">tytuł</label>
+                    <label class="floating-label__label" for="title">tytuł</label>
                     <input id="title" name="title" type="text" class="form-control" required th:value="${page.title}">
                     <span id="titleHelpBlock" class="form-text text-muted">tytuł strony wyświetlony zostanie na pasku przeglądarki, zatem tytuł strony musi być unikalny</span>
                 </div>
             </div>
             <div class="form-group row">
                 <div class="col-12 floating-label">
-                    <label for="pageType">rozkład strony</label>
+                    <label class="floating-label__label" for="pageType">rozkład strony</label>
                     <select id="pageType" name="pageType" class="custom-select">
                         <option value="-1">brak</option>
                         <option
@@ -64,10 +64,10 @@
             <div class="form-group row">
                 <div class="col-12 floating-label">
                     <input th:unless="${page.visible==null}" name="visible" id="visible" type="checkbox"
-                           th:checked="${page.visible}">
+                           th:checked="${page.visible}" class="floating-label__checkbox">
                     <input th:if="${page.visible==null}" name="visible" id="visible" type="checkbox"
-                           value="false">
-                    <label for="visible">widoczna</label>
+                           value="false" class="floating-label__checkbox">
+                    <label class="floating-label__label" for="visible">widoczna</label>
                 </div>
             </div>
             <div class="form-group row">

@@ -31,14 +31,14 @@
             </h3>
             <div class="form-group row">
                 <div class="col-12 floating-label">
-                    <label for="key" class="">identyfikator</label>
+                    <label class="floating-label__label" for="key">identyfikator</label>
                     <input id="id" name="id" type="text" class="form-control" th:field="*{id}" th:value="${form.id}"
                            required="required">
                 </div>
             </div>
             <div class="form-group row">
                 <div class="col-12 floating-label">
-                    <label for="key" class="">klucz</label>
+                    <label class="floating-label__label" for="key">klucz</label>
                     <input id="key" name="key" type="text" class="form-control" th:field="*{key}" th:value="${form.key}"
                            required="required">
                     <span class="form-text text-danger" th:if="${#fields.hasErrors('key')}" th:errors="*{key}"
@@ -47,21 +47,21 @@
             </div>
             <div class="form-group row">
                 <div class="col-12 floating-label">
-                    <label for="value" class="">wartość</label>
+                    <label class="floating-label__label" for="value">wartość</label>
                     <input id="value" name="value" type="text" class="form-control" th:field="*{value}"
                            th:value="${form.value}" required="required">
                 </div>
             </div>
             <div class="form-group row">
                 <div class="col-12 floating-label">
-                    <label for="created" class="">data utworzenia</label>
+                    <label class="floating-label__label" for="created">data utworzenia</label>
                     <input id="created" name="cdate" type="text" class="form-control" th:field="*{created}"
                            th:value="${form.created}" disabled>
                 </div>
             </div>
             <div class="form-group row">
                 <div class="col-12 floating-label">
-                    <label for="updated" class="">data aktualizacji</label>
+                    <label class="floating-label__label" for="updated">data aktualizacji</label>
                     <input id="updated" name="udate" type="text" class="form-control" th:field="*{updated}"
                            th:value="${form.updated}" disabled>
                 </div>
