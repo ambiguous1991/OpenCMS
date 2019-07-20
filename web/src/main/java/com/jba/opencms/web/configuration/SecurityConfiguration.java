@@ -42,14 +42,8 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .sameOrigin()
                 .and()
                 .authorizeRequests()
-                .antMatchers("/page/**").permitAll()
-                .anyRequest().authenticated()
-                .antMatchers("/dashboard/**")
-                .hasAnyRole(
-                    AuthorityEnum.Administrator.name(),
-                    AuthorityEnum.Editor.name(),
-                    AuthorityEnum.Reviewer.name()
-                )
+                .antMatchers("/dashboard/**").authenticated()
+                .antMatchers("/**").permitAll()
         .and()
             .formLogin()
                 .loginPage("/login")

@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import javax.servlet.http.HttpServletResponse;
 import java.util.List;
-import java.util.Map;
 
 @Controller
 @RequestMapping(value = "/")
@@ -59,7 +58,7 @@ public class PageController {
 
         if(page==null||!page.getVisible()){
             response.setStatus(HttpServletResponse.SC_NOT_FOUND);
-            return "error/404";
+            return "error/not-found";
         }
 
         if(page.getPageType()!=null){

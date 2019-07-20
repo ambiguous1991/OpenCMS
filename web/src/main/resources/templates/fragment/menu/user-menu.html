@@ -44,8 +44,14 @@
 
         </ul>
         <ul class="navbar-nav mr-0">
-            <li class="nav-item mr-0">
+            <li sec:authorize="!isAuthenticated()" class="nav-item mr-0">
                 <a class="nav-link" href="/dashboard">Zaloguj się</a>
+            </li>
+            <li sec:authorize="isAuthenticated()" class="nav-item mr-5">
+                <span class="navbar-text text-primary" sec:authentication="name"></span>
+            </li>
+            <li sec:authorize="isAuthenticated()" class="nav-item mr-0">
+                <a class="nav-link" href="/logout">Wyloguj się</a>
             </li>
         </ul>
     </div>
