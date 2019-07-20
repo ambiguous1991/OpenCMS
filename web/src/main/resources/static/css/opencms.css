@@ -23,7 +23,7 @@
     flex-direction: row;
 }
 
-.tiles>div>.card{
+.tiles__card{
     padding: 1em;
     text-align: center;
     margin:1em 1em 0 1em;
@@ -68,11 +68,11 @@
     width:100%;
 }
 
-.floating-label-container{
+.floating-label{
     margin-top: 0.5rem;
 }
 
-.floating-label-container>label{
+.floating-label__label{
     position:absolute;
     top:-0.9rem;
     left:1.3rem;
@@ -83,7 +83,7 @@
     border-radius: 0.4rem;
     z-index: 5;
 }
-.floating-label-container>input[type=checkbox]{
+.floating-label__checkbox{
     margin-top: 0.8rem;
 }
 
