@@ -1,7 +1,3 @@
-* {
-    border: 0px solid red;
-}
-
 @media (min-width: 1200px) {
     .box-login {
     }
@@ -175,28 +171,28 @@
     background-repeat: no-repeat;
     background-position: center;
     background-size: cover;
-    background: linear-gradient(95deg, rgba(0, 0, 0, 0) 55%, #7620A5 55%), url("../images/403.jpg");
-    background: -moz-linear-gradient(95deg, rgba(0, 0, 0, 0) 55%, #7620A5 55%), url("../images/403.jpg");
-    background: -ms-linear-gradient(95deg, rgba(0, 0, 0, 0) 55%, #7620A5 55%), url("../images/403.jpg");
-    background: -o-linear-gradient(95deg, rgba(0, 0, 0, 0) 55%, #7620A5 55%), url("../images/403.jpg");
+    background: linear-gradient(95deg, rgba(0, 0, 0, 0) 55%, #7620A5 55%), url(../images/403.jpg);
+    background: -moz-linear-gradient(95deg, rgba(0, 0, 0, 0) 55%, #7620A5 55%), url(../images/403.jpg);
+    background: -ms-linear-gradient(95deg, rgba(0, 0, 0, 0) 55%, #7620A5 55%), url(../images/403.jpg);
+    background: -o-linear-gradient(95deg, rgba(0, 0, 0, 0) 55%, #7620A5 55%), url(../images/403.jpg);
 }
 .info-box--404 {
     background-repeat: no-repeat;
     background-position: center;
     background-size: cover;
-    background: linear-gradient(95deg, rgba(0, 0, 0, 0) 55%, #FFB400 55%), url("../images/404.jpg");
-    background: -moz-linear-gradient(95deg, rgba(0, 0, 0, 0) 55%, #FFB400 55%), url("../images/404.jpg");
-    background: -ms-linear-gradient(95deg, rgba(0, 0, 0, 0) 55%, #FFB400 55%), url("../images/404.jpg");
-    background: -o-linear-gradient(95deg, rgba(0, 0, 0, 0) 55%, #FFB400 55%), url("../images/404.jpg");
+    background: linear-gradient(95deg, rgba(0, 0, 0, 0) 55%, #FFB400 55%), url(../images/404.jpg);
+    background: -moz-linear-gradient(95deg, rgba(0, 0, 0, 0) 55%, #FFB400 55%), url(../images/404.jpg);
+    background: -ms-linear-gradient(95deg, rgba(0, 0, 0, 0) 55%, #FFB400 55%), url(../images/404.jpg);
+    background: -o-linear-gradient(95deg, rgba(0, 0, 0, 0) 55%, #FFB400 55%), url(../images/404.jpg);
 }
 .info-box--500 {
     background-repeat: no-repeat;
     background-position: center;
     background-size: cover;
-    background: linear-gradient(95deg, rgba(0, 0, 0, 0) 55%, #FF3900 55%), url("../images/500.jpg");
-    background: -moz-linear-gradient(95deg, rgba(0, 0, 0, 0) 55%, #FF3900 55%), url("../images/500.jpg");
-    background: -ms-linear-gradient(95deg, rgba(0, 0, 0, 0) 55%, #FF3900 55%), url("../images/500.jpg");
-    background: -o-linear-gradient(95deg, rgba(0, 0, 0, 0) 55%, #FF3900 55%), url("../images/500.jpg");
+    background: linear-gradient(95deg, rgba(0, 0, 0, 0) 55%, #FF3900 55%), url(../images/500.jpg);
+    background: -moz-linear-gradient(95deg, rgba(0, 0, 0, 0) 55%, #FF3900 55%), url(../images/500.jpg);
+    background: -ms-linear-gradient(95deg, rgba(0, 0, 0, 0) 55%, #FF3900 55%), url(../images/500.jpg);
+    background: -o-linear-gradient(95deg, rgba(0, 0, 0, 0) 55%, #FF3900 55%), url(../images/500.jpg);
 }
 .info-box__contents {
     position: absolute;
