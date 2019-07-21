@@ -9,7 +9,7 @@
     <meta name="keywords" content="Blog,CV,Programming,Jakub,Bartusiak,Java,Spring">
     <meta name="author" content="Jakub Bartusiak">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="google-site-verification" content="bm2QYR5NxPEN5erX9yooPVfYBdlYwlxFooE9vw4EvAM" />
+    <meta name="google-site-verification" content="bm2QYR5NxPEN5erX9yooPVfYBdlYwlxFooE9vw4EvAM"/>
     <title>Page</title>
     <link rel="stylesheet" href="../../static/css/bootstrap.css"/>
     <link rel="stylesheet" href="../../static/css/bootstrap-theme.css"/>
@@ -18,7 +18,6 @@
             src="https://code.jquery.com/jquery-3.4.1.js"
             integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
             crossorigin="anonymous"></script>
-    <script type="text/javascript" src="/webjars/popper.js/1.14.7/umd/popper.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
             integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
             crossorigin="anonymous"></script>
@@ -31,10 +30,6 @@
 <body class="d-flex flex-column vh-100" style="">
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
     <a class="navbar-brand" href="/" th:text="${@systemVariables.get('page.name')}">Navbar</a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
-            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-    </button>
 
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
@@ -44,7 +39,6 @@
                     PLACEHOLDER
                 </a>
             </li>
-
         </ul>
         <ul class="navbar-nav mr-0">
             <li class="nav-item mr-0">
@@ -57,7 +51,81 @@
      style="padding-left: 0 !important; padding-right: 0 !important;">
     <div class="m-0 p-0 d-flex flex-column flex-grow-1">
         <!--EDIT FROM HERE!-->
-        <div class="btn-primary flex-grow-1"></div>
+        <div class="container-fluid bg-primary flex-grow-1">
+            <div class="row p-4 font-family-roboto">
+                <div class="col-12 order-2 order-md-0 col-md-7 p-4"
+                     style="-webkit-border-radius: 10px;-moz-border-radius: 10px;border-radius: 10px; background-color: rgba(255,255,255,0.8)">
+                    <h1 class="font-family-roboto text-center small-caps">dzień dobry</h1>
+                    <hr>
+                    <article class="mb-5">
+                        <header class="font-italic mb-2">Napisz do mnie...</header>
+                        <div class="text-justify">
+                            jeżeli masz jakieś pytania, propozycje, lub jeżeli chcesz zaoferować jakieś zlecenie.
+                            Jeżeli jesteś rekruterem, preferowaną formą kontaktu jest linkedin. Jeżeli natomiast
+                            chciałbyś skorzystać z niniejszego systemu, odwiedź mojego githuba i nie martw się -
+                            odpowiem na pytania, jeżeli takie się pojawią!
+                        </div>
+                    </article>
+                    <div class="font-family-roboto text-muted text-center">możesz znaleźć mnie jeszcze tutaj</div>
+                    <div class=" row">
+                        <div class="col-12 col-sm-6 col-lg-4 col-xl-3  mt-3 d-flex flex-row justify-content-center">
+                            <a class="card-link" href="https://www.linkedin.com/in/jakub-bartusiak-jba/">
+                                <div class="card-square card-square--150 card-square--linkedin card-square--grow">
+                                    <i class="card-square__icon fab fa-linkedin"></i>
+                                    <div class="card-square__title">linkedin</div>
+                                </div>
+                            </a>
+                        </div>
+                        <div class="col-12 col-sm-6 col-lg-4 col-xl-3  mt-3 d-flex flex-row justify-content-center">
+                            <a class="card-link" href="https://github.com/ambiguous1991">
+                                <div class="card-square card-square--150 card-square--github card-square--grow">
+                                    <i class="card-square__icon fab fa-github-square"></i>
+                                    <div class="card-square__title">github</div>
+                                </div>
+                            </a>
+                        </div>
+                        <div class="col-12 col-sm-6 col-lg-4 col-xl-3 mt-3 d-flex flex-row justify-content-center">
+                            <a class="card-link" href="mailto:jakub@bartusiak.com.pl">
+                                <div class="card-square card-square--150 card-square--gmail card-square--grow">
+                                    <i class="card-square__icon fas fa-envelope"></i>
+                                    <div class="card-square__title">gmail</div>
+                                </div>
+                            </a>
+                        </div>
+                        <div class="col-12 col-sm-6 col-lg-4 col-xl-3 mt-3 d-flex flex-row justify-content-center">
+                            <a class="card-link" href="https://www.facebook.com/bartusiak.k">
+                                <div class="card-square card-square--150 card-square--facebook card-square--grow">
+                                    <i class="card-square__icon fab fa-facebook-square"></i>
+                                    <div class="card-square__title">facebook</div>
+                                </div>
+                            </a>
+                        </div>
+                        <div class="col-12 col-sm-6 col-lg-4 col-xl-3  mt-3 d-flex flex-row justify-content-center">
+                            <a class="card-link" href="https://m.me/bartusiak.k">
+                                <div class="card-square card-square--150 card-square--messenger card-square--grow">
+                                    <i class="card-square__icon fab fa-facebook-messenger"></i>
+                                    <div class="card-square__title">messanger</div>
+                                </div>
+                            </a>
+                        </div>
+                        <div class="col-12 col-sm-6 col-lg-4 col-xl-3  mt-3 d-flex flex-row justify-content-center">
+                            <a class="card-link" href="https://twitter.com/satanicus1991">
+                                <div class="card-square card-square--150 card-square--twitter card-square--grow">
+                                    <i class="card-square__icon fab fa-twitter-square"></i>
+                                    <div class="card-square__title">twitter</div>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12 order-1 col-md-1"></div>
+                <div class="col-12 mb-3 mb-md-0 order-0 d-flex flex-column order-md-2 col-md-4 text-center justify-content-center">
+                    <div>
+                        <img class="img-fluid text-center" src="../../static/images/bulb.png">
+                    </div>
+                </div>
+            </div>
+        </div>
         <!--EDIT TO HERE!-->
     </div>
 </div>
