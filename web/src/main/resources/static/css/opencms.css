@@ -148,6 +148,7 @@
     flex-direction: column;
     justify-content: center;
     text-align: center;
+    background-color: rgba(255,255,255,0.95);
 
     border: 1px solid #CCC;
     -webkit-border-radius: 10px;
@@ -325,3 +326,9 @@
     }
 }
 
+.contact-background{
+    background: -webkit-linear-gradient(60deg, var(--primary)  30%, rgba(0,0,0,0) 30%), -webkit-linear-gradient(30deg, var(--gray) 60%, var(--gray-dark) 60%);
+    background: -o-linear-gradient(60deg, var(--primary)  30%, rgba(0,0,0,0) 30%), -o-linear-gradient(30deg, var(--gray) 60%, var(--gray-dark) 60%);
+    background: -moz-linear-gradient(60deg, var(--primary)  30%, rgba(0,0,0,0) 30%), -moz-linear-gradient(30deg, var(--gray) 60%, var(--gray-dark) 60%);
+    background: linear-gradient(60deg, var(--primary)  30%, rgba(0,0,0,0) 30%), linear-gradient(30deg, var(--gray) 60%, var(--gray-dark) 60%);
+}
