@@ -1,6 +1,7 @@
 package com.jba.opencms.type.page;
 
 import com.jba.opencms.type.base.BaseTypeSimpleKey;
+import com.jba.opencms.type.file.Script;
 import com.jba.opencms.type.image.Image;
 import com.jba.opencms.type.user.Authority;
 import lombok.Data;
@@ -9,7 +10,9 @@ import lombok.ToString;
 
 import javax.persistence.*;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -58,6 +61,15 @@ public class Page extends BaseTypeSimpleKey<Page> {
     )
     @ToString.Exclude
     private List<Image> images = new ArrayList<>();
+
+    @ManyToMany
+    @ToString.Exclude
+    @JoinTable(
+            name = "page_script",
+            joinColumns = {@JoinColumn(name = "FK_SCRIPT_ID")},
+            inverseJoinColumns = {@JoinColumn(name = "FK_PAGE_ID")}
+    )
+    private Set<Script> pages = new HashSet<>();
 
     public void addAuthority(Authority authority){
         if(!pageAuthorities.contains(authority)) {

@@ -1,6 +1,7 @@
-package com.jba.opencms.type.page;
+package com.jba.opencms.type.file;
 
 import com.jba.opencms.type.base.BaseTypeSimpleKey;
+import com.jba.opencms.type.page.Page;
 import lombok.Data;
 import lombok.ToString;
 
