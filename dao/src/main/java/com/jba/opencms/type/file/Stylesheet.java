@@ -27,6 +27,7 @@ public class Stylesheet extends BaseTypeSimpleKey<Stylesheet> {
 
     @ManyToMany
     @ToString.Exclude
+    @EqualsAndHashCode.Exclude
     @JoinTable(
             name = "page_stylesheet",
             joinColumns = {@JoinColumn(name = "FK_PAGE_ID")},

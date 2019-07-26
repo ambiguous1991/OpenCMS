@@ -43,6 +43,7 @@ public class Page extends BaseTypeSimpleKey<Page> {
             inverseJoinColumns = {@JoinColumn(name="FK_PAGE_ID")}
     )
     @ToString.Exclude
+    @EqualsAndHashCode.Exclude
     private List<Authority> pageAuthorities = new ArrayList<>();
 
     @ManyToMany(fetch = FetchType.LAZY)
@@ -52,6 +53,7 @@ public class Page extends BaseTypeSimpleKey<Page> {
             inverseJoinColumns = {@JoinColumn(name = "FK_PAGE_ID_PARENT")}
     )
     @ToString.Exclude
+    @EqualsAndHashCode.Exclude
     private List<Page> subpages = new ArrayList<>();
 
     @ManyToMany(fetch = FetchType.LAZY)
@@ -61,10 +63,12 @@ public class Page extends BaseTypeSimpleKey<Page> {
             inverseJoinColumns = {@JoinColumn(name = "FK_PAGE_ID")}
     )
     @ToString.Exclude
+    @EqualsAndHashCode.Exclude
     private List<Image> images = new ArrayList<>();
 
     @ManyToMany
     @ToString.Exclude
+    @EqualsAndHashCode.Exclude
     @JoinTable(
             name = "page_script",
             joinColumns = {@JoinColumn(name = "FK_SCRIPT_ID")},
@@ -74,6 +78,7 @@ public class Page extends BaseTypeSimpleKey<Page> {
 
     @ManyToMany
     @ToString.Exclude
+    @EqualsAndHashCode.Exclude
     @JoinTable(
             name = "page_stylesheet",
             joinColumns = {@JoinColumn(name = "FK_STYLESHEET_ID")},
