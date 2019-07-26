@@ -6,6 +6,7 @@ import com.jba.opencms.dao.ifs.MenuDao;
 import com.jba.opencms.dao.ifs.SystemVariableDao;
 import com.jba.opencms.type.file.File;
 import com.jba.opencms.type.file.Script;
+import com.jba.opencms.type.file.Stylesheet;
 import com.jba.opencms.type.image.Image;
 import com.jba.opencms.type.menu.Entry;
 import com.jba.opencms.type.menu.Menu;
@@ -89,5 +90,10 @@ public class DaoConfiguration {
     @Bean
     public GenericDao<Script> scriptDao(SessionFactory sessionFactory){
         return new HibernateDao<>(Script.class, sessionFactory);
+    }
+
+    @Bean
+    public GenericDao<Stylesheet> stylesheetDao(SessionFactory sessionFactory){
+        return new HibernateDao<>(Stylesheet.class, sessionFactory);
     }
 }
