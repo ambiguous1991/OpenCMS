@@ -13,8 +13,8 @@ import java.util.Set;
 @EqualsAndHashCode(callSuper = true)
 @Entity
 @Data
-@Table(name = "script")
-public class Script extends BaseTypeSimpleKey<Script> {
+@Table(name = "stylesheet")
+public class Stylesheet extends BaseTypeSimpleKey<Stylesheet> {
 
     @Column(name = "TITLE", nullable = false, length = 200)
     private String title;
@@ -28,10 +28,10 @@ public class Script extends BaseTypeSimpleKey<Script> {
     @ManyToMany
     @ToString.Exclude
     @JoinTable(
-            name = "page_script",
+            name = "page_stylesheet",
             joinColumns = {@JoinColumn(name = "FK_PAGE_ID")},
-            inverseJoinColumns = {@JoinColumn(name = "FK_SCRIPT_ID")}
+            inverseJoinColumns = {@JoinColumn(name = "FK_STYLESHEET_ID")}
     )
     private Set<Page> pages = new HashSet<>();
-    
+
 }

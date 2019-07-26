@@ -2,6 +2,7 @@ package com.jba.opencms.type.page;
 
 import com.jba.opencms.type.base.BaseTypeSimpleKey;
 import com.jba.opencms.type.file.Script;
+import com.jba.opencms.type.file.Stylesheet;
 import com.jba.opencms.type.image.Image;
 import com.jba.opencms.type.user.Authority;
 import lombok.Data;
@@ -69,7 +70,17 @@ public class Page extends BaseTypeSimpleKey<Page> {
             joinColumns = {@JoinColumn(name = "FK_SCRIPT_ID")},
             inverseJoinColumns = {@JoinColumn(name = "FK_PAGE_ID")}
     )
-    private Set<Script> pages = new HashSet<>();
+    private Set<Script> scripts = new HashSet<>();
+
+    @ManyToMany
+    @ToString.Exclude
+    @JoinTable(
+            name = "page_stylesheet",
+            joinColumns = {@JoinColumn(name = "FK_STYLESHEET_ID")},
+            inverseJoinColumns = {@JoinColumn(name = "FK_PAGE_ID")}
+    )
+    private Set<Stylesheet> stylesheets = new HashSet<>();
+
 
     public void addAuthority(Authority authority){
         if(!pageAuthorities.contains(authority)) {
