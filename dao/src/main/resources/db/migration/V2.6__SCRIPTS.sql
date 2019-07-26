@@ -2,7 +2,7 @@ CREATE TABLE script
 (
   ID    bigint(20)   NOT NULL AUTO_INCREMENT,
   TITLE varchar(200) NOT NULL,
-  PATH  varchar(100),
+  PATH  varchar(200),
   VALUE text,
   CDATE datetime(6)  NOT NULL,
   UDATE datetime(6)  NOT NULL,
@@ -22,7 +22,7 @@ CREATE TABLE stylesheet
 (
   ID    bigint(20)   NOT NULL AUTO_INCREMENT,
   TITLE varchar(200) NOT NULL,
-  PATH  varchar(100),
+  PATH  varchar(200),
   VALUE text,
   CDATE datetime(6)  NOT NULL,
   UDATE datetime(6)  NOT NULL,
