@@ -4,19 +4,9 @@
       xmlns:th="http://www.thymeleaf.org">
 
 <head>
-    <meta charset="UTF-8">
     <meta th:replace="fragment/metadata">
     <title th:text="${@systemVariables.get(@varkey.PAGE_NAME)}+${breadcrumbTitle}">Failed</title>
     <div th:replace="fragment/import"></div>
-    <link rel="stylesheet" href="../../../static/css/opencms.css"/>
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css"
-          integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf"
-          crossorigin="anonymous">
-    <link rel="stylesheet" href="../../../static/css/bootstrap.css"/>
-    <script
-            src="https://code.jquery.com/jquery-3.4.1.js"
-            integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
-            crossorigin="anonymous"></script>
     <script type="text/javascript">
         $(document).ready(function () {
             $('#title').keyup(function () {

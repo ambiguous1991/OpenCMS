@@ -33,6 +33,7 @@
     </dependencyManagement>
 
     <dependencies>
+        <!--OPENCMS DEPS-->
         <dependency>
             <groupId>com.jba.opencms</groupId>
             <artifactId>service</artifactId>
@@ -43,7 +44,8 @@
             <artifactId>security</artifactId>
             <version>${security.version}</version>
         </dependency>
-
+        <!--END OPENCMS DEPS-->
+        <!--SPRING BOOT DEPS-->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-actuator</artifactId>
@@ -69,7 +71,8 @@
             <artifactId>spring-boot-starter-thymeleaf</artifactId>
             <version>${spring.boot.version}</version>
         </dependency>
-        <!-- https://mvnrepository.com/artifact/org.thymeleaf.extras/thymeleaf-extras-springsecurity5 -->
+        <!--END SPRING BOOT DEPS-->
+        <!--EXTERNAL SOURCES-->
         <dependency>
             <groupId>org.thymeleaf.extras</groupId>
             <artifactId>thymeleaf-extras-springsecurity5</artifactId>
@@ -87,6 +90,12 @@
             <version>${lombok.version}</version>
         </dependency>
         <dependency>
+            <groupId>com.amazonaws</groupId>
+            <artifactId>aws-java-sdk-s3</artifactId>
+        </dependency>
+        <!--END EXTERNAL SOURCES-->
+        <!--WEBJARS DEPS-->
+        <dependency>
             <groupId>org.webjars</groupId>
             <artifactId>jquery</artifactId>
             <version>3.4.0</version>
@@ -95,19 +104,39 @@
             <groupId>org.webjars</groupId>
             <artifactId>bootstrap</artifactId>
             <version>4.3.1</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.webjars</groupId>
+                    <artifactId>jquery</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>org.webjars</groupId>
+                    <artifactId>popper.js</artifactId>
+                </exclusion>
+            </exclusions>
         </dependency>
         <dependency>
             <groupId>org.webjars</groupId>
             <artifactId>font-awesome</artifactId>
             <version>5.8.1</version>
         </dependency>
-        <!-- https://mvnrepository.com/artifact/org.webjars/popper.js -->
         <dependency>
             <groupId>org.webjars</groupId>
             <artifactId>popper.js</artifactId>
             <version>1.14.7</version>
         </dependency>
-
+        <dependency>
+            <groupId>org.webjars.bower</groupId>
+            <artifactId>summernote</artifactId>
+            <version>0.8.12</version>
+        </dependency>
+        <dependency>
+            <groupId>org.webjars</groupId>
+            <artifactId>jquery-validation</artifactId>
+            <version>1.19.0</version>
+        </dependency>
+        <!--END WEBJARS DEPS-->
+        <!--TEST DEPS-->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>
@@ -120,16 +149,7 @@
             <version>${spring.base.version}</version>
             <scope>test</scope>
         </dependency>
-
-        <dependency>
-            <groupId>com.amazonaws</groupId>
-            <artifactId>aws-java-sdk-s3</artifactId>
-        </dependency>
-
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-devtools</artifactId>
-        </dependency>
+        <!--TEST DEPS-->
     </dependencies>
 
     <build>
