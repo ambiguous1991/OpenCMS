@@ -13,7 +13,7 @@
 
     <artifactId>security</artifactId>
     <version>${security.version}</version>
-    <name>OpenCMS Security ${security.version}</name>
+    <name>OpenCMS Security</name>
     <description>Security package for OpenCMS</description>
 
     <properties>

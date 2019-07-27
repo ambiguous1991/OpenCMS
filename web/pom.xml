@@ -13,7 +13,7 @@
 
     <artifactId>web</artifactId>
     <version>${web.version}</version>
-    <name>OpenCMS Web ${web.version}</name>
+    <name>OpenCMS Web</name>
     <description>Web package for open cms</description>
 
     <properties>
