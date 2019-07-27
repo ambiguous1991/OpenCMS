@@ -11,7 +11,10 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.view.RedirectView;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.util.List;
 
@@ -29,28 +32,22 @@ public class PageController {
     }
 
     @RequestMapping(value = "/", method = RequestMethod.GET)
-    public String home(Model model){
-        List<Entry> entries = menuService.findActive(true).getEntries();
-        Long homePageId = Long.parseLong(globalsService.findByKey(SystemVariableKeys.PAGE_HOMEPAGE).getValue());
+    public RedirectView home(Model model){
+        long homePageId = Long.parseLong(globalsService.findByKey(SystemVariableKeys.PAGE_HOMEPAGE).getValue());
 
-        Page page = pageService.findOne(homePageId, true);
-
-        model.addAttribute("page", page);
-
-        model.addAttribute("menu", entries);
-
-        if(page.getPageType()!=null){
-            return page.getPageType().getLayoutName();
-        }
-        else
-            return "page-template/one-column-half-width";
+        return new RedirectView("/page?page="+homePageId);
     }
 
-    @RequestMapping(value = "/page/{pageId}", method = RequestMethod.GET)
-    public String getPage(@PathVariable("pageId") Long pageId, Model model, HttpServletResponse response){
+    @RequestMapping(value = "/page", method = RequestMethod.GET)
+    public RedirectView getPage(@RequestParam("page") Long pageId){
+        return new RedirectView("/page/"+pageService.findOne(pageId, false).getIdentifier());
+    }
+
+    @RequestMapping(value = "/page/{pageName}", method = RequestMethod.GET)
+    public String getPage(@PathVariable("pageName") String pageName, Model model, HttpServletResponse response){
         List<Entry> entries = menuService.findActive(true).getEntries();
 
-        Page page = pageService.findOne(pageId, true);
+        Page page = pageService.findByIdentifier(pageName);
 
         model.addAttribute("page", page);
 
@@ -60,7 +57,6 @@ public class PageController {
             response.setStatus(HttpServletResponse.SC_NOT_FOUND);
             return "error/not-found";
         }
-
         if(page.getPageType()!=null){
             return page.getPageType().getLayoutName();
         }

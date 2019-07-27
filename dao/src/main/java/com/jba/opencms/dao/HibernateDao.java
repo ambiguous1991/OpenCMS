@@ -2,7 +2,9 @@ package com.jba.opencms.dao;
 
 import org.hibernate.SessionFactory;
 
+import javax.persistence.criteria.CriteriaQuery;
 import java.io.Serializable;
+import java.util.List;
 
 public class HibernateDao<T extends Serializable> extends AbstractHibernateDao<T> implements GenericDao<T> {
 

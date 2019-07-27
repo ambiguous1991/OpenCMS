@@ -4,6 +4,8 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
 import java.io.Serializable;
 import java.util.List;
 
@@ -21,6 +23,10 @@ public abstract class AbstractHibernateDao<T extends Serializable> {
 
     public T findOne(long id) {
         return (T) getCurrentSession().get(clazz, id);
+    }
+
+    public List<T> findFiltered(CriteriaQuery<T> filter){
+        return getCurrentSession().createQuery(filter).getResultList();
     }
 
     public List<T> findAll() {
@@ -42,6 +48,10 @@ public abstract class AbstractHibernateDao<T extends Serializable> {
     public void deleteById(long entityId) {
         T entity = findOne(entityId);
         delete(entity);
+    }
+
+    public CriteriaBuilder createBuilder(){
+        return getCurrentSession().getCriteriaBuilder();
     }
 
     protected final Session getCurrentSession() {

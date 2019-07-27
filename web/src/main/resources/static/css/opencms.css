@@ -130,7 +130,84 @@
 .footer-fixed {
     position: fixed;
     bottom: 0;
+    width: 100%;
 }
+
+/*CARDS*/
+
+.small-caps{
+    font-variant: small-caps;
+}
+
+.card__link{
+
+}
+
+.card-square{
+    display:flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+    background-color: rgba(255,255,255,0.95);
+
+    border: 1px solid #CCC;
+    -webkit-border-radius: 10px;
+    -moz-border-radius: 10px;
+    border-radius: 10px;
+    -webkit-box-shadow: 0px 0px 15px -1px rgba(0,0,0,0.2);
+    -moz-box-shadow: 0px 0px 15px -1px rgba(0,0,0,0.2);
+    box-shadow: 0px 0px 15px -1px rgba(0,0,0,0.2);
+}
+
+.card-square--grow{
+    transition: all .2s ease-in-out;
+}
+.card-square--grow:hover{
+    transform: scale(1.1);
+}
+
+.card-square--150{
+    height:150px;
+    width:150px;
+}
+
+.card-square--facebook{
+    color:#3C5A99;
+}
+
+.card-square--linkedin{
+    color:#0077B5;
+}
+
+.card-square--twitter{
+    color:#1DA1F2;
+}
+
+.card-square--github{
+    color:#000000;
+}
+
+.card-square--messenger{
+    color:#0078FF;
+}
+
+.card-square--gmail{
+    color:#DB4437;
+}
+
+.card-square__icon{
+    font-size: 5rem;
+    background-color: inherit;
+}
+
+.card-square__title{
+    margin-top: 0.5rem;
+}
+
+.fs-5rem{
+    font-size: 5rem;
+}
+/*END CARDS*/
 
 /*ERROR PAGES*/
 .error {
@@ -249,3 +326,9 @@
     }
 }
 
+.contact-background{
+    background: -webkit-linear-gradient(60deg, var(--primary)  30%, rgba(0,0,0,0) 30%), -webkit-linear-gradient(30deg, var(--gray) 60%, var(--gray-dark) 60%);
+    background: -o-linear-gradient(60deg, var(--primary)  30%, rgba(0,0,0,0) 30%), -o-linear-gradient(30deg, var(--gray) 60%, var(--gray-dark) 60%);
+    background: -moz-linear-gradient(60deg, var(--primary)  30%, rgba(0,0,0,0) 30%), -moz-linear-gradient(30deg, var(--gray) 60%, var(--gray-dark) 60%);
+    background: linear-gradient(60deg, var(--primary)  30%, rgba(0,0,0,0) 30%), linear-gradient(30deg, var(--gray) 60%, var(--gray-dark) 60%);
+}

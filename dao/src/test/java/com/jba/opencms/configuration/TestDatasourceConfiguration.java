@@ -15,4 +15,6 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 @EnableTransactionManagement
 public class TestDatasourceConfiguration {
     protected Logger logger = LogManager.getLogger(getClass());
+
+
 }
