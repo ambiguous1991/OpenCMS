@@ -6,6 +6,7 @@ import com.jba.opencms.page.PageTypeService;
 import com.jba.opencms.type.menu.Entry;
 import com.jba.opencms.type.page.Page;
 import com.jba.opencms.type.page.PageType;
+import net.bytebuddy.utility.RandomString;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.scheduling.annotation.Async;
@@ -46,7 +47,12 @@ public class AdminPageController {
         Page page = new Page();
 
         page.setTitle("New page");
-        page.setIdentifier("new-page");
+        if(!pageService.identifierAvailable("new-page", -1L)){
+            page.setIdentifier("new-page-"+RandomString.make(10));
+        }
+        else {
+            page.setIdentifier("new-page");
+        }
         page.setVisible(false);
 
         pageService.create(page);
@@ -75,6 +81,9 @@ public class AdminPageController {
             Boolean visible) {
         Page page = pageService.findOne(pageId, true);
         page.setTitle(title);
+        if(!page.getIdentifier().equals(identifier)&&!pageService.identifierAvailable(identifier, pageId)){
+            identifier+="-"+pageId;
+        }
         page.setIdentifier(identifier);
         if(visible!=null) {
             page.setVisible(visible);

@@ -34,13 +34,15 @@ public class PageServiceImpl extends AbstractService<Page> implements PageServic
     }
 
     @Override
-    public boolean identifierAvailable(String identifier) {
+    public boolean identifierAvailable(String identifier, Long id) {
         CriteriaBuilder builder = dao.createBuilder();
         CriteriaQuery<Page> query = builder.createQuery(Page.class);
         Root<Page> root = query.from(Page.class);
 
-        CriteriaQuery<Page> identifierQuery = query.select(root).where(builder.like(root.get("identifier"), identifier));
+        CriteriaQuery<Page> identifierQuery =
+                query.select(root)
+                        .where(builder.equal(root.get("identifier"), identifier));
 
-        return dao.findFiltered(identifierQuery).size()==0;
+        return dao.findFiltered(identifierQuery).stream().allMatch(el -> el.getId().equals(id));
     }
 }

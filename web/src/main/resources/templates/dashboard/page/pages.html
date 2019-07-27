@@ -60,7 +60,7 @@
                 </thead>
                 <tbody>
                     <tr th:each="page: ${pages}" class="border-bottom">
-                        <th th:text="${page.getTitle()}" class="font-weight-normal">moja-strona-główna</th>
+                        <th th:text="${page.getIdentifier()}" class="font-weight-normal">moja-strona-główna</th>
                         <th th:text="${page.getTitle()}" class="font-weight-normal">Strona główna</th>
                         <th th:text="${page.getSubpages().size()}" class="font-weight-normal">0</th>
                         <th th:text="${#temporals.format(page.getUpdated(), @systemVariables.get(@varkey.SYSTEM_DASHBOARD_DATE_FORMAT))}" class="font-weight-normal">
