@@ -7,9 +7,6 @@
         <meta th:replace="fragment/metadata">
         <title th:text="${@systemVariables.get(@varkey.PAGE_NAME)}+${breadcrumbTitle}">Failed</title>
         <div th:replace="fragment/import"></div>
-        <link rel="stylesheet" href="../../../static/css/opencms.css"/>
-        <link rel="stylesheet" href="../../../static/css/bootstrap.css"/>
-
     </head>
 <body class="d-flex flex-column vh-100">
     <nav th:replace="fragment/admin-navbar"></nav>
