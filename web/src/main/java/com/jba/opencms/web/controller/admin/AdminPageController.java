@@ -46,6 +46,7 @@ public class AdminPageController {
         Page page = new Page();
 
         page.setTitle("New page");
+        page.setIdentifier("new-page");
         page.setVisible(false);
 
         pageService.create(page);
@@ -70,10 +71,11 @@ public class AdminPageController {
     @RequestMapping(value = "/{pageId}", method = RequestMethod.POST)
     public RedirectView updatePageDetails(
             @PathVariable("pageId") Long pageId,
-            String title, Long pageType,
+            String title, Long pageType, String identifier,
             Boolean visible) {
         Page page = pageService.findOne(pageId, true);
         page.setTitle(title);
+        page.setIdentifier(identifier);
         if(visible!=null) {
             page.setVisible(visible);
         }

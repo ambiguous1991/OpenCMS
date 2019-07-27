@@ -70,7 +70,7 @@
                 </div>
                 <div class="col-12 col-lg-6 floating-label">
                     <label class="floating-label__label" for="identifier">identyfikator</label>
-                    <input id="identifier" name="id" type="text" class="form-control" disabled>
+                    <input id="identifier" name="identifier" type="text" class="form-control" readonly th:value="${page.identifier}">
                     <span id="identifierHelpBlock" class="form-text text-muted">ta treść generowana jest automatycznie na podstawie tytułu</span>
                 </div>
             </div>

@@ -23,6 +23,9 @@ import java.util.stream.Stream;
 @Table(name = "page")
 public class Page extends BaseTypeSimpleKey<Page> {
 
+    @Column(name="IDENTIFIER", nullable = false, length = 200)
+    private String identifier;
+
     @Column(name = "TITLE", nullable = false, length = 200)
     private String title;
 
