@@ -19,15 +19,13 @@ public class PageServiceImpl extends AbstractService<Page> implements PageServic
         logger = LoggerFactory.getLogger(getClass());
     }
 
-    private final CriteriaQuery<Page> createIdentifierQuery(String identifier){
+    private CriteriaQuery<Page> createIdentifierQuery(String identifier){
         CriteriaBuilder builder = dao.createBuilder();
         CriteriaQuery<Page> query = builder.createQuery(Page.class);
         Root<Page> root = query.from(Page.class);
 
-        CriteriaQuery<Page> identifierQuery =
-                query.select(root)
-                        .where(builder.equal(root.get("identifier"), identifier));
-        return identifierQuery;
+        return query.select(root)
+                .where(builder.equal(root.get("identifier"), identifier));
     }
 
     @Override
@@ -46,8 +44,7 @@ public class PageServiceImpl extends AbstractService<Page> implements PageServic
 
     @Override
     public Page findByIdentifier(String identifier) {
-        Page page = dao.findFiltered(createIdentifierQuery(identifier)).stream().findFirst().orElse(null);
-        return page;
+        return dao.findFiltered(createIdentifierQuery(identifier)).stream().findFirst().orElse(null);
     }
 
     @Override
