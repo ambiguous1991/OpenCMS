@@ -19,6 +19,17 @@ public class PageServiceImpl extends AbstractService<Page> implements PageServic
         logger = LoggerFactory.getLogger(getClass());
     }
 
+    private final CriteriaQuery<Page> createIdentifierQuery(String identifier){
+        CriteriaBuilder builder = dao.createBuilder();
+        CriteriaQuery<Page> query = builder.createQuery(Page.class);
+        Root<Page> root = query.from(Page.class);
+
+        CriteriaQuery<Page> identifierQuery =
+                query.select(root)
+                        .where(builder.equal(root.get("identifier"), identifier));
+        return identifierQuery;
+    }
+
     @Override
     public void updateContents(Long pageId, String content) {
         logger.info("Updating contents of page: "+pageId);
@@ -34,15 +45,13 @@ public class PageServiceImpl extends AbstractService<Page> implements PageServic
     }
 
     @Override
+    public Page findByIdentifier(String identifier) {
+        Page page = dao.findFiltered(createIdentifierQuery(identifier)).stream().findFirst().orElse(null);
+        return page;
+    }
+
+    @Override
     public boolean identifierAvailable(String identifier, Long id) {
-        CriteriaBuilder builder = dao.createBuilder();
-        CriteriaQuery<Page> query = builder.createQuery(Page.class);
-        Root<Page> root = query.from(Page.class);
-
-        CriteriaQuery<Page> identifierQuery =
-                query.select(root)
-                        .where(builder.equal(root.get("identifier"), identifier));
-
-        return dao.findFiltered(identifierQuery).stream().allMatch(el -> el.getId().equals(id));
+        return dao.findFiltered(createIdentifierQuery(identifier)).stream().allMatch(el -> el.getId().equals(id));
     }
 }
