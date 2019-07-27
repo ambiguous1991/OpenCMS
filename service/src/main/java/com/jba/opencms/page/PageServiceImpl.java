@@ -6,6 +6,9 @@ import com.jba.opencms.type.page.Page;
 import org.slf4j.LoggerFactory;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Root;
 import java.util.List;
 
 @Transactional
@@ -28,5 +31,16 @@ public class PageServiceImpl extends AbstractService<Page> implements PageServic
         catch (Exception e){
             logger.error("Error during page update", e);
         }
+    }
+
+    @Override
+    public boolean identifierAvailable(String identifier) {
+        CriteriaBuilder builder = dao.createBuilder();
+        CriteriaQuery<Page> query = builder.createQuery(Page.class);
+        Root<Page> root = query.from(Page.class);
+
+        CriteriaQuery<Page> identifierQuery = query.select(root).where(builder.like(root.get("identifier"), identifier));
+
+        return dao.findFiltered(identifierQuery).size()==0;
     }
 }
