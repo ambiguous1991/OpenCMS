@@ -13,7 +13,7 @@
 
     <artifactId>service</artifactId>
     <version>${service.version}</version>
-    <name>OpenCMS Service ${service.version}</name>
+    <name>OpenCMS Service</name>
     <description>OpenCMS Services  package</description>
 
     <dependencies>
