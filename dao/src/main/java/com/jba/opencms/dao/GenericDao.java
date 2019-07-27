@@ -1,5 +1,9 @@
 package com.jba.opencms.dao;
 
+import org.hibernate.Criteria;
+
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
 import java.io.Serializable;
 import java.util.List;
 
@@ -8,6 +12,8 @@ public interface GenericDao<T extends Serializable> {
     T findOne(final long id);
 
     List<T> findAll();
+
+    List<T> findFiltered(CriteriaQuery<T> filter);
 
     void create(final T entity);
 
@@ -18,5 +24,7 @@ public interface GenericDao<T extends Serializable> {
     void deleteById(final long entityId);
 
     void setClass(final Class clazz);
+
+    CriteriaBuilder createBuilder();
 
 }

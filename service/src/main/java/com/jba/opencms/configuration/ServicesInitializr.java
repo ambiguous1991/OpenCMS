@@ -4,8 +4,7 @@ import com.jba.opencms.dao.GenericDao;
 import com.jba.opencms.dao.ifs.EntryDao;
 import com.jba.opencms.dao.ifs.MenuDao;
 import com.jba.opencms.dao.ifs.SystemVariableDao;
-import com.jba.opencms.file.FileService;
-import com.jba.opencms.file.FileServiceImpl;
+import com.jba.opencms.file.*;
 import com.jba.opencms.globals.GlobalsService;
 import com.jba.opencms.globals.GlobalsServiceImpl;
 import com.jba.opencms.image.ImageService;
@@ -19,6 +18,8 @@ import com.jba.opencms.page.PageServiceImpl;
 import com.jba.opencms.page.PageTypeService;
 import com.jba.opencms.page.PageTypeServiceImpl;
 import com.jba.opencms.type.file.File;
+import com.jba.opencms.type.file.Script;
+import com.jba.opencms.type.file.Stylesheet;
 import com.jba.opencms.type.image.Image;
 import com.jba.opencms.type.page.Page;
 import com.jba.opencms.type.page.PageType;
@@ -65,5 +66,20 @@ public class ServicesInitializr {
     @Bean
     public FileService fileService(GenericDao<File> fileDao){
         return new FileServiceImpl(fileDao);
+    }
+
+    @Bean
+    public StylesheetService stylesheetService(GenericDao<Stylesheet> stylesheetDao){
+        return new StylesheetServiceImpl(stylesheetDao);
+    }
+
+    @Bean
+    public ScriptService scriptService(GenericDao<Script>scriptDao){
+        return new ScriptServiceImpl(scriptDao);
+    }
+
+    @Bean
+    public FileFacadeService fileFacadeService(FileService fileService, StylesheetService stylesheetService, ScriptService scriptService){
+        return new FileFacadeServiceImpl(scriptService, stylesheetService, fileService);
     }
 }

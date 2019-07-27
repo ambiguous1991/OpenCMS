@@ -27,6 +27,7 @@ public class Entry extends BaseTypeSimpleKey<Entry> {
     @ManyToOne
     @JoinColumn(name = "FK_MENU_ID")
     @ToString.Exclude
+    @EqualsAndHashCode.Exclude
     private Menu menu = null;
 
     @OneToMany(mappedBy = "parent", fetch = FetchType.EAGER, orphanRemoval = true)
@@ -35,6 +36,7 @@ public class Entry extends BaseTypeSimpleKey<Entry> {
     @ManyToOne
     @JoinColumn(name = "FK_ENTRY_PARENT_ID")
     @ToString.Exclude
+    @EqualsAndHashCode.Exclude
     private Entry parent;
 
     public static Entry of(String label){
