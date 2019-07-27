@@ -4,6 +4,7 @@
       xmlns:th="http://www.thymeleaf.org">
 
 <head>
+    <meta charset="UTF-8">
     <meta th:replace="fragment/metadata">
     <title th:text="${@systemVariables.get(@varkey.PAGE_NAME)}+${breadcrumbTitle}">Failed</title>
     <div th:replace="fragment/import"></div>
@@ -12,7 +13,47 @@
           integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf"
           crossorigin="anonymous">
     <link rel="stylesheet" href="../../../static/css/bootstrap.css"/>
+    <script
+            src="https://code.jquery.com/jquery-3.4.1.js"
+            integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
+            crossorigin="anonymous"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('#title').keyup(function () {
+                var text = $(this).val().toLowerCase().replace(/ +/g, '-').normalize("NFC");
+                $('#identifier').val(stripAccents(text));
+            })
+        });
 
+        function stripAccents(input) {
+            var map = new Map();
+            map.set('Ą', 'A');
+            map.set('Ć', 'C');
+            map.set('Ę', 'E');
+            map.set('Ł', 'L');
+            map.set('Ń', 'N');
+            map.set('Ó', 'O');
+            map.set('Ż', 'Z');
+            map.set('Ź', 'Z');
+            map.set('ą', 'a');
+            map.set('ć', 'c');
+            map.set('ę', 'e');
+            map.set('ł', 'l');
+            map.set('ń', 'n');
+            map.set('ó', 'o');
+            map.set('ż', 'z');
+            map.set('ź', 'z');
+
+            var inputarray = input.split('');
+            for (var i = 0; i < inputarray.length; i++) {
+                const mapping = map.get(inputarray[i]);
+                if(typeof mapping !== "undefined"){
+                    inputarray[i]=mapping;
+                }
+            }
+            return inputarray.join('');
+        }
+    </script>
 </head>
 <body class="d-flex flex-column vh-100">
 <nav th:replace="fragment/admin-navbar"></nav>
