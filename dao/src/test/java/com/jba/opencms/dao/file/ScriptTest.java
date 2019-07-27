@@ -6,6 +6,8 @@ import com.jba.opencms.configuration.TestDatasourceConfiguration;
 import com.jba.opencms.dao.GenericDao;
 import com.jba.opencms.type.file.Script;
 import com.jba.opencms.type.page.Page;
+import org.hibernate.query.criteria.HibernateCriteriaBuilder;
+import org.hibernate.query.criteria.internal.CriteriaBuilderImpl;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +16,10 @@ import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Expression;
+import javax.persistence.criteria.Root;
 import java.util.List;
 import java.util.Set;
 
@@ -32,6 +38,13 @@ public class ScriptTest extends BaseSpringIntegrationTest {
         scripts.forEach(logger::info);
         Set<Page> pages = scripts.get(0).getPages();
         pages.forEach(logger::info);
+
+        CriteriaBuilder builder = scriptDao.createBuilder();
+        CriteriaQuery<Script> query = builder.createQuery(Script.class);
+        Root<Script> root = query.from(Script.class);
+        CriteriaQuery<Script> title = query.select(root).where(builder.like(root.get("title"), "%script 1%"));
+
+        scriptDao.findFiltered(title).forEach(logger::info);
     }
 
     @Test
