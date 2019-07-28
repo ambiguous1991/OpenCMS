@@ -39,6 +39,9 @@ public class Page extends BaseTypeSimpleKey<Page> {
     @JoinColumn(name = "FK_PAGE_TYPE_ID", nullable = true)
     private PageType pageType;
 
+    @Column(name = "MOBILE_ENABLED", nullable = false)
+    private Boolean isMobileEnabled;
+
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(
             name = "page_authority",
