@@ -263,6 +263,22 @@
 .info-box__quicky-text {
   display: none;
 }
+@media (min-width: 550px) {
+  .info-box__quicky-text {
+    display: block;
+  }
+  .info-box__divider {
+    width: 100%;
+    display: block;
+  }
+}
+@media (min-width: 800px) {
+  .info-box__error-code {
+    display: block !important;
+    font-weight: bolder;
+    font-size: 5rem;
+  }
+}
 
 @media (min-width: 550px) {
   .info-box__quicky-text {

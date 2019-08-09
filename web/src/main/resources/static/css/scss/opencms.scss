@@ -317,6 +317,25 @@
   &__quicky-text {
     display: none;
   }
+
+  @media (min-width: 550px) {
+    &__quicky-text {
+      display: block;
+    }
+
+    &__divider {
+      width: 100%;
+      display: block;
+    }
+  }
+
+  @media(min-width: 800px) {
+    &__error-code {
+      display: block !important;;
+      font-weight: bolder;
+      font-size: 5rem;
+    }
+  }
 }
 
 
