@@ -54,6 +54,7 @@ public class AdminPageController {
             page.setIdentifier("new-page");
         }
         page.setVisible(false);
+        page.setIsMobileEnabled(true);
 
         pageService.create(page);
 
@@ -78,7 +79,7 @@ public class AdminPageController {
     public RedirectView updatePageDetails(
             @PathVariable("pageId") Long pageId,
             String title, Long pageType, String identifier,
-            Boolean visible) {
+            Boolean visible, Boolean isMobileEnabled) {
         Page page = pageService.findOne(pageId, true);
         page.setTitle(title);
         if(!page.getIdentifier().equals(identifier)&&!pageService.identifierAvailable(identifier, pageId)){
@@ -89,6 +90,10 @@ public class AdminPageController {
             page.setVisible(visible);
         }
         else page.setVisible(false);
+        if(isMobileEnabled!=null){
+            page.setIsMobileEnabled(isMobileEnabled);
+        }
+        else page.setIsMobileEnabled(false);
 
         PageType selectedPageType = pageTypeService.findOne(pageType, false);
         page.setPageType(selectedPageType);

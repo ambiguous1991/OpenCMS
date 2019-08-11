@@ -60,11 +60,15 @@
                     </div>
                 </div>
             </form>
-            <div class="d-flex flex-row mt-5">
+            <div class="d-flex flex-row mt-5" th:if="${entry.getParent()==null}">
                 <h4>Wpisy</h4>
                 <form th:action="'/dashboard/menu/'+${menuId}+'/'+${entry.getId()}+'/new'" method="post" class="flex-grow-1 text-right">
                     <button name="submit" type="submit" class="btn btn-primary">Dodaj wpis</button>
                 </form>
+
+            </div>
+            <div class="mt-3" th:if="${entry.getParent()==null}">
+                <span th:if="${entry.getSubentires()==null || entry.getSubentires().size()==0}">Brak wpisów</span>
             </div>
             <div th:if="${entry.getParent()==null}" class="overflow-auto">
                 <table class="table table-sm table-borderless" th:if="${entry.getSubentires().size()>0}">

@@ -5,6 +5,7 @@
 
 <head>
     <meta th:replace="fragment/metadata">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title th:text="${@systemVariables.get(@varkey.PAGE_NAME)}+${breadcrumbTitle}">Failed</title>
     <div th:replace="fragment/import"></div>
     <script type="text/javascript">
@@ -111,6 +112,15 @@
                     <input th:if="${page.visible==null}" name="visible" id="visible" type="checkbox"
                            value="false" class="floating-label__checkbox">
                     <label class="floating-label__label" for="visible">widoczna</label>
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="col-12 floating-label">
+                    <input th:unless="${page.isMobileEnabled==null}" name="isMobileEnabled" id="isMobileEnabled" type="checkbox"
+                           th:checked="${page.isMobileEnabled}" class="floating-label__checkbox">
+                    <input th:if="${page.visible==null}" name="isMobileEnabled" id="isMobileEnabled" type="checkbox"
+                           value="false" class="floating-label__checkbox">
+                    <label class="floating-label__label" for="isMobileEnabled">strona z widokiem mobilnym</label>
                 </div>
             </div>
             <div class="form-group row">

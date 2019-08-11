@@ -30,6 +30,7 @@ public class PageDaoIntegrationTest extends BaseSpringIntegrationTest {
         page.setVisible(true);
         page.setTitle("TestTitle");
         page.setIdentifier("testtitle");
+        page.setIsMobileEnabled(true);
         pageDao.create(page);
 
         List<Authority> all = authorityDao.findAll();
