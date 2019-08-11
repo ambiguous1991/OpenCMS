@@ -80,7 +80,7 @@ public class Page extends BaseTypeSimpleKey<Page> {
             joinColumns = {@JoinColumn(name = "FK_SCRIPT_ID")},
             inverseJoinColumns = {@JoinColumn(name = "FK_PAGE_ID")}
     )
-    private Set<Script> scripts = new HashSet<>();
+    private List<Script> scripts = new ArrayList<>();
 
     @ManyToMany
     @ToString.Exclude
@@ -90,8 +90,7 @@ public class Page extends BaseTypeSimpleKey<Page> {
             joinColumns = {@JoinColumn(name = "FK_STYLESHEET_ID")},
             inverseJoinColumns = {@JoinColumn(name = "FK_PAGE_ID")}
     )
-    private Set<Stylesheet> stylesheets = new HashSet<>();
-
+    private List<Stylesheet> stylesheets = new ArrayList<>();
 
     public void addAuthority(Authority authority){
         if(!pageAuthorities.contains(authority)) {
