@@ -14,39 +14,51 @@
 <nav th:replace="fragment/admin-breadcrumb"></nav>
 <div class="wrapper" style="max-height: 100vh;">
     <div th:replace="fragment/admin-sidebar"></div>
-    <div class="flex-grow-1 flex-column d-flex overflow-auto p-5">
-        <h2 class="mb-4" th:if="${RESOURCE_TYPE}">Skrypty .js strony <span th:text="${page.getTitle()}"></span></h2>
-        <h2 class="mb-4" th:unless="${RESOURCE_TYPE}">Arkusze stylów strony <span th:text="${page.getTitle()}"></span></h2>
-        <div class="row flex-grow-1">
-            <div class="col-12 col-md-5">
-                <label class="floating-label__label" for="available_sources">dostępne źródła</label>
-                <select id="available_sources" name="available_sources" class="custom-select form__select-multiple"
-                        multiple readonly>
-                    <option value="1">element1</option>
-                    <option value="2">element2</option>
-                    <option>element3</option>
-                    <option>element4</option>
-                </select>
-            </div>
-            <div class="col-2 d-none d-md-flex flex-md-column form__caret">
-                <div><a id="addBtnHorizontal" href="#"><i class="fas fa-caret-right"></i></a></div>
-                <div><a id="removeBtnHorizontal" href="#"><i class="fas fa-caret-left"></i></a></div>
-            </div>
-            <div class="col-12 d-flex flex-row d-md-none form__caret">
-                <div><a id="addBtnVertical" href="#"><i class="fas fa-caret-down"></i></a></div>
-                <div><a id="removeBtnVertical" href="#"><i class="fas fa-caret-up"></i></a></div>
-            </div>
-            <div class="col-12 col-md-5">
-                <label class="floating-label__label" for="page_sources">źródła strony</label>
-                <select id="page_sources" name="page_sources" class="custom-select form__select-multiple" multiple
-                        readonly>
-                    <option value="-1" disabled>brak</option>
-                </select>
+    <div class="flex-grow-1 flex-column d-flex overflow-auto p-5"
+         th:with="RESOURCE_NAME=${RESOURCE_TYPE?'scripts':'stylesheets'}">
+        <h2 class="mb-3" th:if="${RESOURCE_TYPE}">Skrypty .js strony <span th:text="${page.getTitle()}"></span></h2>
+        <h2 class="mb-3" th:unless="${RESOURCE_TYPE}">Arkusze stylów strony <span th:text="${page.getTitle()}"></span>
+        </h2>
+        <div class="text-muted text-justify mb-4">
+            <div>
+                Aby dodać źródła do strony, wybierz je z listy po lewej a na stępnie wybierz strzałkę kierującą do
+                drugiego okna. Aby usunąć źródła ze strony, wybierz je z listy po prawej stronie i wybierz strzałkę w
+                odwrotnym kierunku. Kiedy zakończysz, zatwierdź swoje zmiany przyciskiem na dole strony.
             </div>
         </div>
-        <div class="row mt-3">
-            <button class="col-12 col-md-4 offset-md-4 btn btn-primary btn-block">Zapisz</button>
-        </div>
+        <form th:action="${'/dashboard/page/'+page.getId()+'/'+RESOURCE_NAME}" method="post"
+              class="flex-grow-1 d-flex flex-column">
+            <div class="row flex-grow-1">
+                <div class="col-12 col-md-5">
+                    <label class="floating-label__label" for="available_sources">dostępne źródła</label>
+                    <select id="available_sources" name="available_sources" class="custom-select form__select-multiple"
+                            multiple readonly>
+                        <option value="1">element1</option>
+                        <option value="2">element2</option>
+                        <option>element3</option>
+                        <option>element4</option>
+                    </select>
+                </div>
+                <div class="col-2 d-none d-md-flex flex-md-column form__caret">
+                    <div><a id="addBtnHorizontal" href="#"><i class="fas fa-caret-right"></i></a></div>
+                    <div><a id="removeBtnHorizontal" href="#"><i class="fas fa-caret-left"></i></a></div>
+                </div>
+                <div class="col-12 d-flex flex-row d-md-none form__caret">
+                    <div><a id="addBtnVertical" href="#"><i class="fas fa-caret-down"></i></a></div>
+                    <div><a id="removeBtnVertical" href="#"><i class="fas fa-caret-up"></i></a></div>
+                </div>
+                <div class="col-12 col-md-5">
+                    <label class="floating-label__label" for="page_sources">źródła strony</label>
+                    <select id="page_sources" name="page_sources" class="custom-select form__select-multiple" multiple
+                            readonly>
+                        <option value="-1" disabled>brak</option>
+                    </select>
+                </div>
+            </div>
+            <div class="row mt-3">
+                <button type="submit" class="col-12 col-md-4 offset-md-4 btn btn-primary btn-block">Zapisz</button>
+            </div>
+        </form>
     </div>
 </div>
 <script>

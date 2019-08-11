@@ -110,6 +110,13 @@ public class AdminPageController {
         return "dashboard/page/resources";
     }
 
+    @RequestMapping(value = "/{pageId}/scripts", method = RequestMethod.POST)
+    public String addPageScripts(@PathVariable("pageId") Long pageId, List<String> body, Model model){
+        model.addAttribute("page", pageService.findOne(pageId, true));
+        model.addAttribute("RESOURCE_TYPE", true);
+        return "dashboard/page/resources";
+    }
+
     @RequestMapping(value = "/{pageId}/stylesheets", method = RequestMethod.GET)
     public String getStylesheets(@PathVariable("pageId") Long pageId, Model model){
         model.addAttribute("page", pageService.findOne(pageId, true));
