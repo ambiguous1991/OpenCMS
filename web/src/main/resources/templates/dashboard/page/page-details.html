@@ -93,16 +93,18 @@
             </div>
             <div class="row mb-3">
                 <div class="col-12 col-lg-6 mb-3">
-                    <select id="scripts" name="scripts" class="custom-select" multiple>
+                    <select id="scripts" name="scripts" class="custom-select" multiple readonly>
                         <option value="-1">brak</option>
                     </select>
                     <label class="floating-label__label" for="scripts">skrypty</label>
+                    <a href="#" th:href="@{'/dashboard/'+${page.getId()}+'/scripts'}" class="floating-label__button_plus"><i class="fas fa-pen-square"></i></a>
                 </div>
                 <div class="col-12 col-lg-6">
-                    <select id="stylesheets" name="stylesheets" class="custom-select" multiple>
+                    <select id="stylesheets" name="stylesheets" class="custom-select" multiple readonly>
                         <option value="-1">brak</option>
                     </select>
                     <label class="floating-label__label" for="stylesheets">arkusze stylów</label>
+                    <a href="#" th:href="@{'/dashboard/'+${page.getId()}+'/stylesheets'}" class="floating-label__button_plus"><i class="fas fa-pen-square"></i></a>
                 </div>
             </div>
             <div class="form-group row">

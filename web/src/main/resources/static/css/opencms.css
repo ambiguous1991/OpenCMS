@@ -70,6 +70,19 @@
 .floating-label__checkbox {
   margin-top: 0.8rem;
 }
+.floating-label__button_plus {
+  border: none;
+  position: absolute;
+  top: -1.75rem;
+  right: 2.5rem;
+  font-size: 2.5rem;
+  background: transparent;
+  color: var(--green);
+  z-index: 5;
+}
+.floating-label__button_plus:hover {
+  color: green;
+}
 
 @keyframes backdrop-floaty {
   from {
