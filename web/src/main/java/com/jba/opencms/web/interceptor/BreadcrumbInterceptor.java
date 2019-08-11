@@ -81,6 +81,8 @@ public class BreadcrumbInterceptor extends HandlerInterceptorAdapter {
         map.put("change-password", "Zmiana hasła");
         map.put("presentation", "Wygląd");
         map.put("edit-css", "Edycja arkusza stylów");
+        map.put("stylesheets", "Arkusze stylów");
+        map.put("scripts", "Skrypty");
         return map;
     }
 }

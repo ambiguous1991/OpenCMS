@@ -383,3 +383,20 @@
   background: -moz-linear-gradient(60deg, var(--primary) 30%, rgba(0, 0, 0, 0) 30%), -moz-linear-gradient(30deg, var(--gray) 60%, var(--gray-dark) 60%);
   background: linear-gradient(60deg, var(--primary) 30%, rgba(0, 0, 0, 0) 30%), linear-gradient(30deg, var(--gray) 60%, var(--gray-dark) 60%);
 }
+
+.form{
+  &__caret{
+    font-size: 4rem;
+    justify-content: space-evenly;
+    text-align: center;
+    align-items: center;
+
+    @media(min-width: 768px) {
+      font-size: 5rem;
+    }
+  }
+
+  &__select-multiple{
+    height: 100%!important;
+  }
+}
