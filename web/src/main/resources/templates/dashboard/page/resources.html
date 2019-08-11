@@ -1,0 +1,24 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-4.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta th:replace="fragment/metadata">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title th:text="${@systemVariables.get(@varkey.PAGE_NAME)}+${breadcrumbTitle}">Failed</title>
+    <div th:replace="fragment/import"></div>
+</head>
+<body class="d-flex flex-column vh-100">
+<nav th:replace="fragment/admin-navbar"></nav>
+<nav th:replace="fragment/admin-breadcrumb"></nav>
+<div class="wrapper" style="max-height: 100vh;">
+    <div th:replace="fragment/admin-sidebar"></div>
+    <div class="flex-grow-1 flex-column d-flex overflow-auto p-5">
+        <h2 class="mb-4" th:if="${RESOURCE_TYPE}">Skrypty .js strony <span th:text="${page.getTitle()}"></span></h2>
+        <h2 class="mb-4" th:unless="${RESOURCE_TYPE}">Arkusze stylów strony <span th:text="${page.getTitle()}"></span></h2>
+        <span th:text="${#httpServletRequest.getRequestURL()}"></span>
+    </div>
+</div>
+</body>
+</html>

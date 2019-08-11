@@ -103,6 +103,20 @@ public class AdminPageController {
         return new RedirectView("/dashboard/page");
     }
 
+    @RequestMapping(value = "/{pageId}/scripts", method = RequestMethod.GET)
+    public String getPageScripts(@PathVariable("pageId") Long pageId, Model model){
+        model.addAttribute("page", pageService.findOne(pageId, true));
+        model.addAttribute("RESOURCE_TYPE", true);
+        return "dashboard/page/resources";
+    }
+
+    @RequestMapping(value = "/{pageId}/stylesheets", method = RequestMethod.GET)
+    public String getStylesheets(@PathVariable("pageId") Long pageId, Model model){
+        model.addAttribute("page", pageService.findOne(pageId, true));
+        model.addAttribute("RESOURCE_TYPE", false);
+        return "dashboard/page/resources";
+    }
+
     @RequestMapping(value = "/{pageId}/edit", method = RequestMethod.GET)
     public String editPage(
             @PathVariable("pageId") Long pageId,
