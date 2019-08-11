@@ -8,6 +8,23 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title th:text="${@systemVariables.get(@varkey.PAGE_NAME)}+${breadcrumbTitle}">Failed</title>
     <div th:replace="fragment/import"></div>
+
+    <script
+            src="https://code.jquery.com/jquery-3.4.1.js"
+            integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
+            crossorigin="anonymous"></script>
+    <meta charset="UTF-8">
+    <meta name="description" content="Personal Blog">
+    <meta name="keywords" content="Blog,CV,Programming,Jakub,Bartusiak,Java,Spring">
+    <meta name="author" content="Jakub Bartusiak">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="google-site-verification" content="bm2QYR5NxPEN5erX9yooPVfYBdlYwlxFooE9vw4EvAM"/>
+    <title>Page</title>
+    <link rel="stylesheet" href="../../../static/css/bootstrap.css"/>
+    <link rel="stylesheet" href="../../../static/css/bootstrap-theme.css"/>
+    <link rel="stylesheet" href="../../../static/css/opencms.css"/>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css"
+          integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
 </head>
 <body class="d-flex flex-column vh-100">
 <nav th:replace="fragment/admin-navbar"></nav>
@@ -16,9 +33,62 @@
     <div th:replace="fragment/admin-sidebar"></div>
     <div class="flex-grow-1 flex-column d-flex overflow-auto p-5">
         <h2 class="mb-4" th:if="${RESOURCE_TYPE}">Skrypty .js strony <span th:text="${page.getTitle()}"></span></h2>
-        <h2 class="mb-4" th:unless="${RESOURCE_TYPE}">Arkusze stylów strony <span th:text="${page.getTitle()}"></span></h2>
-        <span th:text="${#httpServletRequest.getRequestURL()}"></span>
+        <!--        <h2 class="mb-4" th:unless="${RESOURCE_TYPE}">Arkusze stylów strony <span th:text="${page.getTitle()}"></span></h2>-->
+        <div class="row">
+            <div class="col-5">
+                <label class="floating-label__label" for="available_sources">dostępne źródła</label>
+                <select id="available_sources" name="available_sources" class="custom-select" multiple readonly>
+                    <option value="1">element1</option>
+                    <option value="2">element2</option>
+                    <option>element3</option>
+                    <option>element4</option>
+                </select>
+            </div>
+            <div class="col-2 d-flex flex-column text-center justify-content-around" style="font-size: 2rem">
+                <div><a id="addBtn" href="#"><i class="fas fa-caret-right"></i></a></div>
+                <div><a id="removeBtn" href="#"><i class="fas fa-caret-left"></i></a></div>
+            </div>
+            <div class="col-5">
+                <label class="floating-label__label" for="page_sources">źródła strony</label>
+                <select id="page_sources" name="page_sources" class="custom-select" multiple readonly>
+                    <option value="-1">brak</option>
+                </select>
+            </div>
+        </div>
     </div>
 </div>
+<script>
+    var sources = $('#available_sources');
+    var pageSources = $('#page_sources');
+    var addButton = $('#addBtn');
+    var removeButton = $('#removeBtn');
+
+    addButton.click(function () {
+        const result = getSelectValues(sources);
+        addSelectValues(pageSources, result);
+    });
+
+    removeButton.click(function () {
+        const selectedValues = getSelectValues(pageSources);
+        addSelectValues(sources, selectedValues);
+    });
+
+    function getSelectValues(rootElement) {
+        const selected = rootElement.find('option:selected');
+        rootElement.find('option:selected').remove();
+        if(rootElement.find('option')[0]===undefined){
+            rootElement.append(new Option('brak', '-1'));
+        }
+        return selected;
+    }
+
+    function addSelectValues(rootElement, optionsList) {
+        const emptyPlaceholder = rootElement.find(":contains('brak')");
+        if(emptyPlaceholder.length===1){
+            rootElement.find('option').remove();
+        }
+        rootElement.append(optionsList);
+    }
+</script>
 </body>
 </html>
