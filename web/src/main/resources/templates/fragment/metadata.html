@@ -2,5 +2,6 @@
 <meta name="description" content="Personal Blog">
 <meta name="keywords" content="Blog,CV,Programming,Jakub,Bartusiak,Java,Spring">
 <meta name="author" content="Jakub Bartusiak">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta th:if="${page!=null && page.isMobileEnabled}" name="viewport" content="width=device-width, initial-scale=1.0" xmlns:th="http://www.thymeleaf.org">
+<meta th:unless="${page!=null}" name="viewport" content="width=device-width, initial-scale=1.0" xmlns:th="http://www.thymeleaf.org">
 <meta name="google-site-verification" content="bm2QYR5NxPEN5erX9yooPVfYBdlYwlxFooE9vw4EvAM" />
