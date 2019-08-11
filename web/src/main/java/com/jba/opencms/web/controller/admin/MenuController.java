@@ -89,6 +89,7 @@ public class MenuController {
                                         Model model){
         Entry entry = entryService.findOne(entryId, true);
         model.addAttribute("entry", entry);
+        model.addAttribute("subentry", entry.getParent()!=null);
 
         model.addAttribute("menuId", menuId);
         List<Page> pages = pageService.findAll(true);
