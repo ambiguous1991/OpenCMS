@@ -9,7 +9,9 @@ import com.jba.opencms.type.file.Stylesheet;
 import com.jba.opencms.type.menu.Entry;
 import com.jba.opencms.type.page.Page;
 import com.jba.opencms.type.page.PageType;
+import com.jba.opencms.web.form.resource.ResourceForm;
 import com.jba.opencms.web.message.AbstractConverter;
+import com.jba.opencms.web.type.resource.ScriptToResourceWrapperConverter;
 import net.bytebuddy.utility.RandomString;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -116,15 +118,19 @@ public class AdminPageController {
     }
 
     @RequestMapping(value = "/{pageId}/scripts", method = RequestMethod.GET)
-    public String getPageScripts(@PathVariable("pageId") Long pageId, Model model) {
-        List<Script> scripts = fileService.script().findAll(true);
+    public String getPageScripts(@PathVariable("pageId") Long pageId, Model model, ScriptToResourceWrapperConverter converter) {
         Page page = pageService.findOne(pageId, true);
+
+        List<Script> availableScripts = fileService.script().findAll(true);
         List<Script> pageScripts = page.getScripts();
-        scripts.removeAll(pageScripts);
-        model.addAttribute("resources", scripts);
-        model.addAttribute("pageResources", pageScripts);
+        availableScripts.removeAll(pageScripts);
+
+        ResourceForm form = new ResourceForm(converter.convert(availableScripts), converter.convert(pageScripts));
+
+        model.addAttribute("form", form);
         model.addAttribute("page", page);
         model.addAttribute("RESOURCE_TYPE", true);
+
         return "dashboard/page/resources";
     }
 
@@ -139,13 +145,8 @@ public class AdminPageController {
     }
 
     @RequestMapping(value = "/{pageId}/scripts", method = RequestMethod.POST)
-    public RedirectView addPageScripts(@PathVariable("pageId") Long pageId, @RequestBody String page_sources) {
+    public RedirectView addPageScripts(@PathVariable("pageId") Long pageId, ResourceForm resourceForm) {
         Page page = pageService.findOne(pageId, true);
-        if (scriptConverter.applies(page_sources)) {
-            List<Script> read = scriptConverter.read(page_sources);
-            page.getScripts().addAll(read);
-        }
-        pageService.update(page);
         return new RedirectView("/dashboard/page/" + pageId + "?success");
     }
 
