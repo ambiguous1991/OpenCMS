@@ -7,17 +7,17 @@ import java.util.stream.Collectors;
 
 public abstract class AbstractConverter<T> implements RequestBodyToResourceConverter<T> {
 
-    private final String PARAM_NAME;
-    private final Predicate<String> startsWithParam;
+    private final List<String> SUPPORTS_PARAMS;
+    private final Predicate<String> STARTS_WITH;
 
-    protected AbstractConverter(String parameterName) {
-        PARAM_NAME = parameterName;
-        startsWithParam = el -> el.startsWith(PARAM_NAME);
+    protected AbstractConverter(String... parameterName) {
+        SUPPORTS_PARAMS = Arrays.asList(parameterName);
+        STARTS_WITH = element->SUPPORTS_PARAMS.stream().anyMatch(element::startsWith);
     }
 
     @Override
-    public final boolean applies(String string) {
-        return string.contains(PARAM_NAME);
+    public final boolean supports(String string) {
+        return SUPPORTS_PARAMS.stream().anyMatch(element->element.contains(string));
     }
 
     @Override
@@ -28,7 +28,7 @@ public abstract class AbstractConverter<T> implements RequestBodyToResourceConve
     protected final List<String> tokenize(String input) {
         String[] parameters = input.split("&");
         List<String> result = Arrays.stream(parameters)
-                .filter(startsWithParam)
+                .filter(STARTS_WITH)
                 .map(element -> element.substring(element.indexOf('=')+1))
                 .collect(Collectors.toList());
         return result;

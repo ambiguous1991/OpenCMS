@@ -1,4 +1,4 @@
-package com.jba.opencms.web.controller.admin;
+package com.jba.opencms.web.controller.admin.page;
 
 import com.jba.opencms.file.FileFacadeService;
 import com.jba.opencms.menu.MenuService;
@@ -18,10 +18,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.view.RedirectView;
 
 import java.util.ArrayList;
@@ -35,19 +32,21 @@ public class AdminPageController {
     private MenuService menuService;
     private PageTypeService pageTypeService;
     private FileFacadeService fileService;
-    private AbstractConverter<Script> scriptConverter;
+    private AbstractConverter<Script> acceptedScripts, rejectedScripts;
 
     public AdminPageController(PageService pageService,
                                MenuService menuService,
                                PageTypeService pageTypeService,
                                FileFacadeService fileService,
-                               AbstractConverter<Script> scriptConverter)
+                               AbstractConverter<Script> scriptAcceptedConverter,
+                               AbstractConverter<Script> scriptRejectedConverter)
     {
         this.pageService = pageService;
         this.menuService = menuService;
         this.pageTypeService = pageTypeService;
         this.fileService = fileService;
-        this.scriptConverter = scriptConverter;
+        this.acceptedScripts = scriptAcceptedConverter;
+        this.rejectedScripts = scriptRejectedConverter;
     }
 
     @RequestMapping(method = RequestMethod.GET)
@@ -145,8 +144,16 @@ public class AdminPageController {
     }
 
     @RequestMapping(value = "/{pageId}/scripts", method = RequestMethod.POST)
-    public RedirectView addPageScripts(@PathVariable("pageId") Long pageId, ResourceForm resourceForm) {
+    public RedirectView addPageScripts(@PathVariable("pageId") Long pageId, @RequestBody String body) {
         Page page = pageService.findOne(pageId, true);
+
+        List<Script> toAdd = acceptedScripts.read(body);
+        List<Script> toRemove = rejectedScripts.read(body);
+
+        page.getScripts().removeAll(toRemove);
+        page.getScripts().addAll(toAdd);
+
+        pageService.update(page);
         return new RedirectView("/dashboard/page/" + pageId + "?success");
     }
 

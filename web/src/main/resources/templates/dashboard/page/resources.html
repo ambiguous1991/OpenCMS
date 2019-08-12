@@ -31,10 +31,10 @@
             <div class="row flex-grow-1">
                 <div class="col-12 col-md-5">
                     <label class="floating-label__label" for="availableResources">dostępne źródła</label>
-                    <select id="availableResources" name="availableResources" class="custom-select form__select-multiple" th:field="*{availableResources}"
+                    <select id="availableResources" name="availableResources" class="custom-select form__select-multiple"
                             readonly multiple>
-                        <option th:if="*{getAvailableResources().size()==0}" value="-1">brak</option>
-                        <option th:each="resource: *{getAvailableResources()}" th:value="${{resource.getValue()}}" th:text="${resource.getText()}"></option>
+                        <option th:if="${form.getAvailableResources().size()==0}" value="-1">brak</option>
+                        <option th:each="resource: ${form.getAvailableResources()}" th:value="${{resource.getValue()}}" th:text="${resource.getText()}"></option>
                     </select>
                 </div>
                 <div class="col-2 d-none d-md-flex flex-md-column form__caret">
@@ -47,9 +47,9 @@
                 </div>
                 <div class="col-12 col-md-5">
                     <label class="floating-label__label" for="pageResources">źródła strony</label>
-                    <select id="pageResources" name="pageResources" class="custom-select form__select-multiple" th:field="*{pageResources}" readonly multiple>
-                        <option th:if="*{getPageResources().size()==0}" value="-1" disabled>brak</option>
-                        <option th:each="resource: *{getPageResources()}" th:value="${{resource.getValue()}}" th:text="${resource.getText()}"></option>
+                    <select id="pageResources" name="pageResources" class="custom-select form__select-multiple" readonly multiple>
+                        <option th:if="${form.getPageResources().size()==0}" value="-1">brak</option>
+                        <option th:each="resource: ${form.getPageResources()}" th:value="${{resource.getValue()}}" th:text="${resource.getText()}"></option>
                     </select>
                 </div>
             </div>

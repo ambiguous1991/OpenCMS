@@ -10,8 +10,8 @@ public class RequestBodyToScriptResourceConverter extends AbstractConverter<Scri
 
     private FileFacadeService fileService;
 
-    public RequestBodyToScriptResourceConverter(String parameterName, FileFacadeService fileService) {
-        super(parameterName);
+    public RequestBodyToScriptResourceConverter(FileFacadeService fileService, String... supportedParams) {
+        super(supportedParams);
         this.fileService=fileService;
     }
 
