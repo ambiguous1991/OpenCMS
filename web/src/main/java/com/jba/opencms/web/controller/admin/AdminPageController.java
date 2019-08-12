@@ -1,11 +1,15 @@
 package com.jba.opencms.web.controller.admin;
 
+import com.jba.opencms.file.FileFacadeService;
 import com.jba.opencms.menu.MenuService;
 import com.jba.opencms.page.PageService;
 import com.jba.opencms.page.PageTypeService;
+import com.jba.opencms.type.file.Script;
+import com.jba.opencms.type.file.Stylesheet;
 import com.jba.opencms.type.menu.Entry;
 import com.jba.opencms.type.page.Page;
 import com.jba.opencms.type.page.PageType;
+import com.jba.opencms.web.message.AbstractConverter;
 import net.bytebuddy.utility.RandomString;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -13,10 +17,12 @@ import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.view.RedirectView;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Controller
@@ -26,11 +32,20 @@ public class AdminPageController {
     private PageService pageService;
     private MenuService menuService;
     private PageTypeService pageTypeService;
+    private FileFacadeService fileService;
+    private AbstractConverter<Script> scriptConverter;
 
-    public AdminPageController(PageService pageService, MenuService menuService, PageTypeService pageTypeService) {
+    public AdminPageController(PageService pageService,
+                               MenuService menuService,
+                               PageTypeService pageTypeService,
+                               FileFacadeService fileService,
+                               AbstractConverter<Script> scriptConverter)
+    {
         this.pageService = pageService;
         this.menuService = menuService;
         this.pageTypeService = pageTypeService;
+        this.fileService = fileService;
+        this.scriptConverter = scriptConverter;
     }
 
     @RequestMapping(method = RequestMethod.GET)
@@ -47,10 +62,9 @@ public class AdminPageController {
         Page page = new Page();
 
         page.setTitle("New page");
-        if(!pageService.identifierAvailable("new-page", -1L)){
-            page.setIdentifier("new-page-"+RandomString.make(10));
-        }
-        else {
+        if (!pageService.identifierAvailable("new-page", -1L)) {
+            page.setIdentifier("new-page-" + RandomString.make(10));
+        } else {
             page.setIdentifier("new-page");
         }
         page.setVisible(false);
@@ -82,18 +96,16 @@ public class AdminPageController {
             Boolean visible, Boolean isMobileEnabled) {
         Page page = pageService.findOne(pageId, true);
         page.setTitle(title);
-        if(!page.getIdentifier().equals(identifier)&&!pageService.identifierAvailable(identifier, pageId)){
-            identifier+="-"+pageId;
+        if (!page.getIdentifier().equals(identifier) && !pageService.identifierAvailable(identifier, pageId)) {
+            identifier += "-" + pageId;
         }
         page.setIdentifier(identifier);
-        if(visible!=null) {
+        if (visible != null) {
             page.setVisible(visible);
-        }
-        else page.setVisible(false);
-        if(isMobileEnabled!=null){
+        } else page.setVisible(false);
+        if (isMobileEnabled != null) {
             page.setIsMobileEnabled(isMobileEnabled);
-        }
-        else page.setIsMobileEnabled(false);
+        } else page.setIsMobileEnabled(false);
 
         PageType selectedPageType = pageTypeService.findOne(pageType, false);
         page.setPageType(selectedPageType);
@@ -104,24 +116,37 @@ public class AdminPageController {
     }
 
     @RequestMapping(value = "/{pageId}/scripts", method = RequestMethod.GET)
-    public String getPageScripts(@PathVariable("pageId") Long pageId, Model model){
-        model.addAttribute("page", pageService.findOne(pageId, true));
-        model.addAttribute("RESOURCE_TYPE", true);
-        return "dashboard/page/resources";
-    }
-
-    @RequestMapping(value = "/{pageId}/scripts", method = RequestMethod.POST)
-    public String addPageScripts(@PathVariable("pageId") Long pageId, List<String> body, Model model){
-        model.addAttribute("page", pageService.findOne(pageId, true));
+    public String getPageScripts(@PathVariable("pageId") Long pageId, Model model) {
+        List<Script> scripts = fileService.script().findAll(true);
+        Page page = pageService.findOne(pageId, true);
+        List<Script> pageScripts = page.getScripts();
+        scripts.removeAll(pageScripts);
+        model.addAttribute("resources", scripts);
+        model.addAttribute("pageResources", pageScripts);
+        model.addAttribute("page", page);
         model.addAttribute("RESOURCE_TYPE", true);
         return "dashboard/page/resources";
     }
 
     @RequestMapping(value = "/{pageId}/stylesheets", method = RequestMethod.GET)
-    public String getStylesheets(@PathVariable("pageId") Long pageId, Model model){
+    public String getStylesheets(@PathVariable("pageId") Long pageId, Model model) {
+        List<Stylesheet> stylesheets = fileService.stylesheet().findAll(true);
+        model.addAttribute("resources", stylesheets);
+        model.addAttribute("pageResources", new ArrayList<Stylesheet>());
         model.addAttribute("page", pageService.findOne(pageId, true));
         model.addAttribute("RESOURCE_TYPE", false);
         return "dashboard/page/resources";
+    }
+
+    @RequestMapping(value = "/{pageId}/scripts", method = RequestMethod.POST)
+    public RedirectView addPageScripts(@PathVariable("pageId") Long pageId, @RequestBody String page_sources) {
+        Page page = pageService.findOne(pageId, true);
+        if (scriptConverter.applies(page_sources)) {
+            List<Script> read = scriptConverter.read(page_sources);
+            page.getScripts().addAll(read);
+        }
+        pageService.update(page);
+        return new RedirectView("/dashboard/page/" + pageId + "?success");
     }
 
     @RequestMapping(value = "/{pageId}/edit", method = RequestMethod.GET)
@@ -145,10 +170,9 @@ public class AdminPageController {
         model.addAttribute("page", page);
         model.addAttribute("menu", menu);
 
-        if(page.getPageType()!=null){
+        if (page.getPageType() != null) {
             return page.getPageType().getLayoutName();
-        }
-        else
+        } else
             return "page-template/one-column-half-width";
     }
 

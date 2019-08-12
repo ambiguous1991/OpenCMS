@@ -32,11 +32,9 @@
                 <div class="col-12 col-md-5">
                     <label class="floating-label__label" for="available_sources">dostępne źródła</label>
                     <select id="available_sources" name="available_sources" class="custom-select form__select-multiple"
-                            multiple readonly>
-                        <option value="1">element1</option>
-                        <option value="2">element2</option>
-                        <option>element3</option>
-                        <option>element4</option>
+                            readonly multiple>
+                        <option th:if="${resources.size()==0}" value="-1">brak</option>
+                        <option th:each="resource: ${resources}" th:value="${resource.getId()}" th:text="${resource.getTitle()}"></option>
                     </select>
                 </div>
                 <div class="col-2 d-none d-md-flex flex-md-column form__caret">
@@ -49,9 +47,9 @@
                 </div>
                 <div class="col-12 col-md-5">
                     <label class="floating-label__label" for="page_sources">źródła strony</label>
-                    <select id="page_sources" name="page_sources" class="custom-select form__select-multiple" multiple
-                            readonly>
-                        <option value="-1" disabled>brak</option>
+                    <select id="page_sources" th:object="${pageResources}" name="page_sources" class="custom-select form__select-multiple" readonly multiple>
+                        <option th:if="${pageResources.size()==0}" value="-1" disabled>brak</option>
+                        <option th:each="resource: ${pageResources}" th:value="${resource.getId()}" th:text="${resource.getTitle()}"></option>
                     </select>
                 </div>
             </div>

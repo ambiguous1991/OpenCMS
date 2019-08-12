@@ -10,10 +10,7 @@ import lombok.EqualsAndHashCode;
 import lombok.ToString;
 
 import javax.persistence.*;
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -72,13 +69,13 @@ public class Page extends BaseTypeSimpleKey<Page> {
     @EqualsAndHashCode.Exclude
     private List<Image> images = new ArrayList<>();
 
-    @ManyToMany
+    @ManyToMany(cascade = CascadeType.ALL)
     @ToString.Exclude
     @EqualsAndHashCode.Exclude
     @JoinTable(
             name = "page_script",
-            joinColumns = {@JoinColumn(name = "FK_SCRIPT_ID")},
-            inverseJoinColumns = {@JoinColumn(name = "FK_PAGE_ID")}
+            joinColumns = {@JoinColumn(name = "FK_PAGE_ID")},
+            inverseJoinColumns = {@JoinColumn(name = "FK_SCRIPT_ID")}
     )
     private List<Script> scripts = new ArrayList<>();
 
@@ -87,8 +84,8 @@ public class Page extends BaseTypeSimpleKey<Page> {
     @EqualsAndHashCode.Exclude
     @JoinTable(
             name = "page_stylesheet",
-            joinColumns = {@JoinColumn(name = "FK_STYLESHEET_ID")},
-            inverseJoinColumns = {@JoinColumn(name = "FK_PAGE_ID")}
+            joinColumns = {@JoinColumn(name = "FK_PAGE_ID")},
+            inverseJoinColumns = {@JoinColumn(name = "FK_STYLESHEET_ID")}
     )
     private List<Stylesheet> stylesheets = new ArrayList<>();
 
