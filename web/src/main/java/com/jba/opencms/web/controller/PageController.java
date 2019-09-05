@@ -48,6 +48,7 @@ public class PageController {
         List<Entry> entries = menuService.findActive(true).getEntries();
 
         Page page = pageService.findByIdentifier(pageName);
+        pageService.findOne(page.getId(), true);
 
         model.addAttribute("page", page);
 

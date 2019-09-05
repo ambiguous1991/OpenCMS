@@ -17,3 +17,8 @@
 <script type="text/javascript" src="/webjars/bootstrap/4.3.1/js/bootstrap.js"></script>
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css"
       integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+<!--/*@thymesVar id="page" type="com.jba.opencms.type.page.Page"*/-->
+<th:block th:if="${page}!=null">
+    <script type="text/javascript" th:each="script: ${page.getScripts()}" th:href="'https://'+${@environment.getProperty('cloud.aws.bucket')}+${@environment.getProperty('application.opencms.web.extension')}+${script.getPath()}"></script>
+    <link rel="stylesheet" th:each="page_stylesheet: ${page.getStylesheets()}" th:href="'https://'+${@environment.getProperty('cloud.aws.bucket')}+${@environment.getProperty('application.opencms.web.extension')}+${page_stylesheet.getPath()}">
+</th:block>
