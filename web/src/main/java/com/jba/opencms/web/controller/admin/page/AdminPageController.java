@@ -12,6 +12,7 @@ import com.jba.opencms.type.page.PageType;
 import com.jba.opencms.web.form.resource.ResourceForm;
 import com.jba.opencms.web.message.AbstractConverter;
 import com.jba.opencms.web.type.resource.ScriptToResourceWrapperConverter;
+import com.jba.opencms.web.type.resource.StylesheetToResourceWrapperConverter;
 import net.bytebuddy.utility.RandomString;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -21,7 +22,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.view.RedirectView;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Controller
@@ -33,13 +33,16 @@ public class AdminPageController {
     private PageTypeService pageTypeService;
     private FileFacadeService fileService;
     private AbstractConverter<Script> acceptedScripts, rejectedScripts;
+    private AbstractConverter<Stylesheet> acceptedStylesheets, rejectedStylesheets;
 
     public AdminPageController(PageService pageService,
                                MenuService menuService,
                                PageTypeService pageTypeService,
                                FileFacadeService fileService,
                                AbstractConverter<Script> scriptAcceptedConverter,
-                               AbstractConverter<Script> scriptRejectedConverter)
+                               AbstractConverter<Script> scriptRejectedConverter,
+                               AbstractConverter<Stylesheet> stylesheetAcceptedConverter,
+                               AbstractConverter<Stylesheet> stylesheetRejectedConverter)
     {
         this.pageService = pageService;
         this.menuService = menuService;
@@ -47,6 +50,8 @@ public class AdminPageController {
         this.fileService = fileService;
         this.acceptedScripts = scriptAcceptedConverter;
         this.rejectedScripts = scriptRejectedConverter;
+        this.acceptedStylesheets = stylesheetAcceptedConverter;
+        this.rejectedStylesheets = stylesheetRejectedConverter;
     }
 
     @RequestMapping(method = RequestMethod.GET)
@@ -134,12 +139,19 @@ public class AdminPageController {
     }
 
     @RequestMapping(value = "/{pageId}/stylesheets", method = RequestMethod.GET)
-    public String getStylesheets(@PathVariable("pageId") Long pageId, Model model) {
-        List<Stylesheet> stylesheets = fileService.stylesheet().findAll(true);
-        model.addAttribute("resources", stylesheets);
-        model.addAttribute("pageResources", new ArrayList<Stylesheet>());
-        model.addAttribute("page", pageService.findOne(pageId, true));
+    public String getStylesheets(@PathVariable("pageId") Long pageId, Model model, StylesheetToResourceWrapperConverter converter) {
+        Page page = pageService.findOne(pageId, true);
+
+        List<Stylesheet> availableStylesheets = fileService.stylesheet().findAll(true);
+        List<Stylesheet> pageStylesheets = page.getStylesheets();
+        availableStylesheets.removeAll(pageStylesheets);
+
+        ResourceForm form = new ResourceForm(converter.convert(availableStylesheets), converter.convert(pageStylesheets));
+
+        model.addAttribute("form", form);
+        model.addAttribute("page", page);
         model.addAttribute("RESOURCE_TYPE", false);
+
         return "dashboard/page/resources";
     }
 
@@ -152,6 +164,20 @@ public class AdminPageController {
 
         page.getScripts().removeAll(toRemove);
         page.getScripts().addAll(toAdd);
+
+        pageService.update(page);
+        return new RedirectView("/dashboard/page/" + pageId + "?success");
+    }
+
+    @RequestMapping(value = "/{pageId}/stylesheets", method = RequestMethod.POST)
+    public RedirectView addPageStylesheets(@PathVariable("pageId") Long pageId, @RequestBody String body) {
+        Page page = pageService.findOne(pageId, true);
+
+        List<Stylesheet> toAdd = acceptedStylesheets.read(body);
+        List<Stylesheet> toRemove = rejectedStylesheets.read(body);
+
+        page.getStylesheets().removeAll(toRemove);
+        page.getStylesheets().addAll(toAdd);
 
         pageService.update(page);
         return new RedirectView("/dashboard/page/" + pageId + "?success");

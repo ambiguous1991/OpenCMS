@@ -94,14 +94,16 @@
             <div class="row mb-3">
                 <div class="col-12 col-lg-6 mb-3">
                     <select id="scripts" name="scripts" class="custom-select" multiple readonly>
-                        <option value="-1">brak</option>
+                        <option th:if="${page.getScripts().size()==0}" value="-1" disabled>brak</option>
+                        <option th:each="script: ${page.getScripts()}" th:value="${script.getValue()}" th:text="${script.getTitle()}" disabled></option>
                     </select>
                     <label class="floating-label__label" for="scripts">skrypty</label>
                     <a href="#" th:href="@{'/dashboard/page/'+${page.getId()}+'/scripts'}" class="floating-label__button_plus"><i class="fas fa-pen-square"></i></a>
                 </div>
                 <div class="col-12 col-lg-6">
                     <select id="stylesheets" name="stylesheets" class="custom-select" multiple readonly>
-                        <option value="-1">brak</option>
+                        <option th:if="${page.getStylesheets().size()==0}" value="-1" disabled>brak</option>
+                        <option th:each="stylesheet: ${page.getStylesheets()}" th:value="${stylesheet.getValue()}" th:text="${stylesheet.getTitle()}" disabled></option>
                     </select>
                     <label class="floating-label__label" for="stylesheets">arkusze stylów</label>
                     <a href="#" th:href="@{'/dashboard/page/'+${page.getId()}+'/stylesheets'}" class="floating-label__button_plus"><i class="fas fa-pen-square"></i></a>
