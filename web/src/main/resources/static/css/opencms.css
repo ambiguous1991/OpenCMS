@@ -331,4 +331,60 @@
   height: 100% !important;
 }
 
+/*Presentation list group*/
+.list-group-presentation__toplevel-container {
+  padding: 1px;
+  transition: all 300ms;
+}
+@media (min-width: 768px) {
+  .list-group-presentation__toplevel-container {
+    padding: 10px;
+  }
+}
+
+.list-group-container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  align-content: center;
+  padding: 0.8rem;
+  border-radius: 3px;
+  border: 1px solid lightgray;
+  transition: all 0.5s ease;
+  text-align: center;
+}
+.list-group-container__href {
+  flex-grow: 1;
+  color: inherit;
+}
+.list-group-container__href:hover {
+  color: inherit;
+}
+.list-group-container__icon {
+  color: var(--primary);
+  font-size: 1.5rem;
+  transition: all 0.5s ease;
+}
+.list-group-container__subtext {
+  display: none;
+  color: var(--gray);
+}
+.list-group-container:hover {
+  transform: scale(1.05);
+}
+@media (min-width: 768px) {
+  .list-group-container {
+    flex-direction: column;
+    padding: 2rem;
+    -webkit-box-shadow: 5px 5px 15px 5px rgba(0, 0, 0, 0.05);
+    -moz-box-shadow: 5px 5px 15px 5px rgba(0, 0, 0, 0.05);
+    box-shadow: 5px 5px 15px 5px rgba(0, 0, 0, 0.05);
+    border-radius: 10px;
+  }
+  .list-group-container__icon {
+    margin-bottom: 2rem;
+    font-size: 5rem;
+  }
+}
+
 /*# sourceMappingURL=opencms.css.map */
