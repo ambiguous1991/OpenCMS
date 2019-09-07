@@ -345,29 +345,33 @@
 .list-group-container {
   display: flex;
   flex-direction: row;
-  align-items: center;
   align-content: center;
+  align-items: center;
   padding: 0.8rem;
   border-radius: 3px;
   border: 1px solid lightgray;
   transition: all 0.5s ease;
-  text-align: center;
+  text-align: left;
 }
 .list-group-container__href {
   flex-grow: 1;
   color: inherit;
+  margin-right: 1rem;
 }
 .list-group-container__href:hover {
   color: inherit;
 }
 .list-group-container__icon {
+  margin-right: 1rem;
+  margin-left: 1rem;
   color: var(--primary);
   font-size: 1.5rem;
   transition: all 0.5s ease;
 }
 .list-group-container__subtext {
-  display: none;
   color: var(--gray);
+  flex-grow: 1;
+  text-align: right;
 }
 .list-group-container:hover {
   transform: scale(1.05);
@@ -380,10 +384,19 @@
     -moz-box-shadow: 5px 5px 15px 5px rgba(0, 0, 0, 0.05);
     box-shadow: 5px 5px 15px 5px rgba(0, 0, 0, 0.05);
     border-radius: 10px;
+    text-align: center;
   }
   .list-group-container__icon {
     margin-bottom: 2rem;
+    margin-left: 0;
+    margin-right: 0;
     font-size: 5rem;
+  }
+  .list-group-container__subtext {
+    text-align: center;
+  }
+  .list-group-container__href {
+    margin-right: 0;
   }
 }
 
