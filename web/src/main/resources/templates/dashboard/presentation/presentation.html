@@ -69,27 +69,12 @@
             });
 
             $('#do-upload').on("click", function (event) {
-                event.preventDefault();
-                $('#file-upload-form').slideUp('fast');
-                $('#progress-bar-container').slideDown('slow');
-
-                $('#progress-bar')
-                    .delay(1000).css('width', '25%').attr('aria-valuenow', 25).delay(1000, function () {
-                    $('#this').css('width', '50%').attr('aria-valuenow', 50).delay(1000, function () {
-                        $('#this').css('width', '75%').attr('aria-valuenow', 75).delay(1000, function () {
-                            $('#this').css('width', '100%').attr('aria-valuenow', 100)
-                        })
-                    })
-                })
-            });
-
-            $('#do-upload').on("click", function (event) {
 
                 event.preventDefault();
 
                 var f = $('#file-upload-form').slideUp('fast');
                 $('#progress-bar-container').slideDown('slow');
-                $('#modal-close-button').fadeOut();
+                $('.modal-header').slideUp();
 
                 console.info("In do upload");
 
