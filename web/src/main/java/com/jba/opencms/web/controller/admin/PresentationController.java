@@ -2,6 +2,7 @@ package com.jba.opencms.web.controller.admin;
 
 import com.jba.opencms.web.repository.FileRepository;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -9,6 +10,7 @@ import org.springframework.util.FileCopyUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
@@ -46,5 +48,12 @@ public class PresentationController {
         repository.save(file, new ByteArrayInputStream(content.getBytes()), PUBLIC_READ_ONLY, TEXT_CSS);
 
         return ResponseEntity.ok("{\n\t\"status\":\"ok\"\n}");
+    }
+
+    @RequestMapping(method= RequestMethod.POST, value = "/file")
+    public ResponseEntity<String> postNewFile( @RequestParam("file") MultipartFile file){
+
+
+        return new ResponseEntity<>("OK", HttpStatus.OK);
     }
 }

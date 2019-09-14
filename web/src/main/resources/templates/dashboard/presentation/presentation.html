@@ -32,6 +32,150 @@
 <nav th:replace="fragment/admin-breadcrumb"></nav>
 <div class="wrapper" style="max-height: 100vh;">
     <div th:replace="fragment/admin-sidebar"></div>
+    <!--/*-->
+    <script>
+        function filesizeToString(size){
+            if (size<1024) return size+"B";
+            else if (size>1024&&size<=1048576) return (size/1024).toFixed(2)+" KB";
+            if (size>1048576) return (size/1048576).toFixed(2)+" MB";
+        }
+
+        function updateProgressBar(percent){
+            $('#progress-bar').css('width', Math.round(percent)+"%").attr('aria-valuenow', Math.round(percent)).text(percent+"%");
+        }
+
+        $(document).ready(function () {
+            $.ajaxSetup({
+                headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')}
+            });
+
+            $("#open_modal_stylesheet, #open_modal_script").on("click", function () {
+                $('#upload-modal').modal({
+                    backdrop: 'static',
+                    keyboard: false
+                });
+            });
+
+            $("#file").on('change', function () {
+                console.log("IN CHANGE");
+                console.log($(this).val());
+                var filePath = $(this).val();
+                var fileName = filePath.substr(filePath.lastIndexOf("\\") + 1, filePath.length);
+                $('#fileName').text(fileName);
+                $('#label-mime').text(this.files[0].type);
+                $('#data-labels').slideDown();
+                var filesize = this.files[0].size;
+                $('#label-size').text(filesizeToString(filesize));
+            });
+
+            $('#do-upload').on("click", function (event) {
+                event.preventDefault();
+                $('#file-upload-form').slideUp('fast');
+                $('#progress-bar-container').slideDown('slow');
+
+                $('#progress-bar')
+                    .delay(1000).css('width', '25%').attr('aria-valuenow', 25).delay(1000, function () {
+                    $('#this').css('width', '50%').attr('aria-valuenow', 50).delay(1000, function () {
+                        $('#this').css('width', '75%').attr('aria-valuenow', 75).delay(1000, function () {
+                            $('#this').css('width', '100%').attr('aria-valuenow', 100)
+                        })
+                    })
+                })
+            });
+
+            $('#do-upload').on("click", function (event) {
+
+                event.preventDefault();
+
+                var f = $('#file-upload-form').slideUp('fast');
+                $('#progress-bar-container').slideDown('slow');
+                $('#modal-close-button').fadeOut();
+
+                console.info("In do upload");
+
+                var form = f[0];
+                var data = new FormData(form);
+                var contentType = $('#label-mime').text();
+                var progressBar = $('#progress-bar');
+
+                var request = $.ajax({
+                    type: 'POST',
+                    enctype: 'multipart/form-data',
+                    url: '/dashboard/presentation/file',
+                    data: data,
+                    cache: false,
+                    contentType: false,
+                    processData: false,
+                    timeout: 600000,
+                    xhr: function() {
+                        var xhr = new window.XMLHttpRequest();
+                        xhr.upload.addEventListener("progress", function(evt) {
+                            if (evt.lengthComputable) {
+                                var percentComplete = evt.loaded / evt.total;
+                                updateProgressBar(percentComplete);
+                            }
+                        }, false);
+
+                        xhr.addEventListener("progress", function(evt) {
+                            if (evt.lengthComputable) {
+                                var percentComplete = evt.loaded / evt.total;
+                                console.log(percentComplete);
+                                updateProgressBar(percentComplete);
+                                //Do something with download progress
+                            }
+                        }, false);
+                    },
+                    success: function (data) {
+                        console.log(data);
+                        window.location.href = data;
+                    },
+
+                });
+            })
+        })
+    </script>
+
+    <div class="modal fade" id="upload-modal">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Prześlij plik</h4>
+                    <button id="modal-close-button" type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+                <div id="modal-body" class="modal-body m-3">
+                    <form id="file-upload-form" action="/dashboard/presentation/file" enctype="multipart/form-data"
+                          method="post">
+                        <div class="form-group row">
+                            <div class="custom-file">
+                                <label class="custom-file-label" for="file" id="fileName">wybierz plik</label>
+                                <input type="file" class="custom-file-input" id="file" name="file">
+                            </div>
+                        </div>
+                        <div class="row" id="data-labels" style="display: none;">
+                            <div class="col-6">zawartość (MIME)</div>
+                            <div id="label-mime" class="col-6"></div>
+                            <div class="col-6">rozmiar</div>
+                            <div id="label-size" class="col-6"></div>
+                        </div>
+                        <div class="form-group row mt-2">
+                            <button id="do-upload" class="btn btn-block btn-primary" type="submit">Prześlij</button>
+                            <meta name="csrf-token" th:content="${_csrf.getToken()}">
+                        </div>
+                    </form>
+                    <div id="progress-bar-container" style="display: none">
+                        <div class="mb-3">trwa przesyłanie pliku...</div>
+                        <div class="progress" >
+                            <div id="progress-bar" class="progress-bar progress-bar-animated progress-bar-striped" role="progressbar" aria-valuenow="0"
+                                 aria-valuemin="0" aria-valuemax="100" style="width:0%">0
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--*/-->
+    <div th:replace="dashboard/presentation/fragment/fileUpload"></div>
     <div class="flex-grow-1 flex-column d-flex overflow-auto p-5">
         <div class="d-flex flex-row mb-3">
             <h2>Wygląd</h2>
@@ -67,19 +211,17 @@
             <div class="col-12 col-md-6 col-lg-4 list-grid-group__toplevel-container">
                 <div class="list-grid-group-container">
                     <i class="fas fa-scroll list-grid-group-container__icon"></i>
-                    <a href="/dashboard/presentation/add-script" class="list-grid-group-container__href">Dodaj skrypt .js</a>
+                    <a id="open_modal_script" href="#" class="list-grid-group-container__href">Dodaj skrypt .js</a>
                 </div>
             </div>
             <div class="col-12 col-md-6 col-lg-4 list-grid-group__toplevel-container">
                 <div class="list-grid-group-container">
                     <i class="fas fa-file-code list-grid-group-container__icon"></i>
-                    <a href="/dashboard/presentation/add-stylesheet" class="list-grid-group-container__href">Dodaj arkusz stylów</a>
+                    <a id="open_modal_stylesheet" href="#" class="list-grid-group-container__href">Dodaj arkusz stylów</a>
                 </div>
             </div>
-
         </div>
     </div>
-
 </div>
 </body>
 </html>

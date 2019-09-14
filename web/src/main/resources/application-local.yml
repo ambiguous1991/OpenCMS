@@ -3,6 +3,10 @@ application:
     web:
       extension: .s3.eu-west-3.amazonaws.com/
 spring:
+  servlet:
+    multipart:
+      max-file-size: -1
+      max-request-size: -1
   datasource:
     url: jdbc:mysql://localhost:3306/opencmstest?useSSL=false&serverTimezone=UTC&allowPublicKeyRetrieval=true
     username: opencms
