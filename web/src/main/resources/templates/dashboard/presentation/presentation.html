@@ -165,6 +165,15 @@
         <div class="d-flex flex-row mb-3">
             <h2>Wygląd</h2>
         </div>
+        <div class="alert alert-success" th:if="${param.success}">
+            Plik <strong th:text="${param.file}"></strong> został zapisany.
+        </div>
+        <div class="alert alert-danger" th:if="${param.error}">
+            Plik nie został zapisany. <strong th:text="${param.message}"></strong>
+        </div>
+        <script>
+            $('.alert').delay(2000).fadeOut('slow');
+        </script>
         <div class="row list-grid-group">
             <div class="col-12 col-md-6 col-lg-4 list-grid-group__toplevel-container">
                 <div class="list-grid-group-container">

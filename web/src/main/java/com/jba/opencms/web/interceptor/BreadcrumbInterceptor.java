@@ -40,8 +40,7 @@ public class BreadcrumbInterceptor extends HandlerInterceptorAdapter {
                 !uri.contains("/static") &&
                 !uri.contains("/js") &&
                 !uri.contains("/css") &&
-                !request.getMethod().equals("PUT") &&
-                !request.getMethod().equals("PATCH");
+                request.getMethod().equals("GET");
     }
 
     private List<Breadcrumb> requestToBreadcrumb(final String requestURI){
@@ -83,6 +82,7 @@ public class BreadcrumbInterceptor extends HandlerInterceptorAdapter {
         map.put("edit-css", "Edycja arkusza stylów");
         map.put("stylesheets", "Arkusze stylów");
         map.put("scripts", "Skrypty");
+        map.put("file", "Plik");
         return map;
     }
 }
