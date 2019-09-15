@@ -9,7 +9,6 @@ import org.springframework.transaction.annotation.Transactional;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
-import java.util.List;
 
 @Transactional
 public class PageServiceImpl extends AbstractService<Page> implements PageService {
@@ -44,7 +43,11 @@ public class PageServiceImpl extends AbstractService<Page> implements PageServic
 
     @Override
     public Page findByIdentifier(String identifier) {
-        return dao.findFiltered(createIdentifierQuery(identifier)).stream().findFirst().orElse(null);
+        Page page = dao.findFiltered(createIdentifierQuery(identifier)).stream().findFirst().orElse(null);
+        if(page!=null){
+            initialize(page);
+        }
+        return page;
     }
 
     @Override

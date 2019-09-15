@@ -7,7 +7,9 @@ import lombok.EqualsAndHashCode;
 import lombok.ToString;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 @EqualsAndHashCode(callSuper = true)
@@ -25,14 +27,8 @@ public class Script extends BaseTypeSimpleKey<Script> {
     @Column(name = "VALUE")
     private String value;
 
-    @ManyToMany
-    @JoinTable(
-            name = "page_script",
-            joinColumns = {@JoinColumn(name = "FK_PAGE_ID")},
-            inverseJoinColumns = {@JoinColumn(name = "FK_SCRIPT_ID")}
-    )
+    @ManyToMany(mappedBy = "scripts")
     @ToString.Exclude
     @EqualsAndHashCode.Exclude
-    private Set<Page> pages = new HashSet<>();
-
+    private List<Page> pages = new ArrayList<>();
 }

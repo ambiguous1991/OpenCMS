@@ -1,5 +1,7 @@
 package com.jba.opencms.web.configuration;
 
+import com.jba.opencms.file.FileFacadeService;
+import com.jba.opencms.web.repository.DatabaseBackedFileRepository;
 import com.jba.opencms.web.repository.FileRepository;
 import com.jba.opencms.web.repository.MockFileRepository;
 import lombok.extern.slf4j.Slf4j;
@@ -12,7 +14,7 @@ import org.springframework.context.annotation.Profile;
 @Slf4j
 public class LocalFileRepositoryConfiguration {
     @Bean
-    public FileRepository fileRepository() {
-        return new MockFileRepository();
+    public FileRepository fileRepository(FileFacadeService fileFacadeService) {
+        return new DatabaseBackedFileRepository(fileFacadeService);
     }
 }

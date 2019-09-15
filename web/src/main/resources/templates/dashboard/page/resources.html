@@ -1,0 +1,107 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-4.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta th:replace="fragment/metadata">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title th:text="${@systemVariables.get(@varkey.PAGE_NAME)}+${breadcrumbTitle}">Failed</title>
+    <div th:replace="fragment/import"></div>
+</head>
+<body class="d-flex flex-column vh-100">
+<nav th:replace="fragment/admin-navbar"></nav>
+<nav th:replace="fragment/admin-breadcrumb"></nav>
+<div class="wrapper" style="max-height: 100vh;">
+    <div th:replace="fragment/admin-sidebar"></div>
+    <div class="flex-grow-1 flex-column d-flex overflow-auto p-5"
+         th:with="RESOURCE_NAME=${RESOURCE_TYPE?'scripts':'stylesheets'}">
+        <h2 class="mb-3" th:if="${RESOURCE_TYPE}">Skrypty .js strony <span th:text="${page.getTitle()}"></span></h2>
+        <h2 class="mb-3" th:unless="${RESOURCE_TYPE}">Arkusze stylów strony <span th:text="${page.getTitle()}"></span>
+        </h2>
+        <div class="text-muted text-justify mb-4">
+            <div>
+                Aby dodać źródła do strony, wybierz je z listy po lewej a na stępnie wybierz strzałkę kierującą do
+                drugiego okna. Aby usunąć źródła ze strony, wybierz je z listy po prawej stronie i wybierz strzałkę w
+                odwrotnym kierunku. Kiedy zakończysz, zatwierdź swoje zmiany przyciskiem na dole strony.
+            </div>
+        </div>
+        <form th:action="${'/dashboard/page/'+page.getId()+'/'+RESOURCE_NAME}" method="post"
+              class="flex-grow-1 d-flex flex-column" th:object="${form}">
+            <div class="row flex-grow-1">
+                <div class="col-12 col-md-5">
+                    <label class="floating-label__label" for="availableResources">dostępne źródła</label>
+                    <select id="availableResources" name="availableResources" class="custom-select form__select-multiple"
+                            readonly multiple>
+                        <option th:if="${form.getAvailableResources().size()==0}" value="-1">brak</option>
+                        <option th:each="resource: ${form.getAvailableResources()}" th:value="${{resource.getValue()}}" th:text="${resource.getText()}"></option>
+                    </select>
+                </div>
+                <div class="col-2 d-none d-md-flex flex-md-column form__caret">
+                    <div><a id="addBtnHorizontal" href="#"><i class="fas fa-caret-right"></i></a></div>
+                    <div><a id="removeBtnHorizontal" href="#"><i class="fas fa-caret-left"></i></a></div>
+                </div>
+                <div class="col-12 d-flex flex-row d-md-none form__caret">
+                    <div><a id="addBtnVertical" href="#"><i class="fas fa-caret-down"></i></a></div>
+                    <div><a id="removeBtnVertical" href="#"><i class="fas fa-caret-up"></i></a></div>
+                </div>
+                <div class="col-12 col-md-5">
+                    <label class="floating-label__label" for="pageResources">źródła strony</label>
+                    <select id="pageResources" name="pageResources" class="custom-select form__select-multiple" readonly multiple>
+                        <option th:if="${form.getPageResources().size()==0}" value="-1">brak</option>
+                        <option th:each="resource: ${form.getPageResources()}" th:value="${{resource.getValue()}}" th:text="${resource.getText()}"></option>
+                    </select>
+                </div>
+            </div>
+            <div class="row mt-3">
+                <button type="submit" class="col-12 col-md-4 offset-md-4 btn btn-primary btn-block">Zapisz</button>
+            </div>
+        </form>
+    </div>
+</div>
+<script>
+    let sources = $('#availableResources');
+    let pageSources = $('#pageResources');
+
+    const addButtonHorizontal = $('#addBtnHorizontal');
+    const removeButtonHorizontal = $('#removeBtnHorizontal');
+    const addButtonVertical = $('#addBtnVertical');
+    const removeButtonVertical = $('#removeBtnVertical');
+
+    addButtonHorizontal.click(addFunction);
+    removeButtonHorizontal.click(removeFunction);
+    addButtonVertical.click(addFunction);
+    removeButtonVertical.click(removeFunction);
+
+    function addFunction() {
+        const result = getSelectValues(sources);
+        addSelectValues(pageSources, result);
+    }
+
+    function removeFunction() {
+        const selectedValues = getSelectValues(pageSources);
+        addSelectValues(sources, selectedValues);
+    }
+
+    function getSelectValues(rootElement) {
+        const selected = rootElement.find('option:selected');
+        rootElement.find('option:selected').remove();
+        if (rootElement.find('option')[0] === undefined) {
+            let emptyOption = new Option('brak', '-1');
+            emptyOption.setAttribute('disabled', 'disabled');
+            rootElement.append(emptyOption);
+        }
+        selected.removeAttr('selected');
+        return selected;
+    }
+
+    function addSelectValues(rootElement, optionsList) {
+        const emptyPlaceholder = rootElement.find(":contains('brak')");
+        if (emptyPlaceholder.length === 1 && optionsList.length > 0) {
+            rootElement.find('option').remove();
+        }
+        rootElement.append(optionsList);
+    }
+</script>
+</body>
+</html>

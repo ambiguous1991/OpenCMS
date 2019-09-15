@@ -36,7 +36,7 @@ public class ScriptTest extends BaseSpringIntegrationTest {
     public void getTest(){
         List<Script> scripts = scriptDao.findAll();
         scripts.forEach(logger::info);
-        Set<Page> pages = scripts.get(0).getPages();
+        List<Page> pages = scripts.get(0).getPages();
         pages.forEach(logger::info);
 
         CriteriaBuilder builder = scriptDao.createBuilder();

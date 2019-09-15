@@ -12,6 +12,10 @@ server:
     use-relative-redirects: true
   use-forward-headers: true
 spring:
+  servlet:
+    multipart:
+      max-file-size: -1
+      max-request-size: -1
   datasource:
     url: jdbc:mysql://jba.ckrms4qkskz1.eu-west-3.rds.amazonaws.com:3306/opencms?useSSL=false&serverTimezone=UTC&allowPublicKeyRetrieval=true
     username: opencms

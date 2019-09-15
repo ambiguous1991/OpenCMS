@@ -7,71 +7,74 @@
     <meta th:replace="fragment/metadata">
     <title th:text="${@systemVariables.get(@varkey.PAGE_NAME)}+${breadcrumbTitle}">Failed</title>
     <div th:replace="fragment/import"></div>
+    <!--/*-->
+    <link rel="stylesheet" href="../../static/css/bootstrap.css"/>
+    <link rel="stylesheet" href="../../static/css/bootstrap-theme.css"/>
+    <link rel="stylesheet" href="../../static/css/opencms.css"/>
+    <script
+            src="https://code.jquery.com/jquery-3.4.1.js"
+            integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
+            crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+            integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+            crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+            integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+            crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css"
+          integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+    <!--*/-->
 </head>
 <body class="d-flex flex-column vh-100">
 <nav th:replace="fragment/admin-navbar"></nav>
 <nav th:replace="fragment/admin-breadcrumb"></nav>
 <div class="wrapper">
     <div th:replace="fragment/admin-sidebar"></div>
-    <div class="tiles flex-grow-1 flex-column overflow-auto">
-        <div class="d-flex flex-grow-1 flex-wrap">
+    <div class="flex-grow-1 flex-column d-flex overflow-auto p-5">
+        <div class="row list-grid-group">
             <!-- Page Content -->
-            <div class="card tiles__card flex-grow-1 shadow-lg">
-                <div class="card-content">
-                    <a href="" th:href="@{/dashboard/page}">
-                        <p><i class="fas fa-file text-muted icon-vh"></i></p>
-                        <strong>Strony</strong>
-                        <p class="text-muted" style="font-size: 1em;">Dodawaj, usuwaj<br>lub zmieniaj strony</p>
-                    </a>
+            <div class="col-12 col-md-6 col-lg-4 list-grid-group__toplevel-container">
+                <div class="list-grid-group-container">
+                    <i class="fas fa-file list-grid-group-container__icon"></i>
+                    <a class="list-grid-group-container__href" href="" th:href="@{/dashboard/page}">Strony</a>
+                    <small class="list-grid-group-container__subtext">Dodawaj, usuwaj lub zmieniaj strony</small>
                 </div>
             </div>
-            <div class="card tiles__card flex-grow-1 shadow-lg">
-                <div class="card-content">
-                    <a href="" th:href="@{/dashboard/menu}">
-                        <p><i class="fas fa-bars text-muted icon-vh"></i></p>
-                        <strong>Menu</strong>
-                        <p class="text-muted" style="font-size: 1em;">Dodawaj, usuwaj<br>lub zmieniaj menu</p>
-                    </a>
+            <div class="col-12 col-md-6 col-lg-4 list-grid-group__toplevel-container">
+                <div class="list-grid-group-container">
+                    <i class="fas fa-bars list-grid-group-container__icon"></i>
+                    <a class="list-grid-group-container__href" href="" th:href="@{/dashboard/menu}">Menu</a>
+                    <small class="list-grid-group-container__subtext">Dodawaj, usuwaj lub zmieniaj menu</small>
                 </div>
             </div>
-            <div class="card tiles__card flex-grow-1 shadow-lg">
-                <div class="card-content">
-                    <a href="" th:href="@{/dashboard/images}">
-                        <p><i class="fas fa-image text-muted icon-vh"></i></p>
-                        <strong>Obrazy</strong>
-                        <p class="text-muted" style="font-size: 1em;">Przeglądaj lub<br>edytuj obrazy</p>
-                    </a>
+            <div class="col-12 col-md-6 col-lg-4 list-grid-group__toplevel-container">
+                <div class="list-grid-group-container">
+                    <i class="fas fa-image list-grid-group-container__icon"></i>
+                    <a class="list-grid-group-container__href" href="" th:href="@{/dashboard/images}">Obrazy</a>
+                    <small class="list-grid-group-container__subtext">Przeglądaj lub edytuj obrazy</small>
                 </div>
             </div>
-        </div>
-        <div class="d-flex flex-wrap flex-grow-1 mb-3">
-            <div class="card tiles__card flex-grow-1 shadow-lg">
-                <div class="card-content">
-                    <a href="" th:href="@{/dashboard/system-variables}">
-                        <p><i class="fas fa-globe text-muted icon-vh"></i></p>
-                        <strong>Serwis</strong>
-                        <p class="text-muted" style="font-size: 1em;">Zarządzaj globalnymi<br>ustawieniami serwisu.</p>
-                    </a>
+            <div class="col-12 col-md-6 col-lg-4 list-grid-group__toplevel-container">
+                <div class="list-grid-group-container">
+                    <i class="fas fa-globe list-grid-group-container__icon"></i>
+                    <a class="list-grid-group-container__href" href="" th:href="@{/dashboard/system-variables}">Serwis</a>
+                    <small class="list-grid-group-container__subtext">Zarządzaj globalnymi ustawieniami serwisu</small>
                 </div>
             </div>
             <!-- Page Content -->
-            <div class="card tiles__card flex-grow-1 shadow-lg">
-                <div class="card-content">
-                    <a href="" th:href="@{/dashboard/presentation}">
-                        <p><i class="far fa-eye text-muted icon-vh"></i></p>
-                        <strong>Wygląd</strong>
-                        <p class="text-muted" style="font-size: 1em;">Dostosuj wygląd<br>serwisu</p>
-                    </a>
+            <div class="col-12 col-md-6 col-lg-4 list-grid-group__toplevel-container">
+                <div class="list-grid-group-container">
+                    <i class="far fa-eye list-grid-group-container__icon"></i>
+                    <a class="list-grid-group-container__href" href="" th:href="@{/dashboard/presentation}">Wygląd</a>
+                    <small class="list-grid-group-container__subtext">Dostosuj wygląd serwisu</small>
                 </div>
             </div>
             <!-- Page Content -->
-            <div class="card tiles__card flex-grow-1 shadow-lg">
-                <div class="card-content">
-                    <a href="" th:href="@{/dashboard/users}">
-                        <p><i class="fas fa-user-shield text-muted icon-vh"></i></p>
-                        <strong>Użytkownicy & IAM</strong>
-                        <p class="text-muted" style="font-size: 1em;">Zarządzaj<br>użytkownikami</p>
-                    </a>
+            <div class="col-12 col-md-6 col-lg-4 list-grid-group__toplevel-container">
+                <div class="list-grid-group-container">
+                    <i class="fas fa-user-shield list-grid-group-container__icon"></i>
+                    <a class="list-grid-group-container__href" href="" th:href="@{/dashboard/users}">Użytkownicy & IAM</a>
+                    <small class="list-grid-group-container__subtext">Zarządzaj użytkownikami</small>
                 </div>
             </div>
         </div>

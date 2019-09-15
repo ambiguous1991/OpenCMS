@@ -7,7 +7,9 @@ import lombok.EqualsAndHashCode;
 import lombok.ToString;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 @EqualsAndHashCode(callSuper = true)
@@ -25,14 +27,9 @@ public class Stylesheet extends BaseTypeSimpleKey<Stylesheet> {
     @Column(name = "VALUE")
     private String value;
 
-    @ManyToMany
+    @ManyToMany(mappedBy = "stylesheets")
     @ToString.Exclude
     @EqualsAndHashCode.Exclude
-    @JoinTable(
-            name = "page_stylesheet",
-            joinColumns = {@JoinColumn(name = "FK_PAGE_ID")},
-            inverseJoinColumns = {@JoinColumn(name = "FK_STYLESHEET_ID")}
-    )
-    private Set<Page> pages = new HashSet<>();
+    private List<Page> pages = new ArrayList<>();
 
 }
