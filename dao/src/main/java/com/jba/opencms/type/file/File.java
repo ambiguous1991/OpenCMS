@@ -14,16 +14,16 @@ public class File extends BaseTypeSimpleKey<File> {
     @Column(name = "NAME", length = 100)
     private String name;
 
-    @Column(name = "DESCRIPTION", length = 200)
-    private String description;
+    @Column(name = "PATH")
+    private String path;
 
-    @Column(name = "ENABLED", nullable = false)
-    private Boolean enabled;
-
-    @Column(name = "DATA", nullable = false, columnDefinition = "LONGBLOB")
+    @Column(name = "DATA", nullable = false, columnDefinition = "MEDIUMBLOB")
     @Lob
     private byte[] data;
 
-    @Column(name = "EXTENSION", length = 5)
-    private String extension;
+    @Column(name = "MIME")
+    private String mime;
+
+    @Column(name = "DESCRIPTION", length = 200)
+    private String description;
 }
