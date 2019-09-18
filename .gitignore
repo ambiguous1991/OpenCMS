@@ -73,3 +73,4 @@ fabric.properties
 .idea/*
 **/target
 /web/src/main/resources/application.properties
+/web/src/test/resources/opencms.css
