@@ -1,11 +1,9 @@
 package com.jba.opencms.web.repository;
 
-import com.jba.opencms.file.FileFacadeService;
+import com.jba.opencms.file.FileService;
 import com.jba.opencms.type.file.Script;
 import com.jba.opencms.type.file.Stylesheet;
 import com.jba.opencms.web.utils.ContentType;
-import org.apache.tomcat.util.http.fileupload.IOUtils;
-import org.springframework.util.CollectionUtils;
 
 import java.io.ByteArrayInputStream;
 import java.io.FileNotFoundException;
@@ -17,23 +15,15 @@ import java.util.List;
 
 public class DatabaseBackedFileRepository implements FileRepository {
 
-    private FileFacadeService fileFacadeService;
+    private FileService fileService;
 
-    public DatabaseBackedFileRepository(FileFacadeService fileFacadeService) {
-        this.fileFacadeService = fileFacadeService;
+    public DatabaseBackedFileRepository(FileService fileService) {
+        this.fileService = fileService;
     }
 
     @Override
     public InputStream get(String path) throws FileNotFoundException, IllegalArgumentException {
-        if(path.contains(".css")) {
-            Stylesheet stylesheet = fileFacadeService.stylesheet().findOne(1L, false);
-            return stringValueToInputStream(stylesheet.getValue());
-        }
-        else if(path.contains(".js")) {
-            Script script = fileFacadeService.script().findOne(1L, false);
-            return stringValueToInputStream(script.getValue());
-        }
-        throw new FileNotFoundException();
+
     }
 
     public InputStream stringValueToInputStream(String value){
@@ -48,14 +38,14 @@ public class DatabaseBackedFileRepository implements FileRepository {
             stylesheet.setPath(path);
             stylesheet.setTitle(path);
             stylesheet.setValue(readInput(input));
-            fileFacadeService.stylesheet().create(stylesheet);
+            fileService.stylesheet().create(stylesheet);
         }
         else if (content.contains(ContentType.TEXT_JAVASCRIPT)){
             Script script = new Script();
             script.setPath(path);
             script.setTitle(path);
             script.setValue(readInput(input));
-            fileFacadeService.script().create(script);
+            fileService.script().create(script);
         }
         else throw new IllegalArgumentException("Provided filetype is illegal!");
     }

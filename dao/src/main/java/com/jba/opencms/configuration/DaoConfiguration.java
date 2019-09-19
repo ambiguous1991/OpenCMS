@@ -2,6 +2,7 @@ package com.jba.opencms.configuration;
 
 import com.jba.opencms.dao.*;
 import com.jba.opencms.dao.ifs.EntryDao;
+import com.jba.opencms.dao.ifs.FileDao;
 import com.jba.opencms.dao.ifs.MenuDao;
 import com.jba.opencms.dao.ifs.SystemVariableDao;
 import com.jba.opencms.type.file.File;
@@ -83,8 +84,8 @@ public class DaoConfiguration {
     }
 
     @Bean
-    public GenericDao<File> fileDao(SessionFactory sessionFactory){
-        return new HibernateDao<>(File.class, sessionFactory);
+    public FileDao fileDao(SessionFactory sessionFactory){
+        return new FileDaoImpl(File.class, sessionFactory);
     }
 
     @Bean

@@ -1,6 +1,7 @@
 package com.jba.opencms.type.file;
 
 import com.jba.opencms.type.base.BaseTypeSimpleKey;
+import lombok.Data;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -9,6 +10,7 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "file")
+@Data
 public class File extends BaseTypeSimpleKey<File> {
 
     @Column(name = "NAME", length = 100)
