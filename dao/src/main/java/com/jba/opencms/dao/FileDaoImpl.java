@@ -16,7 +16,7 @@ public class FileDaoImpl extends HibernateDao<File> implements FileDao {
 
     @Override
     public File get(String path) {
-        return getCurrentSession().createQuery("from " + File.class.getName() + " where File.path=:path", File.class)
+        return getCurrentSession().createQuery("from " + File.class.getName() + " where path=:path", File.class)
                 .setParameter("path", path).getSingleResult();
     }
 

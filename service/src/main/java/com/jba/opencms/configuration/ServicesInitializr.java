@@ -2,6 +2,7 @@ package com.jba.opencms.configuration;
 
 import com.jba.opencms.dao.GenericDao;
 import com.jba.opencms.dao.ifs.EntryDao;
+import com.jba.opencms.dao.ifs.FileDao;
 import com.jba.opencms.dao.ifs.MenuDao;
 import com.jba.opencms.dao.ifs.SystemVariableDao;
 import com.jba.opencms.file.*;
@@ -64,7 +65,7 @@ public class ServicesInitializr {
     }
 
     @Bean
-    public FileService fileService(GenericDao<File> fileDao){
+    public FileService fileService(FileDao fileDao){
         return new FileServiceImpl(fileDao);
     }
 
