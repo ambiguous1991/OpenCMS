@@ -1,18 +1,19 @@
 package com.jba.opencms.web.repository;
 
+import com.amazonaws.util.IOUtils;
 import com.jba.opencms.file.FileService;
+import com.jba.opencms.type.file.File;
 import com.jba.opencms.type.file.Script;
 import com.jba.opencms.type.file.Stylesheet;
 import com.jba.opencms.web.utils.ContentType;
+import lombok.extern.log4j.Log4j2;
 
-import java.io.ByteArrayInputStream;
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.io.InputStream;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+@Log4j2
 public class DatabaseBackedFileRepository implements FileRepository {
 
     private FileService fileService;
@@ -21,65 +22,61 @@ public class DatabaseBackedFileRepository implements FileRepository {
         this.fileService = fileService;
     }
 
-    @Override
-    public InputStream get(String path) throws FileNotFoundException, IllegalArgumentException {
-
+    private File getFileOrThrow(String path) throws FileNotFoundException{
+        File file = fileService.get(path);
+        if(file==null) throw new FileNotFoundException("File "+path+" not found");
+        return file;
     }
 
-    public InputStream stringValueToInputStream(String value){
-        return new ByteArrayInputStream(value.getBytes());
+    private byte[] readInput(InputStream inputStream) throws IOException{
+        return IOUtils.toByteArray(inputStream);
+    }
+
+    @Override
+    public InputStream get(String path) throws FileNotFoundException, IllegalArgumentException {
+        File fileToBeServed = getFileOrThrow(path);
+        return new ByteArrayInputStream(fileToBeServed.getData());
     }
 
     @Override
     public void save(String path, InputStream input, FileAccessMode mode, String... contentTypes) throws IllegalArgumentException {
-        List<String> content = Arrays.asList(contentTypes);
-        if (content.contains(ContentType.TEXT_CSS)){
-            Stylesheet stylesheet = new Stylesheet();
-            stylesheet.setPath(path);
-            stylesheet.setTitle(path);
-            stylesheet.setValue(readInput(input));
-            fileService.stylesheet().create(stylesheet);
+        File file = new File();
+        if(contentTypes!=null) {
+            file.setMime(contentTypes[0]);
         }
-        else if (content.contains(ContentType.TEXT_JAVASCRIPT)){
-            Script script = new Script();
-            script.setPath(path);
-            script.setTitle(path);
-            script.setValue(readInput(input));
-            fileService.script().create(script);
-        }
-        else throw new IllegalArgumentException("Provided filetype is illegal!");
-    }
-
-    private String readInput(InputStream inputStream){
-        byte aByte = 0;
-        List<Byte> bytesArray = new ArrayList<>();
+        else file.setMime("text");
+        file.setName(path);
+        file.setPath(path);
         try {
-            while ((aByte = (byte) inputStream.read())!=-1) {
-                bytesArray.add(aByte);
-            }
+            file.setData(readInput(input));
+            fileService.create(file);
         }
         catch (IOException e){
-            return null;
+            log.error("Errror reading input for file "+path, e);
         }
-        byte[] bytes = new byte[bytesArray.size()];
-        for(int i=0; i<bytesArray.size(); i++){
-            bytes[i]=bytesArray.get(i);
-        }
-        return new String(bytes);
     }
 
     @Override
     public void update(String path, InputStream input, FileAccessMode mode, String... contentTypes) throws FileNotFoundException, IllegalArgumentException {
-
+        File file = getFileOrThrow(path);
+        try {
+            file.setData(readInput(input));
+            fileService.update(file);
+        }
+        catch (IOException e){
+            log.error("Errror reading input for file "+path, e);
+        }
     }
 
     @Override
     public boolean delete(String path) throws FileNotFoundException, IllegalArgumentException {
-        return false;
+        File file = getFileOrThrow(path);
+        fileService.delete(file.getId());
+        return true;
     }
 
     @Override
     public List<String> list(String path) throws IllegalArgumentException {
-        return null;
+        return fileService.list(path);
     }
 }
