@@ -29,4 +29,9 @@ public class FileServiceImpl extends AbstractService<File> implements FileServic
 
         return dao.list(path);
     }
+
+    @Override
+    public boolean exists(String path) {
+        return get(path) != null;
+    }
 }

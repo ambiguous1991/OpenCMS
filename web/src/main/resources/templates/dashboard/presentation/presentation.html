@@ -41,7 +41,7 @@
         }
 
         function updateProgressBar(percent){
-            $('#progress-bar').css('width', Math.round(percent)+"%").attr('aria-valuenow', Math.round(percent)).text(percent+"%");
+            $('#progress-bar').css('width', Math.round(percent)+"%").attr('aria-valuenow', Math.round(percent)).text(Math.round(percent)+"%");
         }
 
         $(document).ready(function () {
@@ -57,64 +57,77 @@
             });
 
             $("#file").on('change', function () {
-                console.log("IN CHANGE");
-                console.log($(this).val());
                 var filePath = $(this).val();
                 var fileName = filePath.substr(filePath.lastIndexOf("\\") + 1, filePath.length);
-                $('#fileName').text(fileName);
-                $('#label-mime').text(this.files[0].type);
+
+                $('#filePickerControls').slideUp();
+                $('#fileInputControls').slideDown();
+
+                $('#filePath').val("/resources/"+fileName);
+                $('#fileNameData').val(fileName);
+                $('#mimeContent').val(this.files[0].type);
                 $('#data-labels').slideDown();
                 var filesize = this.files[0].size;
-                $('#label-size').text(filesizeToString(filesize));
+                $('#fileSize').val(filesizeToString(filesize));
+            });
+
+            $('#fileNameData').on('keyup', function () {
+                $('#filePath').val("/resources/"+$(this).val());
             });
 
             $('#do-upload').on("click", function (event) {
 
                 event.preventDefault();
 
-                var f = $('#file-upload-form').slideUp('fast');
+                console.info("In do upload");
+
+                var formContainer = $('#file-upload-form');
+                formContainer.slideUp('fast');
                 $('#progress-bar-container').slideDown('slow');
                 $('.modal-header').slideUp();
 
-                console.info("In do upload");
-
-                var form = f[0];
+                var form = formContainer[0];
                 var data = new FormData(form);
-                var contentType = $('#label-mime').text();
-                var progressBar = $('#progress-bar');
 
                 var request = $.ajax({
                     type: 'POST',
                     enctype: 'multipart/form-data',
-                    url: '/dashboard/presentation/file',
+                    url: '/file',
                     data: data,
                     cache: false,
                     contentType: false,
                     processData: false,
                     timeout: 600000,
-                    xhr: function() {
-                        var xhr = new window.XMLHttpRequest();
-                        xhr.upload.addEventListener("progress", function(evt) {
-                            if (evt.lengthComputable) {
-                                var percentComplete = evt.loaded / evt.total;
-                                updateProgressBar(percentComplete);
-                            }
-                        }, false);
-
-                        xhr.addEventListener("progress", function(evt) {
-                            if (evt.lengthComputable) {
-                                var percentComplete = evt.loaded / evt.total;
-                                console.log(percentComplete);
-                                updateProgressBar(percentComplete);
-                                //Do something with download progress
-                            }
-                        }, false);
-                    },
                     success: function (data) {
                         console.log(data);
-                        window.location.href = data;
+                        let jsonResult = JSON.parse(data);
+                        window.location.href = jsonResult.path;
                     },
-
+                    error: function (data) {
+                        console.log(data.responseText);
+                        let jsonResult = JSON.parse(data.responseText);
+                        window.location.href = jsonResult.path;
+                    },
+                    xhr: function () {
+                        var xhr = $.ajaxSettings.xhr();
+                        xhr.onprogress = function e() {
+                            // For downloads
+                            if (e.lengthComputable) {
+                                var progress = (e.loaded / e.total)*100;
+                                console.log(progress);
+                                updateProgressBar(progress);
+                            }
+                        };
+                        xhr.upload.onprogress = function (e) {
+                            // For uploads
+                            if (e.lengthComputable) {
+                                var progress = (e.loaded / e.total)*100;
+                                console.log(progress);
+                                updateProgressBar(progress);
+                            }
+                        };
+                        return xhr;
+                    }
                 });
             })
         })
@@ -130,17 +143,39 @@
                 <div id="modal-body" class="modal-body m-3">
                     <form id="file-upload-form" action="/dashboard/presentation/file" enctype="multipart/form-data"
                           method="post">
-                        <div class="form-group row">
-                            <div class="custom-file">
-                                <label class="custom-file-label" for="file" id="fileName">wybierz plik</label>
-                                <input type="file" class="custom-file-input" id="file" name="file">
+                        <div id="filePickerControls">
+                            <div class="form-group row">
+                                <div class="custom-file">
+                                    <label class="custom-file-label" for="file" id="fileName">wybierz plik</label>
+                                    <input type="file" class="custom-file-input" id="file" name="file">
+                                </div>
                             </div>
                         </div>
-                        <div class="row" id="data-labels" style="display: none;">
-                            <div class="col-6">zawartość (MIME)</div>
-                            <div id="label-mime" class="col-6"></div>
-                            <div class="col-6">rozmiar</div>
-                            <div id="label-size" class="col-6"></div>
+                        <div id="fileInputControls" style="display:none">
+                            <div class="form-group row">
+                                <div class="floating-label col-12">
+                                    <label class="floating-label__label" for="fileNameData">nazwa pliku</label>
+                                    <input type="text" class="form-control" name="fileNameData" id="fileNameData">
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <div class="floating-label col-12">
+                                    <label class="floating-label__label" for="filePath">lokalizacja</label>
+                                    <input type="text" class="form-control" name="filePath" id="filePath">
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <div class="floating-label col-12">
+                                    <label class="floating-label__label" for="mimeContent">zawartość (MIME)</label>
+                                    <input type="text" class="form-control" name="mimeContent" id="mimeContent" readonly>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <div class="floating-label col-12">
+                                    <label class="floating-label__label" for="fileSize">rozmiar</label>
+                                    <input type="text" class="form-control" name="fileSize" id="fileSize" readonly>
+                                </div>
+                            </div>
                         </div>
                         <div class="form-group row mt-2">
                             <button id="do-upload" class="btn btn-block btn-primary" type="submit">Prześlij</button>

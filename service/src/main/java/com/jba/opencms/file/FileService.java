@@ -8,4 +8,5 @@ import java.util.List;
 public interface FileService extends BaseService<File> {
     File get(String path);
     List<String> list(String path) throws IllegalArgumentException;
+    boolean exists(String path);
 }

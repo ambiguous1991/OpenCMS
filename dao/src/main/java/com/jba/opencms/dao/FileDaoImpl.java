@@ -2,6 +2,8 @@ package com.jba.opencms.dao;
 
 import com.jba.opencms.dao.ifs.FileDao;
 import com.jba.opencms.type.file.File;
+import org.hibernate.NonUniqueObjectException;
+import org.hibernate.NonUniqueResultException;
 import org.hibernate.SessionFactory;
 
 import java.util.Collections;
@@ -16,8 +18,11 @@ public class FileDaoImpl extends HibernateDao<File> implements FileDao {
 
     @Override
     public File get(String path) {
-        return getCurrentSession().createQuery("from " + File.class.getName() + " where path=:path", File.class)
-                .setParameter("path", path).getSingleResult();
+        List<File> files = getCurrentSession().createQuery("from " + File.class.getName() + " where path=:path", File.class)
+                .setParameter("path", path).getResultList();
+        if(files.isEmpty()) return null;
+        else if (files.size()==1) return files.get(0);
+        else throw new NonUniqueResultException(files.size());
     }
 
     @Override
