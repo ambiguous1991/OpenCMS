@@ -4,12 +4,14 @@ import com.amazonaws.util.IOUtils;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.jba.opencms.file.FileService;
 import com.jba.opencms.type.file.File;
+import com.jba.opencms.web.form.file.FileUploadForm;
 import lombok.extern.slf4j.Slf4j;
 import org.hibernate.NonUniqueResultException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.support.StandardMultipartHttpServletRequest;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -29,17 +31,27 @@ public class FileController {
         this.fileService = fileService;
     }
 
+    @ModelAttribute
+    public FileUploadForm getFileUploadForm(HttpServletRequest request){
+        try {
+            return new FileUploadForm((StandardMultipartHttpServletRequest)request);
+        }
+        catch (Exception e){
+            return null;
+        }
+    }
+
     @RequestMapping(method = RequestMethod.POST)
-    public ResponseEntity<String> addFile(@RequestParam(name = "multipart") MultipartFile multipart, String fileNameData) throws IOException{
+    public ResponseEntity<String> addFile(@ModelAttribute FileUploadForm form) throws IOException{
         Map<String, String> result = new HashMap<>();
 
         try {
-            if (!fileService.exists("/resources/" + fileNameData)) {
+            if (!fileService.exists(form.getFilePath())) {
                 File file = new File();
-                file.setData(multipart.getBytes());
-                file.setName(fileNameData);
-                file.setMime(multipart.getContentType());
-                file.setPath("/resources/" + fileNameData);
+                file.setData(form.getMultipart().getBytes());
+                file.setName(form.getFileName());
+                file.setMime(form.getMultipart().getContentType());
+                file.setPath(form.getFilePath());
 
                 fileService.create(file);
                 result.put("result", "success");
@@ -48,7 +60,7 @@ public class FileController {
             }
         }
         catch (NonUniqueResultException e){
-            log.error(String.format("INCONSISTENT database - %s - filename: %s", e.getMessage(), "/resources/"+fileNameData));
+            log.error(String.format("INCONSISTENT database - %s - filename: %s", e.getMessage(), form.getFilePath()));
         }
         result.put("result", "error");
         result.put("path", "/dashboard/presentation?error&message=Plik o podanej nazwie już istnieje");

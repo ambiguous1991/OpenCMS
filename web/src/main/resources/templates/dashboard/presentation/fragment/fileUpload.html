@@ -22,21 +22,20 @@
         });
 
         $("#multipart").on('change', function () {
-            var filePath = $(this).val();
-            var fileName = filePath.substr(filePath.lastIndexOf("\\") + 1, filePath.length);
+            let filePath = $(this).val();
+            let fileName = filePath.substr(filePath.lastIndexOf("\\") + 1, filePath.length);
 
             $('#filePickerControls').slideUp();
             $('#fileInputControls').slideDown();
 
             $('#filePath').val("/resources/"+fileName);
-            $('#fileNameData').val(fileName);
+            $('#fileName').val(fileName);
             $('#mimeContent').val(this.files[0].type);
-            $('#data-labels').slideDown();
-            var filesize = this.files[0].size;
+            let filesize = this.files[0].size;
             $('#fileSize').val(filesizeToString(filesize));
         });
 
-        $('#fileNameData').on('keyup', function () {
+        $('#fileName').on('keyup', function () {
             $('#filePath').val("/resources/"+$(this).val());
         });
 
@@ -46,15 +45,15 @@
 
             console.info("In do upload");
 
-            var formContainer = $('#file-upload-form');
+            let formContainer = $('#file-upload-form');
             formContainer.slideUp('fast');
             $('#progress-bar-container').slideDown('slow');
             $('.modal-header').slideUp();
 
-            var form = formContainer[0];
-            var data = new FormData(form);
+            let form = formContainer[0];
+            let data = new FormData(form);
 
-            var request = $.ajax({
+            let request = $.ajax({
                 type: 'POST',
                 enctype: 'multipart/form-data',
                 url: '/file',
@@ -74,7 +73,7 @@
                     window.location.href = jsonResult.path;
                 },
                 xhr: function () {
-                    var xhr = $.ajaxSettings.xhr();
+                    let xhr = $.ajaxSettings.xhr();
                     xhr.onprogress = function e() {
                         // For downloads
                         if (e.lengthComputable) {
@@ -86,7 +85,7 @@
                     xhr.upload.onprogress = function (e) {
                         // For uploads
                         if (e.lengthComputable) {
-                            var progress = (e.loaded / e.total)*100;
+                            let progress = (e.loaded / e.total)*100;
                             console.log(progress);
                             updateProgressBar(progress);
                         }
@@ -119,8 +118,8 @@
                     <div id="fileInputControls" style="display:none">
                         <div class="form-group row">
                             <div class="floating-label col-12">
-                                <label class="floating-label__label" for="fileNameData">nazwa pliku</label>
-                                <input type="text" class="form-control" name="fileNameData" id="fileNameData">
+                                <label class="floating-label__label" for="fileName">nazwa pliku</label>
+                                <input type="text" class="form-control" name="fileName" id="fileName">
                             </div>
                         </div>
                         <div class="form-group row">
