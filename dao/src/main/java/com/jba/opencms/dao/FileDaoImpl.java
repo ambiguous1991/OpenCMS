@@ -42,7 +42,7 @@ public class FileDaoImpl extends HibernateDao<File> implements FileDao {
     }
 
     @Override
-    public List<FileProjection> getImageProjections() {
+    public List<FileProjection> getImagesMetadata() {
         CriteriaBuilder builder = getCurrentSession().getCriteriaBuilder();
         CriteriaQuery<FileProjection> query = builder.createQuery(FileProjection.class);
         Root<File> file = query.from(File.class);
@@ -59,7 +59,7 @@ public class FileDaoImpl extends HibernateDao<File> implements FileDao {
     }
 
     @Override
-    public List<FileProjection> getFileProjections() {
+    public List<FileProjection> getFileMetadata() {
         return null;
     }
 }

@@ -13,9 +13,6 @@ import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 import java.util.List;
-import java.util.logging.Logger;
-
-import static org.junit.Assert.*;
 
 @RunWith(SpringRunner.class)
 @ContextConfiguration(classes = {TestDatasourceConfiguration.class, DaoConfiguration.class})
@@ -27,7 +24,7 @@ public class FileTest extends BaseSpringIntegrationTest {
 
     @Test
     public void getImageProjection(){
-        List<FileProjection> imageProjections = fileDao.getImageProjections();
+        List<FileProjection> imageProjections = fileDao.getImagesMetadata();
 
         imageProjections.forEach(item->logger.info(item));
     }

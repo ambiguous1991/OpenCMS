@@ -4,6 +4,7 @@ import com.jba.opencms.base.AbstractService;
 import com.jba.opencms.dao.GenericDao;
 import com.jba.opencms.dao.ifs.FileDao;
 import com.jba.opencms.type.file.File;
+import com.jba.opencms.type.file.projection.FileProjection;
 
 import java.util.List;
 
@@ -33,5 +34,15 @@ public class FileServiceImpl extends AbstractService<File> implements FileServic
     @Override
     public boolean exists(String path) {
         return get(path) != null;
+    }
+
+    @Override
+    public List<FileProjection> getImagesMetadata() {
+        return dao.getImagesMetadata();
+    }
+
+    @Override
+    public List<FileProjection> getFileMetadata() {
+        return dao.getFileMetadata();
     }
 }
