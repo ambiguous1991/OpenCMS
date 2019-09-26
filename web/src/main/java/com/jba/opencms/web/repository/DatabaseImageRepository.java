@@ -1,34 +1,34 @@
 package com.jba.opencms.web.repository;
 
+import com.jba.opencms.file.FileService;
 import com.jba.opencms.image.ImageService;
 import com.jba.opencms.type.image.Image;
 
 public class DatabaseImageRepository implements ImageRepository {
 
-    private ImageService imageService;
+    private FileService fileService;
 
-    public DatabaseImageRepository(ImageService imageService) {
-        this.imageService = imageService;
+    public DatabaseImageRepository(FileService fileService) {
+        this.fileService = fileService;
     }
 
     @Override
-    public byte[] get(String id) {
-        return imageService.findOne(Long.parseLong(id), false).getData();
+    public byte[] get(String path) {
+        return fileService.get(path).getData();
     }
 
     @Override
-    public String getName(String id) {
-        return imageService.findOne(Long.parseLong(id), false).getName();
+    public String getName(String path) {
+        return fileService.get(path).getName();
     }
 
     @Override
-    public String getExtension(String id) {
-        return imageService.findOne(Long.parseLong(id), false).getExtension();
+    public String getExtension(String path) {
+        return fileService.get(path).getMime();
     }
 
     @Override
     public String getFullName(String id) {
-        Image image = imageService.findOne(Long.parseLong(id), false);
-        return image.getName()+"."+image.getExtension();
+        return fileService.findOne(Long.parseLong(id), false).getPath();
     }
 }
