@@ -7,6 +7,23 @@
     <meta th:replace="fragment/metadata">
     <title th:text="${@systemVariables.get(@varkey.PAGE_NAME)}+${breadcrumbTitle}">Failed</title>
     <div th:replace="fragment/import"></div>
+    <!--/*-->
+    <link rel="stylesheet" href="../../../static/css/bootstrap.css"/>
+    <link rel="stylesheet" href="../../../static/css/bootstrap-theme.css"/>
+    <link rel="stylesheet" href="../../../static/css/opencms.css"/>
+    <script
+            src="https://code.jquery.com/jquery-3.4.1.js"
+            integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
+            crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+            integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+            crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+            integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+            crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css"
+          integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+    <!--*/-->
 </head>
 <div th:replace="dashboard/image/fragment/imageUpload"></div>
 <body class="d-flex flex-column vh-100">
@@ -22,24 +39,24 @@
                         class="fas fa-cloud-upload-alt"></i></button>
             </div>
         </div>
-        <div class="flex-grow-1 text-center" id="image-list">
-            <th:block th:with="columnCount=${6}">
-                <div class="row" th:each="row: ${#numbers.sequence(0, images.size(), columnCount)}">
-                    <div class="card col-sm-2" th:each="column: ${#numbers.sequence(0, 5)}"
-                         th:if="${row+column}<${images.size()}">
-                        <img class="card-img-top" th:src="${'/image/'+images.get(row+column).getId()}"
+        <div class="flex-grow-1" id="image-list">
+            <div class="row">
+                <div class="col-12 col-sm-4 col-lg-6 mb-3" th:each="image: ${images}">
+                    <div class="image-container">
+                        <div class="image-container__image" th:style="'background: url('+${'/file?path='+image.getPath()}+')'"
                              src="../../../static/images/bulb.png"
-                             alt="Card image cap">
-                        <div class="card-body">
-                            <a href="#" th:href="${'/dashboard/images/'+images.get(row+column).getId()}">
+                             alt="Card image cap"></div>
+                        <div class="image-container__subtext">
+                            <a href="#" th:href="${'/dashboard/images/details?image='+image.getPath()}">
                                 <h5 class="font-weight-bold card-title font-family-roboto"
-                                    th:text="${images.get(row+column).getName()}">Title</h5>
+                                    th:text="${image.getName()}">Title</h5>
                             </a>
-                            <p class="card-text" th:text="${images.get(row+column).getDescription()}">Description</p>
+                            <small class="image-container__small" th:if="${image.getDescription()!=null}" th:text="${image.getDescription()}">Description</small>
+                            <small class="image-container__small" th:if="${image.getDescription()==null}">Brak opisu</small>
                         </div>
                     </div>
                 </div>
-            </th:block>
+            </div>
         </div>
     </div>
 </div>

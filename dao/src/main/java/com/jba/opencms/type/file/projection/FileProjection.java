@@ -1,6 +1,5 @@
 package com.jba.opencms.type.file.projection;
 
-import com.jba.opencms.type.file.File;
 import lombok.Data;
 
 @Data

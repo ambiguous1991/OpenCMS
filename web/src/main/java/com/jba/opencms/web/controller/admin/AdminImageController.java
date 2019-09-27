@@ -1,6 +1,9 @@
 package com.jba.opencms.web.controller.admin;
 
+import com.jba.opencms.file.FileService;
 import com.jba.opencms.image.ImageService;
+import com.jba.opencms.type.file.File;
+import com.jba.opencms.type.file.projection.FileProjection;
 import com.jba.opencms.type.image.Image;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -21,26 +24,28 @@ import java.util.List;
 public class AdminImageController {
 
     private ImageService imageService;
+    private FileService fileService;
 
-    public AdminImageController(ImageService imageService) {
+    public AdminImageController(ImageService imageService, FileService fileService) {
         this.imageService = imageService;
+        this.fileService = fileService;
     }
 
     @RequestMapping(method = RequestMethod.GET)
     public String getImageDashboard(Model model) {
-        List<Image> images = imageService.findAll(true);
+        List<FileProjection> imagesMetadata = fileService.getImagesMetadata();
 
-        model.addAttribute("images", images);
+        model.addAttribute("images", imagesMetadata);
 
         return "dashboard/image/images";
     }
 
-    @RequestMapping(value = "/{imageId}")
+    @RequestMapping(value = "/details")
     public String getImageForm(
-            @PathVariable("imageId") Long imageId,
+            @RequestParam("image") String imagePath,
             Model model
     ) {
-        Image image = imageService.findOne(imageId, true);
+        File image = fileService.get(imagePath);
         model.addAttribute("image", image);
         model.addAttribute("imageId", image.getId());
 
@@ -50,13 +55,15 @@ public class AdminImageController {
     @RequestMapping(value = "/{imageId}", method = RequestMethod.POST)
     public RedirectView postImage(
             @PathVariable("imageId") Long imageId,
-            Image image
+            File image
     ) {
-        Image imageDB = imageService.findOne(imageId, false);
+        File imageDB = fileService.findOne(imageId, true);
 
         imageDB.setName(image.getName());
-        imageDB.setDescription(image.getDescription());
-        imageService.update(imageDB);
+        if(!image.getDescription().isEmpty())
+            imageDB.setDescription(image.getDescription());
+        else imageDB.setDescription(null);
+        fileService.update(imageDB);
 
         return new RedirectView("/dashboard/images?success");
     }

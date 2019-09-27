@@ -34,8 +34,8 @@
                     </div>
                     <div class="form-group row">
                         <div class="col-12 floating-label">
-                            <label class="floating-label__label" for="extension">Rozszerzenie</label>
-                            <input id="extension" name="extension" type="text" class="form-control" th:value="${image.getExtension()}" disabled>
+                            <label class="floating-label__label" for="extension">Typ</label>
+                            <input id="extension" name="extension" type="text" class="form-control" th:value="${image.getMime()}" disabled>
                         </div>
                     </div>
                     <div class="form-group row">
@@ -53,7 +53,7 @@
                 </form>
             </div>
             <div class="col-md-12 col-lg-7 mb-3 mb-lg-0 order-first order-lg-last">
-                <img class="w-100" src="../../../static/images/bulb.png" th:src="'/image/'+${imageId}">
+                <img class="w-100" src="../../../static/images/bulb.png" th:src="'/file?path='+${image.getPath()}">
             </div>
         </div>
     </div>
