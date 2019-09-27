@@ -14,7 +14,7 @@
             headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')}
         });
 
-        $("#open_modal_stylesheet, #open_modal_script").on("click", function () {
+        $("#open_modal_stylesheet, #open_modal_script, #open_modal").on("click", function () {
             $('#upload-modal').modal({
                 backdrop: 'static',
                 keyboard: false

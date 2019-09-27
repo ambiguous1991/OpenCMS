@@ -1,6 +1,7 @@
 package com.jba.opencms.web.controller;
 
 import com.amazonaws.util.IOUtils;
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.jba.opencms.file.FileService;
 import com.jba.opencms.type.file.File;
@@ -42,7 +43,8 @@ public class FileController {
     }
 
     @RequestMapping(method = RequestMethod.POST)
-    public ResponseEntity<String> addFile(@ModelAttribute FileUploadForm form) throws IOException{
+    public ResponseEntity<String> addFile(
+            @ModelAttribute FileUploadForm form) throws IOException{
         Map<String, String> result = new HashMap<>();
 
         try {
@@ -54,9 +56,8 @@ public class FileController {
                 file.setPath(form.getFilePath());
 
                 fileService.create(file);
-                result.put("result", "success");
-                result.put("path", "/dashboard/presentation?success&file=" + file.getPath());
-                return new ResponseEntity<>(new ObjectMapper().writeValueAsString(result), HttpStatus.OK);
+
+                return determineRedirect(form);
             }
         }
         catch (NonUniqueResultException e){
@@ -65,6 +66,20 @@ public class FileController {
         result.put("result", "error");
         result.put("path", "/dashboard/presentation?error&message=Plik o podanej nazwie już istnieje");
         return new ResponseEntity<>(new ObjectMapper().writeValueAsString(result), HttpStatus.BAD_REQUEST);
+    }
+
+    private ResponseEntity<String> determineRedirect(FileUploadForm form) throws JsonProcessingException {
+        Map<String, String> result = new HashMap<>();
+        if(form.getMimeContent().contains("jpeg")||form.getMimeContent().contains("jpg")||form.getMimeContent().contains("png")){
+            result.put("result", "success");
+            result.put("path", "/dashboard/images/details?image=" + form.getFilePath());
+            return new ResponseEntity<>(new ObjectMapper().writeValueAsString(result), HttpStatus.OK);
+        }
+        else {
+            result.put("result", "success");
+            result.put("path", "/dashboard/presentation?success&file=" + form.getFilePath());
+            return new ResponseEntity<>(new ObjectMapper().writeValueAsString(result), HttpStatus.OK);
+        }
     }
 
     @RequestMapping(method = RequestMethod.GET)
