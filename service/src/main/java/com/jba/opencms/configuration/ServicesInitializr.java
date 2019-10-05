@@ -6,6 +6,8 @@ import com.jba.opencms.dao.ifs.FileDao;
 import com.jba.opencms.dao.ifs.MenuDao;
 import com.jba.opencms.dao.ifs.SystemVariableDao;
 import com.jba.opencms.file.*;
+import com.jba.opencms.file.preprocessor.FilePreprocessor;
+import com.jba.opencms.file.preprocessor.ImagePreprocessor;
 import com.jba.opencms.globals.GlobalsService;
 import com.jba.opencms.globals.GlobalsServiceImpl;
 import com.jba.opencms.image.ImageService;
@@ -82,5 +84,10 @@ public class ServicesInitializr {
     @Bean
     public FileFacadeService fileFacadeService(FileService fileService, StylesheetService stylesheetService, ScriptService scriptService){
         return new FileFacadeServiceImpl(scriptService, stylesheetService, fileService);
+    }
+
+    @Bean
+    public FilePreprocessor imagePreprocessor(){
+        return new ImagePreprocessor();
     }
 }
