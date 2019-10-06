@@ -2,13 +2,14 @@ package com.jba.opencms.configuration;
 
 import com.jba.opencms.dao.GenericDao;
 import com.jba.opencms.dao.ifs.EntryDao;
+import com.jba.opencms.dao.ifs.FileDao;
 import com.jba.opencms.dao.ifs.MenuDao;
 import com.jba.opencms.dao.ifs.SystemVariableDao;
 import com.jba.opencms.file.*;
+import com.jba.opencms.file.preprocessor.FilePreprocessor;
+import com.jba.opencms.file.preprocessor.ImagePreprocessor;
 import com.jba.opencms.globals.GlobalsService;
 import com.jba.opencms.globals.GlobalsServiceImpl;
-import com.jba.opencms.image.ImageService;
-import com.jba.opencms.image.ImageServiceImpl;
 import com.jba.opencms.menu.EntryService;
 import com.jba.opencms.menu.EntryServiceImpl;
 import com.jba.opencms.menu.MenuService;
@@ -17,10 +18,8 @@ import com.jba.opencms.page.PageService;
 import com.jba.opencms.page.PageServiceImpl;
 import com.jba.opencms.page.PageTypeService;
 import com.jba.opencms.page.PageTypeServiceImpl;
-import com.jba.opencms.type.file.File;
 import com.jba.opencms.type.file.Script;
 import com.jba.opencms.type.file.Stylesheet;
-import com.jba.opencms.type.image.Image;
 import com.jba.opencms.type.page.Page;
 import com.jba.opencms.type.page.PageType;
 import org.springframework.context.annotation.Bean;
@@ -54,17 +53,12 @@ public class ServicesInitializr {
     }
 
     @Bean
-    public ImageService imageService(GenericDao<Image> imageDao){
-        return new ImageServiceImpl(imageDao);
-    }
-
-    @Bean
     public GlobalsService globalsService(SystemVariableDao systemVariableDao){
         return new GlobalsServiceImpl(systemVariableDao);
     }
 
     @Bean
-    public FileService fileService(GenericDao<File> fileDao){
+    public FileService fileService(FileDao fileDao){
         return new FileServiceImpl(fileDao);
     }
 
@@ -81,5 +75,10 @@ public class ServicesInitializr {
     @Bean
     public FileFacadeService fileFacadeService(FileService fileService, StylesheetService stylesheetService, ScriptService scriptService){
         return new FileFacadeServiceImpl(scriptService, stylesheetService, fileService);
+    }
+
+    @Bean
+    public FilePreprocessor imagePreprocessor(){
+        return new ImagePreprocessor();
     }
 }

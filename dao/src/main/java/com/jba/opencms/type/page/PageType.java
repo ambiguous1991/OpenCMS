@@ -1,7 +1,7 @@
 package com.jba.opencms.type.page;
 
 import com.jba.opencms.type.base.BaseTypeSimpleKey;
-import com.jba.opencms.type.image.Image;
+import com.jba.opencms.type.file.File;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
@@ -20,7 +20,7 @@ public class PageType extends BaseTypeSimpleKey<PageType> {
     private String layoutName;
 
     @ManyToOne
-    @JoinColumn(name = "FK_IMAGE_ID", nullable = true)
-    private Image image;
+    @JoinColumn(name = "FK_FILE_ID", nullable = true)
+    private File file;
 
 }

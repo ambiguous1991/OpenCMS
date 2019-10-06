@@ -18,8 +18,6 @@
     <mapping class="com.jba.opencms.type.user.Authority"/>
     <mapping class="com.jba.opencms.type.user.ImageUser"/>
 
-    <mapping class="com.jba.opencms.type.image.Image"/>
-
     <mapping class="com.jba.opencms.type.page.Page"/>
     <mapping class="com.jba.opencms.type.page.PageType"/>
 

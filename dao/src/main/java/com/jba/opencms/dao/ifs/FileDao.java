@@ -1,16 +1,17 @@
-package com.jba.opencms.file;
+package com.jba.opencms.dao.ifs;
 
-import com.jba.opencms.base.BaseService;
+import com.jba.opencms.dao.GenericDao;
 import com.jba.opencms.type.file.File;
 import com.jba.opencms.type.file.projection.FileProjection;
 
 import java.util.List;
 
-public interface FileService extends BaseService<File> {
+public interface FileDao extends GenericDao<File> {
     File get(String path);
-    List<String> list(String path) throws IllegalArgumentException;
-    boolean exists(String path);
+    List<String> list(String path);
     List<FileProjection> getImagesMetadata();
+    List<FileProjection> getScriptMetadata();
+    List<FileProjection> getStylesheetMetadata();
     List<FileProjection> getFileMetadata();
     List<File> findAll(List<String> mimes);
 }

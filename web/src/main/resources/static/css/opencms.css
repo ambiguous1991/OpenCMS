@@ -420,4 +420,39 @@
   }
 }
 
+.image-container {
+  border: 1px solid lightgray;
+  border-radius: 10px;
+  text-align: center;
+  -webkit-box-shadow: 5px 5px 15px 5px rgba(0, 0, 0, 0.05);
+  -moz-box-shadow: 5px 5px 15px 5px rgba(0, 0, 0, 0.05);
+  box-shadow: 5px 5px 15px 5px rgba(0, 0, 0, 0.05);
+}
+.image-container__image {
+  border-top-right-radius: 10px;
+  border-top-left-radius: 10px;
+  min-height: 200px;
+  height: 60%;
+  width: 100%;
+  background-repeat: no-repeat !important;
+  background-size: cover !important;
+  background-position: top center !important;
+}
+.image-container__title {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  margin-left: 1rem;
+  margin-right: 1rem;
+}
+.image-container__subtext {
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+}
+.image-container__small {
+  height: 2rem;
+  max-height: 2rem;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+
 /*# sourceMappingURL=opencms.css.map */

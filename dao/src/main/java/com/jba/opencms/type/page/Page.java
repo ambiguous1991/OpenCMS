@@ -1,18 +1,18 @@
 package com.jba.opencms.type.page;
 
 import com.jba.opencms.type.base.BaseTypeSimpleKey;
+import com.jba.opencms.type.file.File;
 import com.jba.opencms.type.file.Script;
 import com.jba.opencms.type.file.Stylesheet;
-import com.jba.opencms.type.image.Image;
 import com.jba.opencms.type.user.Authority;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
 
 import javax.persistence.*;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 @EqualsAndHashCode(callSuper = true)
 @Entity
@@ -67,7 +67,7 @@ public class Page extends BaseTypeSimpleKey<Page> {
     )
     @ToString.Exclude
     @EqualsAndHashCode.Exclude
-    private List<Image> images = new ArrayList<>();
+    private List<File> images = new ArrayList<>();
 
     @ManyToMany(cascade = CascadeType.ALL)
     @ToString.Exclude
