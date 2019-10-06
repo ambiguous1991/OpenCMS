@@ -12,4 +12,5 @@ public interface FileService extends BaseService<File> {
     boolean exists(String path);
     List<FileProjection> getImagesMetadata();
     List<FileProjection> getFileMetadata();
+    List<File> findAll(List<String> mimes);
 }

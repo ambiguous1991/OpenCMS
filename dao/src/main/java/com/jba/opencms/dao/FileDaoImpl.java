@@ -79,6 +79,21 @@ public class FileDaoImpl extends HibernateDao<File> implements FileDao {
     }
 
     @Override
+    public List<File> findAll(List<String> mimes) {
+        CriteriaBuilder builder = getCurrentSession().getCriteriaBuilder();
+        CriteriaQuery<File> query = builder.createQuery(File.class);
+        Root<File> file = query.from(File.class);
+        CriteriaBuilder.In<Object> mime = builder.in(file.get("mime"));
+
+        for(String mimeValue: mimes){
+            mime.value(mimeValue);
+        }
+
+        query.where(mime);
+        return getCurrentSession().createQuery(query).getResultList();
+    }
+
+    @Override
     public List<FileProjection> getFileMetadata() {
         return null;
     }

@@ -13,4 +13,5 @@ public interface FileDao extends GenericDao<File> {
     List<FileProjection> getScriptMetadata();
     List<FileProjection> getStylesheetMetadata();
     List<FileProjection> getFileMetadata();
+    List<File> findAll(List<String> mimes);
 }

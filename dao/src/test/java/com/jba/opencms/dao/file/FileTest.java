@@ -4,6 +4,7 @@ import com.jba.opencms.BaseSpringIntegrationTest;
 import com.jba.opencms.configuration.DaoConfiguration;
 import com.jba.opencms.configuration.TestDatasourceConfiguration;
 import com.jba.opencms.dao.ifs.FileDao;
+import com.jba.opencms.type.file.File;
 import com.jba.opencms.type.file.projection.FileProjection;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -12,6 +13,7 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
+import java.util.Collections;
 import java.util.List;
 
 @RunWith(SpringRunner.class)
@@ -29,5 +31,11 @@ public class FileTest extends BaseSpringIntegrationTest {
         imageProjections.forEach(item->logger.info(item));
     }
 
+    @Test
+    public void getImagesTest(){
+        List<File> all = fileDao.findAll(Collections.singletonList("text/plain"));
+
+        System.out.println(all);
+    }
 
 }

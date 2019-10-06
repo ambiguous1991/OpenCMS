@@ -45,4 +45,9 @@ public class FileServiceImpl extends AbstractService<File> implements FileServic
     public List<FileProjection> getFileMetadata() {
         return dao.getFileMetadata();
     }
+
+    @Override
+    public List<File> findAll(List<String> mimes) {
+        return dao.findAll(mimes);
+    }
 }
