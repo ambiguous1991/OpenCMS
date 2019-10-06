@@ -520,13 +520,22 @@
     background-position: top center !important;
   }
 
+  &__title{
+    overflow: hidden;
+    text-overflow: ellipsis;
+    margin-left: 1rem;
+    margin-right: 1rem;
+  }
+
   &__subtext{
     margin-top: 1rem;
     margin-bottom: 1rem;
   }
 
   &__small{
-    height:50px;
-    max-height: 50px;
+    height: 2rem;
+    max-height: 2rem;
+    text-overflow: ellipsis;
+    overflow: hidden;
   }
 }

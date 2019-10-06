@@ -41,14 +41,14 @@
         </div>
         <div class="flex-grow-1" id="image-list">
             <div class="row">
-                <div class="col-12 col-sm-4 col-lg-6 mb-3" th:each="image: ${images}">
+                <div class="col-12 col-sm-4 col-lg-3 mb-3" th:each="image: ${images}">
                     <div class="image-container">
                         <div class="image-container__image" th:style="'background: url('+${'/file?path='+image.getPath()}+')'"
                              src="../../../static/images/bulb.png"
                              alt="Card image cap"></div>
                         <div class="image-container__subtext">
                             <a href="#" th:href="${'/dashboard/images/details?image='+image.getPath()}">
-                                <h5 class="font-weight-bold card-title font-family-roboto"
+                                <h5 class="font-weight-bold card-title font-family-roboto image-container__title"
                                     th:text="${image.getName()}">Title</h5>
                             </a>
                             <small class="image-container__small" th:if="${image.getDescription()!=null}" th:text="${image.getDescription()}">Description</small>

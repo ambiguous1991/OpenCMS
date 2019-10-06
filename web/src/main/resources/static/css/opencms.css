@@ -438,13 +438,21 @@
   background-size: cover !important;
   background-position: top center !important;
 }
+.image-container__title {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  margin-left: 1rem;
+  margin-right: 1rem;
+}
 .image-container__subtext {
   margin-top: 1rem;
   margin-bottom: 1rem;
 }
 .image-container__small {
-  height: 50px;
-  max-height: 50px;
+  height: 2rem;
+  max-height: 2rem;
+  text-overflow: ellipsis;
+  overflow: hidden;
 }
 
 /*# sourceMappingURL=opencms.css.map */

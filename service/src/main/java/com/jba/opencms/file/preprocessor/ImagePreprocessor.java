@@ -127,9 +127,12 @@ public class ImagePreprocessor implements FilePreprocessor {
 
         int orientation = 1;
         try {
-            orientation = directory.getInt(ExifIFD0Directory.TAG_ORIENTATION);
+            if(directory!=null) {
+                orientation = directory.getInt(ExifIFD0Directory.TAG_ORIENTATION);
+            }
+            else throw new MetadataException("Exif data of provided image is empty!");
         } catch (MetadataException me) {
-            log.warn("Could not get orientation");
+            log.warn("Could not get orientation. "+me.getMessage());
         }
         int width = jpegDirectory.getImageWidth();
         int height = jpegDirectory.getImageHeight();
