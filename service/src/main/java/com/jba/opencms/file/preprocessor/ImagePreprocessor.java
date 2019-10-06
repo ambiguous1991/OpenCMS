@@ -7,6 +7,7 @@ import com.drew.metadata.Metadata;
 import com.drew.metadata.MetadataException;
 import com.drew.metadata.exif.ExifIFD0Directory;
 import com.drew.metadata.jpeg.JpegDirectory;
+import com.jba.opencms.type.file.File;
 import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
 
@@ -15,12 +16,25 @@ import java.awt.*;
 import java.awt.geom.AffineTransform;
 import java.awt.image.AffineTransformOp;
 import java.awt.image.BufferedImage;
+import java.awt.image.ColorModel;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
+import java.util.Arrays;
 
 @Slf4j
 public class ImagePreprocessor implements FilePreprocessor {
+
+    private java.util.List<String> acceptedMimeTypes = Arrays.asList("image/jpg", "image/jpeg");
+
+    @Override
+    public void accept(File file) {
+        if(acceptedMimeTypes.contains(file.getMime())){
+            byte[] data = file.getData();
+            file.setData(preprocess(data));
+        }
+        else log.info("Class {} does not apply to file {}", this.getClass().getSimpleName(), file.getName());
+    }
 
     @Data
     private static final class ImageInformation {
@@ -29,8 +43,7 @@ public class ImagePreprocessor implements FilePreprocessor {
         private final int height;
     }
 
-    @Override
-    public byte[] preprocess(byte[] input){
+    private byte[] preprocess(byte[] input){
         try {
             final ImageInformation imageInformation = readImageInformation(input);
             final BufferedImage image = byteArrayToImage(input);
@@ -51,15 +64,19 @@ public class ImagePreprocessor implements FilePreprocessor {
     }
 
     private BufferedImage transformOrientation(BufferedImage image, ImageInformation imageInformation){
-        AffineTransformOp op = new AffineTransformOp(
+        AffineTransformOp transformOp = new AffineTransformOp(
                 exifDataToTransformation(imageInformation), AffineTransformOp.TYPE_BICUBIC);
 
-        BufferedImage destinationImage = op.createCompatibleDestImage(image, (image.getType() == BufferedImage.TYPE_BYTE_GRAY) ? image.getColorModel() : null );
-        Graphics2D g = destinationImage.createGraphics();
-        g.setBackground(Color.WHITE);
-        g.clearRect(0, 0, destinationImage.getWidth(), destinationImage.getHeight());
-        destinationImage = op.filter(image, destinationImage);
-        return destinationImage;
+        BufferedImage result;
+
+        if(imageInformation.orientation!=1) {
+            result = new BufferedImage(image.getHeight(), image.getWidth(), image.getType());
+        }
+        else result = new BufferedImage(image.getWidth(), image.getHeight(), image.getType());
+
+        transformOp.filter(image, result);
+
+        return result;
     }
 
     private AffineTransform exifDataToTransformation(ImageInformation info){

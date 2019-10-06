@@ -4,6 +4,7 @@ import com.amazonaws.util.IOUtils;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.jba.opencms.file.FileService;
+import com.jba.opencms.file.preprocessor.FilePreprocessor;
 import com.jba.opencms.type.file.File;
 import com.jba.opencms.web.form.file.FileUploadForm;
 import lombok.extern.slf4j.Slf4j;
@@ -11,7 +12,6 @@ import org.hibernate.NonUniqueResultException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.support.StandardMultipartHttpServletRequest;
 
 import javax.servlet.http.HttpServletRequest;
@@ -27,9 +27,11 @@ import java.util.Map;
 public class FileController {
 
     private FileService fileService;
+    private FilePreprocessor imagePreprocessor;
 
-    public FileController(FileService fileService) {
+    public FileController(FileService fileService, FilePreprocessor imagePreprocessor) {
         this.fileService = fileService;
+        this.imagePreprocessor = imagePreprocessor;
     }
 
     @ModelAttribute
@@ -54,6 +56,8 @@ public class FileController {
                 file.setName(form.getFileName());
                 file.setMime(form.getMultipart().getContentType());
                 file.setPath(form.getFilePath());
+
+                imagePreprocessor.accept(file);
 
                 fileService.create(file);
 
