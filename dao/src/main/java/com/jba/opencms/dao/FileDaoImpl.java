@@ -12,6 +12,7 @@ import org.hibernate.query.criteria.internal.predicate.LikePredicate;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -43,19 +44,38 @@ public class FileDaoImpl extends HibernateDao<File> implements FileDao {
 
     @Override
     public List<FileProjection> getImagesMetadata() {
+        CriteriaQuery<FileProjection> query = byMime(Arrays.asList("image/png", "image/jpg", "image/jpeg", "image/bmp"));
+
+        return getCurrentSession().createQuery(query).getResultList();
+    }
+
+    @Override
+    public List<FileProjection> getScriptMetadata() {
+        CriteriaQuery<FileProjection> query = byMime(Collections.singletonList("text/javascript"));
+
+        return getCurrentSession().createQuery(query).getResultList();
+    }
+
+    @Override
+    public List<FileProjection> getStylesheetMetadata() {
+        CriteriaQuery<FileProjection> query = byMime(Collections.singletonList("text/css"));
+
+        return getCurrentSession().createQuery(query).getResultList();
+    }
+
+    private CriteriaQuery<FileProjection> byMime(List<String> mimes){
         CriteriaBuilder builder = getCurrentSession().getCriteriaBuilder();
         CriteriaQuery<FileProjection> query = builder.createQuery(FileProjection.class);
         Root<File> file = query.from(File.class);
         query.multiselect(file.get("name"), file.get("path"), file.get("mime"), file.get("description"));
         CriteriaBuilder.In<Object> mime = builder.in(file.get("mime"));
-        mime.value("image/png");
-        mime.value("image/jpg");
-        mime.value("image/jpeg");
-        mime.value("image/bmp");
+
+        for(String mimeValue: mimes){
+            mime.value(mimeValue);
+        }
 
         query.where(mime);
-
-        return getCurrentSession().createQuery(query).getResultList();
+        return query;
     }
 
     @Override

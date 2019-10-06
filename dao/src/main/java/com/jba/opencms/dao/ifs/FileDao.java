@@ -10,5 +10,7 @@ public interface FileDao extends GenericDao<File> {
     File get(String path);
     List<String> list(String path);
     List<FileProjection> getImagesMetadata();
+    List<FileProjection> getScriptMetadata();
+    List<FileProjection> getStylesheetMetadata();
     List<FileProjection> getFileMetadata();
 }
