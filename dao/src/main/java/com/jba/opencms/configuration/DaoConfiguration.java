@@ -8,7 +8,6 @@ import com.jba.opencms.dao.ifs.SystemVariableDao;
 import com.jba.opencms.type.file.File;
 import com.jba.opencms.type.file.Script;
 import com.jba.opencms.type.file.Stylesheet;
-import com.jba.opencms.type.image.Image;
 import com.jba.opencms.type.menu.Entry;
 import com.jba.opencms.type.menu.Menu;
 import com.jba.opencms.type.message.Message;
@@ -56,11 +55,6 @@ public class DaoConfiguration {
     @Bean
     public GenericDao<Status> statusDao(SessionFactory sessionFactory){
         return new HibernateDao<>(Status.class, sessionFactory);
-    }
-
-    @Bean
-    public GenericDao<Image> imageDao(SessionFactory sessionFactory){
-        return new HibernateDao<>(Image.class, sessionFactory);
     }
 
     @Bean

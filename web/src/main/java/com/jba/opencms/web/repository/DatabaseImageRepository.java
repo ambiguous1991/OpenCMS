@@ -1,8 +1,6 @@
 package com.jba.opencms.web.repository;
 
 import com.jba.opencms.file.FileService;
-import com.jba.opencms.image.ImageService;
-import com.jba.opencms.type.image.Image;
 
 public class DatabaseImageRepository implements ImageRepository {
 
