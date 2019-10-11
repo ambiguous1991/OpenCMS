@@ -74,3 +74,4 @@ fabric.properties
 **/target
 /web/src/main/resources/application.properties
 /web/src/test/resources/opencms.css
+/web/src/main/resources/static/scss/bootstrap/
