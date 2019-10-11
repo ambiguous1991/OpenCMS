@@ -72,6 +72,7 @@ fabric.properties
 **/*.iml
 .idea/*
 **/target
-/web/src/main/resources/application.properties
-/web/src/test/resources/opencms.css
-/web/src/main/resources/static/scss/bootstrap/
+web/src/main/resources/application.properties
+web/src/main/resources/static/scss/bootstrap/
+web/.elasticbeanstalk/
+web/src/main/resources/static/css/scss/bootstrap/
