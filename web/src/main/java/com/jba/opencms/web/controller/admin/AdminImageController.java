@@ -8,6 +8,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.view.RedirectView;
 
 import java.util.List;
@@ -31,12 +32,12 @@ public class AdminImageController {
         return "dashboard/image/images";
     }
 
-    @RequestMapping(value = "/{imageId}")
+    @RequestMapping(value = "/details")
     public String getImageForm(
-            @PathVariable("imageId") Long imageId,
+            @RequestParam("image") String imageId,
             Model model
     ) {
-        File image = fileService.findOne(imageId, true);
+        File image = fileService.get(imageId);
         model.addAttribute("image", image);
         model.addAttribute("imageId", image.getId());
 
