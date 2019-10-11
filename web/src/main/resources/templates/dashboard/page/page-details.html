@@ -95,7 +95,7 @@
                 <div class="col-12 col-lg-6 mb-3">
                     <select id="scripts" name="scripts" class="custom-select" multiple readonly>
                         <option th:if="${page.getScripts().size()==0}" value="-1" disabled>brak</option>
-                        <option th:each="script: ${page.getScripts()}" th:value="${script.getValue()}" th:text="${script.getTitle()}" disabled></option>
+                        <option th:each="script: ${page.getScripts()}" th:value="${script.getId()}" th:text="${script.getName()}" disabled></option>
                     </select>
                     <label class="floating-label__label" for="scripts">skrypty</label>
                     <a href="#" th:href="@{'/dashboard/page/'+${page.getId()}+'/scripts'}" class="floating-label__button_plus"><i class="fas fa-pen-square"></i></a>

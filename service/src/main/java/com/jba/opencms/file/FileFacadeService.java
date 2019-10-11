@@ -1,7 +1,7 @@
 package com.jba.opencms.file;
 
 public interface FileFacadeService {
-    ScriptService script();
+    FileService script();
     StylesheetService stylesheet();
     FileService file();
 }

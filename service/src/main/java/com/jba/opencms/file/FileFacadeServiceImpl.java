@@ -2,18 +2,20 @@ package com.jba.opencms.file;
 
 public class FileFacadeServiceImpl implements FileFacadeService {
 
-    private ScriptService scriptService;
+    //TODO -- Remove this
+
+    private FileService scriptService;
     private StylesheetService stylesheetService;
     private FileService fileService;
 
-    public FileFacadeServiceImpl(ScriptService scriptService, StylesheetService stylesheetService, FileService fileService) {
+    public FileFacadeServiceImpl(FileService scriptService, StylesheetService stylesheetService, FileService fileService) {
         this.scriptService = scriptService;
         this.stylesheetService = stylesheetService;
         this.fileService = fileService;
     }
 
     @Override
-    public ScriptService script() {
+    public FileService script() {
         return scriptService;
     }
 

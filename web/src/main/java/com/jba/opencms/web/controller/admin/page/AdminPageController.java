@@ -4,7 +4,7 @@ import com.jba.opencms.file.FileFacadeService;
 import com.jba.opencms.menu.MenuService;
 import com.jba.opencms.page.PageService;
 import com.jba.opencms.page.PageTypeService;
-import com.jba.opencms.type.file.Script;
+import com.jba.opencms.type.file.File;
 import com.jba.opencms.type.file.Stylesheet;
 import com.jba.opencms.type.menu.Entry;
 import com.jba.opencms.type.page.Page;
@@ -19,9 +19,13 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.view.RedirectView;
 
+import java.util.Collections;
 import java.util.List;
 
 @Controller
@@ -32,15 +36,15 @@ public class AdminPageController {
     private MenuService menuService;
     private PageTypeService pageTypeService;
     private FileFacadeService fileService;
-    private AbstractConverter<Script> acceptedScripts, rejectedScripts;
+    private AbstractConverter<File> acceptedScripts, rejectedScripts;
     private AbstractConverter<Stylesheet> acceptedStylesheets, rejectedStylesheets;
 
     public AdminPageController(PageService pageService,
                                MenuService menuService,
                                PageTypeService pageTypeService,
                                FileFacadeService fileService,
-                               AbstractConverter<Script> scriptAcceptedConverter,
-                               AbstractConverter<Script> scriptRejectedConverter,
+                               AbstractConverter<File> scriptAcceptedConverter,
+                               AbstractConverter<File> scriptRejectedConverter,
                                AbstractConverter<Stylesheet> stylesheetAcceptedConverter,
                                AbstractConverter<Stylesheet> stylesheetRejectedConverter)
     {
@@ -125,8 +129,8 @@ public class AdminPageController {
     public String getPageScripts(@PathVariable("pageId") Long pageId, Model model, ScriptToResourceWrapperConverter converter) {
         Page page = pageService.findOne(pageId, true);
 
-        List<Script> availableScripts = fileService.script().findAll(true);
-        List<Script> pageScripts = page.getScripts();
+        List<File> availableScripts = fileService.file().findAll(Collections.singletonList("text/javascript"));
+        List<File> pageScripts = page.getScripts();
         availableScripts.removeAll(pageScripts);
 
         ResourceForm form = new ResourceForm(converter.convert(availableScripts), converter.convert(pageScripts));
@@ -159,8 +163,8 @@ public class AdminPageController {
     public RedirectView addPageScripts(@PathVariable("pageId") Long pageId, @RequestBody String body) {
         Page page = pageService.findOne(pageId, true);
 
-        List<Script> toAdd = acceptedScripts.read(body);
-        List<Script> toRemove = rejectedScripts.read(body);
+        List<File> toAdd = acceptedScripts.read(body);
+        List<File> toRemove = rejectedScripts.read(body);
 
         page.getScripts().removeAll(toRemove);
         page.getScripts().addAll(toAdd);

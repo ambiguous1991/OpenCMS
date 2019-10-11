@@ -18,7 +18,6 @@ import com.jba.opencms.page.PageService;
 import com.jba.opencms.page.PageServiceImpl;
 import com.jba.opencms.page.PageTypeService;
 import com.jba.opencms.page.PageTypeServiceImpl;
-import com.jba.opencms.type.file.Script;
 import com.jba.opencms.type.file.Stylesheet;
 import com.jba.opencms.type.page.Page;
 import com.jba.opencms.type.page.PageType;
@@ -68,12 +67,7 @@ public class ServicesInitializr {
     }
 
     @Bean
-    public ScriptService scriptService(GenericDao<Script>scriptDao){
-        return new ScriptServiceImpl(scriptDao);
-    }
-
-    @Bean
-    public FileFacadeService fileFacadeService(FileService fileService, StylesheetService stylesheetService, ScriptService scriptService){
+    public FileFacadeService fileFacadeService(FileService fileService, StylesheetService stylesheetService, FileService scriptService){
         return new FileFacadeServiceImpl(scriptService, stylesheetService, fileService);
     }
 

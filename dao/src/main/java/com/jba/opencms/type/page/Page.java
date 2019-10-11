@@ -2,7 +2,6 @@ package com.jba.opencms.type.page;
 
 import com.jba.opencms.type.base.BaseTypeSimpleKey;
 import com.jba.opencms.type.file.File;
-import com.jba.opencms.type.file.Script;
 import com.jba.opencms.type.file.Stylesheet;
 import com.jba.opencms.type.user.Authority;
 import lombok.Data;
@@ -77,7 +76,7 @@ public class Page extends BaseTypeSimpleKey<Page> {
             joinColumns = {@JoinColumn(name = "FK_PAGE_ID")},
             inverseJoinColumns = {@JoinColumn(name = "FK_SCRIPT_ID")}
     )
-    private List<Script> scripts = new ArrayList<>();
+    private List<File> scripts = new ArrayList<>();
 
     @ManyToMany
     @ToString.Exclude

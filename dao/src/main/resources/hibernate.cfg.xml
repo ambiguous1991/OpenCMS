@@ -11,7 +11,6 @@
     <mapping class="com.jba.opencms.type.base.BaseTypeCompoundKey"/>
 
     <mapping class="com.jba.opencms.type.file.File"/>
-    <mapping class="com.jba.opencms.type.file.Script"/>
     <mapping class="com.jba.opencms.type.file.Stylesheet"/>
 
     <mapping class="com.jba.opencms.type.user.User"/>

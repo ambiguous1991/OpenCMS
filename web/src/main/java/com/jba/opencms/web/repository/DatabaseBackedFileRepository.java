@@ -3,14 +3,9 @@ package com.jba.opencms.web.repository;
 import com.amazonaws.util.IOUtils;
 import com.jba.opencms.file.FileService;
 import com.jba.opencms.type.file.File;
-import com.jba.opencms.type.file.Script;
-import com.jba.opencms.type.file.Stylesheet;
-import com.jba.opencms.web.utils.ContentType;
 import lombok.extern.log4j.Log4j2;
 
 import java.io.*;
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 @Log4j2
