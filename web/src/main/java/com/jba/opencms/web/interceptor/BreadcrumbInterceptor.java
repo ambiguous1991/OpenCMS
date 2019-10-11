@@ -83,6 +83,7 @@ public class BreadcrumbInterceptor extends HandlerInterceptorAdapter {
         map.put("stylesheets", "Arkusze stylów");
         map.put("scripts", "Skrypty");
         map.put("file", "Plik");
+        map.put("details", "Szczegóły");
         return map;
     }
 }

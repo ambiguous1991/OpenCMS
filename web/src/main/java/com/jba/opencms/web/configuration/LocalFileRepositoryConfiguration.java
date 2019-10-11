@@ -1,11 +1,8 @@
 package com.jba.opencms.web.configuration;
 
-import com.jba.opencms.dao.ifs.FileDao;
-import com.jba.opencms.file.FileFacadeService;
 import com.jba.opencms.file.FileService;
 import com.jba.opencms.web.repository.DatabaseBackedFileRepository;
 import com.jba.opencms.web.repository.FileRepository;
-import com.jba.opencms.web.repository.MockFileRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

@@ -444,6 +444,9 @@
     flex-grow: 1;
     color:inherit;
     margin-right: 1rem;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
   }
   &__href:hover{
     color:inherit;
@@ -468,6 +471,9 @@
     color: var(--gray);
     flex-grow: 1;
     text-align: right;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
 
   &:hover{
@@ -504,10 +510,15 @@
   border: 1px solid lightgray;
   border-radius: 10px;
   text-align: center;
+  transition: all 0.5s ease;
 
   -webkit-box-shadow: 5px 5px 15px 5px rgba(0, 0, 0, 0.05);
   -moz-box-shadow: 5px 5px 15px 5px rgba(0, 0, 0, 0.05);
   box-shadow: 5px 5px 15px 5px rgba(0, 0, 0, 0.05);
+
+  &--transition{
+    transition: all 0.5s ease;
+  }
 
   &__image{
     border-top-right-radius: 10px;
@@ -538,4 +549,18 @@
     text-overflow: ellipsis;
     overflow: hidden;
   }
+}
+
+.image-div{
+  width: 100%!important;
+  height: 100%!important;
+  background-size: contain!important;
+  background-repeat: no-repeat!important;
+  background-position: center!important;
+  background-color: lightgray!important;
+  border-radius: 0.25rem!important;
+  min-height: 300px!important;
+  -webkit-box-shadow: 5px 5px 15px 5px rgba(0, 0, 0, 0.05)!important;
+  -moz-box-shadow: 5px 5px 15px 5px rgba(0, 0, 0, 0.05)!important;
+  box-shadow: 5px 5px 15px 5px rgba(0, 0, 0, 0.05)!important;
 }

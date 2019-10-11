@@ -18,8 +18,6 @@ import com.jba.opencms.page.PageService;
 import com.jba.opencms.page.PageServiceImpl;
 import com.jba.opencms.page.PageTypeService;
 import com.jba.opencms.page.PageTypeServiceImpl;
-import com.jba.opencms.type.file.Script;
-import com.jba.opencms.type.file.Stylesheet;
 import com.jba.opencms.type.page.Page;
 import com.jba.opencms.type.page.PageType;
 import org.springframework.context.annotation.Bean;
@@ -60,21 +58,6 @@ public class ServicesInitializr {
     @Bean
     public FileService fileService(FileDao fileDao){
         return new FileServiceImpl(fileDao);
-    }
-
-    @Bean
-    public StylesheetService stylesheetService(GenericDao<Stylesheet> stylesheetDao){
-        return new StylesheetServiceImpl(stylesheetDao);
-    }
-
-    @Bean
-    public ScriptService scriptService(GenericDao<Script>scriptDao){
-        return new ScriptServiceImpl(scriptDao);
-    }
-
-    @Bean
-    public FileFacadeService fileFacadeService(FileService fileService, StylesheetService stylesheetService, ScriptService scriptService){
-        return new FileFacadeServiceImpl(scriptService, stylesheetService, fileService);
     }
 
     @Bean

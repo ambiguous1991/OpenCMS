@@ -1,12 +1,14 @@
 package com.jba.opencms.type.file;
 
 import com.jba.opencms.type.base.BaseTypeSimpleKey;
+import com.jba.opencms.type.page.Page;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.ToString;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Lob;
-import javax.persistence.Table;
+import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "file")
@@ -28,4 +30,9 @@ public class File extends BaseTypeSimpleKey<File> {
 
     @Column(name = "DESCRIPTION", length = 200)
     private String description;
+
+    @ManyToMany(mappedBy = "scripts")
+    @ToString.Exclude
+    @EqualsAndHashCode.Exclude
+    private List<Page> pages = new ArrayList<>();
 }

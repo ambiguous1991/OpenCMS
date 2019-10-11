@@ -1,8 +1,7 @@
 package com.jba.opencms.web.configuration;
 
-import com.jba.opencms.file.FileFacadeService;
-import com.jba.opencms.type.file.Script;
-import com.jba.opencms.type.file.Stylesheet;
+import com.jba.opencms.file.FileService;
+import com.jba.opencms.type.file.File;
 import com.jba.opencms.web.message.AbstractConverter;
 import com.jba.opencms.web.message.RequestBodyToScriptResourceConverter;
 import com.jba.opencms.web.message.RequestBodyToStylesheetResourceConverter;
@@ -11,29 +10,27 @@ import com.jba.opencms.web.type.resource.StylesheetToResourceWrapperConverter;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
-import javax.swing.text.Style;
-
 @Configuration
 public class ResourceConfiguration {
 
     @Bean
-    public AbstractConverter<Script> scriptAcceptedConverter(FileFacadeService fileFacadeService){
-        return new RequestBodyToScriptResourceConverter(fileFacadeService, "pageResources", "_pageResources");
+    public AbstractConverter<File> scriptAcceptedConverter(FileService fileService){
+        return new RequestBodyToScriptResourceConverter(fileService, "pageResources", "_pageResources");
     }
 
     @Bean
-    public AbstractConverter<Script> scriptRejectedConverter(FileFacadeService fileFacadeService){
-        return new RequestBodyToScriptResourceConverter(fileFacadeService, "availableResources", "_availableResources");
+    public AbstractConverter<File> scriptRejectedConverter(FileService fileService){
+        return new RequestBodyToScriptResourceConverter(fileService, "availableResources", "_availableResources");
     }
 
     @Bean
-    public AbstractConverter<Stylesheet> stylesheetAcceptedConverter(FileFacadeService fileFacadeService){
-        return new RequestBodyToStylesheetResourceConverter(fileFacadeService, "pageResources", "_pageResources");
+    public AbstractConverter<File> stylesheetAcceptedConverter(FileService fileService){
+        return new RequestBodyToStylesheetResourceConverter(fileService, "pageResources", "_pageResources");
     }
 
     @Bean
-    public AbstractConverter<Stylesheet> stylesheetRejectedConverter(FileFacadeService fileFacadeService){
-        return new RequestBodyToStylesheetResourceConverter(fileFacadeService, "availableResources", "_availableResources");
+    public AbstractConverter<File> stylesheetRejectedConverter(FileService fileService){
+        return new RequestBodyToStylesheetResourceConverter(fileService, "availableResources", "_availableResources");
     }
 
     @Bean

@@ -4,10 +4,8 @@ import com.jba.opencms.BaseSpringIntegrationTest;
 import com.jba.opencms.configuration.DaoConfiguration;
 import com.jba.opencms.configuration.TestDatasourceConfiguration;
 import com.jba.opencms.dao.GenericDao;
-import com.jba.opencms.type.file.Script;
+import com.jba.opencms.type.file.File;
 import com.jba.opencms.type.page.Page;
-import org.hibernate.query.criteria.HibernateCriteriaBuilder;
-import org.hibernate.query.criteria.internal.CriteriaBuilderImpl;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,40 +16,39 @@ import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
-import javax.persistence.criteria.Expression;
 import javax.persistence.criteria.Root;
 import java.util.List;
-import java.util.Set;
 
 @RunWith(SpringRunner.class)
 @ContextConfiguration(classes = {TestDatasourceConfiguration.class, DaoConfiguration.class})
 @EnableTransactionManagement
-public class ScriptTest extends BaseSpringIntegrationTest {
+public class FileScriptTest extends BaseSpringIntegrationTest {
 
     @Autowired
-    private GenericDao<Script> scriptDao;
+    private GenericDao<File> fileDao;
 
     @Test
     @Transactional
     public void getTest(){
-        List<Script> scripts = scriptDao.findAll();
+        List<File> scripts = fileDao.findAll();
         scripts.forEach(logger::info);
         List<Page> pages = scripts.get(0).getPages();
         pages.forEach(logger::info);
 
-        CriteriaBuilder builder = scriptDao.createBuilder();
-        CriteriaQuery<Script> query = builder.createQuery(Script.class);
-        Root<Script> root = query.from(Script.class);
-        CriteriaQuery<Script> title = query.select(root).where(builder.like(root.get("title"), "%script 1%"));
+        CriteriaBuilder builder = fileDao.createBuilder();
+        CriteriaQuery<File> query = builder.createQuery(File.class);
+        Root<File> root = query.from(File.class);
+        CriteriaQuery<File> title = query.select(root).where(builder.like(root.get("name"), "%script 1%"));
 
-        scriptDao.findFiltered(title).forEach(logger::info);
+        fileDao.findFiltered(title).forEach(logger::info);
     }
 
     @Test
     public void saveTest(){
-        Script script = new Script();
-        script.setTitle("New script");
+        File script = new File();
+        script.setName("New script");
         script.setPath("/test/awd");
-        scriptDao.create(script);
+        script.setData(new byte[0]);
+        fileDao.create(script);
     }
 }
