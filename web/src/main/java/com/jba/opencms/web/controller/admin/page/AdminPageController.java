@@ -1,11 +1,10 @@
 package com.jba.opencms.web.controller.admin.page;
 
-import com.jba.opencms.file.FileFacadeService;
+import com.jba.opencms.file.FileService;
 import com.jba.opencms.menu.MenuService;
 import com.jba.opencms.page.PageService;
 import com.jba.opencms.page.PageTypeService;
 import com.jba.opencms.type.file.File;
-import com.jba.opencms.type.file.Stylesheet;
 import com.jba.opencms.type.menu.Entry;
 import com.jba.opencms.type.page.Page;
 import com.jba.opencms.type.page.PageType;
@@ -35,18 +34,18 @@ public class AdminPageController {
     private PageService pageService;
     private MenuService menuService;
     private PageTypeService pageTypeService;
-    private FileFacadeService fileService;
+    private FileService fileService;
     private AbstractConverter<File> acceptedScripts, rejectedScripts;
-    private AbstractConverter<Stylesheet> acceptedStylesheets, rejectedStylesheets;
+    private AbstractConverter<File> acceptedStylesheets, rejectedStylesheets;
 
     public AdminPageController(PageService pageService,
                                MenuService menuService,
                                PageTypeService pageTypeService,
-                               FileFacadeService fileService,
+                               FileService fileService,
                                AbstractConverter<File> scriptAcceptedConverter,
                                AbstractConverter<File> scriptRejectedConverter,
-                               AbstractConverter<Stylesheet> stylesheetAcceptedConverter,
-                               AbstractConverter<Stylesheet> stylesheetRejectedConverter)
+                               AbstractConverter<File> stylesheetAcceptedConverter,
+                               AbstractConverter<File> stylesheetRejectedConverter)
     {
         this.pageService = pageService;
         this.menuService = menuService;
@@ -129,7 +128,7 @@ public class AdminPageController {
     public String getPageScripts(@PathVariable("pageId") Long pageId, Model model, ScriptToResourceWrapperConverter converter) {
         Page page = pageService.findOne(pageId, true);
 
-        List<File> availableScripts = fileService.file().findAll(Collections.singletonList("text/javascript"));
+        List<File> availableScripts = fileService.findAll(Collections.singletonList("text/javascript"));
         List<File> pageScripts = page.getScripts();
         availableScripts.removeAll(pageScripts);
 
@@ -146,8 +145,8 @@ public class AdminPageController {
     public String getStylesheets(@PathVariable("pageId") Long pageId, Model model, StylesheetToResourceWrapperConverter converter) {
         Page page = pageService.findOne(pageId, true);
 
-        List<Stylesheet> availableStylesheets = fileService.stylesheet().findAll(true);
-        List<Stylesheet> pageStylesheets = page.getStylesheets();
+        List<File> availableStylesheets = fileService.findAll(Collections.singletonList("text/css"));
+        List<File> pageStylesheets = page.getStylesheets();
         availableStylesheets.removeAll(pageStylesheets);
 
         ResourceForm form = new ResourceForm(converter.convert(availableStylesheets), converter.convert(pageStylesheets));
@@ -177,8 +176,8 @@ public class AdminPageController {
     public RedirectView addPageStylesheets(@PathVariable("pageId") Long pageId, @RequestBody String body) {
         Page page = pageService.findOne(pageId, true);
 
-        List<Stylesheet> toAdd = acceptedStylesheets.read(body);
-        List<Stylesheet> toRemove = rejectedStylesheets.read(body);
+        List<File> toAdd = acceptedStylesheets.read(body);
+        List<File> toRemove = rejectedStylesheets.read(body);
 
         page.getStylesheets().removeAll(toRemove);
         page.getStylesheets().addAll(toAdd);
