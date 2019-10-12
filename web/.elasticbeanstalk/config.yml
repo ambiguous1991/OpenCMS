@@ -1,0 +1,22 @@
+branch-defaults:
+  default:
+    environment: jba-pro
+environment-defaults:
+  jba-pro:
+    branch: null
+    repository: null
+global:
+  application_name: jba
+  default_ec2_keyname: jba-pro
+  default_platform: arn:aws:elasticbeanstalk:eu-west-3::platform/Java 8 running on
+    64bit Amazon Linux/2.8.3
+  default_region: eu-west-3
+  include_git_submodules: true
+  instance_profile: null
+  platform_name: null
+  platform_version: null
+  profile: eb-cli
+  sc: null
+  workspace_type: Application
+deploy:
+  artifact: target/web-2.1.2.jar
