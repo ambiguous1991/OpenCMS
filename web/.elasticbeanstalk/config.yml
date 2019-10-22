@@ -19,4 +19,4 @@ global:
   sc: null
   workspace_type: Application
 deploy:
-  artifact: target/web-2.1.3.jar
+  artifact: target/web-2.1.4.jar
