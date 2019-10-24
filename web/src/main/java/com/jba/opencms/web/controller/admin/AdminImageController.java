@@ -57,4 +57,13 @@ public class AdminImageController {
 
         return new RedirectView("/dashboard/images?success");
     }
+
+    @RequestMapping(value = "/{imageId}/delete", method = RequestMethod.GET)
+    public RedirectView deleteImage(
+        @PathVariable("imageId") Long imageId
+    ){
+        fileService.delete(imageId);
+
+        return new RedirectView("/dashboard/images?success");
+    }
 }
