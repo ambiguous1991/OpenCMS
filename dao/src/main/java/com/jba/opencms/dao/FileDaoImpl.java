@@ -12,9 +12,7 @@ import org.hibernate.query.criteria.internal.predicate.LikePredicate;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
 import java.util.stream.Collectors;
 
 public class FileDaoImpl extends HibernateDao<File> implements FileDao {
@@ -63,19 +61,30 @@ public class FileDaoImpl extends HibernateDao<File> implements FileDao {
         return getCurrentSession().createQuery(query).getResultList();
     }
 
-    private CriteriaQuery<FileProjection> byMime(List<String> mimes){
-        CriteriaBuilder builder = getCurrentSession().getCriteriaBuilder();
+    private CriteriaQuery<FileProjection> fileProjectionCriteriaQuery(Map<String, List<String>> in){
+        CriteriaBuilder builder = getCurrentSession().getCriteriaBuilder();;
         CriteriaQuery<FileProjection> query = builder.createQuery(FileProjection.class);
         Root<File> file = query.from(File.class);
         query.multiselect(file.get("name"), file.get("path"), file.get("mime"), file.get("description"));
-        CriteriaBuilder.In<Object> mime = builder.in(file.get("mime"));
 
-        for(String mimeValue: mimes){
-            mime.value(mimeValue);
+        for(String key: in.keySet()){
+            CriteriaBuilder.In<Object> inQuery = builder.in(file.get(key));
+            for(String value: in.get(key)){
+                inQuery.value(value);
+            }
+            query.where(inQuery);
         }
-
-        query.where(mime);
         return query;
+    }
+
+    private CriteriaQuery<FileProjection> byMime(List<String> mimes){
+        HashMap<String, List<String>> mime = new HashMap<>();
+        mime.put("mime", mimes);
+        return fileProjectionCriteriaQuery(mime);
+    }
+
+    private CriteriaQuery<FileProjection> all(){
+        return fileProjectionCriteriaQuery(new HashMap<>());
     }
 
     @Override
@@ -95,6 +104,7 @@ public class FileDaoImpl extends HibernateDao<File> implements FileDao {
 
     @Override
     public List<FileProjection> getFileMetadata() {
-        return null;
+        CriteriaQuery<FileProjection> all = all();
+        return getCurrentSession().createQuery(all).getResultList();
     }
 }
