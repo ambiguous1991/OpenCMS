@@ -47,23 +47,13 @@
             <h2>Pliki</h2>
         </div>
         <div class="row list-grid-group">
-            <div class="col-12 col-md-6 col-lg-4 list-grid-group__toplevel-container list-grid-group--list-only">
+            <div class="col-12 col-md-6 col-lg-4 list-grid-group__toplevel-container list-grid-group--list-only" th:each="file: ${files}">
                 <div class="list-grid-group-container list-grid-group-container--no-hover list-grid-group-container--list-only ">
                     <i class="fas fa-file list-grid-group-container__icon list-grid-group-container__icon--list-only"></i>
                     <div class="list-group-text-container">
-                        <a class="" href="/dashboard/users/change-password" style="flex-grow: 0;">nazwa_pliku.file</a>
-                        <small class="list-group-text-container__item-description">jakiś opis pliku jeżeli istnieje</small>
-                        <div class="list-group-text-container__consola">/path/to/file</div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-12 col-md-6 col-lg-4 list-grid-group__toplevel-container list-grid-group--list-only">
-                <div class="list-grid-group-container list-grid-group-container--no-hover list-grid-group-container--list-only ">
-                    <i class="fas fa-file list-grid-group-container__icon list-grid-group-container__icon--list-only"></i>
-                    <div class="list-group-text-container">
-                        <a class="" href="/dashboard/users/change-password" style="flex-grow: 0;">nazwa_pliku.file</a>
-                        <small class="list-group-text-container__item-description">jakiś opis pliku jeżeli istnieje</small>
-                        <div class="list-group-text-container__consola">/path/to/file</div>
+                        <a th:href="${file.getPath()}" style="flex-grow: 0;" th:text="${file.getName()}">nazwa_pliku.file</a>
+                        <small class="list-group-text-container__item-description" th:text="${file.getDescription()}">jakiś opis pliku jeżeli istnieje</small>
+                        <div class="list-group-text-container__consola" th:text="${file.getPath()}">/path/to/file</div>
                     </div>
                 </div>
             </div>
