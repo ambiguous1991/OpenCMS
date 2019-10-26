@@ -51,7 +51,7 @@
                 <div class="list-grid-group-container list-grid-group-container--no-hover list-grid-group-container--list-only ">
                     <i class="fas fa-file list-grid-group-container__icon list-grid-group-container__icon--list-only"></i>
                     <div class="list-group-text-container">
-                        <a th:href="${file.getPath()}" style="flex-grow: 0;" th:text="${file.getName()}">nazwa_pliku.file</a>
+                        <a th:href="${'/dashboard/files/file'+file.getPath()}" style="flex-grow: 0;" th:text="${file.getName()}">nazwa_pliku.file</a>
                         <small class="list-group-text-container__item-description" th:text="${file.getDescription()}">jakiś opis pliku jeżeli istnieje</small>
                         <div class="list-group-text-container__consola" th:text="${file.getPath()}">/path/to/file</div>
                     </div>
