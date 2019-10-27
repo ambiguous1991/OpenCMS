@@ -86,11 +86,12 @@ public class FileController {
         }
     }
 
-    @RequestMapping(method = RequestMethod.GET)
+    @RequestMapping(value = "/**", method = RequestMethod.GET)
     public void getFile(
-            HttpServletResponse response,
-            @RequestParam(name = "path") String path) throws IOException {
-        File file = fileService.get(path);
+            HttpServletRequest request,
+            HttpServletResponse response) throws IOException {
+        String requestURI = request.getRequestURI().replaceAll("/file","");
+        File file = fileService.get(requestURI);
         if(file!=null) {
             response.setContentType(file.getMime());
             IOUtils.copy(new ByteArrayInputStream(file.getData()), response.getOutputStream());
