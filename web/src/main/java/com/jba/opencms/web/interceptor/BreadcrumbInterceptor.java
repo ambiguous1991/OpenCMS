@@ -26,9 +26,9 @@ public class BreadcrumbInterceptor extends HandlerInterceptorAdapter {
         if(shouldIntercept(request, response)){
             logger.info("Building breadcrumbs for "+requestURI);
 
-            List<Breadcrumb> breadcrumbs = requestToBreadcrumb(requestURI);
+            List<Breadcrumb> breadcrumbs = requestToBreadcrumb(trimIfNeeded(requestURI));
             String breadcrumbTitle = breadcrumbs.stream().map(Breadcrumb::getLabel).collect(Collectors.joining(" - ", " - ", ""));
-            modelAndView.addObject("breadcrumb", requestToBreadcrumb(requestURI));
+            modelAndView.addObject("breadcrumb", requestToBreadcrumb(trimIfNeeded(requestURI)));
             modelAndView.addObject("breadcrumbTitle", breadcrumbTitle);
         }
     }
@@ -60,6 +60,13 @@ public class BreadcrumbInterceptor extends HandlerInterceptorAdapter {
         return collect;
     }
 
+    private String trimIfNeeded(String requestURI){
+        if(requestURI.contains("/dashboard/files/file")){
+            return "/dashboard/files/file";
+        }
+        else return requestURI;
+    }
+
     private String extractHref(String element, StringBuilder requestURI){
         requestURI.append("/"+element);
         return requestURI.toString();
@@ -83,6 +90,7 @@ public class BreadcrumbInterceptor extends HandlerInterceptorAdapter {
         map.put("stylesheets", "Arkusze stylów");
         map.put("scripts", "Skrypty");
         map.put("file", "Plik");
+        map.put("files", "Pliki");
         map.put("details", "Szczegóły");
         return map;
     }

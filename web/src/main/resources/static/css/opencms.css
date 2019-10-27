@@ -399,8 +399,14 @@
   overflow: hidden;
   text-overflow: ellipsis;
 }
+.list-grid-group-container__text-center {
+  align-self: center;
+}
 .list-grid-group-container:hover {
   transform: scale(1.05);
+}
+.list-grid-group-container--no-hover {
+  transform: none !important;
 }
 @media (min-width: 768px) {
   .list-grid-group-container {
@@ -424,6 +430,26 @@
   .list-grid-group-container__href {
     margin-right: 0;
   }
+}
+
+.list-group-text-container {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  overflow: hidden;
+}
+.list-group-text-container__consola {
+  font-family: "Courier New", Courier, monospace;
+}
+.list-group-text-container__item-description {
+  color: gray;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+  padding-left: 1rem;
+  padding-right: 1rem;
 }
 
 .image-container {

@@ -1,0 +1,65 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-4.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta th:replace="fragment/metadata">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8">
+    <title th:text="${@systemVariables.get(@varkey.PAGE_NAME)}+${breadcrumbTitle}">Failed</title>
+    <div th:replace="fragment/import"></div>
+    <link rel="stylesheet" href="../../../static/css/opencms.css"/>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css"
+          integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf"
+          crossorigin="anonymous">
+    <link rel="stylesheet" href="../../../static/css/bootstrap.css"/>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+            integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+            crossorigin="anonymous"></script>
+    <link href="https://gitcdn.github.io/bootstrap-toggle/2.2.2/css/bootstrap-toggle.min.css" rel="stylesheet">
+    <script src="https://gitcdn.github.io/bootstrap-toggle/2.2.2/js/bootstrap-toggle.min.js"></script>
+    <!--/*-->
+    <link rel="stylesheet" href="../../../static/css/bootstrap.css"/>
+    <link rel="stylesheet" href="../../../static/css/bootstrap-theme.css"/>
+    <link rel="stylesheet" href="../../../static/css/opencms.css"/>
+    <script
+            src="https://code.jquery.com/jquery-3.4.1.js"
+            integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
+            crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+            integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+            crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+            integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+            crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css"
+          integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+    <!--*/-->
+</head>
+<body class="d-flex flex-column vh-100">
+<nav th:replace="fragment/admin-navbar"></nav>
+<nav th:replace="fragment/admin-breadcrumb"></nav>
+<div class="wrapper" style="max-height: 100vh;">
+    <div th:replace="fragment/admin-sidebar"></div>
+    <div class="flex-grow-1 flex-column d-flex overflow-auto p-5">
+        <div class="d-flex flex-row mb-3">
+            <h2>Pliki</h2>
+        </div>
+        <div class="row list-grid-group">
+            <div class="col-12 col-md-6 col-lg-4 list-grid-group__toplevel-container list-grid-group--list-only" th:each="file: ${files}">
+                <div class="list-grid-group-container list-grid-group-container--no-hover list-grid-group-container--list-only ">
+                    <i class="fas fa-file list-grid-group-container__icon list-grid-group-container__icon--list-only"></i>
+                    <div class="list-group-text-container">
+                        <a th:href="${'/dashboard/files/file'+file.getPath()}" style="flex-grow: 0;" th:text="${file.getName()}">nazwa_pliku.file</a>
+                        <small class="list-group-text-container__item-description" th:text="${file.getDescription()}">jakiś opis pliku jeżeli istnieje</small>
+                        <div class="list-group-text-container__consola" th:text="${file.getPath()}">/path/to/file</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+</body>
+</html>

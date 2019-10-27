@@ -23,6 +23,7 @@ public class File extends BaseTypeSimpleKey<File> {
 
     @Column(name = "DATA", nullable = false, columnDefinition = "MEDIUMBLOB")
     @Lob
+    @ToString.Exclude
     private byte[] data;
 
     @Column(name = "MIME")
