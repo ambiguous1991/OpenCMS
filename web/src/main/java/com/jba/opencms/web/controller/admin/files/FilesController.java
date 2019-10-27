@@ -8,6 +8,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.view.RedirectView;
 
 import javax.servlet.http.HttpServletRequest;
@@ -59,5 +60,12 @@ public class FilesController {
         fileService.update(fromDB);
 
         return new RedirectView("/dashboard/files?update-success");
+    }
+
+    @RequestMapping(value = "/delete")
+    public RedirectView deleteFile(@RequestParam("file") Long fileId){
+        fileService.delete(fileId);
+
+        return new RedirectView("/dashboard/files?delete-success");
     }
 }
