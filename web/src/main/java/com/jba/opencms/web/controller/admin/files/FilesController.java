@@ -7,6 +7,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.servlet.view.RedirectView;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
@@ -39,9 +41,23 @@ public class FilesController {
         String filePath = requestURI.replaceAll(TO_REMOVE_FROM_PATH, "");
 
         File file = fileService.get(filePath);
-        model.addAttribute("file", file);
+        if(file!=null) {
+            model.addAttribute("file", file);
 
-        log.info(request.getRequestURI());
-        return "error/not-found";
+            return "dashboard/files/file";
+        }
+        else return "error/not-found";
+    }
+
+    @RequestMapping(value = "file/**", method = RequestMethod.POST)
+    public RedirectView updateFile(HttpServletRequest request, File file){
+        File fromDB = fileService.findOne(file.getId(), false);
+        fromDB.setName(file.getName());
+        fromDB.setDescription(file.getDescription());
+        fromDB.setPath(file.getPath());
+
+        fileService.update(fromDB);
+
+        return new RedirectView("/dashboard/files?update-success");
     }
 }
