@@ -41,6 +41,10 @@ public class FilesController {
         String requestURI = request.getRequestURI();
         String filePath = requestURI.replaceAll(TO_REMOVE_FROM_PATH, "");
 
+        if(filePath.contains("/images/")){
+            return "redirect:/dashboard/images/details"+filePath;
+        }
+
         File file = fileService.get(filePath);
         if(file!=null) {
             model.addAttribute("file", file);

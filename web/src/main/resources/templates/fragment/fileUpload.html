@@ -52,18 +52,18 @@
         function determinePrePart(mimeType, fileName){
             switch (mimeType) {
                 case 'text/css':
-                    return '/css/'+fileName;
+                    return '/resources/css/'+fileName;
                 case 'text/javascript':
-                    return '/js/'+fileName;
+                    return '/resources/js/'+fileName;
                 case 'image/jpeg':
                 case 'image/jpg':
                 case 'image/png':
                 case 'image/bmp':
                 case 'image/tiff':
                 case 'image/svg':
-                    return '/images/'+fileName;
+                    return '/resources/images/'+fileName;
                 default:
-                    return '/resources/'+fileName;
+                    return '/files/'+fileName;
             }
         }
 

@@ -76,7 +76,7 @@ public class FileController {
         Map<String, String> result = new HashMap<>();
         if(form.getMimeContent().contains("jpeg")||form.getMimeContent().contains("jpg")||form.getMimeContent().contains("png")){
             result.put("result", "success");
-            result.put("path", "/dashboard/images/details?image=" + form.getFilePath());
+            result.put("path", "/dashboard/images/details" + form.getFilePath());
             return new ResponseEntity<>(new ObjectMapper().writeValueAsString(result), HttpStatus.OK);
         }
         else {

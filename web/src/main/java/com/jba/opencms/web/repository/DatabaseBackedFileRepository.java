@@ -18,6 +18,9 @@ public class DatabaseBackedFileRepository implements FileRepository {
     }
 
     private File getFileOrThrow(String path) throws FileNotFoundException{
+        if(!path.startsWith("/")){
+            path="/"+path;
+        }
         File file = fileService.get(path);
         if(file==null) throw new FileNotFoundException("File "+path+" not found");
         return file;
