@@ -44,6 +44,9 @@ public class FilesController {
         if(filePath.contains("/images/")){
             return "redirect:/dashboard/images/details"+filePath;
         }
+        else if (filePath.contains("/css/")){
+            return "redirect:/dashboard/presentation/edit-css?file="+filePath;
+        }
 
         File file = fileService.get(filePath);
         if(file!=null) {
