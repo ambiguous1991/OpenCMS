@@ -56,7 +56,7 @@
                 </form>
             </div>
             <div class="col-md-12 col-lg-7 mb-3 mb-lg-0 order-first order-lg-last">
-                <div class="w-100 h-100 image-div" th:style="'background: url(/file?path='+${image.getPath()}+');'">
+                <div class="w-100 h-100 image-div" th:style="'background: url(/file'+${image.getPath()}+');'">
             </div>
         </div>
     </div>

@@ -25,7 +25,7 @@
           integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
     <!--*/-->
 </head>
-<div th:replace="dashboard/presentation/fragment/fileUpload"></div>
+<div th:replace="fragment/fileUpload"></div>
 <body class="d-flex flex-column vh-100">
 <nav th:replace="fragment/admin-navbar"></nav>
 <nav th:replace="fragment/admin-breadcrumb"></nav>
@@ -43,7 +43,7 @@
             <div class="row image-container--transition">
                 <div class="col-12 col-sm-4 col-lg-3 mb-3 image-container--transition" th:each="image: ${images}">
                     <div class="image-container">
-                        <div class="image-container__image" th:style="'background: url('+${'/file?path='+image.getPath()}+')'"
+                        <div class="image-container__image" th:style="'background: url('+${'/file'+image.getPath()}+')'"
                              src="../../../static/images/bulb.png"
                              alt="Card image cap"></div>
                         <div class="image-container__subtext">
