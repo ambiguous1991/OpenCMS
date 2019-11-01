@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.view.RedirectView;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 @Controller
@@ -32,16 +33,21 @@ public class AdminImageController {
         return "dashboard/image/images";
     }
 
-    @RequestMapping(value = "/details")
+    @RequestMapping(value = "/details/**")
     public String getImageForm(
-            @RequestParam("image") String imageId,
+            HttpServletRequest request,
             Model model
     ) {
-        File image = fileService.get(imageId);
-        model.addAttribute("image", image);
-        model.addAttribute("imageId", image.getId());
+        String requestURI = request.getRequestURI().replace("/dashboard/images/details", "");
 
-        return "dashboard/image/image";
+        File image = fileService.get(requestURI);
+        if(image!=null) {
+            model.addAttribute("image", image);
+            model.addAttribute("imageId", image.getId());
+
+            return "dashboard/image/image";
+        }
+        else return "redirect:/404";
     }
 
     @RequestMapping(value = "/{imageId}", method = RequestMethod.POST)

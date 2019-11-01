@@ -64,6 +64,9 @@ public class BreadcrumbInterceptor extends HandlerInterceptorAdapter {
         if(requestURI.contains("/dashboard/files/file")){
             return "/dashboard/files/file";
         }
+        else if (requestURI.contains("/dashboard/images/details")){
+            return "/dashboard/images/details";
+        }
         else return requestURI;
     }
 

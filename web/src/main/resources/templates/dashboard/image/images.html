@@ -47,7 +47,7 @@
                              src="../../../static/images/bulb.png"
                              alt="Card image cap"></div>
                         <div class="image-container__subtext">
-                            <a href="#" th:href="${'/dashboard/images/details?image='+image.getPath()}">
+                            <a href="#" th:href="${'/dashboard/images/details'+image.getPath()}">
                                 <h5 class="font-weight-bold card-title font-family-roboto image-container__title"
                                     th:text="${image.getName()}">Title</h5>
                             </a>
