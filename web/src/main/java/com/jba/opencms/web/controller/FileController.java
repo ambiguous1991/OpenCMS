@@ -76,7 +76,7 @@ public class FileController {
         Map<String, String> result = new HashMap<>();
         if(form.getMimeContent().contains("jpeg")||form.getMimeContent().contains("jpg")||form.getMimeContent().contains("png")){
             result.put("result", "success");
-            result.put("path", "/dashboard/images/details?image=" + form.getFilePath());
+            result.put("path", "/dashboard/images/details" + form.getFilePath());
             return new ResponseEntity<>(new ObjectMapper().writeValueAsString(result), HttpStatus.OK);
         }
         else {
@@ -86,11 +86,12 @@ public class FileController {
         }
     }
 
-    @RequestMapping(method = RequestMethod.GET)
+    @RequestMapping(value = "/**", method = RequestMethod.GET)
     public void getFile(
-            HttpServletResponse response,
-            @RequestParam(name = "path") String path) throws IOException {
-        File file = fileService.get(path);
+            HttpServletRequest request,
+            HttpServletResponse response) throws IOException {
+        String requestURI = request.getRequestURI().replaceAll("/file","");
+        File file = fileService.get(requestURI);
         if(file!=null) {
             response.setContentType(file.getMime());
             IOUtils.copy(new ByteArrayInputStream(file.getData()), response.getOutputStream());
