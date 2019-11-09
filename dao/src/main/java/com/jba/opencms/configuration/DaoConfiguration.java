@@ -12,6 +12,7 @@ import com.jba.opencms.type.message.Message;
 import com.jba.opencms.type.message.Status;
 import com.jba.opencms.type.page.Page;
 import com.jba.opencms.type.page.PageType;
+import com.jba.opencms.type.page.ThymeleafTemplate;
 import com.jba.opencms.type.user.Authority;
 import com.jba.opencms.type.user.ImageUser;
 import com.jba.opencms.type.user.User;
@@ -56,7 +57,7 @@ public class DaoConfiguration {
     }
 
     @Bean
-    public MenuDao menuDao(@Qualifier("sessionFactory") SessionFactory sessionFactory){
+    public MenuDao menuDao(SessionFactory sessionFactory){
         return new MenuDaoImpl(Menu.class, sessionFactory);
     }
 
@@ -78,5 +79,10 @@ public class DaoConfiguration {
     @Bean
     public FileDao fileDao(SessionFactory sessionFactory){
         return new FileDaoImpl(File.class, sessionFactory);
+    }
+
+    @Bean
+    public GenericDao<ThymeleafTemplate> templateDao(SessionFactory sessionFactory){
+        return new HibernateDao<>(ThymeleafTemplate.class, sessionFactory);
     }
 }
