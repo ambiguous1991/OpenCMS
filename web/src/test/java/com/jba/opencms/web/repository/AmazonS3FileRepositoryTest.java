@@ -29,6 +29,7 @@ import static org.junit.Assert.assertThat;
 @Import({AWSS3Configuration.class})
 @TestPropertySource(locations = "/application.properties")
 @Slf4j
+@Ignore
 public class AmazonS3FileRepositoryTest {
 
     @TestConfiguration

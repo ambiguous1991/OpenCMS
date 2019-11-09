@@ -24,7 +24,7 @@
     </modules>
 
     <properties>
-        <dao.version>2.1.4</dao.version>
+        <dao.version>2.1.5</dao.version>
         <security.version>2.1.4</security.version>
         <service.version>2.1.4</service.version>
         <web.version>2.1.4</web.version>
