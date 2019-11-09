@@ -1,10 +1,7 @@
 package com.jba.opencms.configuration;
 
 import com.jba.opencms.dao.*;
-import com.jba.opencms.dao.ifs.EntryDao;
-import com.jba.opencms.dao.ifs.FileDao;
-import com.jba.opencms.dao.ifs.MenuDao;
-import com.jba.opencms.dao.ifs.SystemVariableDao;
+import com.jba.opencms.dao.ifs.*;
 import com.jba.opencms.type.file.File;
 import com.jba.opencms.type.menu.Entry;
 import com.jba.opencms.type.menu.Menu;
@@ -82,7 +79,7 @@ public class DaoConfiguration {
     }
 
     @Bean
-    public GenericDao<ThymeleafTemplate> templateDao(SessionFactory sessionFactory){
-        return new HibernateDao<>(ThymeleafTemplate.class, sessionFactory);
+    public TemplateDao templateDao(SessionFactory sessionFactory){
+        return new TemplateDaoImpl(sessionFactory);
     }
 }
