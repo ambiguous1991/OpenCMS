@@ -12,7 +12,7 @@
     </parent>
 
     <artifactId>web</artifactId>
-    <version>${web.version}</version>
+    <version>${opencms.version}</version>
     <name>OpenCMS Web</name>
     <description>Web package for open cms</description>
 
@@ -37,12 +37,12 @@
         <dependency>
             <groupId>com.jba.opencms</groupId>
             <artifactId>service</artifactId>
-            <version>${service.version}</version>
+            <version>${opencms.version}</version>
         </dependency>
         <dependency>
             <groupId>com.jba.opencms</groupId>
             <artifactId>security</artifactId>
-            <version>${security.version}</version>
+            <version>${opencms.version}</version>
         </dependency>
         <!--END OPENCMS DEPS-->
         <!--SPRING BOOT DEPS-->
