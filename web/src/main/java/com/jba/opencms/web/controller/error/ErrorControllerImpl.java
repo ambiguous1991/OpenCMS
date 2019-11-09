@@ -1,5 +1,6 @@
 package com.jba.opencms.web.controller.error;
 
+import com.jba.opencms.web.controller.AbstractController;
 import org.springframework.boot.web.servlet.error.ErrorController;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -13,7 +14,7 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 @Controller
-public class ErrorControllerImpl implements ErrorController {
+public class ErrorControllerImpl extends AbstractController implements ErrorController {
 
     private final static Map<Integer, String> statusCodesToPageMapping = Stream.of(
             new AbstractMap.SimpleEntry<>(401, "error/forbidden"),

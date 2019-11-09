@@ -2,6 +2,7 @@ package com.jba.opencms.web.controller.admin;
 
 import com.jba.opencms.security.SecurityUtils;
 import com.jba.opencms.type.user.User;
+import com.jba.opencms.web.controller.AbstractController;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -11,7 +12,7 @@ import javax.servlet.http.HttpServletRequest;
 
 @Controller
 @RequestMapping("/dashboard")
-public class DashboardController {
+public class DashboardController extends AbstractController {
 
     @GetMapping
     public String dashboard(){

@@ -1,5 +1,6 @@
 package com.jba.opencms.web.controller.admin;
 
+import com.jba.opencms.web.controller.AbstractController;
 import com.jba.opencms.web.repository.FileRepository;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.ResponseEntity;
@@ -17,7 +18,7 @@ import static com.jba.opencms.web.utils.ContentType.TEXT_CSS;
 
 @Controller
 @RequestMapping(value = "/dashboard/presentation")
-public class PresentationController {
+public class PresentationController extends AbstractController {
 
     private FileRepository repository;
 

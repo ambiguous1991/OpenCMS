@@ -10,7 +10,7 @@ import org.springframework.web.servlet.view.RedirectView;
 import javax.servlet.http.HttpServletRequest;
 
 @Controller
-public class LoginController {
+public class LoginController extends AbstractController {
 
     @GetMapping("/login")
     public String loginForm(){

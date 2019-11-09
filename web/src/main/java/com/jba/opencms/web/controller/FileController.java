@@ -23,8 +23,7 @@ import java.util.Map;
 
 @RestController
 @RequestMapping(value = "/file")
-@Slf4j
-public class FileController {
+public class FileController extends AbstractController{
 
     private FileService fileService;
     private FilePreprocessor imagePreprocessor;

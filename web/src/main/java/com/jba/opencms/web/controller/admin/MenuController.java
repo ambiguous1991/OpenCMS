@@ -6,6 +6,7 @@ import com.jba.opencms.page.PageService;
 import com.jba.opencms.type.menu.Entry;
 import com.jba.opencms.type.menu.Menu;
 import com.jba.opencms.type.page.Page;
+import com.jba.opencms.web.controller.AbstractController;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -19,7 +20,7 @@ import java.util.Comparator;
 import java.util.List;
 
 @Controller
-public class MenuController {
+public class MenuController extends AbstractController {
 
     private MenuService menuService;
     private EntryService entryService;
