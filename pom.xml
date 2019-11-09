@@ -8,7 +8,7 @@
     <artifactId>base</artifactId>
     <packaging>pom</packaging>
     <version>1.0.0</version>
-    <name>OpenCMS Base ${dao.version}</name>
+    <name>OpenCMS Base ${opencms.version}</name>
 
     <parent>
         <groupId>org.springframework.boot</groupId>
@@ -24,10 +24,7 @@
     </modules>
 
     <properties>
-        <dao.version>2.1.5</dao.version>
-        <security.version>2.1.4</security.version>
-        <service.version>2.1.4</service.version>
-        <web.version>2.1.4</web.version>
+        <opencms.version>2.1.6</opencms.version>
 
         <java.version>1.8</java.version>
         <lombok.version>1.18.4</lombok.version>

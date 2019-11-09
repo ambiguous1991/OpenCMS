@@ -3,10 +3,9 @@ package com.jba.opencms.web.controller.admin.users;
 import com.jba.opencms.security.SecurityUtils;
 import com.jba.opencms.security.service.UserDetailsServicePasswordChangeCapable;
 import com.jba.opencms.type.user.User;
+import com.jba.opencms.web.controller.AbstractController;
 import com.jba.opencms.web.controller.admin.users.form.ChangePasswordForm;
 import com.jba.opencms.web.controller.admin.users.form.UsernamePasswordForm;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -23,9 +22,7 @@ import javax.servlet.http.HttpServletRequest;
 
 @Controller
 @RequestMapping(value = "/dashboard/users")
-public class UsersController {
-
-    private final Logger logger = LoggerFactory.getLogger(getClass());
+public class UsersController extends AbstractController {
 
     private PasswordEncoder passwordEncoder;
     private UserDetailsServicePasswordChangeCapable userDetailsService;

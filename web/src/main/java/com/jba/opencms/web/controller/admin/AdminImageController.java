@@ -3,12 +3,12 @@ package com.jba.opencms.web.controller.admin;
 import com.jba.opencms.file.FileService;
 import com.jba.opencms.type.file.File;
 import com.jba.opencms.type.file.projection.FileProjection;
+import com.jba.opencms.web.controller.AbstractController;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.view.RedirectView;
 
 import javax.servlet.http.HttpServletRequest;
@@ -16,7 +16,7 @@ import java.util.List;
 
 @Controller
 @RequestMapping(value = "/dashboard/images")
-public class AdminImageController {
+public class AdminImageController extends AbstractController {
 
     private FileService fileService;
 

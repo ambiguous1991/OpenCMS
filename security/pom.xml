@@ -12,7 +12,7 @@
     </parent>
 
     <artifactId>security</artifactId>
-    <version>${security.version}</version>
+    <version>${opencms.version}</version>
     <name>OpenCMS Security</name>
     <description>Security package for OpenCMS</description>
 
@@ -34,7 +34,7 @@
         <dependency>
             <groupId>com.jba.opencms</groupId>
             <artifactId>dao</artifactId>
-            <version>${dao.version}</version>
+            <version>${opencms.version}</version>
         </dependency>
         <dependency>
             <groupId>org.projectlombok</groupId>

@@ -20,7 +20,7 @@ import java.util.List;
 
 @Controller
 @RequestMapping(value = "/")
-public class PageController {
+public class PageController extends AbstractController{
     private MenuService menuService;
     private PageService pageService;
     private GlobalsService globalsService;

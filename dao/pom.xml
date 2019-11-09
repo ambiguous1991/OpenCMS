@@ -12,7 +12,7 @@
     </parent>
 
     <artifactId>dao</artifactId>
-    <version>${dao.version}</version>
+    <version>${opencms.version}</version>
     <name>OpenCMS Dao and Types</name>
     <description>Dao package</description>
 
