@@ -76,17 +76,17 @@
                     <select id="pageType" name="pageType" class="custom-select">
                         <option value="-1">brak</option>
                         <option
-                                th:if="${page.getPageType()!=null}"
-                                th:each="pageType:${pageTypes}"
-                                th:value="${pageType.getId()}"
-                                th:text="${pageType.getLayoutTitle()}"
-                                th:selected="${pageType.getId()==page.getPageType().getId()}">Page
+                                th:if="${page.getTemplate()!=null}"
+                                th:each="template:${templates}"
+                                th:value="${template.getId()}"
+                                th:text="${template.getLayoutTitle()}"
+                                th:selected="${template.getId()==page.getTemplate().getId()}">Page
                         </option>
                         <option
-                                th:if="${page.getPageType()==null}"
-                                th:each="pageType:${pageTypes}"
-                                th:value="${pageType.getId()}"
-                                th:text="${pageType.getLayoutTitle()}">Page
+                                th:if="${page.getTemplate()==null}"
+                                th:each="template:${templates}"
+                                th:value="${template.getId()}"
+                                th:text="${template.getLayoutTitle()}">Page
                         </option>
                     </select>
                 </div>

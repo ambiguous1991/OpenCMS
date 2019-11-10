@@ -2,6 +2,7 @@ package com.jba.opencms.web.databasetemplate;
 
 import com.jba.opencms.page.TemplateService;
 import com.jba.opencms.type.page.Template;
+import io.micrometer.core.instrument.util.StringUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.thymeleaf.IEngineConfiguration;
 import org.thymeleaf.templateresolver.StringTemplateResolver;
@@ -26,7 +27,7 @@ public class DatabaseThymeleafTemplateResolver extends StringTemplateResolver {
     @Override
     protected ITemplateResource computeTemplateResource(IEngineConfiguration configuration, String ownerTemplate, String template, Map<String, Object> templateResolutionAttributes) {
         Template thymeleafTemplate = templateService.byName(template);
-        if (thymeleafTemplate != null) {
+        if (thymeleafTemplate != null && StringUtils.isNotBlank(thymeleafTemplate.getContent())) {
             return super.computeTemplateResource(configuration, ownerTemplate, thymeleafTemplate.getContent(), templateResolutionAttributes);
         }
         log.debug("Template "+template+" not found in database. Looking for results in resources...");

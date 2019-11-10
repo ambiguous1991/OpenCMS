@@ -18,7 +18,7 @@ public class TemplateDaoImpl extends HibernateDao<Template> implements TemplateD
     @Transactional
     public Template byName(String name) {
         List<Template> results = sessionFactory.getCurrentSession()
-                .createQuery("from " + clazz.getName() + " where name=:name", Template.class)
+                .createQuery("from " + clazz.getName() + " where layoutName=:name", Template.class)
                 .setParameter("name", name)
                 .getResultList();
         if(results.size()==1){

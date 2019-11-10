@@ -39,11 +39,6 @@ public class ServicesInitializr {
     }
 
     @Bean
-    public PageTypeService pageTypeService(GenericDao<PageType> pageTypeDao) {
-        return new PageTypeServiceImpl(pageTypeDao);
-    }
-
-    @Bean
     public GlobalsService globalsService(SystemVariableDao systemVariableDao){
         return new GlobalsServiceImpl(systemVariableDao);
     }
