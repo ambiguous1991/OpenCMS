@@ -1,7 +1,7 @@
 package com.jba.opencms.web.databasetemplate;
 
 import com.jba.opencms.page.TemplateService;
-import com.jba.opencms.type.page.ThymeleafTemplate;
+import com.jba.opencms.type.page.Template;
 import lombok.extern.slf4j.Slf4j;
 import org.thymeleaf.IEngineConfiguration;
 import org.thymeleaf.templateresolver.StringTemplateResolver;
@@ -25,7 +25,7 @@ public class DatabaseThymeleafTemplateResolver extends StringTemplateResolver {
 
     @Override
     protected ITemplateResource computeTemplateResource(IEngineConfiguration configuration, String ownerTemplate, String template, Map<String, Object> templateResolutionAttributes) {
-        ThymeleafTemplate thymeleafTemplate = templateService.byName(template);
+        Template thymeleafTemplate = templateService.byName(template);
         if (thymeleafTemplate != null) {
             return super.computeTemplateResource(configuration, ownerTemplate, thymeleafTemplate.getContent(), templateResolutionAttributes);
         }

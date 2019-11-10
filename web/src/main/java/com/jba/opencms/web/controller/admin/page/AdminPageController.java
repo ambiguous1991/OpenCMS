@@ -7,7 +7,6 @@ import com.jba.opencms.page.PageTypeService;
 import com.jba.opencms.type.file.File;
 import com.jba.opencms.type.menu.Entry;
 import com.jba.opencms.type.page.Page;
-import com.jba.opencms.type.page.PageType;
 import com.jba.opencms.web.controller.AbstractController;
 import com.jba.opencms.web.form.resource.ResourceForm;
 import com.jba.opencms.web.message.AbstractConverter;

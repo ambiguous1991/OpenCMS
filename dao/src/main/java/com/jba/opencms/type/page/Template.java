@@ -10,10 +10,15 @@ import javax.persistence.*;
 @Entity
 @Data
 @Table(name = "template")
-public class ThymeleafTemplate extends BaseTypeSimpleKey<ThymeleafTemplate> {
-    @Column(name = "NAME", nullable = false, length = 200)
-    private String name;
+public class Template extends BaseTypeSimpleKey<Template> {
+
+    @Column(name = "LAYOUT_TITLE", nullable = false, length = 100)
+    private String layoutTitle;
+
+    @Column(name = "LAYOUT_NAME", nullable = false, length = 200)
+    private String layoutName;
 
     @Column(name = "CONTENT")
     private String content;
+
 }

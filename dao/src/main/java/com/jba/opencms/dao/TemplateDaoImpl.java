@@ -1,24 +1,24 @@
 package com.jba.opencms.dao;
 
 import com.jba.opencms.dao.ifs.TemplateDao;
-import com.jba.opencms.type.page.ThymeleafTemplate;
+import com.jba.opencms.type.page.Template;
 import org.hibernate.NonUniqueResultException;
 import org.hibernate.SessionFactory;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
-public class TemplateDaoImpl extends HibernateDao<ThymeleafTemplate> implements TemplateDao {
+public class TemplateDaoImpl extends HibernateDao<Template> implements TemplateDao {
 
     public TemplateDaoImpl(SessionFactory sessionFactory) {
-        super(ThymeleafTemplate.class, sessionFactory);
+        super(Template.class, sessionFactory);
     }
 
     @Override
     @Transactional
-    public ThymeleafTemplate byName(String name) {
-        List<ThymeleafTemplate> results = sessionFactory.getCurrentSession()
-                .createQuery("from " + clazz.getName() + " where name=:name", ThymeleafTemplate.class)
+    public Template byName(String name) {
+        List<Template> results = sessionFactory.getCurrentSession()
+                .createQuery("from " + clazz.getName() + " where name=:name", Template.class)
                 .setParameter("name", name)
                 .getResultList();
         if(results.size()==1){

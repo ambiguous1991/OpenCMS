@@ -8,13 +8,10 @@ import com.jba.opencms.type.menu.Menu;
 import com.jba.opencms.type.message.Message;
 import com.jba.opencms.type.message.Status;
 import com.jba.opencms.type.page.Page;
-import com.jba.opencms.type.page.PageType;
-import com.jba.opencms.type.page.ThymeleafTemplate;
 import com.jba.opencms.type.user.Authority;
 import com.jba.opencms.type.user.ImageUser;
 import com.jba.opencms.type.user.User;
 import org.hibernate.SessionFactory;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
@@ -31,11 +28,6 @@ public class DaoConfiguration {
     @Bean
     public GenericDao<Page> pageDao(SessionFactory sessionFactory){
         return new HibernateDao<>(Page.class, sessionFactory);
-    }
-
-    @Bean
-    public GenericDao<PageType> pageTypeDao(SessionFactory sessionFactory){
-        return new HibernateDao<>(PageType.class, sessionFactory);
     }
 
     @Bean

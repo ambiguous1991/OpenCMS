@@ -13,7 +13,6 @@ import com.jba.opencms.menu.MenuService;
 import com.jba.opencms.menu.MenuServiceImpl;
 import com.jba.opencms.page.*;
 import com.jba.opencms.type.page.Page;
-import com.jba.opencms.type.page.PageType;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
