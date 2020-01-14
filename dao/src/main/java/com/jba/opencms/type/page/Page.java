@@ -34,8 +34,8 @@ public class Page extends BaseTypeSimpleKey<Page> {
     private Boolean isMobileEnabled;
 
     @ManyToOne
-    @JoinColumn(name = "FK_PAGE_TYPE_ID", nullable = true)
-    private PageType pageType;
+    @JoinColumn(name = "FK_TEMPLATE_ID", nullable = true)
+    private Template template;
 
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(

@@ -1,22 +1,17 @@
 package com.jba.opencms.configuration;
 
 import com.jba.opencms.dao.*;
-import com.jba.opencms.dao.ifs.EntryDao;
-import com.jba.opencms.dao.ifs.FileDao;
-import com.jba.opencms.dao.ifs.MenuDao;
-import com.jba.opencms.dao.ifs.SystemVariableDao;
+import com.jba.opencms.dao.ifs.*;
 import com.jba.opencms.type.file.File;
 import com.jba.opencms.type.menu.Entry;
 import com.jba.opencms.type.menu.Menu;
 import com.jba.opencms.type.message.Message;
 import com.jba.opencms.type.message.Status;
 import com.jba.opencms.type.page.Page;
-import com.jba.opencms.type.page.PageType;
 import com.jba.opencms.type.user.Authority;
 import com.jba.opencms.type.user.ImageUser;
 import com.jba.opencms.type.user.User;
 import org.hibernate.SessionFactory;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
@@ -36,11 +31,6 @@ public class DaoConfiguration {
     }
 
     @Bean
-    public GenericDao<PageType> pageTypeDao(SessionFactory sessionFactory){
-        return new HibernateDao<>(PageType.class, sessionFactory);
-    }
-
-    @Bean
     public GenericDao<Authority> authorityDao(SessionFactory sessionFactory){
         return new HibernateDao<>(Authority.class, sessionFactory);
     }
@@ -56,7 +46,7 @@ public class DaoConfiguration {
     }
 
     @Bean
-    public MenuDao menuDao(@Qualifier("sessionFactory") SessionFactory sessionFactory){
+    public MenuDao menuDao(SessionFactory sessionFactory){
         return new MenuDaoImpl(Menu.class, sessionFactory);
     }
 
@@ -78,5 +68,10 @@ public class DaoConfiguration {
     @Bean
     public FileDao fileDao(SessionFactory sessionFactory){
         return new FileDaoImpl(File.class, sessionFactory);
+    }
+
+    @Bean
+    public TemplateDao templateDao(SessionFactory sessionFactory){
+        return new TemplateDaoImpl(sessionFactory);
     }
 }

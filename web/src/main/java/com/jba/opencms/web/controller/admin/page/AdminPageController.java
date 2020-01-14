@@ -3,11 +3,11 @@ package com.jba.opencms.web.controller.admin.page;
 import com.jba.opencms.file.FileService;
 import com.jba.opencms.menu.MenuService;
 import com.jba.opencms.page.PageService;
-import com.jba.opencms.page.PageTypeService;
+import com.jba.opencms.page.TemplateService;
 import com.jba.opencms.type.file.File;
 import com.jba.opencms.type.menu.Entry;
 import com.jba.opencms.type.page.Page;
-import com.jba.opencms.type.page.PageType;
+import com.jba.opencms.type.page.Template;
 import com.jba.opencms.web.controller.AbstractController;
 import com.jba.opencms.web.form.resource.ResourceForm;
 import com.jba.opencms.web.message.AbstractConverter;
@@ -34,14 +34,14 @@ public class AdminPageController extends AbstractController {
 
     private PageService pageService;
     private MenuService menuService;
-    private PageTypeService pageTypeService;
+    private TemplateService templateService;
     private FileService fileService;
     private AbstractConverter<File> acceptedScripts, rejectedScripts;
     private AbstractConverter<File> acceptedStylesheets, rejectedStylesheets;
 
     public AdminPageController(PageService pageService,
                                MenuService menuService,
-                               PageTypeService pageTypeService,
+                               TemplateService templateService,
                                FileService fileService,
                                AbstractConverter<File> scriptAcceptedConverter,
                                AbstractConverter<File> scriptRejectedConverter,
@@ -50,7 +50,7 @@ public class AdminPageController extends AbstractController {
     {
         this.pageService = pageService;
         this.menuService = menuService;
-        this.pageTypeService = pageTypeService;
+        this.templateService = templateService;
         this.fileService = fileService;
         this.acceptedScripts = scriptAcceptedConverter;
         this.rejectedScripts = scriptRejectedConverter;
@@ -93,8 +93,8 @@ public class AdminPageController extends AbstractController {
 
         model.addAttribute("page", page);
 
-        List<PageType> pageTypes = pageTypeService.findAll(false);
-        model.addAttribute("pageTypes", pageTypes);
+        List<Template> templates = templateService.findAll(false);
+        model.addAttribute("templates", templates);
 
         return "dashboard/page/page-details";
     }
@@ -117,8 +117,8 @@ public class AdminPageController extends AbstractController {
             page.setIsMobileEnabled(isMobileEnabled);
         } else page.setIsMobileEnabled(false);
 
-        PageType selectedPageType = pageTypeService.findOne(pageType, false);
-        page.setPageType(selectedPageType);
+        Template template = templateService.findOne(pageType, false);
+        page.setTemplate(template);
 
         pageService.update(page);
 
@@ -208,8 +208,8 @@ public class AdminPageController extends AbstractController {
         model.addAttribute("page", page);
         model.addAttribute("menu", menu);
 
-        if (page.getPageType() != null) {
-            return page.getPageType().getLayoutName();
+        if (page.getTemplate() != null) {
+            return page.getTemplate().getLayoutName();
         } else
             return "page-template/one-column-half-width";
     }

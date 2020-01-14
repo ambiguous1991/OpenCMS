@@ -1,10 +1,7 @@
 package com.jba.opencms.configuration;
 
 import com.jba.opencms.dao.GenericDao;
-import com.jba.opencms.dao.ifs.EntryDao;
-import com.jba.opencms.dao.ifs.FileDao;
-import com.jba.opencms.dao.ifs.MenuDao;
-import com.jba.opencms.dao.ifs.SystemVariableDao;
+import com.jba.opencms.dao.ifs.*;
 import com.jba.opencms.file.*;
 import com.jba.opencms.file.preprocessor.FilePreprocessor;
 import com.jba.opencms.file.preprocessor.ImagePreprocessor;
@@ -14,12 +11,8 @@ import com.jba.opencms.menu.EntryService;
 import com.jba.opencms.menu.EntryServiceImpl;
 import com.jba.opencms.menu.MenuService;
 import com.jba.opencms.menu.MenuServiceImpl;
-import com.jba.opencms.page.PageService;
-import com.jba.opencms.page.PageServiceImpl;
-import com.jba.opencms.page.PageTypeService;
-import com.jba.opencms.page.PageTypeServiceImpl;
+import com.jba.opencms.page.*;
 import com.jba.opencms.type.page.Page;
-import com.jba.opencms.type.page.PageType;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
@@ -46,11 +39,6 @@ public class ServicesInitializr {
     }
 
     @Bean
-    public PageTypeService pageTypeService(GenericDao<PageType> pageTypeDao) {
-        return new PageTypeServiceImpl(pageTypeDao);
-    }
-
-    @Bean
     public GlobalsService globalsService(SystemVariableDao systemVariableDao){
         return new GlobalsServiceImpl(systemVariableDao);
     }
@@ -63,5 +51,10 @@ public class ServicesInitializr {
     @Bean
     public FilePreprocessor imagePreprocessor(){
         return new ImagePreprocessor();
+    }
+
+    @Bean
+    public TemplateService templateService(TemplateDao templateDao){
+        return new TemplateServiceImpl(templateDao);
     }
 }

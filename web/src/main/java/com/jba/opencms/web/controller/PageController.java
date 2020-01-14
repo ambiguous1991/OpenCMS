@@ -58,8 +58,8 @@ public class PageController extends AbstractController{
             response.setStatus(HttpServletResponse.SC_NOT_FOUND);
             return "error/not-found";
         }
-        if(page.getPageType()!=null){
-            return page.getPageType().getLayoutName();
+        if(page.getTemplate()!=null){
+            return page.getTemplate().getLayoutName();
         }
         else
             return "page-template/one-column-half-width";
